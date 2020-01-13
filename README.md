@@ -17,6 +17,21 @@
 
 ## Algorithm Design and Techniques
 
+<details>
+<summary>Proofs</summary>
+
+- **Proof by induction**
+    - It allows to prove a statement about an arbitrary number n by:
+        - 1st proving it's true when n is 1 and then 
+        - assuming it's true for n = k and showing it's true for n = k + 1
+    - [For more details](http://comet.lehman.cuny.edu/sormani/teaching/induction.html)
+- **Proofs  by contradiction**
+    - It allow to prove a proposition is valid (true) by showing that assuming the proposition to be false leads to a contradiction
+    - [For more details](https://en.wikipedia.org/wiki/Proof_by_contradiction)
+
+</details>
+
+
 ---
 
 ## Data Structures Fundamentals
