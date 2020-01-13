@@ -2,7 +2,7 @@
 
 - My notes from UC San Diego MicroMasters Program, [Algorithms and Data Structures](https://www.edx.org/micromasters/ucsandiegox-algorithms-and-data-structures)
 - My anki flashcards:
-    - [Anki flashcards package](): 0 cards
+    - [Anki flashcards package](https://github.com/hamidgasmi/AlgorithmsDataStructures/blob/master/algorithms-datastructures_ankiflashcard.apkg): 0 cards
     - [Install Anki](https://apps.ankiweb.net/)
 
 ## Table of Contents
