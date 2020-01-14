@@ -32,6 +32,13 @@
 </details>
 
 
+<details>
+<summary>Running time</summary>
+
+- **T(n)** is the number of lines of code executed by an algorithm
+
+</details>
+
 ---
 
 ## Data Structures Fundamentals
