@@ -47,7 +47,6 @@ def fibonacci4(n):
             f = f_n_1 + f_n_2
             f_n_2 = f_n_1
             f_n_1 = f
-            print(i, f)
         return  f
 
 n = int(input("Enter a number n: "))

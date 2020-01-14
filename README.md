@@ -18,7 +18,7 @@
 ## Algorithm Design and Techniques
 
 <details>
-<summary>Proofs</summary>
+<summary>Prerequisites</summary>
 
 - **Proof by induction**
     - It allows to prove a statement about an arbitrary number n by:
@@ -28,14 +28,15 @@
 - **Proofs  by contradiction**
     - It allow to prove a proposition is valid (true) by showing that assuming the proposition to be false leads to a contradiction
     - [For more details](https://en.wikipedia.org/wiki/Proof_by_contradiction)
+- **T(n)** is the number of lines of code executed by an algorithm
 
 </details>
 
 
 <details>
-<summary>Running time</summary>
+<summary>Steps to solve a programming challenge</summary>
 
-- **T(n)** is the number of lines of code executed by an algorithm
+- 
 
 </details>
 

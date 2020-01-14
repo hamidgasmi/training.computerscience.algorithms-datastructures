@@ -1,4 +1,5 @@
 # Uses python3
+# python3 APlusB.py <<< "3 5"
 # There are two ways of running this program:
 # 1. Run
 #     python3 APlusB.py
