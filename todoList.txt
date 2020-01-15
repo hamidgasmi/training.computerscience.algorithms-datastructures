@@ -1,1 +1,2 @@
 - How can I write test cases with Python
+- Implement max pairwise product with Tournament approach

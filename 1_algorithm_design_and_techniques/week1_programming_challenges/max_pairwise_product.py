@@ -1,4 +1,3 @@
-# Uses python3
 # O(n^2)
 def maxPairwiseProductNaiveApproach(aList):
     
@@ -32,4 +31,6 @@ n = int(input("Enter the number of integer items: "))
 print("Enter now " + str(n) + " integers separated by a space:")
 a = [int(x) for x in input().split()]
 assert(len(a) == n)
-print("The max pairwise product is: ", maxPairwiseProductNaiveApproach(a))
+#print("The max pairwise product is: ", maxPairwiseProductNaiveApproach(a))
+print("The max pairwise product is: ", maxPairwiseProduct(a))
+#print("The max pairwise product is: ", maxPairwiseProductFaster(a))

@@ -32,14 +32,24 @@
 
 </details>
 
-
 <details>
-<summary>Steps to solve a programming challenge</summary>
+<summary>Approaches</summary>
 
-- 
+- **Tournament** approach:
+    - To find the kth largest number in an array, compare each paire of 2 elements together
+    - compare(elem 0, elem 1), compare(elem 2, elem 3)...
+    - O(n + log(n) − 2)
+- **Euclidean** Algorithm
 
 </details>
 
+<details>
+<summary>Use Cases</summary>
+
+- Fibonacci: calculate number of populations
+- GCD: Cryptography, The study of prime numbers in factorization
+
+</details>
 ---
 
 ## Data Structures Fundamentals
