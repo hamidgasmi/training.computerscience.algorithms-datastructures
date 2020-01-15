@@ -7,7 +7,13 @@ def fibonacciNaiveApproach(n):
     if n == 0: return 0
     elif n == 1: return 1
     else:
-        return fibonacciNaiveApproach(n - 1) + fibonacciNaiveApproach(n - 2)
+        #Depth: n
+        #Branches: 2
+        #Addition time complexity: O(n) 
+        #The number of digits is proportional to n
+        # Fibonaccy numbers are big: they're not supported in a word machine
+        # Addition of 100s of digit is slow: carry it and add the 1st digit,... 100th digit... 1000th digit
+        return fibonacciNaiveApproach(n - 1) + fibonacciNaiveApproach(n - 2) # addition: O(n)
 
 #Approach 2:
 #Time: O(n)
@@ -35,19 +41,19 @@ def fibonacci3(n, r):
         return  f
 
 #Approach 4:
-#Time: O(n)
+#Time: O(n^2)
 #Space: O(1)
 def fibonacci4(n):
 
-    if n <= 1: return n
+    if n <= 1: return n #O(1)
     else:
-        f_n_2 = 0
-        f_n_1 = 1
-        for i in range(2, n + 1):
-            f = f_n_1 + f_n_2
-            f_n_2 = f_n_1
-            f_n_1 = f
-        return  f
+        f_n_2 = 0 #O(1)
+        f_n_1 = 1 #O(1)
+        for i in range(2, n + 1): #O(n)
+            f = f_n_1 + f_n_2 #O(n)
+            f_n_2 = f_n_1 #O(1)
+            f_n_1 = f #O(1)
+        return  f #O(1)
 
 n = int(input("Enter a number n: "))
 
