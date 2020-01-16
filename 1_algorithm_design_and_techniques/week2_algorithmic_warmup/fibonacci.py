@@ -1,3 +1,4 @@
+import sys
 
 #Naive Approach
 #Time: 2^n?
@@ -55,23 +56,22 @@ def fibonacci4(n):
             f_n_1 = f #O(1)
         return  f #O(1)
 
-n = int(input("Enter a number n: "))
+if __name__ == '__main__':
+    n = int(input("Enter a number n: "))
 
+    #print(fibonacciNaiveApproach(n))
 
-#fib1_Naiveapproach = fibonacciNaiveApproach(n)
-#print(fibNaiveapproach)
+    #Approach 2
+    #r = [-1] * (n + 1)
+    #fibonacciNaiveApproach(n, r)
+    #print(r[n])
 
-#Approach 2
-#r = [-1] * (n + 1)
-#fibonacciNaiveApproach(n, r)
-#print(r[n])
+    #Approach 3
+    #r = [-1] * 2
+    #fib3 = fibonacci3(n, r)
+    #print("Fib 3", fib3)
 
-#Approach 3
-#r = [-1] * 2
-#fib3 = fibonacci3(n, r)
-#print("Fib 3", fib3)
-
-#Approach 4:
-fib4 = fibonacci4(n)
-print("Fib 4", fib4)
-#assert(fib4 == fib3)
+    #Approach 4:
+    fib4 = fibonacci4(n)
+    print("Fib 4", fib4)
+    #assert(fib4 == fib3)
