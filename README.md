@@ -60,6 +60,7 @@
 
 </details>
 
+<details>
 <summary>Time Complexity</summary>
 
 - It describes the rate of increase of an algorithm
