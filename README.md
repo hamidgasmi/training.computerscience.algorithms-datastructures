@@ -76,6 +76,7 @@
         - Algorithm A is worse asymptotically on very large inputs than algorithm B does
         - But algorithm A is better for all practical sizes and very large inputs couldn't be stored 
 - E.g., O(1), O(n), O(n^2) , O(Log n), O(n log n), O(2^n)
+- [Data structure and theirs related algorithms time complexity](https://www.bigocheatsheet.com/)
 
 </details>
 
@@ -123,7 +124,7 @@
     - E.g., Fibonacci Recursive time complexity: O(2^n)
     - E.g., Fibonacci Space complexity: O(n): because only O(N) nodes exist at any given time 
 - The **base of an Exponent**:
-    - Log(8^n) is completely different than Log(2^n) 
+    - Log(8^n) is completely different than Log(2^n)
  
 </details>
 
@@ -133,7 +134,7 @@
 </details>
 
 <details>
-<summary>Approaches</summary>
+<summary>General Approaches</summary>
 
 - **Tournament** approach:
     - To find the kth largest number in an array, compare each paire of 2 elements together
@@ -145,6 +146,34 @@
 
 <details>
 <summary>Greedy Algorithms</summary>
+
+- **Greedy Strategy**:
+    - Make a greedy choice
+    - Prove that it is a safe choice
+    - Reduce to a subproblem
+    - Solve the subproblem (Iterate)
+    - E.g. Problem, Queue of Patients:
+        - n patients have come to the doctor’s office at same time
+        - Ti is the time needed for treatment of the i-th patient
+        - They can be treated in any order 
+        - Output: Arrange the patients in such a queue that the total waiting time is minimized
+    - E.g. Solution:
+        - Make a greedy choice: choose the patient (Pi) with the smallest treatment time (with the minimum Ti)
+        - Prove that it's a safe choice
+        - Reduce to a smaller problem: remove Pi from the queue
+        - Iterate: Treat all the remaining patients in such order as to minimize their total waiting time as if there wasn't 1st patient
+- **Subproblem** 
+    - It's a similar problem of smaller size
+    - Minimum total waiting time for n patients = (n − 1) · T min + minimum total waiting time for n − 1 patients without T min
+    - Min total waiting time for n = 4 partients: (15, 10, 25, 20) = (4 - 1) * 10 + Min total waiting time for (15, 25, 20)
+- **Safe Choice**:
+    - It's a greedy choice which there's an optimal solution consistent with this 1st choice
+    - It requires to **prove** that a greedy choice is safe
+    - E.g. Queue of Patients: 
+        - If we prove that there's an optimal solution that starts with treating a patient with the minimum treatment time
+        - Therefore such a choice is a safe choice
+        - However, if we choose a patient with the maximum treatment time, there's not an optimal solution that starts with it
+        - Therefore such a choice isn't a safe choice
 
 </details>
 
