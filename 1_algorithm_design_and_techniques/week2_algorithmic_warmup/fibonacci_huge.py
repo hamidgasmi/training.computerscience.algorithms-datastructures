@@ -5,7 +5,7 @@
 import sys
 from fibonacci_last_digit import get_fibonacci_last_digit
 
-#O(m)
+#O(m)?
 def get_fibonacci_huge(n, m):
     if n <= 1: return n
 
@@ -27,13 +27,13 @@ def get_fibonacci_huge(n, m):
                 tmp.clear()
             period.append(current)
 
-    return pattern[n % len(period)]
+    return period[n % len(period)]
 
 if __name__ == '__main__':
     input = sys.stdin.read()
     n, m = map(int, input.split())
 
-    #for i in range(n):
-    #    assert(get_fibonacci_last_digit(i, m) == get_fibonacci_huge(i, m))
+    for i in range(n):
+        assert(get_fibonacci_last_digit(i, m) == get_fibonacci_huge(i, m))
 
     print(get_fibonacci_huge(n, m))
