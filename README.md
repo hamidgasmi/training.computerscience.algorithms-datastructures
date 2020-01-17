@@ -58,7 +58,7 @@
     - It's NOT used in the industry
 - [For more details](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation)
 
-<details>
+</details>
 
 <summary>Time Complexity</summary>
 
