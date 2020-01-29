@@ -20,7 +20,7 @@
 <details>
 <summary>Prerequisites</summary>
 
-- **Proof by induction**
+- **Proof by**
     - It allows to prove a statement about an arbitrary number n by:
         - 1st proving it's true when n is 1 and then 
         - assuming it's true for n = k and showing it's true for n = k + 1
@@ -29,6 +29,16 @@
     - It allow to prove a proposition is valid (true) by showing that assuming the proposition to be false leads to a contradiction
     - [For more details](https://en.wikipedia.org/wiki/Proof_by_contradiction)
 - **T(n)** is the number of lines of code executed by an algorithm
+
+</details>
+
+<details>
+<summary>Test Cases</summary>
+
+- When dealing with string: special characters, encoding (ASCII, UTF-8, UTF-16)?
+- When dealing with numbers:
+    - Think about number size: Int. Long, ... ?
+    - If there is any division: division by 0; Precision?
 
 </details>
 
