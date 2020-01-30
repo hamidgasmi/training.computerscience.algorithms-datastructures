@@ -159,10 +159,10 @@
 <summary>Greedy Algorithms</summary>
 
 - **Greedy Strategy**:
-    - Make a greedy choice
-    - Prove that it is a safe choice
-    - Reduce to a subproblem
-    - Solve the subproblem (Iterate)
+    - **1. Make a greedy choice**
+    - **2. Prove that it is a safe choice**
+    - **3. Reduce to a subproblem**
+    - **4. Solve the subproblem (Iterate)**
     - E.g. Problem, Queue of Patients:
         - n patients have come to the doctor’s office at same time
         - Ti is the time needed for treatment of the i-th patient
