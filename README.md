@@ -20,7 +20,7 @@
 <details>
 <summary>Prerequisites</summary>
 
-- **Proof by**
+- **Proof by Induction**
     - It allows to prove a statement about an arbitrary number n by:
         - 1st proving it's true when n is 1 and then 
         - assuming it's true for n = k and showing it's true for n = k + 1
