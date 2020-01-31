@@ -1,15 +1,13 @@
 # Uses python3
 import sys
 
-def binary_search(a, x):
-    left, right = 0, len(a)
-    # write your code here
-
-def linear_search(a, x):
-    for i in range(len(a)):
-        if a[i] == x:
-            return i
-    return -1
+def binary_search(a, x, low, high):
+    if low > high: return - 1
+    
+    mid = low + (high - low) // 2
+    if a[mid] == x: return mid
+    elif a[mid] < x: return binary_search(a, x, mid + 1, high)
+    else: return binary_search(a, x, low, mid - 1)
 
 if __name__ == '__main__':
     input = sys.stdin.read()
@@ -17,6 +15,13 @@ if __name__ == '__main__':
     n = data[0]
     m = data[n + 1]
     a = data[1 : n + 1]
+
     for x in data[n + 2:]:
-        # replace with the call to binary_search when implemented
-        print(linear_search(a, x), end = ' ')
+        print(binary_search(a, x, 0, len(a) - 1), end = ' ')
+
+    #python3 binary_search.py <<< "5 1 5 8 12 13 5 1 5 8 12 13"
+    #python3 binary_search.py <<< "5 1 5 8 12 13 9 0 1 4 5 6 8 12 13 24"
+    #python3 binary_search.py <<< "5 1 5 8 12 13 9 0 1 4 5 6 8 12 13 24"
+    #python3 binary_search.py <<< "0 9 0 1 4 5 6 8 12 13 24"
+    #python3 binary_search.py <<< "5 1 5 8 12 13 0"
+    #python3 binary_search.py <<< "5 1 5 8 12 13 5 8 1 23 1 11"
