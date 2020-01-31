@@ -191,6 +191,25 @@
 <details>
 <summary>Divide and Conquer</summary>
 
+- **Divide**: Break into non-overlapping subproblems of the same type
+- **Conquer**:
+    - Solve subproblems: each one indepently of the others
+    - Combine results
+- Implementation: it's often implemented with a **recursive** algorithm
+- Calculate its Time Complexity:
+    - Define a corresponding **recurrence relation**, **T**
+        - It's an equation recursively defining a sequence of values
+        - For Linear Search *T(n) = T(n - 1) + c*; *T(0) = c*
+        - *c* is the runtime for a constant amount of work: checking high vs. low indexes; if A[low] == key); preparing the parameters for the recursive call
+        - *T(0)* is the runtime for the **base case** of the recursion (empty array): checking high vs. low indexes, returning not found
+        - For Binary Search *T(n) = T(n/2) + c*; *T(0) = c*
+    - Determine **worst-case runtime**, T(n) from the recurrence relation
+        - Look at the **recursion tree**
+        - For Linear Search T(n) = T(n - 1) + c = T(n - 2) + 2 * c = n * c = T(n) = Θ(n)
+        - For Binary Search T(n) = T(n/2) + c = T(n/2^2) + 2 * c = T(n/2^3) + 3 * c = Θ(log2 n) = Θ(log n)
+- Optionally, create iterative solution
+    - It allows to save space
+
 </details>
 
 <details>
