@@ -70,9 +70,9 @@ if __name__ == '__main__':
     print(result)
 
     #print(binary_search(a, x, 0, len(a) - 1), end = ' ')
-    #python3 binary_search.py <<< "5 1 5 8 12 13 5 1 5 8 12 13"
-    #python3 binary_search.py <<< "5 1 5 8 12 13 9 0 1 4 5 6 8 12 13 24"
-    #python3 binary_search.py <<< "5 1 5 8 12 13 9 0 1 4 5 6 8 12 13 24"
-    #python3 binary_search.py <<< "0 9 0 1 4 5 6 8 12 13 24"
-    #python3 binary_search.py <<< "5 1 5 8 12 13 0"
-    #python3 binary_search.py <<< "5 1 5 8 12 13 5 8 1 23 1 11"
+    #python3 binary_search_enhanced.py <<< "5 1 5 8 12 13 5 1 5 8 12 13"
+    #python3 binary_search_enhanced.py <<< "5 1 5 8 12 13 9 0 1 4 5 6 8 12 13 24"
+    #python3 binary_search_enhanced.py <<< "5 1 5 8 12 13 9 0 1 4 5 6 8 12 13 24"
+    #python3 binary_search_enhanced.py <<< "0 9 0 1 4 5 6 8 12 13 24"
+    #python3 binary_search_enhanced.py <<< "5 1 5 8 12 13 0"
+    #python3 binary_search_enhanced.py <<< "5 1 5 8 12 13 5 8 1 23 1 11"
