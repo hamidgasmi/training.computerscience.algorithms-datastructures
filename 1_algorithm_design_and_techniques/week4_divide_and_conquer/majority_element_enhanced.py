@@ -8,7 +8,7 @@ def get_majority_element(a):
     for i in range(len(a)):
         if a[i] in dic: dic[a[i]] += 1
         else: dic[a[i]] = 1
-        
+
     for val in dic.values():
         if val > len(a) // 2: return 1
 
