@@ -29,7 +29,7 @@
     - It allow to prove a proposition is valid (true) by showing that assuming the proposition to be false leads to a contradiction
     - [For more details](https://en.wikipedia.org/wiki/Proof_by_contradiction)
 - **T(n)** is the number of lines of code executed by an algorithm
-- **Logarithms**: see [this](https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms)
+- **Logarithms**: see [this](https://www.khanalscademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms)
 - **Recursion**: see [this](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion)
 
 </details>
