@@ -216,18 +216,23 @@
     - It allows to save space
 - For more details:
     - [Binary Search](https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search)
-    - [Merge Sort]()
-    - [Quick Sort](http://faculty.cs.tamu.edu/klappi/csce411-f12/csce411-set13.pdf)
+    - **Merge Sort**
+        - [Course Material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week4_divide_and_conquer/03_divide_and_conquer_4_sorting.pdf)
+        - [Merge Sort on khanacademy](https://www.khanacademy.org/computing/computer-science/algorithms#merge-sort)
+    - **Quick Sort**
         - It's more efficient in practice than Merge Sort
         - Average Time Complexity: O(n log n)
         - Time Complexity in the worst case: O(n^2)
-    - [3 way partition Quick Sort](https://www.geeksforgeeks.org/3-way-quicksort-dutch-national-flag/)
-    - [Quick Sort Recursive Tail Elimination](https://www.geeksforgeeks.org/quicksort-tail-call-optimization-reducing-worst-case-space-log-n/)
-    - [Quick Sort wth deterministic pivot selection heuristic]:
-        - The pivot could be the median of the 1st, middle, and last element
-        - If the recursion depth exceeds a certain threshold ***c log n***, the algorithm switches to heap sort
-        - It's a simple but heuristic approach:: it's not guaranteed to be optimal
-        - The time complexity is: O(n log n) in the worst case
+        - [Course Material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week4_divide_and_conquer/03_divide_and_conquer_5_quicksort.pdf)
+        - [Quick Sort on khanacademy](https://www.khanacademy.org/computing/computer-science/algorithms#quick-sort)
+        - [Deterministic and Randomized Quicksort](http://faculty.cs.tamu.edu/klappi/csce411-f12/csce411-set13.pdf)
+        - [3 way partition Quick Sort](https://www.geeksforgeeks.org/3-way-quicksort-dutch-national-flag/)
+        - [Quick Sort Recursive Tail Elimination](https://www.geeksforgeeks.org/quicksort-tail-call-optimization-reducing-worst-case-space-log-n/)
+        - [Quick Sort wth deterministic pivot selection heuristic]:
+            - The pivot could be the median of the 1st, middle, and last element
+            - If the recursion depth exceeds a certain threshold ***c log n***, the algorithm switches to heap sort
+            - It's a simple but heuristic approach:: it's not guaranteed to be optimal
+            - The time complexity is: O(n log n) in the worst case
     - [Counting Sort](https://www.geeksforgeeks.org/counting-sort/)
 
 </details>
