@@ -18,8 +18,8 @@ def randomized_quick_sort(a, l, r):
     k = random.randint(l, r)
     a[l], a[k] = a[k], a[l]
     m = partition2(a, l, r)
-    randomized_quick_sort(a, l, m - 1);
-    randomized_quick_sort(a, m + 1, r);
+    randomized_quick_sort(a, l, m - 1)
+    randomized_quick_sort(a, m + 1, r)
 
 
 if __name__ == '__main__':
