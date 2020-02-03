@@ -8,7 +8,7 @@ def partition3(a, l, r):
 
 def partition2(a, l, r):
     x = a[l]
-    j = l;
+    j = l
     for i in range(l + 1, r + 1):
         if a[i] <= x:
             j += 1
