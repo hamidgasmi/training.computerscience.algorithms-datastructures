@@ -30,7 +30,10 @@
     - [For more details](https://en.wikipedia.org/wiki/Proof_by_contradiction)
 - **T(n)** is the number of lines of code executed by an algorithm
 - **Logarithms**: see [this](https://www.khanalscademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms)
-- **Recursion**: see [this](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion)
+- **Recursion**: 
+    - To [Get Started](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion)
+    - Stack optimization and Tail Recursion:
+        - 
 
 </details>
 
@@ -213,6 +216,19 @@
     - It allows to save space
 - For more details:
     - [Binary Search](https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search)
+    - [Merge Sort]()
+    - [Quick Sort](http://faculty.cs.tamu.edu/klappi/csce411-f12/csce411-set13.pdf)
+        - It's more efficient in practice than Merge Sort
+        - Average Time Complexity: O(n log n)
+        - Time Complexity in the worst case: O(n^2)
+    - [3 way partition Quick Sort](https://www.geeksforgeeks.org/3-way-quicksort-dutch-national-flag/)
+    - [Quick Sort Recursive Tail Elimination](https://www.geeksforgeeks.org/quicksort-tail-call-optimization-reducing-worst-case-space-log-n/)
+    - [Quick Sort wth deterministic pivot selection heuristic]:
+        - The pivot could be the median of the 1st, middle, and last element
+        - If the recursion depth exceeds a certain threshold ***c log n***, the algorithm switches to heap sort
+        - It's a simple but heuristic approach:: it's not guaranteed to be optimal
+        - The time complexity is: O(n log n) in the worst case
+    - [Counting Sort](https://www.geeksforgeeks.org/counting-sort/)
 
 </details>
 
