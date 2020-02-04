@@ -41,13 +41,10 @@ def fast_count_segments(starts, ends, points):
     cnt = [0] * len(points)
 
     QuickSort(starts, ends, 0, len(ends) - 1)
-    print(starts)
-    print(ends)
+
     for p in range(len(points)):
                 
         s = binary_search(points[p], starts, ends, 0, len(ends) - 1)
-        print("point", p)
-        print("s", s)
         if s != -1:
             cnt[p] += 1
             i = s - 1
@@ -58,8 +55,6 @@ def fast_count_segments(starts, ends, points):
             while i < len(ends) and starts[i] <= points[p] <= ends[i]:
                 cnt[p] += 1
                 i += 1
-            #print("[a, b] = [" + str(starts[i]) + ", " + str(ends[i]) + ": (" + str(p1) + "," + str(p2) + ")")
-
     return cnt
 
 def naive_count_segments(starts, ends, points):
