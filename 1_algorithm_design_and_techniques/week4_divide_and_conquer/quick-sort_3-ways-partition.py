@@ -1,6 +1,5 @@
 import sys
 import random
-from sorting import randomized_quick_sort
 
 def partition3Way(a, l, r, m):
 
