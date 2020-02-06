@@ -19,7 +19,7 @@ def partition(x, y, l, r):
 
     p = l - 1
     for j in range(l, r):
-        if compare(x[j], y[j], x[r], y[r]):
+        if x[j] <= x[r]:
             p += 1
             x[p], x[j] = x[j], x[p]
             y[p], y[j] = y[j], y[p]
@@ -51,10 +51,10 @@ def minDistance(x, y, l, r):
     d = min(d, minDistance(x, y, m + 1, r))
 
     i = m
-    while i - 1 >= 0 and (x[i - 1] - x[m]) ** 2 + (y[i - 1] - y[m]) ** 2 <= d:
+    while i - 1 >= 0 and (x[i - 1] - x[m]) ** 2 < d:
         i -= 1
     j = m
-    while j + 1 <= r and (x[j + 1] - x[m]) ** 2 + (y[j + 1] - y[m]) ** 2 <= d:
+    while j + 1 <= r and (x[j + 1] - x[m]) ** 2 < d:
         j += 1
 
     xp = [x[k] for k in range(i, j + 1)]
@@ -94,10 +94,12 @@ if __name__ == '__main__':
     assert(minimum_distance([4, -2, -3, -1, 2, -5, 1, -1, 3, -4, -2], [4, -2, -4, 3, -1, 0, 1, -1, -1, 2, 4]) == minimum_distance_naive([4, -2, -3, -1, 2, -5, 1, -1, 3, -4, -2], [4, -2, -4, 3, -1, 0, 1, -1, -1, 2, 4]))
     assert(minimum_distance([-1000000000, -1000000000], [1000000000, 1000000000]) == minimum_distance_naive([-1000000000, -1000000000], [1000000000, 1000000000]))
     assert(minimum_distance([-3, -14, -7, 26, 18, 38, 29, -48], [-8, -3, 5, 9, 99, 29, 72, 8]) == minimum_distance_naive([-3, -14, -7, 26, 18, 38, 29, -48], [-8, -3, 5, 9, 99, 29, 72, 8]))
+    assert(minimum_distance([2, 12, 40, 5, 12, 3], [3, 30, 50, 1, 10, 4]) == minimum_distance_naive([2, 12, 40, 5, 12, 3], [3, 30, 50, 1, 10, 4]))
 
 #python3 closest_v1.py <<< "2 0 0 3 4" 5.0
 #python3 closest_v1.py <<< "4 7 7 1 100 4 8 7 7" 0.0 
 #python3 closest_v1.py <<< "11 4 4 -2 -2 -3 -4 -1 3 2 3 -4 0 1 1 -1 -1 3 -1 -4 2 -2 4" 1.414213
 #python3 closest_v1.py <<< "11 4 4 -2 -2 -3 -4 -1 3 2 -1 -5 0 1 1 -1 -1 3 -1 -4 2 -2 4" 1.414213
 #python3 closest_v1.py <<< "12 4 4 -2 -2 -3 -4 -1 3 2 3 -4 0 1 1 -1 -1 3 -1 -4 2 -2 4 4 5"
+#python3 closest_v1.py <<< "5 2 3 12 30 40 50 5 1 12 10 3 4"
 #python3 closest_v1.py <<< "2 -1000000000 -1000000000 1000000000 1000000000"
