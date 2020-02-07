@@ -1,6 +1,5 @@
 import sys
 import math
-import random
 
 def merge(x, y, left, mid, right):
     l = left
@@ -49,8 +48,8 @@ def distance(xi, yi, xj, yj):
     return math.sqrt(pow(xi - xj, 2) + pow(yi - yj, 2))
 
 def minDistance(xx, yx, xy, yy, l, r):
-    if l == r:
-        return 10 ** 10
+    if l >= r: 
+        return 2830000000  #The max value of d is 2 * sqrt(2) * 10^9
     elif l + 1 == r:
         return distance(xx[l], yx[l], xx[r], yx[r])
     elif l + 3 == r:
@@ -69,8 +68,9 @@ def minDistance(xx, yx, xy, yy, l, r):
             rightxy.append(xy[i])
             rightyy.append(yy[i])
 
-    d = minDistance(xx, yx, leftxy, leftyy, l, m)
-    d = min(d, minDistance(xx, yx, rightxy, rightyy, m + 1, r))
+    dl = minDistance(xx, yx, leftxy, leftyy, l, m)
+    dr = minDistance(xx, yx, rightxy, rightyy, m + 1, r)
+    d = min(dl, dr)
 
     stripx = []
     stripy = []
@@ -80,13 +80,15 @@ def minDistance(xx, yx, xy, yy, l, r):
             stripy.append(yy[i])
 
     for i in range(len(stripx)):
-        for j in range(i + 1, min(len(stripx), i + 7)):
+        j = i + 1
+        while j < len(stripx) and stripy[j] - stripy[i] < d:
             d = min(d, distance(stripx[i], stripy[i], stripx[j], stripy[j]))
+            j += 1
 
     return d
 
 def minimum_distance_naive(x, y, l, r):
-    d = 10 ** 10
+    d = 2830000000 #The max value of d is 2 * sqrt(2) * 10^9
     for i in range(l, r + 1):
         for j in range(i + 1, r + 1):
             d = min(d, distance(x[i], y[i], x[j], y[j]))
@@ -109,10 +111,11 @@ if __name__ == '__main__':
     n = data[0]
     x = data[1::2]
     y = data[2::2]
+
     print("{0:.9f}".format(minimum_distance_naive(x, y, 0, len(x) - 1)))
     print("{0:.9f}".format(minimum_distance(x, y)))
     assert(minimum_distance([3], [3]) == minimum_distance_naive([3], [3], 0, 0))
-    assert(minimum_distance([-1000000000, -1000000000], [1000000000, 1000000000]) == minimum_distance_naive([-1000000000, -1000000000], [1000000000, 1000000000], 0, 1))
+    assert(minimum_distance([pow(10, 9), pow(-10, 9)], [pow(10, 9), pow(-10, 9)]) == minimum_distance_naive([pow(10, 9), pow(-10, 9)], [pow(10, 9), pow(-10, 9)], 0, 1))
     assert(minimum_distance([0, 3], [0, 4]) == minimum_distance_naive([0, 3], [0, 4], 0, 1))
     assert(minimum_distance([1, 2, 100], [100, 50, 100]) == minimum_distance_naive([1, 2, 100], [100, 50, 100], 0, 2))
     assert(minimum_distance([3, 0, 0, 0], [3, 0, 0, 0]) == minimum_distance_naive([3, 0, 0, 0], [3, 0, 0, 0], 0, 3))
@@ -132,11 +135,4 @@ if __name__ == '__main__':
 #python3 closest_v3.py <<< "2 -1000000000 -1000000000 1000000000 1000000000"
 #python3 closest_v3.py <<< "8 2 496 12 30 40 50 5 1 12 10 3 4 1 496 1 497"
 #python3 closest_v3.py <<< "3 1 100 2 50 100 100"
-#python3 closest_v3.py <<< "4 1 150 1 100 50 100 50 150"
-
-
-#Failed case #13/23: time limit exceeded (Time used: 20.05/10.00, memory used: 13570048/536870912.)
-#Failed case #12/23: Wrong answer (Time used: 1.10/10.00, memory used: 11624448/536870912.)
-#Failed case #22/23: time limit exceeded (Time used: 10.92/10.00, memory used: 33484800/536870912.)
-#Failed case #22/23: time limit exceeded (Time used: 10.89/10.00, memory used: 33583104/536870912.) 
-#Failed case #22/23: time limit exceeded (Time used: 11.86/10.00, memory used: 53284864/536870912.) 
+#python3 closest_v3.py <<< "4 1 150 1 100 50 100 50 150" 49.0000
