@@ -1,7 +1,6 @@
 import sys
 import math
 import random
-from closest_v1 import minimum_distance_naive
 
 def merge(x, y, left, mid, right):
     l = left
@@ -46,23 +45,45 @@ def minDistance(xx, yx, xy, yy, l, r):
     if l == r:
         return 10 ** 10
     elif l + 1 == r:
-        return math.sqrt((xx[l] - xx[r]) ** 2 + (yx[l] - yx[r]) ** 2)
+        return math.sqrt(pow(xx[l] - xx[r], 2) + pow(yx[l] - yx[r], 2))
+    elif l + 3 == r:
+        return minimum_distance_naive(xx, yx, l, r)
 
     m = (l + r) // 2
-    d = minDistance(xx, yx, xy, yy, l, m)
-    d = min(d, minDistance(xx, yx, xy, yy, m + 1, r))
-    if d <= 0.0000000001: return d
+
+    leftxy = []
+    leftyy = []
+    rightxy = []
+    rightyy = []
+    for i in range(len(xy)):
+        if xy[i] <= xx[m] and len(leftxy) < m - l + 1:
+            leftxy.append(xy[i])
+            leftyy.append(yy[i])
+        else:
+            rightxy.append(xy[i])
+            rightyy.append(yy[i])
+
+    d = minDistance(xx, yx, leftxy, leftyy, l, m)
+    d = min(d, minDistance(xx, yx, rightxy, rightyy, m + 1, r))
 
     stripx = []
     stripy = []
-    for i in range(l, r + 1):
+    for i in range(len(xy)):
         if abs(xy[i] - xx[m]) < d:
             stripx.append(xy[i])
             stripy.append(yy[i])
 
     for i in range(len(stripx)):
-        for j in range(i + 1, min(len(stripx), i + 8)):
-            d = min(d, math.sqrt((stripx[i] - stripx[j]) ** 2 + (stripy[i] - stripy[j]) ** 2))
+        for j in range(i + 1, min(len(stripx), i + 7)):
+            d = min(d, math.sqrt(pow(stripx[i] - stripx[j], 2) + pow(stripy[i] - stripy[j], 2)))
+
+    return d
+
+def minimum_distance_naive(x, y, l, r):
+    d = 10 ** 10
+    for i in range(l, r + 1):
+        for j in range(i + 1, r + 1):
+            d = min(d, math.sqrt(pow(x[i] - x[j], 2) + pow(y[i] - y[j], 2)))
 
     return d
 
@@ -113,3 +134,5 @@ if __name__ == '__main__':
 
 #Failed case #13/23: time limit exceeded (Time used: 20.05/10.00, memory used: 13570048/536870912.)
 #Failed case #12/23: Wrong answer (Time used: 1.10/10.00, memory used: 11624448/536870912.)
+#Failed case #22/23: time limit exceeded (Time used: 10.92/10.00, memory used: 33484800/536870912.)
+#Failed case #22/23: time limit exceeded (Time used: 10.89/10.00, memory used: 33583104/536870912.) 

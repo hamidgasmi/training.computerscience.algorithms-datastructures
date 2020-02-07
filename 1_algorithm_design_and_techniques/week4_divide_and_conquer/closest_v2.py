@@ -1,7 +1,6 @@
 import sys
 import math
 import random
-from closest_v1 import minimum_distance_naive
 
 def partition(x, y, l, r):
     p = random.randint(l, r)
@@ -14,7 +13,6 @@ def partition(x, y, l, r):
             p += 1
             x[p], x[j] = x[j], x[p]
             y[p], y[j] = y[j], y[p]
-
     p += 1
     x[p], x[r] = x[r], x[p]
     y[p], y[r] = y[r], y[p]
@@ -31,27 +29,52 @@ def quickSort(x, y, l, r):
             quickSort(x, y, p + 1, r)
             r = p - 1
 
+def distance(xi, yi, xj, yj):
+    return math.sqrt(pow(xi - xj, 2) + pow(yi - yj, 2))
+
 def minDistance(xx, yx, xy, yy, l, r):
     if l == r:
         return 10 ** 10
-    elif l + 1 == r:
-        return math.sqrt((xx[l] - xx[r]) ** 2 + (yx[l] - yx[r]) ** 2)
+    if l + 1 == r:
+        return distance(xx[l], yx[l], xx[r], yx[r])
+    elif l + 3 == r:
+        return minimum_distance_naive(xx, yx, l, r)
 
     m = (l + r) // 2
-    d = minDistance(xx, yx, xy, yy, l, m)
-    d = min(d, minDistance(xx, yx, xy, yy, m + 1, r))
-    if d <= 0.0000000001: return d
+
+    leftxy = []
+    leftyy = []
+    rightxy = []
+    rightyy = []
+    for i in range(len(xy)):
+        if xy[i] <= xx[m] and len(leftxy) < m - l + 1:
+            leftxy.append(xy[i])
+            leftyy.append(yy[i])
+        else:
+            rightxy.append(xy[i])
+            rightyy.append(yy[i])
+
+    d = minDistance(xx, yx, leftxy, leftyy, l, m)
+    d = min(d, minDistance(xx, yx, rightxy, rightyy, m + 1, r))
 
     stripx = []
     stripy = []
-    for i in range(0, len(xy)):
+    for i in range(len(xy)):
         if abs(xy[i] - xx[m]) < d:
             stripx.append(xy[i])
             stripy.append(yy[i])
 
     for i in range(len(stripx)):
-        for j in range(i + 1, min(len(stripx), i + 8)):
-            d = min(d, math.sqrt((stripx[i] - stripx[j]) ** 2 + (stripy[i] - stripy[j]) ** 2))
+        for j in range(i + 1, min(len(stripx), i + 7)):
+            d = min(d, math.sqrt(pow(stripx[i] - stripx[j], 2) + pow(stripy[i] - stripy[j], 2)))
+
+    return d
+
+def minimum_distance_naive(x, y, l, r):
+    d = 10 ** 10
+    for i in range(l, r + 1):
+        for j in range(i + 1, r + 1):
+            d = min(d, distance(x[i], y[i], x[j], y[j]))
 
     return d
 
@@ -65,7 +88,7 @@ def minimum_distance(x, y):
 
     quickSort(x, y, 0, len(y) - 1)
     quickSort(yy, xy, 0, len(xy) - 1)
-    
+
     return minDistance(x, y, xy, yy, 0, len(x) - 1)
 
 if __name__ == '__main__':
