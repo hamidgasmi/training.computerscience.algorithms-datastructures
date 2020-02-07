@@ -1,60 +1,91 @@
 import sys
-import random
 
-def partition(points, l, r):
-    p = random.randint(l, r)
-    points[p], points[r] = points[r], points[p]
-
-    p = l - 1
-    for j in range(l, r):
-        if points[j] <= points[r]:
-            p += 1
-            points[p], points[j] = points[j], points[p]
-
-    p += 1
-    points[p], points[r] = points[r], points[p]
-
-    return p
-
-def quickSort(points, l, r):
-    while l < r:
-        p =  partition(points, l, r)
-        if p - l < r - p:
-            quickSort(points, l, p - 1)
-            l = p + 1
-        else:
-            quickSort(points, p + 1, r)
-            r = p - 1
-
-def binarySearch(points, p, l, r):
-    if l > r:
-        return l - 1
-    elif points[l] == p and points[l + 1] == p:
-        return binarySearch(points, p, l + 1, r)
-
-    mid = (r + l) // 2
-    if points[mid] == p:
-        return mid
-    elif points[mid] > p:
-        return binarySearch(points, p, l, mid - 1)
+def comparePoint(p1, p2, attr1, attr2):
+    if p1 < p2:
+        return True
+    elif p1 > p2:
+        return False
+    elif p1 == p2 and attr1 == attr2:
+        return True
+    elif p1 == p2 and attr1 == -1:
+        return True
+    elif p1 == p2 and attr1 >= 0 and attr2 == -2:
+        return True
     else:
-        return binarySearch(points, p, mid + 1, r)
+        return False
+
+def merge(points, IniAttr, left, m, right):
+    
+    l = left
+    r = m + 1
+    sortedPoints = [0 for i in range(right - left + 1)]
+    sortedIniAttr = [0 for i in range(right - left + 1)]
+    p = 0
+    while l <= m and r <= right:
+        if comparePoint(points[l], points[r], IniAttr[l], IniAttr[r]):
+            sortedPoints[p] = points[l]
+            sortedIniAttr[p] = IniAttr[l]
+            l += 1
+        else:
+            sortedPoints[p] = points[r]
+            sortedIniAttr[p] = IniAttr[r]
+            r += 1
+        p += 1
+
+    while l <= m:
+        sortedPoints[p] = points[l]
+        sortedIniAttr[p] = IniAttr[l]
+        l += 1
+        p += 1
+
+    while r <= right:
+        sortedPoints[p] = points[r]
+        sortedIniAttr[p] = IniAttr[r]
+        r += 1
+        p += 1
+
+    for p in range(right - left + 1):
+        points[p + left] = sortedPoints[p]
+        IniAttr[p + left] = sortedIniAttr[p]
+
+# Points are sorted by location and type: for the same location, start points should come 1st, points should come 2nd and after ends should come 3rd
+# Time complexity: O([s + p] log[s + p])
+def mergeSort(points, IniAttr, l, r):
+    if l >= r: return
+
+    m = (r + l) // 2
+    mergeSort(points, IniAttr, l, m)
+    mergeSort(points, IniAttr, m + 1, r)
+
+    merge(points, IniAttr, l, m, r)    
 
 def fast_count_segments(starts, ends, points):
-    quickSort(starts, 0, len(starts) - 1)
-    quickSort(ends, 0, len(ends) - 1)
+    
+    # Merge all points in the same lists: start points, end points, points
+    allPoints = [starts[i] for i in range(len(starts))]
+    pointAttr = [-1 for i in range(len(starts))]
+    allPoints.extend(points)
+    pointAttr.extend([i for i in range(len(points))])
+    allPoints.extend(ends)
+    pointAttr.extend([-2 for i in range(len(ends))])
+    
+    #Sort all point
+    mergeSort(allPoints, pointAttr, 0, len(allPoints) - 1)
 
-    print("Starts", starts)
-    print("Ends", ends)
-    cnt = [0] * len(points)
-    for p in range(len(points)):
-        s = binarySearch(starts, points[p], 0, len(starts) - 1)
-        e = binarySearch(ends, points[p], 0, len(ends) - 1)
-        cnt[p] = s - e
-
-        print("P: ", points[p])
-        print("S: ", s)
-        print("E: ", e)
+    cnt = [0 for i in range(len(points))]
+    p = 0
+    segmentCnt = 0
+    pntCnt = 0
+    while p < len(allPoints):
+        if pointAttr[p] == -1:
+            segmentCnt += 1
+        elif pointAttr[p] >= 0:
+            cnt[pointAttr[p]] += segmentCnt
+            pntCnt += 1
+            if pntCnt == len(points): break
+        elif pointAttr[p] == -2:
+            segmentCnt -= 1
+        p += 1
 
     return cnt
 
@@ -74,7 +105,6 @@ if __name__ == '__main__':
 
 #python3 points_and_segments_v4.py <<< "3 4 0 0 0 5 7 10 0 1 6 11" 2 1 0 0
 #python3 points_and_segments_v4.py <<< "6 4 0 0 0 5 7 10 12 12 20 25 17 26 0 1 6 11" 2 1 0 0
-#python3 points_and_segments_v4.py <<< "7 4 0 0 0 5 7 10 12 12 20 25 17 26 19 29 0 1 6 11" 2 1 0 0
 #python3 points_and_segments_v4.py <<< "2 3 0 5 7 10 1 6 11" 1 0 0
 #python3 points_and_segments_v4.py <<< "1 3 -10 10 -100 100 0" 0 0 1
 #python3 points_and_segments_v4.py <<< "3 2 0 5 -3 2 7 10 1 6" 2 0

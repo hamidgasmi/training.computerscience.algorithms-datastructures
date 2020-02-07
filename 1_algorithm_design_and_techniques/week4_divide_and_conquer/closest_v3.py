@@ -5,27 +5,31 @@ import random
 def merge(x, y, left, mid, right):
     l = left
     r = mid + 1
-    xs = []
-    ys = []
+    xs = [0 for i in range(right - left + 1)]
+    ys = [0 for i in range(right - left + 1)]
+    i = 0
     while l <= mid and r <= right: 
         if x[l] <= x[r]:
-            xs.append(x[l])
-            ys.append(y[l])
+            xs[i] = x[l]
+            ys[i] = y[l]
             l += 1
         else:
-            xs.append(x[r])
-            ys.append(y[r])
+            xs[i] = x[r]
+            ys[i] = y[r]
             r += 1
+        i += 1
 
     while l <= mid:
-        xs.append(x[l])
-        ys.append(y[l])
+        xs[i] = x[l]
+        ys[i] = y[l]
         l += 1
+        i += 1
     
     while r <= right:
-        xs.append(x[r])
-        ys.append(y[r])
+        xs[i] = x[r]
+        ys[i] = y[r]
         r += 1
+        i += 1
 
     for i in range(left, right + 1):
         x[i] = xs[i - left]
@@ -40,23 +44,25 @@ def mergeSort(x, y, l, r):
     mergeSort(x, y, m + 1, r)
 
     merge(x, y, l, m, r)
-    
+
+def distance(xi, yi, xj, yj):
+    return math.sqrt(pow(xi - xj, 2) + pow(yi - yj, 2))
+
 def minDistance(xx, yx, xy, yy, l, r):
     if l == r:
         return 10 ** 10
     elif l + 1 == r:
-        return math.sqrt(pow(xx[l] - xx[r], 2) + pow(yx[l] - yx[r], 2))
+        return distance(xx[l], yx[l], xx[r], yx[r])
     elif l + 3 == r:
         return minimum_distance_naive(xx, yx, l, r)
 
     m = (l + r) // 2
-
     leftxy = []
     leftyy = []
     rightxy = []
     rightyy = []
     for i in range(len(xy)):
-        if xy[i] <= xx[m] and len(leftxy) < m - l + 1:
+        if xy[i] <= xx[m]: #and len(leftxy) < m - l + 1
             leftxy.append(xy[i])
             leftyy.append(yy[i])
         else:
@@ -75,7 +81,7 @@ def minDistance(xx, yx, xy, yy, l, r):
 
     for i in range(len(stripx)):
         for j in range(i + 1, min(len(stripx), i + 7)):
-            d = min(d, math.sqrt(pow(stripx[i] - stripx[j], 2) + pow(stripy[i] - stripy[j], 2)))
+            d = min(d, distance(stripx[i], stripy[i], stripx[j], stripy[j]))
 
     return d
 
@@ -83,22 +89,19 @@ def minimum_distance_naive(x, y, l, r):
     d = 10 ** 10
     for i in range(l, r + 1):
         for j in range(i + 1, r + 1):
-            d = min(d, math.sqrt(pow(x[i] - x[j], 2) + pow(y[i] - y[j], 2)))
+            d = min(d, distance(x[i], y[i], x[j], y[j]))
 
     return d
 
-def minimum_distance(x, y):
+def minimum_distance(xx, yx):
 
-    xy = [0] * len(x)
-    yy = [0] * len(y)
-    for i in range(len(x)):
-        xy[i] = x[i]
-        yy[i] = y[i]
+    xy = [xx[i] for i in range(len(xx))]
+    yy = [yx[i] for i in range(len(xx))]
 
-    mergeSort(x, y, 0, len(y) - 1)
+    mergeSort(xx, yx, 0, len(xx) - 1)
     mergeSort(yy, xy, 0, len(xy) - 1)
 
-    return minDistance(x, y, xy, yy, 0, len(x) - 1)
+    return minDistance(xx, yx, xy, yy, 0, len(xx) - 1)
 
 if __name__ == '__main__':
     input = sys.stdin.read()
@@ -136,3 +139,4 @@ if __name__ == '__main__':
 #Failed case #12/23: Wrong answer (Time used: 1.10/10.00, memory used: 11624448/536870912.)
 #Failed case #22/23: time limit exceeded (Time used: 10.92/10.00, memory used: 33484800/536870912.)
 #Failed case #22/23: time limit exceeded (Time used: 10.89/10.00, memory used: 33583104/536870912.) 
+#Failed case #22/23: time limit exceeded (Time used: 11.86/10.00, memory used: 53284864/536870912.) 

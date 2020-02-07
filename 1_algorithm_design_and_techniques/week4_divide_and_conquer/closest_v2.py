@@ -119,3 +119,4 @@ if __name__ == '__main__':
 #python3 closest_v2.py <<< "2 -1000000000 -1000000000 1000000000 1000000000"
 #python3 closest_v2.py <<< "8 2 496 12 30 40 50 5 1 12 10 3 4 1 496 1 497"
 #Failed case #13/23: time limit exceeded (Time used: 20.05/10.00, memory used: 13570048/536870912.)
+#Failed case #21/23: time limit exceeded (Time used: 599.86/10.00, memory used: 33521664/536870912.)
