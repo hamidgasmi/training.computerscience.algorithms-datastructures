@@ -246,7 +246,7 @@
     - E.g. Money change problem MinCoin(40 cents) in Tanzania:
         - MinCoin(40s) = 1 + Min( MinCoin(40c - 1c), MinCoin(40c - 5c), MinCoin(40c - 10c), MinCoin(40c - 20c), MinCoin(40c - 25c))
         - MinCoin(20c) is computed at least 4 times: MinCoin(40c - 1c), MinCoin(40c - 5c), MinCoin(40c - 10c), MinCoin(40c - 20c)
-- It's alternative for Greedy Algorithms: 
+- It's an alternative for Greedy Algorithms: 
     - When there is not a safe choice
     - E.g.1, Money change problem MinCoin(40 cents) in US:
         - US coins <= 40c: 1c, 5c, 10c, 25c
