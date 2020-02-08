@@ -240,6 +240,33 @@
 <details>
 <summary>Dynamic Programming</summary>
 
+- It's mainly an optimization over plain recursion.
+- It's an alternative for Recursive algorithms:
+    - Recursive algorithms may be not efficient: they could do a compute several times
+    - E.g. Money change problem MinCoin(40 cents) in Tanzania:
+        - MinCoin(40s) = 1 + Min( MinCoin(40c - 1c), MinCoin(40c - 5c), MinCoin(40c - 10c), MinCoin(40c - 20c), MinCoin(40c - 25c))
+        - MinCoin(20c) is computed at least 4 times: MinCoin(40c - 1c), MinCoin(40c - 5c), MinCoin(40c - 10c), MinCoin(40c - 20c)
+- It's alternative for Greedy Algorithms: 
+    - When there is not a safe choice
+    - E.g.1, Money change problem MinCoin(40 cents) in US:
+        - US coins <= 40c: 1c, 5c, 10c, 25c
+        - A Greedy choice: take the max coin such that coin <= 40c
+        - Result: 3 coins: 40c = 1 * 25c + 1 * 10c + 1 * 5c
+        - Here this choice is safe
+    - E.g.2, Money change problem MinCoin(40 cents) in Tanzania:
+        - Tanzanian coins <= 40c: 1c, 5c, 10c, 20c, 25c
+        - A greedy choice: take the max coin such that the coin <= 40c
+        - Result: 3 coins: 40c = 1 * 25c + 1 * 10c + 1 * 5c
+        - Here this choice isn't safe: 40c = 2 * 20c
+
+- **String Comparison**:
+    - [Course material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_2_editdistance.pdf)
+    - [Advanced dynamic programming lecture notes]() by Jeff Erickson
+    - [How Do We Compare Biological Sequences?](https://www.youtube.com/playlist?list=PLQ-85lQlPqFNmbPEsMoxb5dM5qtRaVShn) by Phillip Compeau and Pavel Pevzner
+- For more details:
+    - [Money change problem: Greedy vs. Recursive vs. Dynamic Programming](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_1_changeproblem.pdf)
+    - [Dynamic Programming](https://www.geeksforgeeks.org/dynamic-programming/) in geeksforgeeks
+
 </details>
 
 <details>
