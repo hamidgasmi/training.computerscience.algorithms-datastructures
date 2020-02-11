@@ -262,31 +262,35 @@
     - Remove all symbols from 2 strings in such a way that the number of points is maximized:
     - Remove the 1st symbol from **both** strings: 1 point if the symbols match; 0 if they don't
     - Remove the 1st symbol from **one** of the strings: 0 point
-    - E.g.,:    A T G T T A T A  => A T - G T T A T A
-        -       A T C G T C C    => A T C G T - C - C
-        -                          +1+1  +1+1         = +4
+    - E.g.,:    
+        -       A T G T T A T A  => A T - G T T A T A
+                A T C G T C C    => A T C G T - C - C
+                                   +1+1  +1+1         = +4
     - **Sequence Alignment**:
         - It's a 2-row matrix
         - 1st row: symbols of the 1st string (in order) interspersed by "-"
         - 2nd row: symbols of the 2nd string (in order) interspersed by "-"
-        - E.g.:  A T - G T T A T C
-        -        A T C G T - C - C
+        - E.g.:  
+        -        A T - G T T A T C
+                 A T C G T - C - C
         - Deletion --^     ^-- insertion
         - **Alignment score**: 
             - Premium (**+1**) for every **match** 
             - Penalty (**-μ**) for every **mismatch**
             - Penatly (**-σ**) for every **indel** (insertion/deletion)
-            - E.g.: ccc:
+            - E.g.:
             -  A T - G T T A T A
-            -  A T C G T - C - C
-            - +1+1-1+1+1-1-0-1+0 = +1
+               A T C G T - C - C
+              +1+1-1+1+1-1-0-1+0 = +1
         - **Optimal alignment**:
             - Input: 2 strings, mismatch penatly μ, and indel penalty σ
             - Output: An alignment of the strings maximizing the score
     - **Common Subsequence**: **Matches** in an alignment of 2 strings form their **common  subsequence**
-        - E.g. A T - G T T A T C
-        -      A T C G T - C - C
-        -      AT    G T (ATGT) is a common subsequence
+        - E.g. 
+        -      A T - G T T A T C
+               A T C G T - C - C
+               AT    G T 
+              (ATGT) is a common subsequence
 - **Longest common subsequence**:
     - Input: 2 strings
     - Output: A longest common subsequence of these strings
@@ -295,9 +299,10 @@
     - Input: 2 strings
     - Output: the **minimum number of operations** (insertions, deletions, and substitutions of symbols) **to transform one string into another**
     - It corresponds to the **minimum number of mismatches and indels** in an alignment of 2 strings (among all possible alignments)
-    - E.g.: E D I - T I N G -
-    -       - D I S T A N C E
-    -  Del.-^     ^--Ins.---^
+    - E.g.: 
+    -       E D I - T I N G -
+            - D I S T A N C E
+       Del.-^     ^--Ins.---^
     - **Minimizing edit distance = Maximizing Alignment score**
     - Let ***D(i,j)*** be the edit distance of an *i*-prefix *A*[1... *i*] and a *j*-prefix *B*[1.... *j*]
     - ***D(i,j) = MIN(D(i,j-1) + 1, D(i-1,j) + 1, D(i-1,j-1) + 1) if A[i] <> B[j]*** OR
