@@ -258,8 +258,53 @@
         - A greedy choice: take the max coin such that the coin <= 40c
         - Result: 3 coins: 40c = 1 * 25c + 1 * 10c + 1 * 5c
         - Here this choice isn't safe: 40c = 2 * 20c
-
-- **String Comparison**:
+- **Alignment game** (String Comparison):
+    - Remove all symbols from 2 strings in such a way that the number of points is maximized:
+    - Remove the 1st symbol from **both** strings: 1 point if the symbols match; 0 if they don't
+    - Remove the 1st symbol from **one** of the strings: 0 point
+    - E.g.,:    A T G T T A T A  => A T - G T T A T A
+        -       A T C G T C C    => A T C G T - C - C
+        -                          +1+1  +1+1         = +4
+    - **Sequence Alignment**:
+        - It's a 2-row matrix
+        - 1st row: symbols of the 1st string (in order) interspersed by "-"
+        - 2nd row: symbols of the 2nd string (in order) interspersed by "-"
+        - E.g.:  A T - G T T A T C
+        -        A T C G T - C - C
+        - Deletion --^     ^-- insertion
+        - **Alignment score**: 
+            - Premium (**+1**) for every **match** 
+            - Penalty (**-μ**) for every **mismatch**
+            - Penatly (**-σ**) for every **indel** (insertion/deletion)
+            - E.g.: ccc:
+            -  A T - G T T A T A
+            -  A T C G T - C - C
+            - +1+1-1+1+1-1-0-1+0 = +1
+        - **Optimal alignment**:
+            - Input: 2 strings, mismatch penatly μ, and indel penalty σ
+            - Output: An alignment of the strings maximizing the score
+    - **Common Subsequence**: **Matches** in an alignment of 2 strings form their **common  subsequence**
+        - E.g. A T - G T T A T C
+        -      A T C G T - C - C
+        -      AT    G T (ATGT) is a common subsequence
+- **Longest common subsequence**:
+    - Input: 2 strings
+    - Output: A longest common subsequence of these strings
+    - It corresponds to **highest alignment score** with **μ = σ = 0** (maximizing the score of an alignment)
+- **Edit distance**
+    - Input: 2 strings
+    - Output: the **minimum number of operations** (insertions, deletions, and substitutions of symbols) **to transform one string into another**
+    - It corresponds to the **minimum number of mismatches and indels** in an alignment of 2 strings (among all possible alignments)
+    - E.g.: E D I - T I N G -
+    -       - D I S T A N C E
+    -  Del.-^     ^--Ins.---^
+    - **Minimizing edit distance = Maximizing Alignment score**
+    - Let ***D(i,j)*** be the edit distance of an *i*-prefix *A*[1... *i*] and a *j*-prefix *B*[1.... *j*]
+    - ***D(i,j) = MIN(D(i,j-1) + 1, D(i-1,j) + 1, D(i-1,j-1) + 1) if A[i] <> B[j]*** OR
+    - ***D(i,j) = MIN(D(i,j-1) + 1, D(i-1,j) + 1, D(i-1,j-1)) if A[i] = B[j]***
+- **Reconstructing an **Optimal Alignment**:
+    - It could be done by backtracking pointers that are stored in the edit distance computation matrix
+- For more details:
     - [Course material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_2_editdistance.pdf)
     - [Advanced dynamic programming lecture notes]() by Jeff Erickson
     - [How Do We Compare Biological Sequences?](https://www.youtube.com/playlist?list=PLQ-85lQlPqFNmbPEsMoxb5dM5qtRaVShn) by Phillip Compeau and Pavel Pevzner
