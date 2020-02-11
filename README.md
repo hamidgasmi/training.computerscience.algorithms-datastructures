@@ -244,8 +244,8 @@
 - It's an alternative for Recursive algorithms:
     - Recursive algorithms may be not efficient: they could do a compute several times
     - E.g. Money change problem MinCoin(40 cents) in Tanzania:
-        - MinCoin(40s) = 1 + Min( MinCoin(40c - 1c), MinCoin(40c - 5c), MinCoin(40c - 10c), MinCoin(40c - 20c), MinCoin(40c - 25c))
-        - MinCoin(20c) is computed at least 4 times: MinCoin(40c - 1c), MinCoin(40c - 5c), MinCoin(40c - 10c), MinCoin(40c - 20c)
+    - MinCoin(40s) = 1 + Min( MinCoin(40c - 1c), MinCoin(40c - 5c), MinCoin(40c - 10c), MinCoin(40c - 20c), MinCoin(40c - 25c))
+    - MinCoin(20c) is computed at least 4 times: MinCoin(40c - 1c), MinCoin(40c - 5c), MinCoin(40c - 10c), MinCoin(40c - 20c)
 - It's an alternative for Greedy Algorithms: 
     - When there is not a safe choice
     - E.g.1, Money change problem MinCoin(40 cents) in US:
@@ -273,7 +273,7 @@
         - E.g.:  
         -        A T - G T T A T C
                  A T C G T - C - C
-        - Deletion --^     ^-- insertion
+                     ^-Del ^--Insert.
         - **Alignment score**: 
             - Premium (**+1**) for every **match** 
             - Penalty (**-μ**) for every **mismatch**
@@ -302,7 +302,7 @@
     - E.g.: 
     -       E D I - T I N G -
             - D I S T A N C E
-       Del.-^     ^--Ins.---^
+            ^-Del ^-Ins.----^
     - **Minimizing edit distance = Maximizing Alignment score**
     - Let ***D(i,j)*** be the edit distance of an *i*-prefix *A*[1... *i*] and a *j*-prefix *B*[1.... *j*]
     - ***D(i,j) = MIN(D(i,j-1) + 1, D(i-1,j) + 1, D(i-1,j-1) + 1) if A[i] <> B[j]*** OR
