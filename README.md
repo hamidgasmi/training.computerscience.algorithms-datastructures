@@ -190,6 +190,15 @@
         - Therefore such a choice is a safe choice
         - However, if we choose a patient with the maximum treatment time, there's not an optimal solution that starts with it
         - Therefore such a choice isn't a safe choice
+- E.g. Fractional Knapsack (or Backpack) Problem:
+    - N items with total weight and total value (Wi, Vi)    
+    - A Backpack with a capacity W
+    - Goal: Maximize value ($) while limiting total weight (kg)
+    - It's possible to take fraction of items
+    - Item 1: (6, $30), Item 2 (3, $14), Item 3 (4, $16), Item 4 (2, $9)
+        - Knapsack capacity: 10
+        - Value per Unit: Item 1: $5; Item2: $4.66; Item3: $4; Item4: $4.5
+        - Solution: 6 * $5 + 3 * $4.666 + 1 * $4.5 (fraction of item4) = $48.5
 
 </details>
 
@@ -309,6 +318,31 @@
     - ***D(i,j) = MIN(D(i,j-1) + 1, D(i-1,j) + 1, D(i-1,j-1)) if A[i] = B[j]***
 - **Reconstructing an **Optimal Alignment**:
     - It could be done by backtracking pointers that are stored in the edit distance computation matrix
+- E.g., Discrete Knapsack problem
+    - N items with total weight Wi (Kg) and total value Vi ($)
+    - A Backpack with a capacity W
+    - Each item is either taken or not
+    - Goal: Maximize value ($) while limiting total weight (kg)
+    - Discrete Knapsack with unlimited repetitions quantities:
+        - Input: Weights (W1,..., Wn) and values (V1,..., Vn) of n items; total weight W (Vi’s, Wi’s, and W are non-negative integers)
+        - Output: The maximum value of items whose weight doesn't exceed W 
+        - Each item can be used any number of times
+        - Item 1 (6, $30), Item 2 (3, $14), Item 3 (4, $16), Item 4 (2, $9)
+        - Knapsack capacity: 10
+        - Solution: 6 ($30) + 2 ($9) + 2 ($9) = $48
+        - Greedy Algorithm doesn't work: 6 ($30) + 
+    - Discrete Knapsack without one of each repetitions item:
+        - Input: Weights (W1,..., Wn) and values (V1,..., Vn) of n items; total weight W (Vi’s, Wi’s, and W are non-negative integers)
+        - Output: The maximum value of items whose weight doesn't exceed W 
+        - Each item can be used at most once
+        - Item 1 (6, $30), Item 2 (3, $14), Item 3 (4, $16), Item 4 (2, $9)
+        - Knapsack capacity: 10
+        - Solution: 6 ($30) + 4 ($16) = $46
+    - Greedy Algorithm fails:
+        - Item1 (6, $30), Item2 (3, $14), Item3 (4, $16), Item4 (2, $9)
+        - Value per Unit: Item 1: $5; Item2: $4.66; Item3: $4; Item4: $4.5
+        - 6 ($30) + 3 ($14) = 9 items ($44)
+        - taking an element of maximum value per unit of weight is not safe!
 - For more details:
     - [Course material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_2_editdistance.pdf)
     - [Advanced dynamic programming lecture notes]() by Jeff Erickson
