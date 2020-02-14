@@ -32,8 +32,7 @@
 - **Logarithms**: see [this](https://www.khanalscademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms)
 - **Recursion**: 
     - To [Get Started](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion)
-    - Stack optimization and Tail Recursion:
-        - 
+    - Stack optimization and Tail Recursion
 
 </details>
 
@@ -146,6 +145,22 @@
 
 <details>
 <summary>Algorithm Design</summary>
+
+- **Reading problem statement**: 
+    - The problem statement specifies the input-output format, the constraints for the input data as well as time and memory limits 
+    - Our goal is to implement a fast program that solves the problem and works within the time and memory limits
+- **Build your intuition**:
+    - *In progress*
+- **Designing an algorithm**: 
+    - When the problem statement is clear, start designing an algorithm and 
+    - Don’t forget to **prove that it works correctly**
+- **Implementing an algorithm**: 
+    - After you developed an algorithm, start implementing it in a programming language
+- **Testing and debugging your program** 
+    - Testing is the art of revealing bugs 
+    - Debugging is the art of exterminating the bugs 
+    - When your program is ready, start testing it! 
+    - If a bug is found, fix it and test again
 
 </details>
 
@@ -386,6 +401,26 @@
 ---
 
 ## Data Structures Fundamentals
+
+<details>
+<summary>Basic Data Structures</summary>
+</details>
+
+<details>
+<summary>Dynamic Arrays and Amortized Analysis</summary>
+</details>
+
+<details>
+<summary>Priority Queues and Disjoint Sets</summary>
+</details>
+
+<details>
+<summary>Hashing</summary>
+</details>
+
+<details>
+<summary>Binary Search Trees</summary>
+</details>
 
 ---
 
