@@ -459,6 +459,18 @@
 </details>
 
 <details>
+<summary>Basic Data Structures: Stacks</summary>
+
+
+</details>
+
+<details>
+<summary>Basic Data Structures: Trees</summary>
+
+
+</details>
+
+<details>
 <summary>Dynamic Arrays and Amortized Analysis</summary>
 </details>
 
