@@ -416,10 +416,10 @@
         - Its elements are laid out as follow: (1,1), (2,1), (2,1), ..., (1,2), (2,2),...
         - accessing **[i][j]** consists of accessing the memory address: **array_addr + elem_size × [column_lenth * (j  − 1st_column_index) + (i − 1st_row_index)]**
 - Time for common operations:
-    -                Read    Remove   Add
-        Beginning:   O(1)     O(n)    O(n) 
-              End:   O(1)     O(1)    O(1)
-           Middle:   O(1)     O(n)    O(n)
+    -                     Read    Remove   Add
+            Beginning:    O(1)     O(n)    O(n) 
+                  End:    O(1)     O(1)    O(1)
+               Middle:    O(1)     O(n)    O(n)
 
 </details>
 
