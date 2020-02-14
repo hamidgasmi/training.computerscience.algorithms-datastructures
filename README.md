@@ -443,18 +443,18 @@
            AddAfter(Node, Key):               O(n)                                 Adds key after node 
 - **Doubly-Linked List**:
     - Its node consists of a key, a pointer to the next node and a pointer to the previous node
-    -   APIs                    Time (wout tail)   Time (w tail)
-        PushFront(Key)              O(1)                        
-        Key TopFront()              O(1)                        
-        PopFront()                  O(1)                        
-        PushBack(Key)               O(n)              O(1)      
-        Key TopBack()               O(n)              O(1)      
-        PopBack()                   O(n)              O(1)      
-        Boolean Find(Key)           O(n)                        
-        Erase(Key)                  O(n)                        
-        Boolean Empty()             O(1)                        
-        AddBefore(Node, Key)        O(n)                        
-        AddAfter(Node, Key)         O(n)    
+    -                APIs                    Time (wout tail)   Time (w tail)
+                PushFront(Key):               O(1)                                 
+                Key TopFront():               O(1)                                 
+                    PopFront():               O(1)                                 
+                 PushBack(Key):               O(n)              O(1)               
+                 Key TopBack():               O(n)              O(1)               
+                     PopBack():               O(n)              O(1)                 
+             Boolean Find(Key):               O(n)                                 
+                    Erase(Key):               O(n)                                 
+               Boolean Empty():               O(1)                                 
+          AddBefore(Node, Key):               O(n)
+           AddAfter(Node, Key):               O(n)
 
 </details>
 
