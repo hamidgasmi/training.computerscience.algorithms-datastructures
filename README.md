@@ -249,7 +249,18 @@
 <details>
 <summary>Dynamic Programming</summary>
 
-- It's mainly an optimization over plain recursion.
+- It's a general algorithmic design technique: Approach can be used to solve many kinds of problems
+- It's Frequently used for optimization problems: finding best way to do something
+- It's typically used when brute-force solution is to enumerate all possibilities:
+    - May not know which subproblems to solve, so we solve many or all!
+    - Reduce number of possibilities by:
+        - Finding optimal solutions to subproblems
+        - Avoiding non-optimal subproblems (when possible)
+        - Frequently gives a polynomial algorithm for brute force exponential one
+- It's like Divide and Conquer:
+    - General design technique
+    - Uses solutions to subproblems to solve larger problems
+    - Difference: Dynamic Programming subproblems typically overlap
 - It's an alternative for Recursive algorithms:
     - Recursive algorithms may be not efficient: they could do a compute several times
     - E.g. Money change problem MinCoin(40 cents) in Tanzania:
@@ -267,6 +278,16 @@
         - A greedy choice: take the max coin such that the coin <= 40c
         - Result: 3 coins: 40c = 1 * 25c + 1 * 10c + 1 * 5c
         - Here this choice isn't safe: 40c = 2 * 20c
+- Steps:
+    - Express a solution mathematically
+        - **Cut and Paste Trick Dynamic Programming**:
+        - Cut and paste proof: optimal solution to problem must use optimal solution to subproblem: otherwise we could remove suboptimal solution to subproblem and replace it with a better solution, which is a contradiction
+        - [For more details](https://stackoverflow.com/questions/9553162/what-is-the-cut-and-paste-proof-technique)
+    - Express a solution recursively
+    - Either develop a **bottom up algorithm**:
+        - Find a bottom up algorithm to find the optimal value
+        - Find a bottom up algorithm to construct the solution
+    - Or develop a **memoized recursive algorithm**
 - **Alignment game** (String Comparison):
     - Remove all symbols from 2 strings in such a way that the number of points is maximized:
     - Remove the 1st symbol from **both** strings: 1 point if the symbols match; 0 if they don't
@@ -350,6 +371,7 @@
 - For more details:
     - [Money change problem: Greedy vs. Recursive vs. Dynamic Programming](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_1_changeproblem.pdf)
     - [Dynamic Programming](https://www.geeksforgeeks.org/dynamic-programming/) in geeksforgeeks
+    - [Dynamic Programming](https://www.radford.edu/~nokie/classes/360/dynprog.html)
 
 </details>
 
