@@ -428,7 +428,20 @@
 <details>
 <summary>Basic Data Structures: Linked Lists</summary>
 
-- It's a
+- Singly-Linked List
+    -   APIs                    Time (wout tail)   Time (w tail)         Description 
+        PushFront(Key)              O(1)              O(1)               Aadd to front
+        Key TopFront()              O(1)              O(1)               Return front item
+        PopFront()                  O(1)              O(1)               Remove front item
+        PushBack(Key)               O(n)              O(1)               Add to back
+        Key TopBack()               O(n)              O(1)               Return back item
+        PopBack()                   O(n)              O(n)               Remove back item
+        Boolean Find(Key)           O(n)              O(n)               Is key in list?
+        Erase(Key)                  O(n)              O(n)               Remove key from list
+        Boolean Empty()             O(1)              O(1)               Empty list?
+        AddBefore(Node, Key)        O(n)              O(n)               Adds key before node
+        AddAfter(Node, Key)         O(n)              O(n)               Adds key after node 
+- Doubly-Linked List
 
 </details>
 
