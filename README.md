@@ -410,11 +410,13 @@
 - **1-D Array**: accessing **array[i]** consists of accessing the memory address: **array_addr + elem_size × (i − first_index)**
 - **2-D Array**:
     - It could be laid out in **Row-Major order**:
+        - Its 2nd index (column) changes most rapidly
         - Its elements are laid out as follow: (1,1), (1,2), (1,3), ..., (2,1), (2,2),...
-        - accessing **[i][j]** consists of accessing the memory address: **array_addr + elem_size × [row_lenth * (i  − 1st_row_index) + (j − 1st_column_index)]**
+        - Accessing **[i][j]** consists of accessing the memory address: **array_addr + elem_size × [row_lenth * (i  − 1st_row_index) + (j − 1st_column_index)]**
     - It could be laid out in **Column-Major order**:
+        - Its 1st index (row) changes most rapidly
         - Its elements are laid out as follow: (1,1), (2,1), (2,1), ..., (1,2), (2,2),...
-        - accessing **[i][j]** consists of accessing the memory address: **array_addr + elem_size × [column_lenth * (j  − 1st_column_index) + (i − 1st_row_index)]**
+        - Accessing **[i][j]** consists of accessing the memory address: **array_addr + elem_size × [column_lenth * (j  − 1st_column_index) + (i − 1st_row_index)]**
 - Time for common operations:
     -                Read    Remove   Add
         Beginning:   O(1)     O(n)    O(n) 
