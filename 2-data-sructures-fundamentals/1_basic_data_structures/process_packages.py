@@ -3,68 +3,32 @@ from collections import namedtuple
 Request = namedtuple("Request", ["arrived_at", "time_to_process"])
 Response = namedtuple("Response", ["was_dropped", "started_at"])
 
-
 class Buffer:
     def __init__(self, size):
         self.size = size
-        self.finish_time = 0
-        self.queue = []
+        self.finish_time = []
 
-    def full(self):
-        return len(self.queue) == self.size
+    #O(b)
+    def process(self, request):
 
-    def empty(self):
-        return len(self.queue) == 0
-
-    def enqueue(self, request):
-        if self.full():
-            return False
-        else:
-            self.queue.append(request)
-            return True
-
-    def process(self):
+        # Dequeue all finish times before the current request arrive at time
+        while len(self.finish_time) != 0 and self.finish_time[0] <= request.arrived_at:
+            self.finish_time.pop(0)
         
-        if not self.empty():
-            request = self.queue[0]
-            response = Response(False, max(request.arrived_at, self.finish_time))
-            self.finish_time = response.started_at + request.time_to_process
-            self.queue.pop(0)
-            return response
+        if len(self.finish_time) < self.size:
+             start_time = request.arrived_at if len(self.finish_time) == 0 else self.finish_time[len(self.finish_time) - 1]
+             self.finish_time.append(start_time + request.time_to_process)
 
+        elif len(self.finish_time) == self.size:
+            start_time = -1
+
+        return Response(start_time == -1, start_time)
+
+#O(n * b)
 def process_requests(requests, buffer):
     responses = []
-
-    if len(requests) == 0:
-        return responses
-
-    # 0. Append to the buffer:
-    i = 0
-    #curr_time = requests[i].arrived_at
-    while not buffer.full() and i < len(requests): #and requests[i].arrived_at == curr_packets_arriving_time:
-        buffer.enqueue(requests[i])
-        i += 1
-
-    while (not buffer.empty()):
-
-        # 1. Process a Request:
-        
-        while not buffer.empty() and (i >= len(requests[i]) or buffer.finish_time + buffer.queue[0].time_to_process <= requests[i].arrived_at):
-            responses.append(buffer.process())
-            
-            
-        # 2. Drop all requests arrived before the end of current request: response.started_at + Request.time_to_process
-        while i < len(requests) and requests[i].arrived_at < buffer.finish_time:
-            responses.append(Response(True, -1))
-            i += 1
-
-        # 3. Append to the buffer (1 spot available)
-        #if i < len(requests): 
-            #curr_packets_arriving_time = requests[i].arrived_at
-        while not buffer.full() and i < len(requests):
-            buffer.enqueue(requests[i])
-            i += 1
-
+    for request in requests:
+        responses.append(buffer.process(request))
     return responses
 
 def main():
