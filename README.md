@@ -193,11 +193,11 @@
     - When the problem statement is clear, start designing an algorithm and 
     - Don’t forget to **prove that it works correctly**
     - Don't forget to **estimate its expected running time**:
-        -   E.g.    
-               Time Complexity:     O(n^2)                  O(n log n)
-                   Machine ops:      10^9                   10^9
-                             n:      10^5                   10^5
-                Estimated Time:   **> 10s** (10^10/10^9)    **< 1 ms** (10^5 * log 10^5 / 10^9)
+        - E.g.
+        -       Time Complexity:     O(n^2)                  O(n log n)
+                    Machine ops:      10^9                   10^9
+                              n:      10^5                   10^5
+                 Estimated Time:      > 10s (10^10/10^9)     < 1 ms (10^5*log(10^5)/10^9)
 - **Implementing an algorithm**: 
     - After you developed an algorithm, start implementing it in a programming language
 - **Testing and debugging your program** 
