@@ -39,10 +39,45 @@
 <details>
 <summary>Test Cases</summary>
 
-- When dealing with string: special characters, encoding (ASCII, UTF-8, UTF-16)?
-- When dealing with numbers:
+- **Boundary** values
+- **Biased**/**Degenerate** tests cases
+    - They're tests which are peculiar in some sense
+    - See example for each data structure below
+- **Randomly** generated cases and **large** dataset:
+    - It's to check random values to catch up cases we didn't think about
+    - It's also to check how long it takes to process a large dataset
+    - Implement our program as a function **solve(dataset)**
+    - Implement an additional procedure **generate()** that produces a random/large dataset 
+    - E.g., if an input to a problem is a sequence of integers of length 1 ≤ n ≤ 10^5, then: 
+        - Generate a sequence of length 10^5, 
+        - Pass it to our solve() function, and 
+        - Ensure our algorithm outputs the result quickly: we could measure the duration time
+- **Stress** testing:
+    - Implement a slow but but simple and correct algorithm
+    - Check that both programs produce the same result (this is not applicable to problems where the output is not unique) 
+    - Generate random test cases as well as biased tests cases
+- When dealing with **numbers**:
     - Think about number size: Int. Long, ... ?
     - If there is any division: division by 0; Precision?
+    - Integers Biased cases: a **Prime/Composite** number; an **Even/Odd** number
+- When dealing with **String**:
+    - Biased/Degenerate tests: 
+        - Empty string
+        - A strings that contains a  sequence of a single letter (“aaaaaaa”) or 2 letters ("abbaabaa") as opposed to those composed of all possible Latin letters
+    - Encoding (ASCII, UTF-8, UTF-16)?
+    - Special characters
+    - such as those with only small numbers or a small range of large numbers, 
+- When dealing with **arrays/lists**:
+    - Biased/Degenerate tests: 
+        - It's empty
+        - It contains only small numbers or a small range of large numbers
+    - It contains **few** elements: 1, 2
+    - It contains **many** elements: 10^6
+    - It contains same elements: min value only (0 for integers), max value only (2^32 for integers), any specific value
+- When dealing with **Trees**:
+    -  Biased/Degenerate tests: a tree which consists of a linked list, binary trees, stars
+- When dealing with **Graphs**:
+    -  Biased/Degenerate tests: a graph which consists of a linked list, a tree, a disconnected graph, a complete graph, a bipartite graph
 
 </details>
 
@@ -149,18 +184,36 @@
 - **Reading problem statement**: 
     - The problem statement specifies the input-output format, the constraints for the input data as well as time and memory limits 
     - Our goal is to implement a fast program that solves the problem and works within the time and memory limits
+    - Question inputs:
+        - **String**: Encoding (ASCII, UTF-8, UTF-16)?, Special characters?
+        - **Number**: Size (Int. Long, ...)? Precision, Rounding?
 - **Build your intuition**:
     - *In progress*
 - **Designing an algorithm**: 
     - When the problem statement is clear, start designing an algorithm and 
     - Don’t forget to **prove that it works correctly**
+    - Don't forget to **estimate its expected running time**:
+        -   E.g.    
+               Time Complexity:     O(n^2)                  O(n log n)
+                   Machine ops:      10^9                   10^9
+                             n:      10^5                   10^5
+                Estimated Time:   **> 10s** (10^10/10^9)    **< 1 ms** (10^5 * log 10^5 / 10^9)
 - **Implementing an algorithm**: 
     - After you developed an algorithm, start implementing it in a programming language
 - **Testing and debugging your program** 
-    - Testing is the art of revealing bugs 
-    - Debugging is the art of exterminating the bugs 
-    - When your program is ready, start testing it! 
-    - If a bug is found, fix it and test again
+    - Testing is the art of revealing bugs
+    - 1st start with **simple test cases**: 
+        - Small dataset
+        - Make sure our program produces correct results
+    - 2nd check **degenerate** cases: see test cases section above
+    - 3rd check **boundary** values: see test cases section above
+    - 4th check **randomly** generated cases
+    - 5th check **large** dataset: see test cases section above
+    - 6th finish with **stress** testing: see test cases section above
+
+
+
+**biased tests cases** such as those with 
 
 </details>
 
