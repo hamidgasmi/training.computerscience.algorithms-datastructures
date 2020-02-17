@@ -211,10 +211,6 @@
     - 5th check **large** dataset: see test cases section above
     - 6th finish with **stress** testing: see test cases section above
 
-
-
-**biased tests cases** such as those with 
-
 </details>
 
 <details>
@@ -475,6 +471,8 @@
             Beginning:    O(1)     O(n)    O(n) 
                   End:    O(1)     O(1)    O(1)
                Middle:    O(1)     O(n)    O(n)
+- Programming Languages:
+    - Python: there is no static array data structure
 
 </details>
 
@@ -508,23 +506,47 @@
                Boolean Empty():               O(1)                                 
           AddBefore(Node, Key):               O(n)
            AddAfter(Node, Key):               O(n)
+- Programming Languages:
+    - Python:
 
 </details>
 
 <details>
 <summary>Basic Data Structures: Stacks</summary>
 
+- Programming Languages:
+    - Python:
 
 </details>
 
 <details>
 <summary>Basic Data Structures: Trees</summary>
 
+- Programming Languages:
+    - Python:
 
 </details>
 
 <details>
-<summary>Dynamic Arrays and Amortized Analysis</summary>
+<summary>Dynamic Arrays</summary>
+
+- Programming Languages:
+    - Python: list (the only kind of array)
+    - C++: vector
+    - Java: ArrayList
+
+</details>
+
+<details>
+<summary>Amortized Analysis</summary>
+
+- Methods to calculate amortized cost:
+    - The **Aggregate method**: 
+        - It calculates amortized cost based on amortized cost definition
+        - E.g. Dynamic Array:
+    - The **Banker's Method**:
+    - The **Physicist's Method**:
+
 </details>
 
 <details>
