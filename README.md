@@ -531,10 +531,39 @@
 <details>
 <summary>Dynamic Arrays</summary>
 
+- It's also known as **Resizable array**
+- It's a solution for limitations of **static** arrays and **dynamically-allocated** arrays (see below):
+    - It can be resized at runtime
+    - It stores (implementation):
+        - Arr: dynamically-allocated array
+        - Capacity: size of the dynamically-allocated array
+        - Size: number of elements currently in the array
+    - When an element is added to the end of the array and array's size and capacity are equal:
+        - It allocates a new array
+        - New Capacity = Previous Capacity x 2
+        - Copy all elements from old array to new array
+        - Insert new element
+        - New Size = Old Size + 1
+        - Free old array space
+-                             Time Complexity
+                    Get(i):        O(1) 
+               Set(i, val):        O(1)
+             PushBack(val):        O(1)/O(n): O(n) when size = capacity; O(1) otherwise (see amortized analysis below)
+                 Remove(i):        O(1)
+                    Size():        O(1)
 - Programming Languages:
     - Python: list (the only kind of array)
     - C++: vector
     - Java: ArrayList
+- Static array:
+    - it's static!
+    - It requires to know its size at compile time
+    - Problem: we might not know max size when declaring an array
+- Dynamically-allocated arrays:
+    - int *my_array = new int[size]
+    - It requires to know its size at runtime
+    - Problem: we might not know max size when allocating an array
+
 
 </details>
 
