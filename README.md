@@ -1,6 +1,6 @@
 # Algorithms and Data Structures
 
-- My notes from UC San Diego MicroMasters Program, [Algorithms and Data Structures](https://www.edx.org/micromasters/ucsandiegox-algorithms-and-data-structures)
+- My notes from UC San Diego MicroMasters Program, [Algorithms and Data Structures](https://www.edx.org/micromasters/ucsandiegox-algorithms-and-data-structures) and all the readings that I made in parallel (see [references](#references) below)
 - My anki flashcards:
     - [Anki flashcards package](https://github.com/hamidgasmi/AlgorithmsDataStructures/blob/master/algorithms-datastructures_ankiflashcard.apkg): 9 cards
     - [Install Anki](https://apps.ankiweb.net/)
@@ -14,6 +14,7 @@
 - [Dynamic Programming: Applications In Machine Learning and Genomics](#dynamic-programming-applications-in-machine-learning-and-genomics)
 - [Graph Algorithms in Genome Sequencing ](#graph-algorithms-in-genome-sequencing)
 - [Algorithms and Data Structures Capstone](#algorithms-and-data-structures-capstone)
+- [References](#references)
 
 ## Algorithm Design and Techniques
 
@@ -584,3 +585,32 @@
 ---
 
 ## Algorithms and Data Structures Capstone
+
+---
+
+## References
+
+<details>
+<summary>Whitepapers & Books</summary>
+
+- [The Algorithm Design Manual](http://mimoza.marmara.edu.tr/~msakalli/cse706_12/SkienaTheAlgorithmDesignManual.pdf)
+
+</details>
+
+<details>
+<summary>Talks & Courses</summary>
+
+- [UC San Diego MicroMasters Program](https://www.edx.org/micromasters/ucsandiegox-algorithms-and-data-structures)
+- Princeton University Coursera Courses:
+    - [Algorithms, Part I](https://www.coursera.org/learn/algorithms-part1/home/welcome)
+    - [Algorithms, Part II](https://www.coursera.org/learn/algorithms-part2/home/welcome)
+
+
+</details>
+
+<details>
+<summary>Articles</summary>
+
+</details>
+
+---
