@@ -42,7 +42,7 @@
 
 - **Boundary** values
 - **Biased**/**Degenerate** tests cases
-    - They're tests which are peculiar in some sense
+    - They're particular in some sense
     - See example for each data structure below
 - **Randomly** generated cases and **large** dataset:
     - It's to check random values to catch up cases we didn't think about
@@ -54,7 +54,7 @@
         - Pass it to our solve() function, and 
         - Ensure our algorithm outputs the result quickly: we could measure the duration time
 - **Stress** testing:
-    - Implement a slow but but simple and correct algorithm
+    - Implement a slow but simple and correct algorithm
     - Check that both programs produce the same result (this is not applicable to problems where the output is not unique) 
     - Generate random test cases as well as biased tests cases
 - When dealing with **numbers**:
@@ -604,13 +604,21 @@
 - Princeton University Coursera Courses:
     - [Algorithms, Part I](https://www.coursera.org/learn/algorithms-part1/home/welcome)
     - [Algorithms, Part II](https://www.coursera.org/learn/algorithms-part2/home/welcome)
-
+- [Grokking the Coding Interview: Patterns for Coding Questions](https://www.educative.io/courses/grokking-the-coding-interview)
 
 </details>
 
 <details>
 <summary>Articles</summary>
 
+- [14 Patterns to Ace Any Coding Interview Question](https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed)
+- [Solving Coding Problems With PEDAC](https://medium.com/launch-school/solving-coding-problems-with-pedac-29141331f93f)
+- [Interview Questions (and answers)](http://readyforsoftwareinterview.blogspot.com/)
+- [How To Approach Any Algorithm Interview Without Panicking](https://www.freecodecamp.org/news/how-to-approach-any-algorithm-interview-without-panicking-b6d7ae5c050/)
+- [Top 10 Algorithms for Coding Interview](https://www.programcreek.com/2012/11/top-10-algorithms-for-coding-interview/)
+
 </details>
 
 ---
+
+## Problems:
