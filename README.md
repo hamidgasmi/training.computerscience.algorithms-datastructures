@@ -545,12 +545,13 @@
         - Insert new element
         - New Size = Old Size + 1
         - Free old array space
--                             Time Complexity
-                    Get(i):        O(1) 
-               Set(i, val):        O(1)
-             PushBack(val):        O(1)/O(n): O(n) when size = capacity; O(1) otherwise (see amortized analysis below)
-                 Remove(i):        O(1)
-                    Size():        O(1)
+- Time Complexity and Operations:
+                Time Complexity
+            Get(i):   O(1) 
+       Set(i, val):   O(1)
+     PushBack(val):   O(1)/O(n): O(n) when size = capacity; O(1) otherwise (see amortized analysis below)
+         Remove(i):   O(1)
+            Size():   O(1)
 - Programming Languages:
     - Python: list (the only kind of array)
     - C++: vector
