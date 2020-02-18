@@ -564,7 +564,8 @@
     - int *my_array = new int[size]
     - It requires to know its size at runtime
     - Problem: we might not know max size when allocating an array
-
+- More details:
+    - [Course file](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
 
 </details>
 
@@ -577,7 +578,9 @@
         - E.g. Dynamic Array:
     - The **Banker's Method**:
     - The **Physicist's Method**:
-
+- More details:
+    - [Amortized Analysis](https://youtu.be/U5XKyIVy2Vc) 
+    - [Course file](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
 </details>
 
 <details>
