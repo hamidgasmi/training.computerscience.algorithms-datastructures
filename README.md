@@ -474,6 +474,8 @@
                Middle:    O(1)     O(n)    O(n)
 - Programming Languages:
     - Python: there is no static array data structure
+- For more details:
+    - [Arrays and Lists Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_1_arrays_and_lists.pdf)
 
 </details>
 
@@ -509,12 +511,26 @@
            AddAfter(Node, Key):               O(n)
 - Programming Languages:
     - Python:
+- For more details:
+    - [Arrays and Lists Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_1_arrays_and_lists.pdf)
 
 </details>
 
 <details>
 <summary>Basic Data Structures: Stacks</summary>
 
+- For more details:
+    - [Stacks and Queues Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
+- Programming Languages:
+    - Python:
+
+</details>
+
+<details>
+<summary>Basic Data Structures: Queues</summary>
+
+- For more details:
+    - [Stacks and Queues Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
 - Programming Languages:
     - Python:
 
@@ -523,8 +539,30 @@
 <details>
 <summary>Basic Data Structures: Trees</summary>
 
-- Programming Languages:
-    - Python:
+- It is empty, or a node with a key, and a list of child trees
+- Terminology:
+    - A **Root**: top node in the tree
+    - A **child** has a line down directly from a **parent**
+    - An **Ancestor** is a parent, or a parent of parent, etc.
+    - **Descendant** is a child, or a child of child, etc.
+    - A **Sibling** is sharing the same parent
+    - A **Leaf** is a node without children
+    - An **Interior node** is a node that isn't a leaf
+    - A **Level**: 
+        - 1 + number of edges between a tree root and a node
+        - E.g., The root node is level 1
+    - A **Height** is the maximum depth of subtree node and its farthest leaf
+    - A **Forest** is a collection of trees
+- Walking a Tree:
+    - **Depth-first** (**DFS**): 
+        - To traverse one sub-tree before exploring a sibling sub-tree
+        - **In Order Traversal** of a node: InOrderTraversal of its Left child; Visit node; InOrderTraversal of its Right child
+        - **Pre Order Traversal** of a node: Visit node; PreOrderTraversal of its Left child; PreOrderTraversal of its Right child
+        - **Post Order Traversal** of a node: PostOrderTraversal of its Left child; PostOrderTraversal of its Right child; Visit node
+    - **Breadth-first** (**BFS**):  
+        - To traverse all nodes at one level before progressing to the next level
+- For more details:
+    - [Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_3_trees.pdf)
 
 </details>
 
@@ -581,6 +619,7 @@
 - More details:
     - [Amortized Analysis](https://youtu.be/U5XKyIVy2Vc) 
     - [Course file](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
+
 </details>
 
 <details>
