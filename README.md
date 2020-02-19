@@ -599,11 +599,11 @@
     - It requires to know its size at compile time
     - Problem: we might not know max size when declaring an array
 - Dynamically-allocated arrays:
-    - int *my_array = new int[size]
+    - int *my_array = new int[ size ]
     - It requires to know its size at runtime
     - Problem: we might not know max size when allocating an array
 - More details:
-    - [Course file](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
+    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
 
 </details>
 
@@ -618,12 +618,26 @@
     - The **Physicist's Method**:
 - More details:
     - [Amortized Analysis](https://youtu.be/U5XKyIVy2Vc) 
-    - [Course file](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
+    - [UC San Diego](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
 
 </details>
 
 <details>
-<summary>Priority Queues and Disjoint Sets</summary>
+<summary>Priority Queues</summary>
+
+- More details:
+    - UC San Diego Course:[]()
+
+</details>
+
+<details>
+<summary>Disjoint Sets</summary>
+
+- [For more details]:
+    - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/tree/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets)
+    - UC San Diego Course:[Efficient Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_4_disjoint_sets_efficient.pdf)
+    - [Tutorial](https://www.topcoder.com/community/competitive-programming/tutorials/disjoint-set-data-structures/)
+
 </details>
 
 <details>
@@ -665,7 +679,9 @@
 <details>
 <summary>Whitepapers & Books</summary>
 
-- [The Algorithm Design Manual](http://mimoza.marmara.edu.tr/~msakalli/cse706_12/SkienaTheAlgorithmDesignManual.pdf)
+- [The Algorithm Design Manual](http://mimoza.marmara.edu.tr/~msakalli/cse706_12/SkienaTheAlgorithmDesignManual.pdf) by Steven S. Skiena
+
+- [Algorithm](http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf) by S. Dasgupta,C. H.Papadimitriou,andU. V. Vazirani
 
 </details>
 
