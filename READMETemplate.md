@@ -1,7 +1,7 @@
 <details>
 <summary>Description</summary>
 
-- More details:
+- For more details:
     - UC San Diego Course:[]()
 
 </details>

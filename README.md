@@ -625,15 +625,16 @@
 <details>
 <summary>Priority Queues</summary>
 
-- More details:
-    - UC San Diego Course:[]()
+- For more details:
+    - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
+    - UC San Diego Course:[Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
 
 </details>
 
 <details>
 <summary>Disjoint Sets</summary>
 
-- [For more details]:
+- For more details:
     - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/tree/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets)
     - UC San Diego Course:[Efficient Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_4_disjoint_sets_efficient.pdf)
     - [Tutorial](https://www.topcoder.com/community/competitive-programming/tutorials/disjoint-set-data-structures/)
