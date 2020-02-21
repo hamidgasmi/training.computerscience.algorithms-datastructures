@@ -644,19 +644,19 @@
 - **Min Heap**:
     - It's a binary tree where the value of each node is at most the values of its children
 - Implementation, Time Complexity and Operations:
-    - An efficient implementation is a **Complete Binary Tree** in an **Array**:
-        -           Operations        0-based index   1-based index array
-                    parent(i):          ⌊ i / 2 ⌋         ⌊ i / 2 ⌋
-                 leftchild(i):          2 * i + 1          2 * i
-                rightchild(i):          2 * i + 2          2 * i + 1
+    - An efficient implementation is a **Complete Binary Tree** in an **Array**
+    -                               Operations:        0-based index      1-based index array
+                  Parent(i):          ⌊ i / 2 ⌋         ⌊ i / 2 ⌋
+               Leftchild(i):          2 * i + 1         2 * i
+              Rightchild(i):          2 * i + 2         2 * i + 1
     -                               Time Complexity     Comment
-                  GetMax():             O(1)            or GetMin()
-                  ExtractMax():         O(log n)        n is the nodes # (or ExtractMin)
-                  Insert(i):            O(log n)
-                  SiftUp(i):            O(log n)
-                  SiftDown(i):          O(log n)
-                  ChangePriority(i):    O(log n)
-                  Remove(i):            O(log n)
+                   GetMax():             O(1)            or GetMin()
+               ExtractMax():           O(log n)        n is the nodes # (or ExtractMin)
+                  Insert(i):           O(log n)
+                  SiftUp(i):           O(log n)
+                SiftDown(i):           O(log n)i
+          ChangePriority(i):           O(log n)
+                  Remove(i):           O(log n)
 - Programming Languages:
     - Python: 
     - C++: 
@@ -672,20 +672,21 @@
 
 - In a d-ary heap nodes on all levels except for possibly the last one have exactly d children
 - Its height is about: ***Log_d n***
--           Operations                0-based index   1-based index array
-                    parent(i):          ⌊ i / d ⌋         ⌊ i / d ⌋
-                 1st child(i):          d * i + 1          d * i
-                 2nd child(i):          d * i + 2          d * i + 1
-                    ...                   ...                ...
-                 d-th child(i):         d * i + d          d * i + d - 1
--                               Time Complexity             Comment
-                  GetMax():             O(1)                or GetMin()
-                  ExtractMax():         O(d * Log_d n)      See running time of SiftDown
-                  Insert(i):            O(Log_d n)
-                  SiftUp(i):            O(Log_d n)          On each level, there is only 1 comparison: child vs. parent
-                  SiftDown(i):          O(d * Log_d n)      On each level, there are d comparisons among d children
-                  ChangePriority(i):    O(d * Log_d n)
-                  Remove(i):            O(d * Log_d n)
+    - An efficient implementation is a **Complete D-ary Tree** in an **Array**
+    -            Operations:    0-based index     1-based index array
+                  Parent(i):     ⌊ i / d ⌋         ⌊ i / d ⌋
+               1st child(i):     d * i + 1         d * i
+               2nd child(i):     d * i + 2         d * i + 1
+                    ...             ...               ...
+              d-th child(i):     d * i + d         d * i + d - 1
+    -                           Time Complexity   Comment
+                   GetMax():     O(1)              or GetMin()
+               ExtractMax():     O(d * Log_d n)    See running time of SiftDown
+                  Insert(i):     O(Log_d n)
+                  SiftUp(i):     O(Log_d n)        On each level, there is only 1 comparison: child vs. parent
+                SiftDown(i):     O(d * Log_d n)    On each level, there are d comparisons among d children
+          ChangePriority(i):     O(d * Log_d n)
+                  Remove(i):     O(d * Log_d n)
 
 </details>
 
