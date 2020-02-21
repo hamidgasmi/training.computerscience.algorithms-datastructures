@@ -548,19 +548,32 @@
     - A **Sibling** is sharing the same parent
     - A **Leaf** is a node without children
     - An **Interior node** is a node that isn't a leaf
+    - An **Edge** is a link between two nodes
     - A **Level**: 
         - 1 + number of edges between a tree root and a node
         - E.g., The root node is level 1
-    - A **Height** is the maximum depth of subtree node and its farthest leaf
+    - A **Height**: 
+        - It's the maximum depth of subtree node and its farthest leaf
+        - It could be calculated by counting the number of nodes or edges
     - A **Forest** is a collection of trees
 - Walking a Tree:
-    - **Depth-first** (**DFS**): 
-        - To traverse one sub-tree before exploring a sibling sub-tree
+    - **Depth-First** (**DFS**): To traverse one sub-tree before exploring a sibling sub-tree
+    - **Breadth-First** (**BFS**): To traverse all nodes at one level before progressing to the next level
+- A **Binary Tree**: 
+    - It's a tree where each node has 0, 1, or 2 children
+    - DFS types: 
         - **In Order Traversal** of a node: InOrderTraversal of its Left child; Visit node; InOrderTraversal of its Right child
         - **Pre Order Traversal** of a node: Visit node; PreOrderTraversal of its Left child; PreOrderTraversal of its Right child
         - **Post Order Traversal** of a node: PostOrderTraversal of its Left child; PostOrderTraversal of its Right child; Visit node
-    - **Breadth-first** (**BFS**):  
-        - To traverse all nodes at one level before progressing to the next level
+    - A **Complete Binary Tree**: 
+        - It's a binary tree in which all its levels are filled except possibly the last one which is filled from left to right
+        - Its height is **Low**: it's at most **O(log n)** (n is nbr of nodes)
+        - It could be **stored effeciently** as an **array**
+    - A **Full Binary Tree**:
+        - It's also called **Proper Binary Tree** or **2-tree**
+        - It's a tree in which every node other than the leaves has 2 children
+        - Its height is Low: it's equal to O(log n)
+        - It could be stored effeciently as an array
 - For more details:
     - [Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_3_trees.pdf)
 
@@ -623,11 +636,62 @@
 </details>
 
 <details>
-<summary>Priority Queues</summary>
+<summary>Priority Queues: Max/Min Heap</summary>
 
+- **Max Heap**:
+    - It's a binary tree where the value of each node is at least the values of its children
+    - For each edge of the tree, the value of the parent is at least the value of the child
+- **Min Heap**:
+    - It's a binary tree where the value of each node is at most the values of its children
+- Implementation, Time Complexity and Operations:
+    - An efficient implementation is a **Complete Binary Tree** in an **Array**:
+        -           Operations        0-based index   1-based index array
+                    parent(i):          ⌊ i / 2 ⌋         ⌊ i / 2 ⌋
+                 leftchild(i):          2 * i + 1          2 * i
+                rightchild(i):          2 * i + 2          2 * i + 1
+    -                               Time Complexity     Comment
+                  GetMax():             O(1)            or GetMin()
+                  ExtractMax():         O(log n)        n is the nodes # (or ExtractMin)
+                  Insert(i):            O(log n)
+                  SiftUp(i):            O(log n)
+                  SiftDown(i):          O(log n)
+                  ChangePriority(i):    O(log n)
+                  Remove(i):            O(log n)
+- Programming Languages:
+    - Python: 
+    - C++: 
+    - Java:                   
 - For more details:
     - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
     - UC San Diego Course:[Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
+
+</details>
+
+<details>
+<summary>Priority Queues: d-ary Heap</summary>
+
+- In a d-ary heap nodes on all levels except for possibly the last one have exactly d children
+- Its height is about: ***Log_d n***
+-           Operations                0-based index   1-based index array
+                    parent(i):          ⌊ i / d ⌋         ⌊ i / d ⌋
+                 1st child(i):          d * i + 1          d * i
+                 2nd child(i):          d * i + 2          d * i + 1
+                    ...                   ...                ...
+                 d-th child(i):         d * i + d          d * i + d - 1
+-                               Time Complexity             Comment
+                  GetMax():             O(1)                or GetMin()
+                  ExtractMax():         O(d * Log_d n)      See running time of SiftDown
+                  Insert(i):            O(Log_d n)
+                  SiftUp(i):            O(Log_d n)          On each level, there is only 1 comparison: child vs. parent
+                  SiftDown(i):          O(d * Log_d n)      On each level, there are d comparisons among d children
+                  ChangePriority(i):    O(d * Log_d n)
+                  Remove(i):            O(d * Log_d n)
+
+</details>
+
+<details>
+<summary>Priority Queues: Heap Sort</summary>
+
 
 </details>
 
