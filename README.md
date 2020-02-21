@@ -645,7 +645,7 @@
     - It's a binary tree where the value of each node is at most the values of its children
 - Implementation, Time Complexity and Operations:
     - An efficient implementation is a **Complete Binary Tree** in an **Array**
-    -                               Operations:        0-based index      1-based index array
+    -            Operations        0-based index      1-based index array
                   Parent(i):          ⌊ i / 2 ⌋         ⌊ i / 2 ⌋
                Leftchild(i):          2 * i + 1         2 * i
               Rightchild(i):          2 * i + 2         2 * i + 1
@@ -668,9 +668,80 @@
 </details>
 
 <details>
+<summary>Priority Queues: Heap Sort</summary>
+
+- Not-In place algorithm to sort an Array (A) with a Heap Sort:
+    -       Create an empty priority queue MaxHeap
+            for i from 1 to n:
+                MaxHeap.Insert(A[i])
+            for i from n downto 1:
+                A[i] = MaxHeap.ExtractMax()
+    - Time Complexity:  O(n log n)
+    - **Space Complexity: O(n)** (It's not an in place algorithm)
+    - It's a natural generalization of selection sort:
+        - Instead of simply scanning the rest of the array to find the maximum value,
+        - It uses a smart data structure
+- In place algorithm to sort an array (A) with a Heap Sort:
+    - Step 1: Turn the array A[] into a heap by permuting its elements
+        - We repair the heap property going from bottom to top
+        - Initially, the heap property is satisfied in all the leaves (i.e., subtrees of depth 0)
+        - We then start repairing the heap property in all subtrees of depth 1
+        - When we reach the root, the heap property is satisfied in the whole tree
+    -       BuildHeap(A[1 ... n])
+                for i from ⌊n/2⌋ downto 1:
+                    SiftDown(i)
+        - Space Complexity: O(1) (In place algorithm)
+        - Time Complexity:
+                Height          Nodes #    T(SiftDown)       T(BuildHeap)
+                log_2(n)          1         log_2(n)          1 * log_2(n) 
+                log_2(n) - 1      2         log_2(n) - 1      2 * [ log_2(n) - 1]
+                  ...            ...         ...                 ...
+                   2            ≤ n/4        2                n/4 * 2
+                   1            ≤ n/2        1                n/2 * 1
+                T(BuildHeap) = n/2 * 1 + n/4 * 2 + ... + 1 * log_2(n) 
+                             = n/2 * 1 + n/4 * 2 + ... + n / 2^log_2(n) * log_2(n)
+                             = n [1/2 + 2/4 + 2/8 + ... log_2(n)/2^log_2(n)] < n * 2
+                             = **O(n)**
+    - Step 2: Sort the Heap
+    -       HeapSort(A[1 . . . n])
+                BuildHeap(A)
+                repeat (n − 1) times:
+                    swap A[1] and A[size]
+                    size = size − 1
+                    SiftDown(1)
+        - Space Complexity: O(1) (In place algorithm)
+        - Time Complexity: O(n long n)
+- Use cases:
+    - **IntraSort** algorithm:
+        - It's a sorting algorithm
+        - It 1st runs QuickSort algorithm (Avergae Running time: O(n log n); Worst Running time: O(n^2))
+        - If it turns out to be slow (the recursion depths exceed c log n, for some constant c),
+        - Then it stops the current call to QuickSort algorithm and switches to HeapSort algorithm (Guaranteed Running time: O(n log n))
+        - It's a QuickSort algorithm with worst running time: O(n log n)
+    - **Partial Sorting**:
+        - Input: An array A[1 . . . n], an integer k: 1 ≤ k ≤ n
+        - Output: The last k elements of a sorted version of A
+        -       PartialSort(A[1 . . . n], k)
+                BuildHeap(A)
+                for i from 1 to k:
+                    print(A.ExtractMax())
+        - BuildHeap Running Time: O(n)
+        - Printing: the last k elements of a sorted version of A: O(k * log n)
+        - Running time: O(n + k log n)
+        - if k = O(n / log n) => **Running time = O(n)**
+        - E.g. Printing the last 102 elements of a sorted version of an array of 1024 elements:
+            - It takes a linear time
+            - if n = 1024 = 2^10 then k = 2^10 / log 2^10 = 1024 / 10 = 102
+- For more details:
+    - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
+    - UC San Diego Course:[Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
+
+</details>
+
+<details>
 <summary>Priority Queues: d-ary Heap</summary>
 
-- In a d-ary heap nodes on all levels except for possibly the last one have exactly d children
+- In a **d-ary heap** nodes on all levels have exactly **d children** except for possibly the last one
 - Its height is about: ***Log_d n***
     - An efficient implementation is a **Complete D-ary Tree** in an **Array**
     -            Operations:    0-based index     1-based index array
@@ -687,12 +758,6 @@
                 SiftDown(i):     O(d * Log_d n)    On each level, there are d comparisons among d children
           ChangePriority(i):     O(d * Log_d n)
                   Remove(i):     O(d * Log_d n)
-
-</details>
-
-<details>
-<summary>Priority Queues: Heap Sort</summary>
-
 
 </details>
 
