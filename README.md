@@ -654,7 +654,7 @@
                ExtractMax():           O(log n)        n is the nodes # (or ExtractMin)
                   Insert(i):           O(log n)
                   SiftUp(i):           O(log n)
-                SiftDown(i):           O(log n)i
+                SiftDown(i):           O(log n)
           ChangePriority(i):           O(log n)
                   Remove(i):           O(log n)
 - Programming Languages:
