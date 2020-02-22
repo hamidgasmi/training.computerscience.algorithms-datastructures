@@ -712,6 +712,8 @@
         - Space Complexity: O(1) (In place algorithm)
         - Time Complexity: O(n long n)
 - Use cases:
+    - It's used for external sort when we need to sort huge files that don’t fit into memory of our computer 
+        - In opposite of QuickSort which is usually used in practice because typically it is faster
     - **IntraSort** algorithm:
         - It's a sorting algorithm
         - It 1st runs QuickSort algorithm (Avergae Running time: O(n log n); Worst Running time: O(n^2))
