@@ -26,7 +26,7 @@
         - 1st proving it's true when n is 1 and then 
         - assuming it's true for n = k and showing it's true for n = k + 1
     - [For more details](http://comet.lehman.cuny.edu/sormani/teaching/induction.html)
-- **Proofs  by contradiction**
+- **Proofs by contradiction**
     - It allow to prove a proposition is valid (true) by showing that assuming the proposition to be false leads to a contradiction
     - [For more details](https://en.wikipedia.org/wiki/Proof_by_contradiction)
 - **T(n)** is the number of lines of code executed by an algorithm
@@ -64,7 +64,7 @@
 - When dealing with **String**:
     - Biased/Degenerate tests: 
         - Empty string
-        - A strings that contains a  sequence of a single letter (“aaaaaaa”) or 2 letters ("abbaabaa") as opposed to those composed of all possible Latin letters
+        - A strings that contains a sequence of a single letter (“aaaaaaa”) or 2 letters ("abbaabaa") as opposed to those composed of all possible Latin letters
     - Encoding (ASCII, UTF-8, UTF-16)?
     - Special characters
     - such as those with only small numbers or a small range of large numbers, 
@@ -76,9 +76,9 @@
     - It contains **many** elements: 10^6
     - It contains same elements: min value only (0 for integers), max value only (2^32 for integers), any specific value
 - When dealing with **Trees**:
-    -  Biased/Degenerate tests: a tree which consists of a linked list, binary trees, stars
+    - Biased/Degenerate tests: a tree which consists of a linked list, binary trees, stars
 - When dealing with **Graphs**:
-    -  Biased/Degenerate tests: a graph which consists of a linked list, a tree, a disconnected graph, a complete graph, a bipartite graph
+    - Biased/Degenerate tests: a graph which consists of a linked list, a tree, a disconnected graph, a complete graph, a bipartite graph
 
 </details>
 
@@ -147,7 +147,7 @@
 - **Drop the constants**: we'll use O(n) instead of O(2 n)
 - **Drop the Non-Dominant Terms**: we'll use O(n^2) instead of O(n^2 + n) or O(n) instead of O(n + log n) 
 - Multi-Part Algorithms - Add: **O(A+B)**
-    - When an algorithm  is in the form 
+    - When an algorithm is in the form 
     - Do A, 
     - When you're done, Do B
 - Multi-Part Algorithms - Multiply: **O(A*B)**
@@ -256,7 +256,7 @@
         - However, if we choose a patient with the maximum treatment time, there's not an optimal solution that starts with it
         - Therefore such a choice isn't a safe choice
 - E.g. Fractional Knapsack (or Backpack) Problem:
-    - N items with total weight and total value (Wi, Vi)    
+    - N items with total weight and total value (Wi, Vi)
     - A Backpack with a capacity W
     - Goal: Maximize value ($) while limiting total weight (kg)
     - It's possible to take fraction of items
@@ -380,7 +380,7 @@
         - **Optimal alignment**:
             - Input: 2 strings, mismatch penatly μ, and indel penalty σ
             - Output: An alignment of the strings maximizing the score
-    - **Common Subsequence**: **Matches** in an alignment of 2 strings form their **common  subsequence**
+    - **Common Subsequence**: **Matches** in an alignment of 2 strings form their **common subsequence**
         - E.g. 
         -      A T - G T T A T C
                A T C G T - C - C
@@ -654,8 +654,8 @@
         - Lib/heapq.py
         - [Description](https://docs.python.org/2/library/heapq.html)
         - [Git](https://github.com/python/cpython/blob/2.7/Lib/heapq.py)
-    - C++: 
-    - Java:                   
+    - C++:
+    - Java:
 - For more details:
     - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
     - UC San Diego Course:[Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
@@ -761,6 +761,68 @@
 <details>
 <summary>Disjoint Sets</summary>
 
+- It's a data structure that keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets
+- A 1st efficient implementation is **Union by Rank Heuristic**: 
+    - It consists of a **Tree** in **2 Arrays**
+    - Each set is a rooted tree
+    - The ID of a set is the root of the tree
+    - Array 1: **Parent**[1 ... n], Parent[i] is the parent of i, or i if it is the root
+    - Array 2: **Rank**[1 ... n], Rank[i] = height of subtree which root is i, rank of the tree's root = 0
+    - MakeSet(i):
+        - It creates a singleton set {i}
+        - It consists of a tree with a single node: parent[i] = i
+    - Find(i):
+        - It returns the ID of the set that is containing i
+        - It consists of the root of the tree where i belongs
+    - Union(i, j):
+        - It merges 2 sets containing i and j
+        - It consists of merging 2 trees
+        - For effenciency purposes, it must keep the resulting tree as shallow as possible
+        - It hang the shorter tree under the root of the longer one (we'll use **rank** array here)
+        - The resulted tree height = the longer tree height if the 2 trees height are different
+        - The resulted tree height = the height of one of the trees + 1 if the 2 trees height are equal:
+-                           Time Complexity
+            MakeSet(x):      O(1)
+               Find(x):      O(tree height) = O(log n) 
+           Union(x, y):      O(tree height) = O(log n) 
+- A 2nd more efficient implementation is **Path Compression Heuristic**:
+    - We keep the same data structure as the Union by rank heuristic implementation
+    - When finding the root of a tree for a particular node i, reattach each node from the traversed path to the root
+    - From an initially empty disjoint set, we make a sequence of m operations including n calls to MakeSet:
+        - The total running time is O(m log∗(n))
+        - The **Amortized time** of a single operation is: **O(log∗(n))**
+-                           Time Complexity
+            MakeSet(x):      O(1)
+               Find(x):      O(log* n) = O(1) if n ≤ 2^65536
+           Union(x, y):      O(log* n) = O(1) if n ≤ 2^65536
+- The **Iterated logarithm** of n, **log∗(n)**: 
+    - It's the number of times the logarithm function needs to be applied to n before the result is ≤ 1
+    -      Log*(n) = 0 if n ≤ 1
+                   = 1 + Log* (Log (n)) if n > 1
+    -      n                           Log*(n)
+           n = 1                        0
+           n = 2                        1
+           n ∈ {3, 4}                   2
+           n ∈ {5,..., 16}              3
+           n ∈ {17, ..., 65536}         4
+           n ∈ {65537,..., 2^65536}     5     
+- Programming Languages:
+    - Python:
+    - C++:
+    - Java:
+- Use Cases:
+    - In a maze (a grid with walls): Is a given cell B reachable from another given cell A?
+        - Build disjoint sets where each non-wall cell represent a singleton set
+            for each cell c in maze:
+                if c isn't a wall MakeSet(c)
+        - Modify disjoint sets above so that if a path between A and B exists, then A and B are in the same set
+            for each cell c in maze:
+                for each neighbor n of c:
+                    Union(c, n)
+        - Check is a path between A and B exists:
+            IsReachable(A, B)
+                return Find(A) = Find(B)
+    - Building a Network:
 - For more details:
     - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/tree/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets)
     - UC San Diego Course:[Efficient Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_4_disjoint_sets_efficient.pdf)
