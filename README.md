@@ -440,14 +440,6 @@
 
 </details>
 
-<details>
-<summary>Use Cases</summary>
-
-- Fibonacci: calculate number of populations
-- GCD: Cryptography, The study of prime numbers in factorization
-
-</details>
-
 ---
 
 ## Data Structures Fundamentals
@@ -658,7 +650,10 @@
           ChangePriority(i):           O(log n)
                   Remove(i):           O(log n)
 - Programming Languages:
-    - Python: 
+    - Python:
+        - Lib/heapq.py
+        - [Description](https://docs.python.org/2/library/heapq.html)
+        - [Git](https://github.com/python/cpython/blob/2.7/Lib/heapq.py)
     - C++: 
     - Java:                   
 - For more details:
