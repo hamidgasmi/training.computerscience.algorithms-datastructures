@@ -781,24 +781,23 @@
         - It hang the shorter tree under the root of the longer one (we'll use **rank** array here)
         - The resulted tree height = the longer tree height if the 2 trees height are different
         - The resulted tree height = the height of one of the trees + 1 if the 2 trees height are equal:
--                           Time Complexity
-            MakeSet(x):      O(1)
-               Find(x):      O(tree height) = O(log n) 
-           Union(x, y):      O(tree height) = O(log n) 
+        -                       Time Complexity
+                MakeSet(x):      O(1)
+                   Find(x):      O(tree height) = O(log n) 
+               Union(x, y):      O(tree height) = O(log n) 
 - A 2nd more efficient implementation is **Path Compression Heuristic**:
     - We keep the same data structure as the Union by rank heuristic implementation
     - When finding the root of a tree for a particular node i, reattach each node from the traversed path to the root
     - From an initially empty disjoint set, we make a sequence of m operations including n calls to MakeSet:
         - The total running time is O(m log∗(n))
         - The **Amortized time** of a single operation is: **O(log∗(n))**
--                           Time Complexity
-            MakeSet(x):      O(1)
-               Find(x):      O(log* n) = O(1) if n ≤ 2^65536
-           Union(x, y):      O(log* n) = O(1) if n ≤ 2^65536
+        -                       Time Complexity
+                MakeSet(x):      O(1)
+                   Find(x):      O(log* n) = O(1) if n ≤ 2^65536
+               Union(x, y):      O(log* n) = O(1) if n ≤ 2^65536
 - The **Iterated logarithm** of n, **log∗(n)**: 
     - It's the number of times the logarithm function needs to be applied to n before the result is ≤ 1
-    -      Log*(n) = 0 if n ≤ 1
-                   = 1 + Log* (Log (n)) if n > 1
+    -      Log*(n) = 0 if n ≤ 1 = 1 + Log* (Log (n)) if n > 1
     -      n                           Log*(n)
            n = 1                        0
            n = 2                        1
