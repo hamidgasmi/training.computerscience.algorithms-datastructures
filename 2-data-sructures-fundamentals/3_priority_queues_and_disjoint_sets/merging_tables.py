@@ -23,15 +23,26 @@ class Database:
         
         return True
 
+    # Time Complexity: O(log n)
+    # Space Complexity: O(1)
     def get_parent(self, table):
-        # find parent and compress path
-        if table != self.parents[table]:
-            self.parents[table] = self.get_parent(self.parents[table])
+        
+        # find parent
+        rootTable = table
+        while rootTable != self.parents[rootTable]:
+            rootTable = self.parents[rootTable]
 
-        return self.parents[table]
+        #Compress Path
+        while table != rootTable:
+            parent = self.parents[table]
+            self.parents[table] = rootTable
+            table = parent
+
+        return rootTable
 
 
 def main():
+
     n_tables, n_queries = map(int, input().split())
     counts = list(map(int, input().split()))
     assert len(counts) == n_tables
@@ -41,8 +52,6 @@ def main():
         dst, src = map(int, input().split())
         db.merge(src - 1, dst - 1)
         print(db.max_row_count)
-        #print("Parents:", db.parents)
-        #print("Size:", db.row_counts)
 
 if __name__ == "__main__":
     main()
