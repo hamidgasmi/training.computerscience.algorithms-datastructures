@@ -12,9 +12,8 @@ class Database:
         if src_parent == dst_parent:
             return False
 
-        # merge two components
-        # use union by rank heuristic
-        # update max_row_count with the new maximum table size
+        # use union by rank heuristic: 
+        # Rank array isn't necessary: we don't have any choice on how the union should be done
         self.parents[src_parent] = dst_parent
         self.row_counts[dst_parent] +=  self.row_counts[src_parent]
         self.row_counts[src_parent] = 0
