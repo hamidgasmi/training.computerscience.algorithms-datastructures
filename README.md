@@ -14,7 +14,6 @@
 - [String Processing and Pattern Matching Algorithms](#string-processing-and-pattern-matching-algorithms)
 - [Dynamic Programming: Applications In Machine Learning and Genomics](#dynamic-programming-applications-in-machine-learning-and-genomics)
 - [Graph Algorithms in Genome Sequencing ](#graph-algorithms-in-genome-sequencing)
-- [Algorithms and Data Structures Capstone](#algorithms-and-data-structures-capstone)
 - [References](#references)
 
 ## Prerequisites
@@ -905,10 +904,6 @@
 ---
 
 ## Graph Algorithms in Genome Sequencing
-
----
-
-## Algorithms and Data Structures Capstone
 
 ---
 
