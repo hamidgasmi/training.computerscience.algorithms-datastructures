@@ -802,6 +802,7 @@
 <details>
 <summary>Disjoint Sets</summary>
 
+- It's also called **Union-Find data structure**
 - It's a data structure that keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets
 - A 1st efficient implementation is **Union by Rank Heuristic**: 
     - It consists of a **Tree** in **2 Arrays**
@@ -945,5 +946,3 @@
 </details>
 
 ---
-
-## Problems:
