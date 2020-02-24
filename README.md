@@ -6,6 +6,7 @@
     - [Install Anki](https://apps.ankiweb.net/)
 
 ## Table of Contents
+- [Prerequisites](#prerequisites)
 - [Algorithm Design and Techniques](#algorithm-design-and-techniques)
 - [Data Structures Fundamentals](#data-structures-fundamentals)
 - [Graph Algorithms](#graph-algorithms)
@@ -16,26 +17,68 @@
 - [Algorithms and Data Structures Capstone](#algorithms-and-data-structures-capstone)
 - [References](#references)
 
-## Algorithm Design and Techniques
+## Prerequisites
 
 <details>
-<summary>Prerequisites</summary>
+<summary>Proof by Induction</summary>
 
-- **Proof by Induction**
-    - It allows to prove a statement about an arbitrary number n by:
-        - 1st proving it's true when n is 1 and then 
-        - assuming it's true for n = k and showing it's true for n = k + 1
-    - [For more details](http://comet.lehman.cuny.edu/sormani/teaching/induction.html)
-- **Proofs by contradiction**
-    - It allow to prove a proposition is valid (true) by showing that assuming the proposition to be false leads to a contradiction
-    - [For more details](https://en.wikipedia.org/wiki/Proof_by_contradiction)
-- **T(n)** is the number of lines of code executed by an algorithm
-- **Logarithms**: see [this](https://www.khanalscademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms)
-- **Recursion**: 
-    - To [Get Started](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion)
-    - Stack optimization and Tail Recursion
+- It allows to prove a statement about an arbitrary number n by:
+    - 1st proving it's true when n is 1 and then 
+    - assuming it's true for n = k and showing it's true for n = k + 1
+- [For more details](http://comet.lehman.cuny.edu/sormani/teaching/induction.html)
 
 </details>
+
+<details>
+<summary>Proofs by contradiction</summary>
+
+- It allow to prove a proposition is valid (true) by showing that assuming the proposition to be false leads to a contradiction
+- [For more details](https://en.wikipedia.org/wiki/Proof_by_contradiction)
+
+</details>
+
+<details>
+<summary>Logarithms</summary>
+
+- See [this](https://www.khanalscademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms)
+
+</details>
+
+<details>
+<summary>Iterated logarithm</summary>
+
+- It's symbolized: **log∗(n)**: 
+- It's the number of times the logarithm function needs to be applied to n before the result is ≤ 1
+-      Log*(n) = 0 if n ≤ 1 = 1 + Log* (Log (n)) if n > 1
+-      n                           Log*(n)
+       n = 1                        0
+       n = 2                        1
+       n ∈ {3, 4}                   2
+       n ∈ {5,..., 16}              3
+       n ∈ {17, ..., 65536}         4
+       n ∈ {65537,..., 2^65536}     5
+
+</details>
+
+<details>
+<summary>Recursion</summary>
+
+- To [Get Started](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion)
+- Stack optimization and Tail Recursion
+
+</details>
+
+<details>
+<summary>T(n)</summary>
+
+- It's the number of lines of code executed by an algorithm
+
+</details>    
+
+
+## Algorithm Design and Techniques
+
+
 
 <details>
 <summary>Test Cases</summary>
@@ -794,17 +837,7 @@
         -                       Time Complexity
                 MakeSet(x):      O(1)
                    Find(x):      O(log* n) = O(1) if n ≤ 2^65536
-               Union(x, y):      O(log* n) = O(1) if n ≤ 2^65536
-- The **Iterated logarithm** of n, **log∗(n)**: 
-    - It's the number of times the logarithm function needs to be applied to n before the result is ≤ 1
-    -      Log*(n) = 0 if n ≤ 1 = 1 + Log* (Log (n)) if n > 1
-    -      n                           Log*(n)
-           n = 1                        0
-           n = 2                        1
-           n ∈ {3, 4}                   2
-           n ∈ {5,..., 16}              3
-           n ∈ {17, ..., 65536}         4
-           n ∈ {65537,..., 2^65536}     5     
+               Union(x, y):      O(log* n) = O(1) if n ≤ 2^65536     
 - Programming Languages:
     - Python:
     - C++:
