@@ -78,8 +78,6 @@
 
 ## Algorithm Design and Techniques
 
-
-
 <details>
 <summary>Test Cases</summary>
 
@@ -488,7 +486,7 @@
 ## Data Structures Fundamentals
 
 <details>
-<summary>Basic Data Structures: Arrays</summary>
+<summary>Arrays</summary>
 
 - It's a contiguous area of memory
 - It's consisting of equal-size elements indexed by contiguous integers
@@ -515,7 +513,7 @@
 </details>
 
 <details>
-<summary>Basic Data Structures: Linked Lists</summary>
+<summary>Linked Lists</summary>
 
 - Singly-Linked List
     -                APIs                Time (wout tail)   Time (w tail)         Description 
@@ -552,7 +550,7 @@
 </details>
 
 <details>
-<summary>Basic Data Structures: Stacks</summary>
+<summary>Stacks</summary>
 
 - For more details:
     - [Stacks and Queues Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
@@ -562,7 +560,7 @@
 </details>
 
 <details>
-<summary>Basic Data Structures: Queues</summary>
+<summary>Queues</summary>
 
 - For more details:
     - [Stacks and Queues Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
@@ -572,7 +570,7 @@
 </details>
 
 <details>
-<summary>Basic Data Structures: Trees</summary>
+<summary>Trees</summary>
 
 - It is empty, or a node with a key, and a list of child trees
 - Terminology:
@@ -836,13 +834,20 @@
         - The **Amortized time** of a single operation is: **O(log∗(n))**
         -                       Time Complexity
                 MakeSet(x):      O(1)
-                   Find(x):      O(log* n) = O(1) if n ≤ 2^65536
-               Union(x, y):      O(log* n) = O(1) if n ≤ 2^65536     
+                   Find(x):      O(log*(n)) = O(1) if n ≤ 2^65536
+               Union(x, y):      O(log*(n)) = O(1) if n ≤ 2^65536
+        - For more details about log*(n), see [Prerequisites](#prerequisites)
 - Programming Languages:
     - Python:
     - C++:
     - Java:
 - Use Cases:
+    - Keep track of the connected compoents of an undirected graph
+        - To determine whether 2 vertices belong to the same component
+        - To determine whether adding an edge between 2 vertices would result in a cycle
+    - **Kruskal's algorithm**:
+        - It's used to find the minimum spanning tree of a graph
+        - [For more details](#graph-algorithms)
     - In a maze (a grid with walls): Is a given cell B reachable from another given cell A?
         - Build disjoint sets where each non-wall cell represent a singleton set
             for each cell c in maze:
@@ -855,6 +860,16 @@
             IsReachable(A, B)
                 return Find(A) = Find(B)
     - Building a Network:
+- Related Problems:
+    - [Find whether individual x is a friend of individual y](https://github.com/hamidgasmi/algorithms-datastructures/issues/33)
+    - [Dish Owner](https://github.com/hamidgasmi/algorithms-datastructures/issues/35)
+    - [Galactik Football](https://github.com/hamidgasmi/algorithms-datastructures/issues/36)
+    - [Merging tables](https://github.com/hamidgasmi/algorithms-datastructures/issues/32)
+    - [Jam Board](https://github.com/hamidgasmi/algorithms-datastructures/issues/37)
+    - [The Last Droid](https://github.com/hamidgasmi/algorithms-datastructures/issues/40)
+    - [Substrings and Repetitions](https://github.com/hamidgasmi/algorithms-datastructures/issues/38)
+    - [Tiptoe through the tulips](https://github.com/hamidgasmi/algorithms-datastructures/issues/39)
+    - [Ada Farm](https://github.com/hamidgasmi/algorithms-datastructures/issues/34)
 - For more details:
     - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/tree/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets)
     - UC San Diego Course:[Efficient Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_4_disjoint_sets_efficient.pdf)
