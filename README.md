@@ -910,26 +910,119 @@
         - It would take 7 PB to store one phone book
 - For more details:
     - UC San Diego Course:[Introduction to Hashing](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_1_hashing_intro.pdf)
-    - Geeks of Geeks: [Direct Address Table](https://www.geeksforgeeks.org/direct-address-table/)
+    - Geeks for Geeks: [Direct Address Table](https://www.geeksforgeeks.org/direct-address-table/)
 
 </details>
 
 <details>
-<summary>Hashing: Direct Addressing</summary>
+<summary>Hashing: Hash Function</summary>
 
-- Programming Languages:
-    - Python:
-    - C++:
-    - Java:
-- Related Problems:
-    - 
-- Use Cases:
-    - Blockchain
-    - It's used in programming languages to quickly identify key words
-    - File Systems
-    - Digital Signature
+- A **Hash Function**:
+    - It's a function defined as follow: for any set of objects S and any integer m > 0, a function h : S → {0, 1, . . . , m − 1}
+    - In other words, it's a function that maps a set of objects S to a set of integers: 0, 1,..., m − 1
+    - A hash **Cardinality** is the # of different values of the hash function (it's m)
+    - A **Collision** happens when h(o1) = h(o2) and o1 != o2
+- **Chaining**:
+    - It's an implementation technique used to solve collisions issue
+    - It's done by storing all pairs objects whose h(object) is equal in a **doubly-linked** list of pairs (object, value)
+    - Geeks for Geeks: [Hashing: Chaining](https://www.geeksforgeeks.org/hashing-set-2-separate-chaining/)
+- **Open Addressing**:
+    - It's an implementation technique used to solve collisions issue
+    - Geeks for Geeks: [Hashing: Open Addressing](https://www.geeksforgeeks.org/hashing-set-3-open-addressing/)
 - For more details:
-    - UC San Diego Course:[]()
+    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - Geeks for Geeks: [Address Calculation Sort using Hashing](https://www.geeksforgeeks.org/address-calculation-sort-using-hashing/)
+    - Geeks for Geeks: [Hashing: Introduction](https://www.geeksforgeeks.org/hashing-set-1-introduction/)
+
+</details>
+
+<details>
+<summary>Hashing: Maps</summary>
+
+- A **Map** from set S of objects to set V of values:
+    - It's a data structure with following methods:
+    -                               Time Complexity     Comment
+                    HasKey(object):  O(c + 1)            Return if object exists in the map   
+                       Get(object):  O(c + 1)            Return object if it exists else null
+                Set(object, value):  O(c + 1)            Update object's value if object exists else insert new pair (object, value)
+                                    Space Complexity
+                                     O(m + n)            Θ(m) (for array of size m) + Θ(n) to store n pairs (object, value) 
+                                     n is the # of elements stored
+                                     c is the length of the longest chain
+                                     If n = 0:  O(c + 1) = O(1)
+                                     If n != 0: O(c + 1) = O(c)
+- E.g., Phone Book:
+    - Problem: Retrieving a name by phone number
+    - Hash Function:
+        - Select hash function h of cardinality m, let say, 1 000 (small enough)
+        - For any set of phone # P, a function h : P → {0, 1, . . . , 999}
+        - h(phoneNumber)
+    - A Map:
+        - Create an array Chains of size m, 1000
+        - Chains[i] is a doubly-linked list of pairs (name, phoneNumber)
+        - Pair(name, phoneNumber) goes into a chain at position h(phoneNumber) in the array Chains
+    - To look up name by phone number, go to the chain corresponding to phone number and look through all pairs
+    - To add a contact, create a pair (name, phoneNumber) and insert it into the corresponding chain
+    - To remove a contact, go to the corresponding chain, find the pair (name, phoneNumber) and remove it from the chain
+- Programming Languages:
+    - Python: **dict**
+    - C++: **unordered_map**
+    - Java: **HashMap**
+- For more details:
+    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+
+</details>
+
+<details>
+<summary>Hashing: Sets</summary>
+
+- It's an abstract data type that can store certain values, without any particular order, and no repeated values 
+- It's an implementation of the mathematical concept of a finite Set 
+- It's usually used to test whether elements belong to set of values (see methods below)
+- It could be implemented with a map data structure:
+    - A set is equivalent to map from S to V = {true} 
+    - The chains Pair is: (object, true)
+    - It's costly: true doesn't add any information
+- It's implemented To Store just objects instead of pairs in the chains
+- It's methods:
+    -                               Time Complexity     Comment
+                     Add(object):  O(c + 1)              Add object to the set if it does exit else nothing   
+                  Remove(object):  O(c + 1)              Remove object from the set if it does exist else nothing
+                    Find(object):  O(c + 1)              Return True if object does exist in the set else False
+                                    Space Complexity
+                                     O(m + n)            Θ(m) (for array of size m) + Θ(n) to store n objects 
+                                     n is the # of objected stored in the set
+                                     c is the length of the longest chain in the set
+                                     If n = 0:  O(c + 1) = O(1)
+                                     If n != 0: O(c + 1) = O(c)
+- Programming Languages:
+    - Python: **set**
+    - C++: **unordered_set**
+    - Java: **HashSet**
+- For more details:
+    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+
+</details>
+
+<details>
+<summary>Hashing: Hash table</summary>
+
+- **Hash Table**:
+    - It's an implementation of a Set or a Map using hashing
+- Related Problems:
+    - In progress:
+- For more details:
+    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+
+</details>
+
+<details>
+<summary>Hashing: How to come up with a Good Hash Function</summary>
+
+- The goal is to come up with a good hash function so that:
+    - The space is optimized: The hash function cardinality, m, is small
+    - The running time is efficient: the longest chain length, c, is small
+- 
 
 </details>
 
