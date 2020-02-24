@@ -878,7 +878,59 @@
 </details>
 
 <details>
-<summary>Hashing</summary>
+<summary>Hashing: Direct Addressing</summary>
+
+- It's the simplest form of hashing
+- It's a data structure that has the capability of mapping records to their corresponding keys using arrays
+- Its records are placed using their key values directly as indexes
+- ![Hash Map](https://www.geeksforgeeks.org/wp-content/uploads/hmap.png)
+- It doesn't use a Hashing Function:
+    -                                   Time Complexity
+                     GetDate(key):              O(1)
+                Insert(key, data):              O(1)
+                      Delete(key):              O(1)
+    -                                   Space Complexity
+                Direct Addressing Table:        O(key maximum value) even if key maximum value <<< actual size   
+- Limitations:
+    - It requires to know the maximum key value of the direct addressing table
+    - It's practically useful only if the key maximum value is very less
+    - It causes a waste of memory space if there is a significant difference between the key maximum value and records #
+- E.g., Phone Book:
+    - Problem: Retrieving a name by phone number
+    - Key: Phone number
+    - Data: Name
+    - Local phone #: 10 digits
+    - Maximum key value: 999-999-9999 = 10^10
+    - It requires to store the phone book as an array of size 10^10
+        - Each cell store a phone number as a long data type: 8 bytes + a name of 12 size long (12 bytes): 20 bytes
+        - The size of the array will be then: 20 * 10^10 = 2 * 10^11 = 2 * 2^36.541209044 = 2^30 * 2^8.541209044 = 373 GB
+        - It requires 373 GB of memory!
+    - What about international #: 15 digits
+        - It would require a huge array size
+        - It would take 7 PB to store one phone book
+- For more details:
+    - UC San Diego Course:[Introduction to Hashing](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_1_hashing_intro.pdf)
+    - Geeks of Geeks: [Direct Address Table](https://www.geeksforgeeks.org/direct-address-table/)
+
+</details>
+
+<details>
+<summary>Hashing: Direct Addressing</summary>
+
+- Programming Languages:
+    - Python:
+    - C++:
+    - Java:
+- Related Problems:
+    - 
+- Use Cases:
+    - Blockchain
+    - It's used in programming languages to quickly identify key words
+    - File Systems
+    - Digital Signature
+- For more details:
+    - UC San Diego Course:[]()
+
 </details>
 
 <details>
