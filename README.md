@@ -1022,7 +1022,94 @@
 - The goal is to come up with a good hash function so that:
     - The space is optimized: The hash function cardinality, m, is small
     - The running time is efficient: the longest chain length, c, is small
-- 
+    - We can't make c and m small at the same time: c >= n / m
+    - **Worst Case**: c = n
+- A Good Hash Function must be:
+    - Deterministic
+    - Fast to compute
+    - Distributes keys well into different cells
+    - Few collisions
+- **Universal Familly**:
+    - Let U be the universe — the set of all possible keys 
+    - Let H be a set of hash functions H = {h : U → {0, 1, 2, . . . , m − 1}} 
+    - H is called a **Universal Family** if for any 2 keys x, y ∈ U, x != y the **probability of collision Pr[h(x) = h(y)] ≤ 1/m**
+    - It means that a collision h(x) = h(y) for any fixed pair of different keys x and y happens for no more than 1/m of all hash functions h ∈ H
+- How Randomization Works:
+    - h(x) = random({0, 1, 2, . . . , m − 1})
+    - It gives probability of collision exactly 1/m
+    - It's not deterministic — can’t use it
+    - All hash functions in H are deterministic
+    - Select a random function h from H
+    - Fixed h is used throughout the algorithm
+- **Load Factor α**:
+    - It's The ratio α = n/m between number of objects n stored in the hash table and the size of the hash table
+    - **If h is chosen randomly from a universal family, the average length of the longest chain c is O(1 + α)**
+    - **If h is from universal family, operations with hash table run on average in time O(1 + α)**
+- Choosing Hash Table Size:
+    - Control amount of memory used with m
+    - Ideally, load factor **0.5 < α < 1**:
+        - if α is very small (α <= 0.5), we can be sure that a lot of the cells of the hash table are empty (at least a half)
+        - If α > 1, we can be sure that there is at least one collision
+        - If α is big, we can be sure that there are a lot of collisions, the longest chain length is too long and the operations will be too slow
+    - Use O(m) = O(n/α) = O(n) memory to store n keys
+    - Operations run in time O(1 + α) = O(1) on average
+- **Dynamic Hash table**:
+    - It's good when What the number of keys n is unknown in advance
+    - It resizes the hash table when α becomes too large (same idea as dynamic arrays)
+    - It chooses new hash function and rehash all the objects
+    - Let's choose to Keep the load factor below 0.9 (α <= 0.9);
+        -       Rehash(T):
+                    loadFactor = T.numberOfKeys / T.size
+                    if loadFactor > 0.9:
+                        Create Tnew of size 2 × T.size
+                        Choose hnew with cardinality Tnew.size
+                        For each object in T:
+                            Insert object in Tnew using hnew
+                            T = Tnew, h = hnew
+        - The result of the rehash method is a new hash table wit an α == 0.5
+        - We should call Rehash after each operation with the hash table
+        - Single rehashing takes **O(n)** time, 
+        - Amortized running time of each operation with hash table is: **O(1)** on average, because rehashing will be rare
+- **Universal Familly for integer**:
+    - **H(p,a,b, x) = [(ax + b) mod p] mod m** for all a, b : **1 ≤ a ≤ p − 1**, **0 ≤ b ≤ p − 1** 
+    - It's a universal family for the set of integers between 0 and p − 1, 
+    - for any **prime** p
+    - It means that p must be greater than |U|
+- **Polynomial Hashing**:
+    - It's a hashing for strings
+    - 
+- E.g., Phone Book 1:
+    - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
+    - The following peration must be fast: Determine who is calling given their phone number
+    - Solution: To implement a map (phone # → name)
+    - Parameters: n contacts stored; m, cardinality of the hash function and hash table size; c, length of the longest chain
+    - Θ(n + m) memory is used
+    - Let take m = 1,000 (small enough)
+    - 1st solution: hash function take 1st 3 digits:
+        - E.g. h(604-999-9999) = 604
+        - Problem: area code
+    - 2nd solution: hash function take last 3 digits:
+        - E.g. h(604-999-9999) = 999
+        - Problem: Problem if many phone numbers end with three zeros
+    - 3rd solution: Hash function: random number between 0 and 999
+        - Uniform distribution of hash values
+        - The keys will be eveny distributed among the cells
+        - Problem: it generated different value when hash function is called again — we won’t be able to find anything!
+    - 4th solution: could we come up with a universal family for integers up to 10^7?
+        - For a = 34, b = 2, so H(p,a,b, x) = [(34 x + 2) mod p] mod m
+        - For x = 1 482 567 corresponding to the phone number 148-25-67 and p = 10 000 019 (p must be > n, 10^7)
+        - H = 40,7185 mod 1,000 = 185
+        - General Case:
+            - Define maximum length L of a phone number
+            - Choose prime number p > 10^L
+            - Choose hash table size m
+            - Choose random hash function from universal family Hp (choose random a ∈ [1, p − 1] and b ∈ [0, p − 1])
+- E.g., Phone Book 2:
+    - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
+    - The following peration must be fast: Call person by name
+    - Solution: To implement Map from names to phone numbers
+- For more details:
+    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
