@@ -1041,11 +1041,11 @@
     - Use O(m) = O(n/α) = O(n) memory to store n keys
     - Operations run in time O(1 + α) = O(1) on average
 - **Universal Family** for **integer**:
-    -         H(*p*, a, b, x) = [(a * x + b) mod *p*] mod m for all a, b : 
-              *p* a fixed prime > |U|, 1 ≤ a ≤ p − 1, 0 ≤ b ≤ p − 1 
+    -               H(p, a, b, x) = [(a * x + b) mod p] mod m for all a, b 
+                    p is a fixed prime > |U|, 1 ≤ a ≤ p − 1, 0 ≤ b ≤ p − 1 
     - It's a universal family for the set of integers between 0 and p − 1
     - **Collision Probability**:
-        - if for any 2 keys x, y ∈ U, x != y: **Pr[h(x) = h(y)] ≤ 1 / m**
+        - if for any 2 keys x, y ∈ U, x != y: ***Pr[h(x) = h(y)] ≤ 1 / m***
 - **Polynomial Hashing** for **strings**:
     - It convert all its character S[i] to integer:
         - It uses ASCII, Unicode
@@ -1053,10 +1053,10 @@
         - E.g., if S[0] is not used, then h(“aa”) = h(“ba”) = ··· = h(“za”)
     - It chooses big prime number p
     - It uses Polynomial Hashing:
-        -                            |S|
-              *Pp* = { h(x,*p*, S) =  ∑ S[i] * x^i mod *p* }
-                                    i = 0
-              *p* a fixed prime, |S| the length of the string S and 1 ≤ x ≤ *p* − 1
+        -                                |S|
+                    Pp = { h(x,p,S) =  ∑ S[i] * x^i mod p }
+                                        i = 0
+                    p a fixed prime, |S| the length of the string S and 1 ≤ x ≤ p − 1
     - It's implemented as follow:
             PolyHash(S, p, x)
                 hash = 0
