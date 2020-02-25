@@ -1005,18 +1005,6 @@
 </details>
 
 <details>
-<summary>Hashing: Hash table</summary>
-
-- **Hash Table**:
-    - It's an implementation of a Set or a Map using hashing
-- Related Problems:
-    - In progress:
-- For more details:
-    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
-
-</details>
-
-<details>
 <summary>Hashing: How to come up with a Good Hash Function</summary>
 
 - The goal is to come up with a good hash function so that:
@@ -1043,8 +1031,8 @@
     - Fixed h is used throughout the algorithm
 - **Load Factor α**:
     - It's The ratio α = n/m between number of objects n stored in the hash table and the size of the hash table
-    - **If h is chosen randomly from a universal family, the average length of the longest chain c is O(1 + α)**
-    - **If h is from universal family, operations with hash table run on average in time O(1 + α)**
+    - If h is chosen randomly from a universal family, the average length of the longest chain c is O(1 + α)
+    - If h is from universal family, operations with hash table run on average in time O(1 + α)
 - Choosing Hash Table Size:
     - Control amount of memory used with m
     - Ideally, load factor **0.5 < α < 1**:
@@ -1053,31 +1041,38 @@
         - If α is big, we can be sure that there are a lot of collisions, the longest chain length is too long and the operations will be too slow
     - Use O(m) = O(n/α) = O(n) memory to store n keys
     - Operations run in time O(1 + α) = O(1) on average
-- **Dynamic Hash table**:
-    - It's good when What the number of keys n is unknown in advance
-    - It resizes the hash table when α becomes too large (same idea as dynamic arrays)
-    - It chooses new hash function and rehash all the objects
-    - Let's choose to Keep the load factor below 0.9 (α <= 0.9);
-        -       Rehash(T):
-                    loadFactor = T.numberOfKeys / T.size
-                    if loadFactor > 0.9:
-                        Create Tnew of size 2 × T.size
-                        Choose hnew with cardinality Tnew.size
-                        For each object in T:
-                            Insert object in Tnew using hnew
-                            T = Tnew, h = hnew
-        - The result of the rehash method is a new hash table wit an α == 0.5
-        - We should call Rehash after each operation with the hash table
-        - Single rehashing takes **O(n)** time, 
-        - Amortized running time of each operation with hash table is: **O(1)** on average, because rehashing will be rare
-- **Universal Familly for integer**:
-    - **H(p,a,b, x) = [(ax + b) mod p] mod m** for all a, b : **1 ≤ a ≤ p − 1**, **0 ≤ b ≤ p − 1** 
-    - It's a universal family for the set of integers between 0 and p − 1, 
-    - for any **prime** p
-    - It means that p must be greater than |U|
-- **Polynomial Hashing**:
-    - It's a hashing for strings
-    - 
+- **Universal Family** for **integer**:
+              H(*p*, a, b, x) = [(a * x + b) mod *p*] mod m for all a, b : 
+              *p* a fixed prime > |U|, 1 ≤ a ≤ p − 1, 0 ≤ b ≤ p − 1 
+    - It's a universal family for the set of integers between 0 and p − 1
+    - **Collision Probability**:
+        - if for any 2 keys x, y ∈ U, x != y: **Pr[h(x) = h(y)] ≤ 1 / m**
+- **Polynomial Hashing** for **strings**:
+    - It convert all its character S[i] to integer:
+        - It uses ASCII, Unicode
+        - It uses all the characters in the hash function because otherwise there will be many collisions
+        - E.g., if S[0] is not used, then h(“aa”) = h(“ba”) = ··· = h(“za”)
+    - It chooses big prime number p
+    - It uses Polynomial Hashing:
+                                     |S|
+              *Pp* = { h(x,*p*, S) =  ∑ S[i] * x^i mod *p* }
+                                    i = 0
+              *p* a fixed prime, |S| the length of the string S and 1 ≤ x ≤ *p* − 1
+    - It's implemented as follow:
+            PolyHash(S, p, x)
+                hash = 0
+                for i from |S| − 1 down to 0:
+                    hash = (hash * x + S[i]) mod p
+                return hash
+    - E.g. |S| = 3
+        - hash = 0
+        - hash = S[2] mod p
+        - hash = S[1] + S[2] * x mod p
+        - hash = S[0] + S[1] * x + S[2] * x^2 mod p
+    - **Collision Probability**:
+        - For any 2 different strings s1 and s2 of length at most L + 1, 
+        - if we choose h from *Pp* at random (by selecting a random x ∈ [1, p − 1]), 
+        - The probability of collision: **Pr[h(s1) = h(s2)] <= L / *p***
 - E.g., Phone Book 1:
     - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
     - The following peration must be fast: Determine who is calling given their phone number
@@ -1108,6 +1103,39 @@
     - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
     - The following peration must be fast: Call person by name
     - Solution: To implement Map from names to phone numbers
+- Use Cases:
+    - [Rabin-Karp's Algorithm](https://brilliant.org/wiki/rabin-karp-algorithm/) uses **Polynomial Hashing** to find patterns in strings
+    - Java class String method hashCode:
+        - It uses Polynomial Hashing
+        - It uses x = 31
+        - It avoids the (mod *p*) operator for technical reasons
+
+- For more details:
+    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+
+</details>
+
+<details>
+<summary>Hashing: Hash table</summary>
+
+- **Hash Table**: is an implementation of a Set or a Map using hashing
+- **Dynamic Hash table**:
+    - It's good when What the number of keys n is unknown in advance
+    - It resizes the hash table when α becomes too large (same idea as dynamic arrays)
+    - It chooses new hash function and rehash all the objects
+    - Let's choose to Keep the load factor below 0.9 (α <= 0.9);
+        -       Rehash(T):
+                    loadFactor = T.numberOfKeys / T.size
+                    if loadFactor > 0.9:
+                        Create Tnew of size 2 × T.size
+                        Choose hnew with cardinality Tnew.size
+                        For each object in T:
+                            Insert object in Tnew using hnew
+                            T = Tnew, h = hnew
+        - The result of the rehash method is a new hash table wit an α == 0.5
+        - We should call Rehash after each operation with the hash table
+        - Single rehashing takes **O(n)** time, 
+        - Amortized running time of each operation with hash table is: **O(1)** on average, because rehashing will be rare
 - For more details:
     - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
