@@ -1062,6 +1062,7 @@
                     for i from |S| − 1 down to 0:
                         hash = (hash * x + S[i]) mod p
                     return hash
+                    
                 E.g. |S| = 3
                 hash = 0
                 hash = S[2] mod p
