@@ -1,0 +1,10 @@
+4
+8
+add test
+add test
+find test
+del test
+find test
+find Test
+add Test
+find Test
