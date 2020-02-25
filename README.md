@@ -976,7 +976,6 @@
 <details>
 <summary>Hashing: Sets</summary>
 
-- It's an abstract data type that can store certain values, without any particular order, and no repeated values 
 - It's an implementation of the mathematical concept of a finite Set 
 - It's usually used to test whether elements belong to set of values (see methods below)
 - It could be implemented with a map data structure:
@@ -1042,7 +1041,7 @@
     - Use O(m) = O(n/α) = O(n) memory to store n keys
     - Operations run in time O(1 + α) = O(1) on average
 - **Universal Family** for **integer**:
-              H(*p*, a, b, x) = [(a * x + b) mod *p*] mod m for all a, b : 
+    -         H(*p*, a, b, x) = [(a * x + b) mod *p*] mod m for all a, b : 
               *p* a fixed prime > |U|, 1 ≤ a ≤ p − 1, 0 ≤ b ≤ p − 1 
     - It's a universal family for the set of integers between 0 and p − 1
     - **Collision Probability**:
@@ -1054,7 +1053,7 @@
         - E.g., if S[0] is not used, then h(“aa”) = h(“ba”) = ··· = h(“za”)
     - It chooses big prime number p
     - It uses Polynomial Hashing:
-                                     |S|
+        -                            |S|
               *Pp* = { h(x,*p*, S) =  ∑ S[i] * x^i mod *p* }
                                     i = 0
               *p* a fixed prime, |S| the length of the string S and 1 ≤ x ≤ *p* − 1
@@ -1101,7 +1100,7 @@
             - Choose random hash function from universal family Hp (choose random a ∈ [1, p − 1] and b ∈ [0, p − 1])
 - E.g., Phone Book 2:
     - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
-    - The following peration must be fast: Call person by name
+    - The following operation must be fast: Call person by name
     - Solution: To implement Map from names to phone numbers
 - Use Cases:
     - [Rabin-Karp's Algorithm](https://brilliant.org/wiki/rabin-karp-algorithm/) uses **Polynomial Hashing** to find patterns in strings
