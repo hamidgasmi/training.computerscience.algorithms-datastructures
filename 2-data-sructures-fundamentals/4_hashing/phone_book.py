@@ -12,6 +12,9 @@ def read_queries():
 def write_responses(result):
     print('\n'.join(result))
 
+# Time Complexity: O(q) / q is the number of queries
+# Space Complexity: O(n) / n is the max size of the phone book
+# It uses direct addressing scheme with a map
 def process_queries(queries):
     contacts = {}
     result = []
