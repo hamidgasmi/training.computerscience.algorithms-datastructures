@@ -1053,10 +1053,10 @@
         - E.g., if S[0] is not used, then h(“aa”) = h(“ba”) = ··· = h(“za”)
     - It chooses big prime number p
     - It uses Polynomial Hashing:
-        -                                |S|
-                    Pp = { h(x,p,S) =  ∑ S[i] * x^i mod p }
-                                        i = 0
-                    p a fixed prime, |S| the length of the string S and 1 ≤ x ≤ p − 1
+    -                             |S|
+                Pp = { h(x,p,S) =  ∑ S[i] * x^i mod p }
+                                 i = 0
+                p a fixed prime, |S| the length of the string S and 1 ≤ x ≤ p − 1
     - It's implemented as follow:
             PolyHash(S, p, x)
                 hash = 0
