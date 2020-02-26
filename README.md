@@ -1062,7 +1062,7 @@
                     for i from |S| − 1 down to 0:
                         hash = (hash * x + S[i]) mod p
                     return hash
-                    
+
                 E.g. |S| = 3
                 hash = 0
                 hash = S[2] mod p
@@ -1072,6 +1072,7 @@
         - For any 2 different strings s1 and s2 of length at most L + 1, 
         - if we choose h from *Pp* at random (by selecting a random x ∈ [1, p − 1]), 
         - The probability of collision: **Pr[h(s1) = h(s2)] <= L / *p***
+- Question: How to choose p so that O(mod p) = O(1)
 - E.g., Phone Book 1:
     - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
     - The following peration must be fast: Determine who is calling given their phone number
