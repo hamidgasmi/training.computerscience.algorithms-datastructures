@@ -6,41 +6,32 @@ class RabinKarp:
 
     def _hash_func(self, s, l, r):
         ans = 0
-        for i in range(l, r):
+        for i in range(r, l - 1, -1):
             ans = (ans * self._multiplier + ord(s[i])) % self._prime
             
         return ans
 
-    def areEqual(self, text, pattern, position):
-        if position + len(pattern) > len(text):
-            return False
-
-        for i in range(position, len(pattern)):
-            if text[i] != pattern[i]:
-                return False
-        return True
-
     def get_occurrences(self, pattern, text):
         
         positions = []
-        hashPattern = self._hash_func(pattern, 0, len(pattern))
-        hashText = self._hash_func(text, 0, len(pattern))
+        hashPattern = self._hash_func(pattern, 0, len(pattern) - 1)
+        hashText = self._hash_func(text, len(text) - len(pattern), len(text) - 1)
+
         if hashText == hashPattern:
-            positions.append(0)
+            positions.append(len(text) - len(pattern))
 
-        multiplierPowP_1 = 1
-        for i in range(len(pattern) - 1):
-            multiplierPowP_1 = (multiplierPowP_1 * self._multiplier) % self._prime
+        multiplierPowP = 1
+        for i in range(len(pattern)):
+            multiplierPowP = (multiplierPowP * self._multiplier)  % self._prime
 
-        for i in range(1, len(text) - len(pattern) + 1):
-            hashText = ((hashText - ord(text[i - 1])) // self._multiplier + multiplierPowP_1 * ord(text[i + len(pattern) - 1])) % self._prime
-
+        for i in range(len(text) - len(pattern) - 1, -1, -1):
+            hashText = (hashText * self._multiplier + (ord(text[i]) - multiplierPowP * ord(text[i + len(pattern)]))) % self._prime
             if hashText == hashPattern:
                 positions.append(i)
 
         results = []
-        for i in range(len(positions)):
-            if self.areEqual(text, pattern, positions[i]):
+        for i in range(len(positions) - 1, -1, -1):
+            if pattern == text[positions[i]:positions[i] + len(pattern)]:
                 results.append(positions[i])
 
         return results
@@ -62,5 +53,3 @@ if __name__ == '__main__':
 
     rabinKarp = RabinKarp()
     print_occurrences(rabinKarp.get_occurrences(*read_input()))
-
-
