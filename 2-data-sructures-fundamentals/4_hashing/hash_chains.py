@@ -36,7 +36,6 @@ class QueryProcessor:
 
         else:
             hash = self._hash_func(query.s)
-            #print("Hash of " + query.s + ": ", hash)
             
             try:
                 ind = self.elems[hash].index(query.s)
