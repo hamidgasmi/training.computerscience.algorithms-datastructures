@@ -1151,20 +1151,20 @@
     - X's key is smaller than the key of any descendent of its right child
 - The **hight** of the binary search tree is at most: **O(log n)**
 - Implementation, Time Complexity and Operations:
-    -  `                            Time Complexity             Description:
-                     Find(k, R):     O(log n)                   Return the node with key k in the tree R, if exists
-                                                                Return the place in the tree where k would fit, otherwise
-                        Next(N):     O(log n)                   Return the node in the tree with the next largest key
-                                                                Return the LeftDescendant(N.Right), if N has a right child
-                                                                Return the RightAncestor(N), otherwise
-                 LeftDescendant(N):   O(log n)
-                  RightAncestor(N):   O(log n)
-            RangeSearch(k1, k2, R):   O(|k2 - k1| log n)        Return a list of nodes with key between k1 and k2
-                      Insert(k, R):   O(log n)                  Insert node with key k to the tree
-                         Delete(N):   O(Log n)                  Removes node N from the tree
-                                                                It finds N
-                                                                N.Parent = N.Left, if N.Right is Null, 
-                                                                Replace N by X, promote X.Right otherwise`    
+    -               Operations    Time Complexity   Description:
+                      Find(k, R):  O(log n)         Return the node with key k in the tree R, if exists
+                                                    Return the place in the tree where k would fit, otherwise
+                         Next(N):  O(log n)         Return the node in the tree with the next largest key
+                                                           the LeftDescendant(N.Right), if N has a right child
+                                                           the RightAncestor(N), otherwise
+               LeftDescendant(N): O(log n)
+                RightAncestor(N): O(log n)
+          RangeSearch(k1, k2, R): O(|k2-k1| log n)  Return a list of nodes with key between k1 and k2
+                    Insert(k, R): O(log n)          Insert node with key k to the tree
+                       Delete(N): O(Log n)          Removes node N from the tree:
+                                                     It finds N
+                                                     N.Parent = N.Left, if N.Right is Null, 
+                                                     Replace N by X, promote X.Right otherwise
 - Use Cases:
     - 
 - For more details:
