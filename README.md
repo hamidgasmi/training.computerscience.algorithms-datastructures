@@ -1188,15 +1188,15 @@
         - They can modify height of nodes on insertion/deletion path
         - They need to rebalance the tree in order to maintain the AVL property
     - Steps to follow for an **insertion**:
-        - Let the newly inserted node be w
-        - 1- Perform standard BST insert for w
+        - 1- Perform standard BST insert
         - 2- Starting from w, travel up and find the first unbalanced node 
-        - Let z be the first unbalanced node, 
-        - Let y be the child of z that comes on the path from w to z
-        - Let x be the grandchild of z that comes on the path from w to z
         - 3- Re-balance the tree by performing appropriate rotations on the subtree rooted with z 
+        -           Let w be the newly inserted node
+                        z be the first unbalanced node, 
+                        y be the child of z that comes on the path from w to z
+                        x be the grandchild of z that comes on the path from w to z     
         - There can be 4 possible cases that needs to be handled as x, y and z can be arranged in 4 ways:
-        -      Cas 1: Left Left Case
+        -      Cas 1: Left Left Case:
                      z                                     y 
                     / \                                  /   \
                    y   T4      Right Rotate (z)         x      z
@@ -1204,7 +1204,7 @@
                  x   T3                              T1  T2  T3  T4
                 / \
               T1   T2
-        -      Cas 2: Left Right Case
+        -      Cas 2: Left Right Case:
                      z                               z                              x
                     / \                            /   \                          /   \ 
                    y   T4   Left Rotate (y)        x    T4    Right Rotate(z)    y      z
@@ -1213,7 +1213,7 @@
                / \                             / \
               T2   T3                         T1   T2
 
-        -      Cas 3: Right Right Case
+        -      Cas 3: Right Right Case:
                       z                               y
                     /  \                            /   \ 
                   T1   y    Left Rotate(z)         z      x
@@ -1222,7 +1222,7 @@
                / \
               T3  T4
 
-        -      Cas 4: Right Left Case
+        -      Cas 4: Right Left Case:
                       z                              z                               x
                      / \                            / \                            /   \ 
                    T1   y   Right Rotate (y)       T1   x     Left Rotate(z)      z      y
@@ -1231,6 +1231,76 @@
                 / \                            /  \
               T2   T3                         T3   T4
     - Steps to follow for a **Deletion**:
+        - (1) Perform standard BST delete
+        - (2) Travel up and find the 1st unbalanced node
+        - (3) Re-balance the tree by performing appropriate rotations
+        -           Let w be the newly inserted node
+                        z be the 1st unbalanced node
+                        y be the larger height child of z 
+                        x be the larger height child of y
+                    Note that the definitions of x and y are different from insertion 
+        - There can be 4 possible cases:
+        -      Cas 1: Left Left Case:
+                     z                                      y 
+                    / \                                   /   \
+                   y   T4      Right Rotate (z)          x      z
+                  / \          - - - - - - - - ->      /  \    /  \ 
+                 x   T3                               T1  T2  T3  T4
+                / \
+              T1   T2
+        -      Cas 2: Left Right Case:
+                     z                               z                            x
+                    / \                            /   \                         /  \ 
+                   y   T4   Left Rotate (y)       x    T4   Right Rotate(z)     y      z
+                  / \      - - - - - - - - ->    /  \      - - - - - - - ->    / \    / \
+                T1   x                          y    T3                      T1  T2 T3  T4
+                    / \                        / \
+                  T2   T3                    T1   T2
+
+        -      Cas 3: Right Right Case:
+                     z                                y
+                    /  \                            /   \ 
+                   T1   y     Left Rotate(z)       z      x
+                  /  \       - - - - - - - ->     / \    / \
+                 T2   x                          T1  T2 T3  T4
+                / \
+              T3  T4
+        -      Cas 4: Right Left Case:
+                     z                            z                            x
+                    / \                          / \                          /  \ 
+                  T1   y   Right Rotate (y)    T1   x      Left Rotate(z)   z      y
+                 / \      - - - - - - - - ->      /  \   - - - - - - - ->  / \    /  \
+                x   T4                           T2   y                   T1  T2  T3  T4
+               / \                              /  \
+              T2  T3                           T3   T4
+    - Steps to follow for a **Merge** operation:
+        - Input: Roots R1 and R2 of trees with all keys in R1’s tree smaller than those in R2’s
+        - Output: The root of a new tree with all the elements of both trees
+        - (1) Go down side of the tree with the bigger height until reaching the subtree with height equal to slowest height
+        - (2) Merge the trees
+        - (2.a) Get new root Ri by removing largest element of left subtree (Ri)
+        - There can be 3 possible cases:
+            -       Cas 1: R1.Height = R2.Height = h
+                     R1(h)       R2(h)                R1'    z     R2                               z(h+1)
+                    / \         /  \                 /  \         /  \                             /     \
+                  T3   T4 (+) T5  T6   Delete(z)   T3'  T4' (+) T5   T6   Merge(R1',R2,z)       R1'(h-1)  R2(h)
+                  / \                 - - - - - ->                      - - - - - - - -  ->    /  \       /  \
+                T1  ...                Rebalance                          AVL property       T3'  T4'    T5   T6
+                    / \             Height(R1') = h - 1 (at most)          maintained
+                   T2  z
+            -       Cas 2: R1.Height (h1) < R2.Height (h2):
+                    R1(h1)       R2(h2)                      R1(h1)       R2'(h1)
+                    / \         /  \                        /  \         /  \
+                  T3   T4 (+) T5   T6  Find R2' in T5     T3   T4 (+)  T7   T8     Merge
+                                      - - - - - - - ->                          - - - - -> Go to Case 1
+                                      R2'.height = h1
+            -       Cas 3: R1.Height (h1) > R2.Height (h2):
+                    R1(h1)       R2(h2)                      R1'(h2)      R2(h1)
+                    / \         /  \                        /  \         /  \
+                  T3   T4 (+) T5   T6  Find R1' in T4     T1   T2 (+)  T5   T6     Merge
+                                      - - - - - - - ->                          - - - - -> Go to Case 1
+                                      R1'.height = h2
+    - Steps to follow for a **Split**:
 - Related Problems:
     - 
 - Use Cases:
@@ -1239,6 +1309,8 @@
     - UC San Diego Course:[AVL tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_1_binary_search_trees_avl_trees.pdf)
     - UC San Diego Course:[AVL Tree implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_2_binary_search_trees_avl_tree_implementation.pdf)
     - UC San Diego Course:[Split and Merge](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_3_binary_search_trees_split_merge.pdf) operations
+    - Geeks for Geeks: [AVL tree insertion](https://www.geeksforgeeks.org/avl-tree-set-1-insertion/)
+    - Geeks for Geeks: [AVL tree deletion](https://www.geeksforgeeks.org/avl-tree-set-2-deletion/)
 
 </details>
 
