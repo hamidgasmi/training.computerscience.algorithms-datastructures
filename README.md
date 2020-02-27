@@ -1110,7 +1110,6 @@
         - It uses Polynomial Hashing
         - It uses x = 31
         - It avoids the (mod *p*) operator for technical reasons
-
 - For more details:
     - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
@@ -1149,27 +1148,108 @@
     - Let's X a node in the tree
     - X’s key is larger than the key of any descendent of its left child, and 
     - X's key is smaller than the key of any descendent of its right child
-- The **hight** of the binary search tree is at most: **O(log n)**
 - Implementation, Time Complexity and Operations:
-    -               Operations    Time Complexity   Description:
-                      Find(k, R):  O(log n)         Return the node with key k in the tree R, if exists
-                                                    Return the place in the tree where k would fit, otherwise
-                         Next(N):  O(log n)         Return the node in the tree with the next largest key
-                                                           the LeftDescendant(N.Right), if N has a right child
-                                                           the RightAncestor(N), otherwise
-               LeftDescendant(N): O(log n)
-                RightAncestor(N): O(log n)
-          RangeSearch(k1, k2, R): O(|k2-k1| log n)  Return a list of nodes with key between k1 and k2
-                    Insert(k, R): O(log n)          Insert node with key k to the tree
-                       Delete(N): O(Log n)          Removes node N from the tree:
-                                                     It finds N
-                                                     N.Parent = N.Left, if N.Right is Null, 
-                                                     Replace N by X, promote X.Right otherwise
+    - Time Complexity: O(height)
+    -               Operations:     Description:
+                      Find(k, R):    Return the node with key k in the tree R, if exists
+                                            the place in the tree where k would fit, otherwise
+                         Next(N):    Return the node in the tree with the next largest key
+                                            the LeftDescendant(N.Right), if N has a right child
+                                            the RightAncestor(N), otherwise
+               LeftDescendant(N):
+                RightAncestor(N):
+          RangeSearch(k1, k2, R):    Return a list of nodes with key between k1 and k2
+                    Insert(k, R):    Insert node with key k to the tree
+                       Delete(N):    Removes node N from the tree:
+                                             It finds N
+                                             N.Parent = N.Left, if N.Right is Null, 
+                                             Replace N by X, promote X.Right otherwise
+- **Balanced** BST:
+    - The **height** of a balanced BST is at most: **O(log n)**
+    - Each subtree is half the size of its parent
+    - Insertion and deletion operations can destroy balance
+    - Insertion and deletion operations need to rebalance
+- For more details:
+    - UC San Diego Course:[BST Basic Operations](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_3_binary_search_trees_basic_operations.pdf)
+    - UC San Diego Course:[Balance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_4_binary_search_trees_balance.pdf)
+
+</details>
+
+<details>
+<summary>AVL Tree</summary>
+
+- It's a **Balanced** BST:
+    - It keeps balanced by maintaining the following **AVL property**:
+        - For all nodes N,
+        - `|N.Left.Height − N.Right.Height| ≤ 1`
+- Implementation, Time Complexity and Operations:
+    - Time Complexity: **O(log n)**
+    - Insertion and deletion operations can destroy balance:
+        - They can modify height of nodes on insertion/deletion path
+        - They need to rebalance the tree in order to maintain the AVL property
+    - Steps to follow for an **insertion**:
+        - Let the newly inserted node be w
+        - 1- Perform standard BST insert for w
+        - 2- Starting from w, travel up and find the first unbalanced node 
+        - Let z be the first unbalanced node, 
+        - Let y be the child of z that comes on the path from w to z
+        - Let x be the grandchild of z that comes on the path from w to z
+        - 3- Re-balance the tree by performing appropriate rotations on the subtree rooted with z 
+        - There can be 4 possible cases that needs to be handled as x, y and z can be arranged in 4 ways:
+        - Cas 1: Left Left Case
+        -          z                                     y 
+                  / \                                  /   \
+                 y   T4      Right Rotate (z)         x      z
+                / \         - - - - - - - - ->      /  \    /  \ 
+               x   T3                              T1  T2  T3  T4
+              / \
+            T1   T2
+        - Cas 2: Left Right Case
+        -          z                               z                              x
+                  / \                            /   \                          /   \ 
+                 y   T4   Left Rotate (y)        x    T4    Right Rotate(z)    y      z
+                / \      - - - - - - - - ->    /  \        - - - - - - - ->   / \    / \
+              T1   x                          y    T3                       T1  T2 T3  T4
+             / \                             / \
+           T2   T3                         T1   T2
+
+        - Cas 3: Right Right Case
+        -          z                                y
+                  /  \                            /   \ 
+                T1   y    Left Rotate(z)         z      x
+               /  \      - - - - - - - ->       / \    / \
+              T2   x                           T1  T2 T3  T4
+             / \
+            T3  T4
+
+        - Cas 4: Right Left Case
+        -          z                            z                              x
+                  / \                          / \                            /  \ 
+                T1   y   Right Rotate (y)    T1   x      Left Rotate(z)      z    y
+               / \  - - - - - - - - ->     /  \         - - - - - - - ->    / \    / \
+              x   T4                      T2   y                          T1  T2  T3  T4
+             / \                              /  \
+           T2   T3                           T3   T4
+    - Steps to follow for a **Deletion**:
+- Related Problems:
+    - 
 - Use Cases:
     - 
 - For more details:
-    - UC San Diego Course:[BST Basic Operations](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_3_binary_search_trees_basic_operations.pdf)
-    - UC San Diego Course:[BST Balance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_4_binary_search_trees_balance.pdf)
+    - UC San Diego Course:[AVL tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_1_binary_search_trees_avl_trees.pdf)
+    - UC San Diego Course:[AVL Tree implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_2_binary_search_trees_avl_tree_implementation.pdf)
+    - UC San Diego Course:[Split and Merge](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_3_binary_search_trees_split_merge.pdf) operations
+
+</details>
+
+<details>
+<summary>Splay Tree</summary>
+
+- 
+- For more details:
+    - UC San Diego Course:[Splay Trees Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_1_binary_search_trees_splay_trees_introduction.pdf)
+    - UC San Diego Course:[Splay Tree Implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_2_binary_search_trees_splay_tree_implementation.pdf)
+    - UC San Diego Course:[Splay Tree Analysis](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_3_binary_search_trees_splay_tree_analysis.pdf)
 
 </details>
 
