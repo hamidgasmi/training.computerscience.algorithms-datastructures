@@ -499,7 +499,7 @@
         - Its 1st index (row) changes most rapidly
         - Its elements are laid out as follow: (1,1), (2,1), (2,1), ..., (1,2), (2,2),...
         - Accessing **[i][j]** consists of accessing the memory address: **array_addr + elem_size × [column_lenth * (j  − 1st_column_index) + (i − 1st_row_index)]**
-- Time for common operations:
+- Time Complexity and Operations:
     -                     Read    Remove   Add
             Beginning:    O(1)     O(n)    O(n) 
                   End:    O(1)     O(1)    O(1)
@@ -604,7 +604,7 @@
     - A **Full Binary Tree**:
         - It's also called **Proper Binary Tree** or **2-tree**
         - It's a tree in which every node other than the leaves has 2 children
-        - Its height is Low: it's equal to O(log n)
+        - Its height is Low: it's equal to **log n**
         - It could be stored effeciently as an array
 - For more details:
     - [Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_3_trees.pdf)
@@ -780,6 +780,7 @@
 
 - In a **d-ary heap** nodes on all levels have exactly **d children** except for possibly the last one
 - Its height is about: ***Log_d n***
+- Implementation, Time Complexity and Operations:
     - An efficient implementation is a **Complete D-ary Tree** in an **Array**
     -            Operations:    0-based index     1-based index array
                   Parent(i):     ⌊ i / d ⌋         ⌊ i / d ⌋
@@ -1142,7 +1143,34 @@
 </details>
 
 <details>
-<summary>Binary Search Trees</summary>
+<summary>Binary Search Tree (BST)</summary>
+
+- It's a binary tree data stucture with the property below:
+    - Let's X a node in the tree
+    - X’s key is larger than the key of any descendent of its left child, and 
+    - X's key is smaller than the key of any descendent of its right child
+- The **hight** of the binary search tree is at most: **O(log n)**
+- Implementation, Time Complexity and Operations:
+    -  `                            Time Complexity             Description:
+                     Find(k, R):     O(log n)                   Return the node with key k in the tree R, if exists
+                                                                Return the place in the tree where k would fit, otherwise
+                        Next(N):     O(log n)                   Return the node in the tree with the next largest key
+                                                                Return the LeftDescendant(N.Right), if N has a right child
+                                                                Return the RightAncestor(N), otherwise
+                 LeftDescendant(N):   O(log n)
+                  RightAncestor(N):   O(log n)
+            RangeSearch(k1, k2, R):   O(|k2 - k1| log n)        Return a list of nodes with key between k1 and k2
+                      Insert(k, R):   O(log n)                  Insert node with key k to the tree
+                         Delete(N):   O(Log n)                  Removes node N from the tree
+                                                                It finds N
+                                                                N.Parent = N.Left, if N.Right is Null, 
+                                                                Replace N by X, promote X.Right otherwise`    
+- Use Cases:
+    - 
+- For more details:
+    - UC San Diego Course:[BST Basic Operations](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_3_binary_search_trees_basic_operations.pdf)
+    - UC San Diego Course:[BST Balance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_4_binary_search_trees_balance.pdf)
+
 </details>
 
 ---
