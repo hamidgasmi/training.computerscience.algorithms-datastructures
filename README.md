@@ -1281,21 +1281,21 @@
         - (2.a) Get new root Ri by removing largest element of left subtree (Ri)
         - There can be 3 possible cases:
         -       Cas 1: R1.Height = R2.Height = h
-                     R1(h)       R2(h)                R1'    z     R2                               z(h+1)
-                    / \         /  \                 /  \         /  \                             /     \
-                  T3   T4 (+) T5  T6   Delete(z)   T3'  T4' (+) T5   T6   Merge(R1',R2,z)       R1'(h-1)  R2(h)
-                  / \                 - - - - - ->                      - - - - - - - -  ->    /  \       /  \
-                T1  ...                Rebalance                          AVL property       T3'  T4'    T5   T6
-                    / \             Height(R1') = h - 1 (at most)          maintained
+                     R1          R2                   R1'    z     R2                   z(h+1)
+                    / \         /  \                 /  \         /  \                 /     \
+                  T3   T4 (+) T5  T6   Delete(z)   T3'  T4' (+) T5   T6   Merge      R1'(h-1)  R2(h)
+                  / \                 - - - - - ->                      - - - - ->   /  \       /  \
+                T1  ...                Rebalance                                    T3'  T4'    T5   T6
+                    / \          h-1 <= R1'.height <= h                            AVL property maintained
                    T2  z
         -       Cas 2: R1.Height (h1) < R2.Height (h2):
-                    R1(h1)       R2(h2)                      R1(h1)       R2'(h1)
+                    R1          R2                           R1(h1)       R2'(h1)
                     / \         /  \                        /  \         /  \
                   T3   T4 (+) T5   T6  Find R2' in T5     T3   T4 (+)  T7   T8     Merge
                                       - - - - - - - ->                          - - - - -> Go to Case 1
                                       R2'.height = h1
         -       Cas 3: R1.Height (h1) > R2.Height (h2):
-                    R1(h1)       R2(h2)                      R1'(h2)      R2(h1)
+                    R1           R2                          R1'(h2)      R2(h1)
                     / \         /  \                        /  \         /  \
                   T3   T4 (+) T5   T6  Find R1' in T4     T1   T2 (+)  T5   T6     Merge
                                       - - - - - - - ->                          - - - - -> Go to Case 1
