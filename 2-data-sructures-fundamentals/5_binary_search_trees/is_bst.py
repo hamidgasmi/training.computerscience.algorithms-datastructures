@@ -4,13 +4,10 @@ import sys, threading
 # Time Complexity: O(n)
 # Space Complxity: O(height)
 def IsBinarySearchTree(tree, v, inOrderTraversal):
-  if v == -1:
-    return True
-  elif len(tree) < 2:
+  if len(tree) < 2:
     return True
 
-  isBST = IsBinarySearchTree(tree, tree[v][1], inOrderTraversal)
-  if not isBST:
+  if tree[v][1] != -1 and not IsBinarySearchTree(tree, tree[v][1], inOrderTraversal):
     return False
 
   if len(inOrderTraversal) == 1 and inOrderTraversal[0] > tree[v][0]:
@@ -21,7 +18,10 @@ def IsBinarySearchTree(tree, v, inOrderTraversal):
   else:
     inOrderTraversal[0] = tree[v][0]
 
-  return IsBinarySearchTree(tree, tree[v][2], inOrderTraversal)
+  if tree[v][2] == -1:
+    return True
+  else:
+    return IsBinarySearchTree(tree, tree[v][2], inOrderTraversal)
 
 def main():
   nodes = int(sys.stdin.readline().strip())
@@ -38,5 +38,5 @@ def main():
 
 if __name__ == '__main__':
   sys.setrecursionlimit(10**7) # max depth of recursion
-  threading.stack_size(2**25)  # new thread will get stack of such size
+  threading.stack_size(2**27)  # new thread will get stack of such size
   threading.Thread(target=main).start()
