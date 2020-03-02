@@ -10,7 +10,7 @@ def IsBinarySearchTree(tree, v, inOrderTraversal):
   if tree[v][1] != -1 and not IsBinarySearchTree(tree, tree[v][1], inOrderTraversal):
     return False
 
-  if len(inOrderTraversal) == 1 and inOrderTraversal[0] > tree[v][0]:
+  if len(inOrderTraversal) == 1 and inOrderTraversal[0] >= tree[v][0]:
     return False
   
   if len(inOrderTraversal) == 0:
