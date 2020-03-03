@@ -1,6 +1,8 @@
 <details>
 <summary>Description</summary>
 
+- Implementation, Time Complexity and Operations:
+
 - Programming Languages:
     - Python:
     - C++:
