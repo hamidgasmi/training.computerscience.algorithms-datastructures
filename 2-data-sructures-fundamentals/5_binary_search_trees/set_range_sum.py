@@ -1,4 +1,3 @@
-# python3
 from sys import stdin
 
 # Splay tree implementation
@@ -7,18 +6,19 @@ from sys import stdin
 class Vertex:
 
   def str(self):
-    return "(key, sum, left, right, parent) = (" + str(self.key) + "," + str(self.sum) + "," + \
+    return "(key, sum, size, left, right) = (" + str(self.key) + "," + str(self.sum) + "," + str(self.size) + "," + \
       ("None" if self.left == None else str(self.left.key)) + "," + \
-      ("None" if self.right == None else str(self.right.key)) + "," + \
-      ("None" if self.parent == None else str(self.parent.key)) + ")"
+      ("None" if self.right == None else str(self.right.key)) + ")"
 
   def __init__(self, key, sum, left, right, parent):
     (self.key, self.sum, self.left, self.right, self.parent) = (key, sum, left, right, parent)
+    self.size = 1
 
 def update(v):
   if v == None:
     return
   v.sum = v.key + (v.left.sum if v.left != None else 0) + (v.right.sum if v.right != None else 0)
+  v.size = 1 + (v.left.size if v.left != None else 0) + (v.right.size if v.right != None else 0)
   if v.left != None:
     v.left.parent = v
   if v.right != None:
@@ -135,17 +135,16 @@ def insert(x):
   
 def erase(x): 
   global root
-  (left, right) = split(root, x)
-  
-  #print("left: ", left.str())
+  (root, right) = split(root, x)
   
   if right == None:
     return
   elif right.key == x:
-    (xleft, xright) = split(right, x + 1)
-    right = xright
+    right = right.right
+    if right != None:
+      right.parent = None
     
-  root = merge(left, right)
+  root = merge(root, right)
 
 def search(x): 
   global root
@@ -161,60 +160,37 @@ def search(x):
 def sum(fr, to): 
   global root
 
-  if fr > to:
-    return 0
-  #print("fr:", fr)
-  #print("to:", to)
-  (left, middle) = split(root, fr)
+  (root, middle) = split(root, fr)
+
   if middle == None:
-    #print("middle 1: None")
     return 0
-  #else:
-  #  print("middle 1: ", middle.str())
 
   (middle, right) = split(middle, to + 1)
-  #if right == None:
-    #print("right: None")
-  #else:
-    #print("right: ", right.str())
 
-  if middle == None:
-    ans = 0
-  else:
-    ans = middle.sum
-    #print("middle 2: ", middle.str())
+  ans = 0 if middle == None else middle.sum
 
-  middle = merge(left, middle)
-
-  root = merge(middle, right)
+  root = merge(merge(root, middle), right)
 
   return ans
 
 MODULO = 1000000001
 n = int(stdin.readline())
 last_sum_result = 0
+
 for i in range(n):
   line = stdin.readline().split()
   if line[0] == '+':
     x = int(line[1])
-    #print("Command: ", "+ " + line[1] + " ===> + " + str((x + last_sum_result) % MODULO))
     insert((x + last_sum_result) % MODULO)
-    #print("root ", "None" if root == None else root.str())
   elif line[0] == '-':
     x = int(line[1])
-    #print("Command: ", "- " + line[1] + " ===> - " + str((x + last_sum_result) % MODULO))
     erase((x + last_sum_result) % MODULO)
-    #print("root ", "None" if root == None else root.str())
   elif line[0] == '?':
     x = int(line[1])
-    #print("Command: ", "? " + line[1] + " ===> ? " + str((x + last_sum_result) % MODULO))
     print('Found' if search((x + last_sum_result) % MODULO) else 'Not found')
-    #print("root ", "None" if root == None else root.str())
   elif line[0] == 's':
     l = int(line[1])
     r = int(line[2])
-    #print("Command: ", "s " + line[1] + " " + line[2] + " ===> s " + str((l + last_sum_result) % MODULO) + " " + str((r + last_sum_result) % MODULO))
     res = sum((l + last_sum_result) % MODULO, (r + last_sum_result) % MODULO)
     print(res)
     last_sum_result = res % MODULO
-    #print("root ", "None" if root == None else root.str())
