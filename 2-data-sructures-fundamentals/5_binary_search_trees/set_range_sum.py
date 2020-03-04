@@ -6,19 +6,17 @@ from sys import stdin
 class Vertex:
 
   def str(self):
-    return "(key, sum, size, left, right) = (" + str(self.key) + "," + str(self.sum) + "," + str(self.size) + "," + \
+    return "(key, sum, left, right) = (" + str(self.key) + "," + str(self.sum) + "," + "," + \
       ("None" if self.left == None else str(self.left.key)) + "," + \
       ("None" if self.right == None else str(self.right.key)) + ")"
 
   def __init__(self, key, sum, left, right, parent):
     (self.key, self.sum, self.left, self.right, self.parent) = (key, sum, left, right, parent)
-    self.size = 1
 
 def update(v):
   if v == None:
     return
   v.sum = v.key + (v.left.sum if v.left != None else 0) + (v.right.sum if v.right != None else 0)
-  v.size = 1 + (v.left.size if v.left != None else 0) + (v.right.size if v.right != None else 0)
   if v.left != None:
     v.left.parent = v
   if v.right != None:
