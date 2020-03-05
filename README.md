@@ -879,133 +879,64 @@
 </details>
 
 <details>
-<summary>Hashing: Direct Addressing</summary>
+<summary>Hashing: Introduction</summary>
 
-- It's the simplest form of hashing
-- It's a data structure that has the capability of mapping records to their corresponding keys using arrays
-- Its records are placed using their key values directly as indexes
-- ![Hash Map](https://www.geeksforgeeks.org/wp-content/uploads/hmap.png)
-- It doesn't use a Hashing Function:
-    -                                   Time Complexity
+- A **Hash Function**:
+    - It's a function that maps a **Universe**, *U*, of keys to a set of integers: 0, 1,..., m − 1
+    - In other words, it's a function such that for any key k from *U* and any integer m > 0, a function **`h(k) : U → {0, 1, . . . , m − 1}`**
+    - A hash **Cardinality**:
+        - It's m
+        - It's the # of different values of the hash function
+        - It's also the size of the table where keys ki will be stored
+    - A **Collision** 
+        - It happens when `h(o1) = h(o2)` and `o1 != o2`
+- **Direct Addressing**:
+    - It's the simplest form of hashing
+    - It's a data structure that has the capability of mapping records to their corresponding keys using arrays
+    - Its records are placed using their key values directly as indexes
+    - ![Hash Map](https://www.geeksforgeeks.org/wp-content/uploads/hmap.png)
+    - It doesn't use a Hashing Function:
+        -                                   Time Complexity
                      GetDate(key):              O(1)
                 Insert(key, data):              O(1)
                       Delete(key):              O(1)
-    -                                   Space Complexity
-                Direct Addressing Table:        O(key maximum value) even if key maximum value <<< actual size   
-- Limitations:
-    - It requires to know the maximum key value of the direct addressing table
-    - It's practically useful only if the key maximum value is very less
-    - It causes a waste of memory space if there is a significant difference between the key maximum value and records #
-- E.g., Phone Book:
-    - Problem: Retrieving a name by phone number
-    - Key: Phone number
-    - Data: Name
-    - Local phone #: 10 digits
-    - Maximum key value: 999-999-9999 = 10^10
-    - It requires to store the phone book as an array of size 10^10
-        - Each cell store a phone number as a long data type: 8 bytes + a name of 12 size long (12 bytes): 20 bytes
-        - The size of the array will be then: 20 * 10^10 = 2 * 10^11 = 2 * 2^36.541209044 = 2^30 * 2^8.541209044 = 373 GB
-        - It requires 373 GB of memory!
-    - What about international #: 15 digits
-        - It would require a huge array size
-        - It would take 7 PB to store one phone book
-- For more details:
-    - UC San Diego Course:[Introduction to Hashing](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_1_hashing_intro.pdf)
-    - Geeks for Geeks: [Direct Address Table](https://www.geeksforgeeks.org/direct-address-table/)
-
-</details>
-
-<details>
-<summary>Hashing: Hash Function</summary>
-
-- A **Hash Function**:
-    - It's a function defined as follow: for any set of objects S and any integer m > 0, a function h : S → {0, 1, . . . , m − 1}
-    - In other words, it's a function that maps a set of objects S to a set of integers: 0, 1,..., m − 1
-    - A hash **Cardinality** is the # of different values of the hash function (it's m)
-    - A **Collision** happens when h(o1) = h(o2) and o1 != o2
+        -                                   Space Complexity
+                Direct Addressing Table:        O(|U|) even if |U| <<< actual size
+    - Limitations:
+        - It requires to know the maximum key value (*|U|*) of the direct addressing table
+        - It's practically useful only if the key maximum value is very less
+        - It causes a waste of memory space if there is a significant difference between the key maximum value and records #
+    - E.g., Phone Book:
+        - Problem: Retrieving a name by phone number
+        - Key: Phone number
+        - Data: Name
+        - Local phone #: 10 digits
+        - Maximum key value: 999-999-9999 = 10^10
+        - It requires to store the phone book as an array of size 10^10
+            - Each cell store a phone number as a long data type: 8 bytes + a name of 12 size long (12 bytes): 20 bytes
+            - The size of the array will be then: 20 * 10^10 = 2 * 10^11 = 2 * 2^36.541209044 = 2^30 * 2^8.541209044 = 373 GB
+            - It requires 373 GB of memory!
+        - What about international #: 15 digits
+            - It would require a huge array size
+            - It would take 7 PB to store one phone book
 - **Chaining**:
     - It's an implementation technique used to solve collisions issue
     - It's done by storing all pairs objects whose h(object) is equal in a **doubly-linked** list of pairs (object, value)
-    - Geeks for Geeks: [Hashing: Chaining](https://www.geeksforgeeks.org/hashing-set-2-separate-chaining/)
 - **Open Addressing**:
     - It's an implementation technique used to solve collisions issue
-    - Geeks for Geeks: [Hashing: Open Addressing](https://www.geeksforgeeks.org/hashing-set-3-open-addressing/)
 - For more details:
+    - UC San Diego Course:[Introduction to Hashing](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_1_hashing_intro.pdf)
     - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
-    - Geeks for Geeks: [Address Calculation Sort using Hashing](https://www.geeksforgeeks.org/address-calculation-sort-using-hashing/)
     - Geeks for Geeks: [Hashing: Introduction](https://www.geeksforgeeks.org/hashing-set-1-introduction/)
+    - Geeks for Geeks: [Direct Address Table](https://www.geeksforgeeks.org/direct-address-table/)
+    - Geeks for Geeks: [Hashing: Chaining](https://www.geeksforgeeks.org/hashing-set-2-separate-chaining/)
+    - Geeks for Geeks: [Hashing: Open Addressing](https://www.geeksforgeeks.org/hashing-set-3-open-addressing/)
+    - Geeks for Geeks: [Address Calculation Sort using Hashing](https://www.geeksforgeeks.org/address-calculation-sort-using-hashing/)
 
 </details>
 
 <details>
-<summary>Hashing: Maps</summary>
-
-- A **Map** from set S of objects to set V of values:
-    - It's a data structure with following methods:
-    -                               Time Complexity     Comment
-                    HasKey(object):  O(c + 1)            Return if object exists in the map   
-                       Get(object):  O(c + 1)            Return object if it exists else null
-                Set(object, value):  O(c + 1)            Update object's value if object exists else insert new pair (object, value)
-                                    Space Complexity
-                                     O(m + n)            Θ(m) (for array of size m) + Θ(n) to store n pairs (object, value) 
-                                     n is the # of elements stored
-                                     c is the length of the longest chain
-                                     If n = 0:  O(c + 1) = O(1)
-                                     If n != 0: O(c + 1) = O(c)
-- E.g., Phone Book:
-    - Problem: Retrieving a name by phone number
-    - Hash Function:
-        - Select hash function h of cardinality m, let say, 1 000 (small enough)
-        - For any set of phone # P, a function h : P → {0, 1, . . . , 999}
-        - h(phoneNumber)
-    - A Map:
-        - Create an array Chains of size m, 1000
-        - Chains[i] is a doubly-linked list of pairs (name, phoneNumber)
-        - Pair(name, phoneNumber) goes into a chain at position h(phoneNumber) in the array Chains
-    - To look up name by phone number, go to the chain corresponding to phone number and look through all pairs
-    - To add a contact, create a pair (name, phoneNumber) and insert it into the corresponding chain
-    - To remove a contact, go to the corresponding chain, find the pair (name, phoneNumber) and remove it from the chain
-- Programming Languages:
-    - Python: **dict**
-    - C++: **unordered_map**
-    - Java: **HashMap**
-- For more details:
-    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
-
-</details>
-
-<details>
-<summary>Hashing: Sets</summary>
-
-- It's an implementation of the mathematical concept of a finite Set 
-- It's usually used to test whether elements belong to set of values (see methods below)
-- It could be implemented with a map data structure:
-    - A set is equivalent to map from S to V = {true} 
-    - The chains Pair is: (object, true)
-    - It's costly: true doesn't add any information
-- It's implemented To Store just objects instead of pairs in the chains
-- It's methods:
-    -                               Time Complexity     Comment
-                     Add(object):  O(c + 1)              Add object to the set if it does exit else nothing   
-                  Remove(object):  O(c + 1)              Remove object from the set if it does exist else nothing
-                    Find(object):  O(c + 1)              Return True if object does exist in the set else False
-                                    Space Complexity
-                                     O(m + n)            Θ(m) (for array of size m) + Θ(n) to store n objects 
-                                     n is the # of objected stored in the set
-                                     c is the length of the longest chain in the set
-                                     If n = 0:  O(c + 1) = O(1)
-                                     If n != 0: O(c + 1) = O(c)
-- Programming Languages:
-    - Python: **set**
-    - C++: **unordered_set**
-    - Java: **HashSet**
-- For more details:
-    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
-
-</details>
-
-<details>
-<summary>Hashing: How to come up with a Good Hash Function</summary>
+<summary>Hashing: Universal Family</summary>
 
 - The goal is to come up with a good hash function so that:
     - The space is optimized: The hash function cardinality, m, is small
@@ -1047,59 +978,40 @@
     - It's a universal family for the set of integers between 0 and p − 1
     - **Collision Probability**:
         - if for any 2 keys x, y ∈ U, x != y: ***Pr[h(x) = h(y)] ≤ 1 / m***
-- **Polynomial Hashing** for **strings**:
-    - It convert all its character S[i] to integer:
-        - It uses ASCII, Unicode
-        - It uses all the characters in the hash function because otherwise there will be many collisions
-        - E.g., if S[0] is not used, then h(“aa”) = h(“ba”) = ··· = h(“za”)
-    - It chooses big prime number p
-    - It uses Polynomial Hashing:
-    -                             |S|
-                Pp = { h(x,p,S) =  ∑ S[i] * x^i mod p }
-                                 i = 0
-                p a fixed prime, |S| the length of the string S and 1 ≤ x ≤ p − 1
-    -           PolyHash(S, p, x)
-                    hash = 0
-                    for i from |S| − 1 down to 0:
-                        hash = (hash * x + S[i]) mod p
-                    return hash
+- For more details:
+    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
-                E.g. |S| = 3
+</details>
+
+<details>
+<summary>Hashing: Polynomial Hashing for string</summary>
+
+- It convert all its character S[i] to integer:
+    - It uses ASCII, Unicode
+    - It uses all the characters in the hash function because otherwise there will be many collisions
+    - E.g., if S[0] is not used, then h(“aa”) = h(“ba”) = ··· = h(“za”)
+- It chooses big prime number p
+- It uses Polynomial Hashing:
+-                             |S|
+            Pp = { h(x,p,S) =  ∑ S[i] * x^i mod p }
+                                i = 0
+            p a fixed prime, |S| the length of the string S and 1 ≤ x ≤ p − 1
+-           PolyHash(S, p, x)
                 hash = 0
-                hash = S[2] mod p
-                hash = S[1] + S[2] * x mod p
-                hash = S[0] + S[1] * x + S[2] * x^2 mod p
-    - **Collision Probability**:
-        - For any 2 different strings s1 and s2 of length at most L + 1, 
-        - if we choose h from *Pp* at random (by selecting a random x ∈ [1, p − 1]), 
-        - The probability of collision: **Pr[h(s1) = h(s2)] <= L / *p***
+                for i from |S| − 1 down to 0:
+                    hash = (hash * x + S[i]) mod p
+                return hash
+
+            E.g. |S| = 3
+            hash = 0
+            hash = S[2] mod p
+            hash = S[1] + S[2] * x mod p
+            hash = S[0] + S[1] * x + S[2] * x^2 mod p
+- **Collision Probability**:
+    - For any 2 different strings s1 and s2 of length at most L + 1, 
+    - if we choose h from *Pp* at random (by selecting a random x ∈ [1, p − 1]), 
+    - The probability of collision: **Pr[h(s1) = h(s2)] <= L / *p***
 - Question: How to choose p so that O(mod p) = O(1)
-- E.g., Phone Book 1:
-    - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
-    - The following peration must be fast: Determine who is calling given their phone number
-    - Solution: To implement a map (phone # → name)
-    - Parameters: n contacts stored; m, cardinality of the hash function and hash table size; c, length of the longest chain
-    - Θ(n + m) memory is used
-    - Let take m = 1,000 (small enough)
-    - 1st solution: hash function take 1st 3 digits:
-        - E.g. h(604-999-9999) = 604
-        - Problem: area code
-    - 2nd solution: hash function take last 3 digits:
-        - E.g. h(604-999-9999) = 999
-        - Problem: Problem if many phone numbers end with three zeros
-    - 3rd solution: Hash function: random number between 0 and 999
-        - Uniform distribution of hash values
-        - The keys will be eveny distributed among the cells
-        - Problem: it generated different value when hash function is called again — we won’t be able to find anything!
-    - 4th solution: could we come up with a universal family for integers up to 10^7?
-        - For a = 34, b = 2, so H(p,a,b, x) = [(34 x + 2) mod p] mod m
-        - For x = 1 482 567 corresponding to the phone number 148-25-67 and p = 10 000 019 (p must be > n, 10^7)
-        - H = 40,7185 mod 1,000 = 185
-        - General Case:
-            - Define maximum length L of a phone number
-            - Choose prime number p > 10^L
-            - Choose hash table size m
-            - Choose random hash function from universal family Hp (choose random a ∈ [1, p − 1] and b ∈ [0, p − 1])
 - E.g., Phone Book 2:
     - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
     - The following operation must be fast: Call person by name
@@ -1116,14 +1028,85 @@
 </details>
 
 <details>
-<summary>Hashing: Hash table</summary>
+<summary>Hashing: Maps</summary>
+
+- It's a data structure that maps **keys** from set S of objects to set V of **values**:
+    - It's implemented with chaining technique
+    - `chain (key, value) ← Array[hash(key)]`
+    - *n* is the number of pairs (key, value) to store in a map
+    - *m* is the map size
+    - *c* is the length of the longest chain in the map
+- It has the following methods:
+    -                            Time Complexity     Comment
+                    HasKey(key):  O(c + 1) = O(1)     Return if object exists in the map   
+                       Get(key):  O(c + 1) = O(1)     Return object if it exists else null
+                Set(key, value):  O(c + 1) = O(1)     Update object's value if object exists else insert new pair (object, value)
+                                                         If n = 0:  O(c + 1) = O(1)
+                                                         If n != 0: O(c + 1) = O(c)
+                                                         Maps hash function is universal: c = n/m = 
+                                 Space Complexity
+                                  Θ(m + n)            Θ(m) (for array of size m) + Θ(n) to store n pairs (object, value)                 
+- E.g., Phone Book:
+    - Problem: Retrieving a name by phone number
+    - Hash Function:
+        - Select hash function h of cardinality m, let say, 1 000 (small enough)
+        - For any set of phone # P, a function h : P → {0, 1, . . . , 999}
+        - h(phoneNumber)
+    - A Map:
+        - Create an array Chains of size m, 1000
+        - Chains[i] is a doubly-linked list of pairs (name, phoneNumber)
+        - Pair(name, phoneNumber) goes into a chain at position h(phoneNumber) in the array Chains
+    - To look up name by phone number, go to the chain corresponding to phone number and look through all pairs
+    - To add a contact, create a pair (name, phoneNumber) and insert it into the corresponding chain
+    - To remove a contact, go to the corresponding chain, find the pair (name, phoneNumber) and remove it from the chain
+- Programming Languages:
+    - Python: **dict**
+    - C++: **unordered_map**
+    - Java: **HashMap**
+- For more details:
+    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+
+</details>
+
+<details>
+<summary>Hashing: Sets</summary>
+
+- It's a data structure that implements the mathematical concept of a **finite Set**:
+    - It's usually used to test whether elements belong to set of values (see methods below)
+    - It's implemented with chaining technique:
+        - It could be implemented with a map from S to V = {true}; the chain pair: (object, true); It's costly: "true" value doesn't add any information
+        - It's actually implemented To store just objects instead of pairs in the chains
+    - *n* is the number of pairs (key, value) to store in a map
+    - *m* is the map size
+    - *c* is the length of the longest chain in the map
+- It has the following methods:
+    -                            Time Complexity     Comment
+                     Add(object): O(c + 1) = O(1)      Add object to the set if it does exit else nothing   
+                  Remove(object): O(c + 1) = O(1)      Remove object from the set if it does exist else nothing
+                    Find(object): O(c + 1) = O(1)      Return True if object does exist in the set else False
+                                                         If n = 0:  O(c + 1) = O(1)
+                                                         If n != 0: O(c + 1) = O(c)
+                                                         Sets hash function is universal: c = n/m = 
+                                 Space Complexity
+                                  O(m + n)             Θ(m) (for array of size m) + Θ(n) to store n objects        
+- Programming Languages:
+    - Python: **set**
+    - C++: **unordered_set**
+    - Java: **HashSet**
+- For more details:
+    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+
+</details>
+
+<details>
+<summary>Hashing: Dynamic Hash table</summary>
 
 - **Hash Table**: is an implementation of a Set or a Map using hashing
 - **Dynamic Hash table**:
     - It's good when What the number of keys n is unknown in advance
     - It resizes the hash table when α becomes too large (same idea as dynamic arrays)
     - It chooses new hash function and rehash all the objects
-    - Let's choose to Keep the load factor below 0.9 (α <= 0.9);
+    - Let's choose to Keep the load factor below 0.9 (`α <= 0.9`);
         -       Rehash(T):
                     loadFactor = T.numberOfKeys / T.size
                     if loadFactor > 0.9:
