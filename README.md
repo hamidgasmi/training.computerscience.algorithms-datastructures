@@ -374,13 +374,13 @@
 - It's an alternative for Greedy Algorithms: 
     - When there is not a safe choice
     - E.g.1, Money change problem MinCoin(40 cents) in US:
-        - US coins <= 40c: 1c, 5c, 10c, 25c
-        - A Greedy choice: take the max coin such that coin <= 40c
+        - US coins <<< 40c: 1c, 5c, 10c, 25c
+        - A Greedy choice: take the max coin such that coin <<< 40c
         - Result: 3 coins: 40c = 1 * 25c + 1 * 10c + 1 * 5c
         - Here this choice is safe
     - E.g.2, Money change problem MinCoin(40 cents) in Tanzania:
-        - Tanzanian coins <= 40c: 1c, 5c, 10c, 20c, 25c
-        - A greedy choice: take the max coin such that the coin <= 40c
+        - Tanzanian coins <<< 40c: 1c, 5c, 10c, 20c, 25c
+        - A greedy choice: take the max coin such that the coin <<< 40c
         - Result: 3 coins: 40c = 1 * 25c + 1 * 10c + 1 * 5c
         - Here this choice isn't safe: 40c = 2 * 20c
 - Steps:
@@ -697,8 +697,8 @@
     - C++:
     - Java:
 - For more details:
-    - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
-    - UC San Diego Course:[Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
+    - UC San Diego Course: [Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
+    - UC San Diego Course: [Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
 
 </details>
 
@@ -770,8 +770,8 @@
             - It takes a linear time
             - if n = 1024 = 2^10 then k = 2^10 / log 2^10 = 1024 / 10 = 102
 - For more details:
-    - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
-    - UC San Diego Course:[Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
+    - UC San Diego Course: [Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
+    - UC San Diego Course: [Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
 
 </details>
 
@@ -872,8 +872,8 @@
     - [Tiptoe through the tulips](https://github.com/hamidgasmi/algorithms-datastructures/issues/39)
     - [Ada Farm](https://github.com/hamidgasmi/algorithms-datastructures/issues/34)
 - For more details:
-    - UC San Diego Course:[Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/tree/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets)
-    - UC San Diego Course:[Efficient Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_4_disjoint_sets_efficient.pdf)
+    - UC San Diego Course: [Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/tree/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets)
+    - UC San Diego Course: [Efficient Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_4_disjoint_sets_efficient.pdf)
     - [Tutorial](https://www.topcoder.com/community/competitive-programming/tutorials/disjoint-set-data-structures/)
 
 </details>
@@ -885,8 +885,8 @@
     - It's a function that maps a set of keys from *U* to a set of integers: *0, 1, ..., m − 1*
     - In other words, it's a function such that for any key *k* from *U* and any integer *m > 0*, a function `h(k) : U → {0, 1, ... , m − 1}`
     - A key **Universe**, ***U***
-        - It's the set *U* of keys
-        - `n = |U|` is the universe size
+        - It's the set *U* of all possible keys
+        - `|U|` is the universe size
     - A hash **Cardinality**:
         - It's `m`
         - It's the # of different values of the hash function
@@ -928,12 +928,25 @@
         - Each value of the hash function maps a **Slot** in the array
         - Each element of the array is a **doubly-linked** list of pairs (key, value)
         - In case of a collision for 2 different keys, their pairs are stored in a linked list of the corresponding slot
-    - `c` is the length of the longest chain in the array 
+    - `n` is the number of keys stored in the array
+        - `n ≤ |U|`
+    - `c` is the length of the longest chain in the array:
+        - `c ≥ n / m`
+        - The question is how to come up with a hash function so that the space is optimized (m is small) and the running time is efficient (c is small)
+        - Space worst case: `c = n`: all values are stored in the same slot
+        - Space best case: `c = n / m`: keys are evenly distributed among all the array cells
+        - See Universal Familly
+    - **Load Factor**, **α**:
+        - `α = n / m`
+        - If α is too small (`α <<< 1` for example, 0.1), there isn't lot of collisions but the cells of the array are empty: we're wasting space
+        - If α > 1, there is at least 1 collision
+        - If α is too big, there are a lot of collisions, *c* is too long and the operations will be too slow
+    - ![Hash Chaining](https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2015/07/hashChaining1.png)
 - **Open Addressing**:
     - It's an implementation technique used to solve collisions issue
 - For more details:
-    - UC San Diego Course:[Introduction to Hashing](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_1_hashing_intro.pdf)
-    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Introduction to Hashing](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_1_hashing_intro.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
     - Geeks for Geeks: [Hashing: Introduction](https://www.geeksforgeeks.org/hashing-set-1-introduction/)
     - Geeks for Geeks: [Direct Address Table](https://www.geeksforgeeks.org/direct-address-table/)
     - Geeks for Geeks: [Hashing: Chaining](https://www.geeksforgeeks.org/hashing-set-2-separate-chaining/)
@@ -945,40 +958,28 @@
 <details>
 <summary>Hashing: Universal Family</summary>
 
-- The goal is to come up with a good hash function so that:
-    - The space is optimized: The hash function cardinality, m, is small
-    - The running time is efficient: the longest chain length, c, is small
-    - We can't make c and m small at the same time: c >= n / m
-    - **Worst Case**: c = n
-- A Good Hash Function must be:
-    - Deterministic
-    - Fast to compute
-    - Distributes keys well into different cells
-    - Few collisions
-- **Universal Familly**:
-    - Let U be the universe — the set of all possible keys 
-    - Let H be a set of hash functions H = {h : U → {0, 1, 2, . . . , m − 1}} 
-    - H is called a **Universal Family** if for any 2 keys x, y ∈ U, x != y the **probability of collision Pr[h(x) = h(y)] ≤ 1/m**
-    - It means that a collision h(x) = h(y) for any fixed pair of different keys x and y happens for no more than 1/m of all hash functions h ∈ H
-- How Randomization Works:
-    - h(x) = random({0, 1, 2, . . . , m − 1})
-    - It gives probability of collision exactly 1/m
-    - It's not deterministic — can’t use it
+- It's a collection of hash functions such that:
+    - `H = { h : U → {0, 1, 2, ... , m − 1} }`
+    - For any 2 keys `x, y ∈ U, x != y` the **probability of collision** `Pr[h(x) = h(y)] ≤ 1 / m`
+    - It means that a collision for any fixed pair of different keys happens for no more than **1 / m** of all hash functions h ∈ H
     - All hash functions in H are deterministic
-    - Select a random function h from H
-    - Fixed h is used throughout the algorithm
-- **Load Factor α**:
-    - It's The ratio α = n/m between number of objects n stored in the hash table and the size of the hash table
-    - If h is chosen randomly from a universal family, the average length of the longest chain c is O(1 + α)
-    - If h is from universal family, operations with hash table run on average in time O(1 + α)
+- How Randomization works:
+    - To Select a random function h from the family H: 
+        - It the only place where we use randomization
+        - This randomly chosen function is deterministic  
+    - To use this **Fixed** *h* function throughout the algorithm: 
+        - to put keys into the hash table,
+        - to search for keys in the hash table, and 
+        - to remove the keys from the hash table
+    - Then, the average length of the longest chain `c = O(1 + α)`
+    - Then, the average running time of hash table operations is `O(1 + α)`
 - Choosing Hash Table Size:
-    - Control amount of memory used with m
     - Ideally, load factor **0.5 < α < 1**:
-        - if α is very small (α <= 0.5), we can be sure that a lot of the cells of the hash table are empty (at least a half)
+        - if α is very small (α ≤ 0.5), we can be sure that a lot of the cells of the hash table are empty (at least a half)
         - If α > 1, we can be sure that there is at least one collision
         - If α is big, we can be sure that there are a lot of collisions, the longest chain length is too long and the operations will be too slow
-    - Use O(m) = O(n/α) = O(n) memory to store n keys
-    - Operations run in time O(1 + α) = O(1) on average
+    - To Use **O(m) = O(n/α) = O(n)** memory to store n keys
+    - Operations will run in time O(1 + α) = **O(1) on average**
 - **Universal Family** for **integer**:
     -               H(p, a, b, x) = [(a * x + b) mod p] mod m for all a, b 
                     p is a fixed prime > |U|, 1 ≤ a ≤ p − 1, 0 ≤ b ≤ p − 1 
@@ -986,7 +987,24 @@
     - **Collision Probability**:
         - if for any 2 keys x, y ∈ U, x != y: ***Pr[h(x) = h(y)] ≤ 1 / m***
 - For more details:
-    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+
+</details>
+
+<details>
+<summary>Hashing: Universal Family for integers</summary>
+
+- It's defined as follow:
+-               Hab(x) = [(a * x + b) mod p] mod m for all a, b 
+                         p is a fixed prime > |U|, 
+                         1 ≤ a ≤ p − 1, 
+                         0 ≤ b ≤ p − 1 
+- H is a universal family for the set of integers between 0 and p − 1:
+    - `|H| = p * (p - 1)`: there're p possible values for b and (p - 1) possible values for a
+- **Collision Probability**:
+    - if for any 2 keys x, y ∈ U, x != y: `Pr[h(x) = h(y)] ≤ 1 / m`
+- For more details:
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1001,7 +1019,7 @@
 - It uses Polynomial Hashing:
 -                             |S|
             Pp = { h(x,p,S) =  ∑ S[i] * x^i mod p }
-                                i = 0
+                             i = 0
             p a fixed prime, |S| the length of the string S and 1 ≤ x ≤ p − 1
 -           PolyHash(S, p, x)
                 hash = 0
@@ -1017,7 +1035,7 @@
 - **Collision Probability**:
     - For any 2 different strings s1 and s2 of length at most L + 1, 
     - if we choose h from *Pp* at random (by selecting a random x ∈ [1, p − 1]), 
-    - The probability of collision: **Pr[h(s1) = h(s2)] <= L / *p***
+    - The probability of collision: **Pr[h(s1) = h(s2)] ≤ L / *p***
 - Question: How to choose p so that O(mod p) = O(1)
 - E.g., Phone Book 2:
     - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
@@ -1030,7 +1048,7 @@
         - It uses x = 31
         - It avoids the (mod *p*) operator for technical reasons
 - For more details:
-    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1041,15 +1059,15 @@
     - It's implemented with chaining technique
     - `chain (key, value) ← Array[hash(key)]`
 - It has the following methods:
-    -                            Time Complexity     Comment
-                    HasKey(key):  O(c + 1) = O(1)     Return if object exists in the map   
-                       Get(key):  O(c + 1) = O(1)     Return object if it exists else null
-                Set(key, value):  O(c + 1) = O(1)     Update object's value if object exists else insert new pair (object, value)
-                                                         If n = 0:  O(c + 1) = O(1)
-                                                         If n != 0: O(c + 1) = O(c)
-                                                         Maps hash function is universal: c = n/m = 
+    -                            Time Complexity       Comment
+                    HasKey(key):  Θ(c + 1) = O(1 + α)   Return if object exists in the map   
+                       Get(key):  Θ(c + 1) = O(1 + α)   Return object if it exists else null
+                Set(key, value):  Θ(c + 1) = O(1 + α)   Update object's value if object exists else insert new pair (object, value)
+                                                               If n = 0:  Θ(c + 1) = Θ(1)
+                                                               If n != 0: Θ(c + 1) = Θ(c)
+                                                               Maps hash function is universal: c = n/m = α
                                  Space Complexity
-                                  Θ(m + n)            Θ(m) (for array of size m) + Θ(n) to store n pairs (object, value)                 
+                                  Θ(m + n)              Array size (m) + n pairs (object, value)                 
 - E.g., Phone Book:
     - Problem: Retrieving a name by phone number
     - Hash Function:
@@ -1068,7 +1086,7 @@
     - C++: **unordered_map**
     - Java: **HashMap**
 - For more details:
-    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1081,21 +1099,21 @@
         - It could be implemented with a map from S to V = {true}; the chain pair: (object, true); It's costly: "true" value doesn't add any information
         - It's actually implemented To store just objects instead of pairs in the chains
 - It has the following methods:
-    -                            Time Complexity     Comment
-                     Add(object): O(c + 1) = O(1)      Add object to the set if it does exit else nothing   
-                  Remove(object): O(c + 1) = O(1)      Remove object from the set if it does exist else nothing
-                    Find(object): O(c + 1) = O(1)      Return True if object does exist in the set else False
-                                                         If n = 0:  O(c + 1) = O(1)
-                                                         If n != 0: O(c + 1) = O(c)
-                                                         Sets hash function is universal: c = n/m = 
+    -                            Time Complexity       Comment
+                     Add(object): Θ(c + 1) = O(1 + α)   Add object to the set if it does exit else nothing   
+                  Remove(object): Θ(c + 1) = O(1 + α)   Remove object from the set if it does exist else nothing
+                    Find(object): Θ(c + 1) = O(1 + α)   Return True if object does exist in the set else False
+                                                               If n = 0:  Θ(c + 1) = Θ(1)
+                                                               If n != 0: Θ(c + 1) = Θ(c)
+                                                               Sets hash function is universal: c = n/m = α 
                                  Space Complexity
-                                  O(m + n)             Θ(m) (for array of size m) + Θ(n) to store n objects        
+                                  Θ(m + n)              Array size (m) + n objects        
 - Programming Languages:
     - Python: **set**
     - C++: **unordered_set**
     - Java: **HashSet**
 - For more details:
-    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1104,10 +1122,10 @@
 
 - **Hash Table**: is an implementation of a Set or a Map using hashing
 - **Dynamic Hash table**:
-    - It's good when What the number of keys n is unknown in advance
+    - It's good when the number of keys n is unknown in advance
     - It resizes the hash table when α becomes too large (same idea as dynamic arrays)
     - It chooses new hash function and rehash all the objects
-    - Let's choose to Keep the load factor below 0.9 (`α <= 0.9`);
+    - Let's choose to Keep the load factor below 0.9 (`α ≤ 0.9`);
         -       Rehash(T):
                     loadFactor = T.numberOfKeys / T.size
                     if loadFactor > 0.9:
@@ -1121,7 +1139,7 @@
         - Single rehashing takes **O(n)** time, 
         - Amortized running time of each operation with hash table is: **O(1)** on average, because rehashing will be rare
 - For more details:
-    - UC San Diego Course:[Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1154,8 +1172,8 @@
     - Insertion and deletion operations can destroy balance
     - Insertion and deletion operations need to rebalance
 - For more details:
-    - UC San Diego Course:[BST Basic Operations](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_3_binary_search_trees_basic_operations.pdf)
-    - UC San Diego Course:[Balance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_4_binary_search_trees_balance.pdf)
+    - UC San Diego Course: [BST Basic Operations](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_3_binary_search_trees_basic_operations.pdf)
+    - UC San Diego Course: [Balance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_4_binary_search_trees_balance.pdf)
 
 </details>
 
@@ -1270,7 +1288,7 @@
                   T3   T4 (+) T5  T6   Delete(z)   T3'  T4' (+) T5   T6   Merge      R1'(h-1)  R2(h)
                   / \                 - - - - - ->                      - - - - ->   /  \       /  \
                 T1  ...                Rebalance                                    T3'  T4'    T5   T6
-                    / \          h-1 <= R1'.height <= h                            AVL property maintained
+                    / \          h-1 ≤ R1'.height ≤ h                            AVL property maintained
                    T2  z
         -       Cas 2: R1.Height (h1) < R2.Height (h2):
                     R1          R2                           R1(h1)       R2'(h1)
@@ -1290,9 +1308,9 @@
 - Use Cases:
     - 
 - For more details:
-    - UC San Diego Course:[AVL tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_1_binary_search_trees_avl_trees.pdf)
-    - UC San Diego Course:[AVL Tree implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_2_binary_search_trees_avl_tree_implementation.pdf)
-    - UC San Diego Course:[Split and Merge](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_3_binary_search_trees_split_merge.pdf) operations
+    - UC San Diego Course: [AVL tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_1_binary_search_trees_avl_trees.pdf)
+    - UC San Diego Course: [AVL Tree implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_2_binary_search_trees_avl_tree_implementation.pdf)
+    - UC San Diego Course: [Split and Merge](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_3_binary_search_trees_split_merge.pdf) operations
     - Geeks for Geeks: [AVL tree insertion](https://www.geeksforgeeks.org/avl-tree-set-1-insertion/)
     - Geeks for Geeks: [AVL tree deletion](https://www.geeksforgeeks.org/avl-tree-set-2-deletion/)
 
@@ -1303,9 +1321,9 @@
 
 - 
 - For more details:
-    - UC San Diego Course:[Splay Trees Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_1_binary_search_trees_splay_trees_introduction.pdf)
-    - UC San Diego Course:[Splay Tree Implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_2_binary_search_trees_splay_tree_implementation.pdf)
-    - UC San Diego Course:[Splay Tree Analysis](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_3_binary_search_trees_splay_tree_analysis.pdf)
+    - UC San Diego Course: [Splay Trees Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_1_binary_search_trees_splay_trees_introduction.pdf)
+    - UC San Diego Course: [Splay Tree Implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_2_binary_search_trees_splay_tree_implementation.pdf)
+    - UC San Diego Course: [Splay Tree Analysis](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_3_binary_search_trees_splay_tree_analysis.pdf)
 
 </details>
 
