@@ -882,14 +882,14 @@
 <summary>Hashing: Introduction</summary>
 
 - A **Hash Function**:
-    - It's a function that maps a **Universe**, *U*, of keys to a set of integers: 0, 1,..., m − 1
-    - In other words, it's a function such that for any key k from *U* and any integer m > 0, a function **`h(k) : U → {0, 1, . . . , m − 1}`**
+    - It's a function that maps a **Universe**, `U`, of keys to a set of integers: `0, 1, ... , m − 1`
+    - In other words, it's a function such that for any key `k` from `U` and any integer `m > 0`, a function `h(k) : U → {0, 1, ... , m − 1}`
     - A hash **Cardinality**:
-        - It's m
+        - It's `m`
         - It's the # of different values of the hash function
-        - It's also the size of the table where keys ki will be stored
+        - It's also the size of the table where keys will be stored
     - A **Collision** 
-        - It happens when `h(o1) = h(o2)` and `o1 != o2`
+        - It happens when `h(k1) = h(k2)` and `k1 != k2`
 - **Direct Addressing**:
     - It's the simplest form of hashing
     - It's a data structure that has the capability of mapping records to their corresponding keys using arrays
