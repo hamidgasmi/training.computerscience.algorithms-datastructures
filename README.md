@@ -1035,12 +1035,16 @@
     - It uses ASCII, Unicode
     - It uses all the characters in the hash function because otherwise there will be many collisions
     - E.g., if S[0] is not used, then h(“aa”) = h(“ba”) = ··· = h(“za”)
-- It chooses big prime number p
 - It uses Polynomial Hashing:
--                             |S|
-            Pp = { h(x,p,S) =  ∑ S[i] * x^i mod p }
-                             i = 0
-            p a fixed prime, |S| the length of the string S and 1 ≤ x ≤ p − 1
+-                         |S|
+            Hp = { h(S) =  ∑ S[i] * x^i mod p } for all x
+                         i = 0
+                    p a fixed prime, 
+                    |S| the length of the string S 
+                    x (the multiplier) is fixed: 1 ≤ x ≤ p − 1
+- H is a universal family:
+    - `|Hp| = p - 1`: 
+    - There're (p - 1) possible values for x
 -           PolyHash(S, p, x)
                 hash = 0
                 for i from |S| − 1 down to 0:
@@ -1055,7 +1059,7 @@
 - **Collision Probability**:
     - For any 2 different strings s1 and s2 of length at most L + 1, 
     - if we choose h from *Pp* at random (by selecting a random x ∈ [1, p − 1]), 
-    - The probability of collision: **Pr[h(s1) = h(s2)] ≤ L / *p***
+    - The probability of collision: **Pr[h(s1) = h(s2)] ≤ L / p**
 - Question: How to choose p so that O(mod p) = O(1)
 - E.g., Phone Book 2:
     - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
