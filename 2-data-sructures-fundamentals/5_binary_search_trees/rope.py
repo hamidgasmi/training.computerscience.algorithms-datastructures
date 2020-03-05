@@ -174,4 +174,4 @@ if __name__ == '__main__':
     for _ in range(q):
         i, j, k = map(int, sys.stdin.readline().strip().split())
         rope.process(i, j, k)
-        print(rope.result())
+    print(rope.result())
