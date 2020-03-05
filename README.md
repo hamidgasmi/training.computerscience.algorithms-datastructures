@@ -882,8 +882,11 @@
 <summary>Hashing: Introduction</summary>
 
 - A **Hash Function**:
-    - It's a function that maps a **Universe**, `U`, of keys to a set of integers: `0, 1, ... , m − 1`
-    - In other words, it's a function such that for any key `k` from `U` and any integer `m > 0`, a function `h(k) : U → {0, 1, ... , m − 1}`
+    - It's a function that maps a set of keys from *U* to a set of integers: *0, 1, ..., m − 1*
+    - In other words, it's a function such that for any key *k* from *U* and any integer *m > 0*, a function `h(k) : U → {0, 1, ... , m − 1}`
+    - A key **Universe**, ***U***
+        - It's the set *U* of keys
+        - `n = |U|` is the universe size
     - A hash **Cardinality**:
         - It's `m`
         - It's the # of different values of the hash function
@@ -920,8 +923,12 @@
             - It would require a huge array size
             - It would take 7 PB to store one phone book
 - **Chaining**:
-    - It's an implementation technique used to solve collisions issue
-    - It's done by storing all pairs objects whose h(object) is equal in a **doubly-linked** list of pairs (object, value)
+    - It's an implementation technique used to solve collision issues:
+        - It uses an array
+        - Each value of the hash function maps a **Slot** in the array
+        - Each element of the array is a **doubly-linked** list of pairs (key, value)
+        - In case of a collision for 2 different keys, their pairs are stored in a linked list of the corresponding slot
+    - `c` is the length of the longest chain in the array 
 - **Open Addressing**:
     - It's an implementation technique used to solve collisions issue
 - For more details:
@@ -1033,9 +1040,6 @@
 - It's a data structure that maps **keys** from set S of objects to set V of **values**:
     - It's implemented with chaining technique
     - `chain (key, value) ← Array[hash(key)]`
-    - *n* is the number of pairs (key, value) to store in a map
-    - *m* is the map size
-    - *c* is the length of the longest chain in the map
 - It has the following methods:
     -                            Time Complexity     Comment
                     HasKey(key):  O(c + 1) = O(1)     Return if object exists in the map   
@@ -1076,9 +1080,6 @@
     - It's implemented with chaining technique:
         - It could be implemented with a map from S to V = {true}; the chain pair: (object, true); It's costly: "true" value doesn't add any information
         - It's actually implemented To store just objects instead of pairs in the chains
-    - *n* is the number of pairs (key, value) to store in a map
-    - *m* is the map size
-    - *c* is the length of the longest chain in the map
 - It has the following methods:
     -                            Time Complexity     Comment
                      Add(object): O(c + 1) = O(1)      Add object to the set if it does exit else nothing   
