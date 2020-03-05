@@ -928,8 +928,7 @@
         - Each value of the hash function maps a **Slot** in the array
         - Each element of the array is a **doubly-linked** list of pairs (key, value)
         - In case of a collision for 2 different keys, their pairs are stored in a linked list of the corresponding slot
-    - `n` is the number of keys stored in the array
-        - `n ≤ |U|`
+    - `n` is the number of keys stored in the array: `n ≤ |U|`
     - `c` is the length of the longest chain in the array:
         - `c ≥ n / m`
         - The question is how to come up with a hash function so that the space is optimized (m is small) and the running time is efficient (c is small)
@@ -938,7 +937,7 @@
         - See Universal Familly
     - **Load Factor**, **α**:
         - `α = n / m`
-        - If α is too small (`α <<< 1` for example, 0.1), there isn't lot of collisions but the cells of the array are empty: we're wasting space
+        - If α is too small (`α <<< 1`), there isn't lot of collisions but the cells of the array are empty: we're wasting space
         - If α > 1, there is at least 1 collision
         - If α is too big, there are a lot of collisions, *c* is too long and the operations will be too slow
     - ![Hash Chaining](https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2015/07/hashChaining1.png)
@@ -965,7 +964,7 @@
     - All hash functions in H are deterministic
 - How Randomization works:
     - To Select a random function h from the family H: 
-        - It the only place where we use randomization
+        - It's the only place where we use randomization
         - This randomly chosen function is deterministic  
     - To use this **Fixed** *h* function throughout the algorithm: 
         - to put keys into the hash table,
@@ -975,17 +974,36 @@
     - Then, the average running time of hash table operations is `O(1 + α)`
 - Choosing Hash Table Size:
     - Ideally, load factor **0.5 < α < 1**:
-        - if α is very small (α ≤ 0.5), we can be sure that a lot of the cells of the hash table are empty (at least a half)
-        - If α > 1, we can be sure that there is at least one collision
-        - If α is big, we can be sure that there are a lot of collisions, the longest chain length is too long and the operations will be too slow
+        - if α is very small (α ≤ 0.5), a lot of the cells of the hash table are empty (at least a half)
+        - If α > 1, there is at least one collision
+        - If α is too big, there're a lot of collisions, *c* is too long and the hash table operations are too slow
     - To Use **O(m) = O(n/α) = O(n)** memory to store n keys
     - Operations will run in time O(1 + α) = **O(1) on average**
-- **Universal Family** for **integer**:
-    -               H(p, a, b, x) = [(a * x + b) mod p] mod m for all a, b 
-                    p is a fixed prime > |U|, 1 ≤ a ≤ p − 1, 0 ≤ b ≤ p − 1 
-    - It's a universal family for the set of integers between 0 and p − 1
-    - **Collision Probability**:
-        - if for any 2 keys x, y ∈ U, x != y: ***Pr[h(x) = h(y)] ≤ 1 / m***
+- For more details:
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+
+</details>
+
+<details>
+<summary>Hashing: Dynamic Hash table</summary>
+
+- **Dynamic Hash table**:
+    - It's good when the number of keys n is unknown in advance
+    - It resizes the hash table when α becomes too large (same idea as dynamic arrays)
+    - It chooses new hash function and rehash all the objects
+    - Let's choose to Keep the load factor below 0.9 (`α ≤ 0.9`);
+        -       Rehash(T):
+                    loadFactor = T.numberOfKeys / T.size
+                    if loadFactor > 0.9:
+                        Create Tnew of size 2 × T.size
+                        Choose hnew with cardinality Tnew.size
+                        For each object in T:
+                            Insert object in Tnew using hnew
+                            T = Tnew, h = hnew
+        - The result of the rehash method is a new hash table wit an α == 0.5
+        - We should call Rehash after each operation with the hash table
+        - Single rehashing takes **O(n)** time, 
+        - Amortized running time of each operation with hash table is: **O(1)** on average, because rehashing will be rare
 - For more details:
     - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
@@ -995,12 +1013,14 @@
 <summary>Hashing: Universal Family for integers</summary>
 
 - It's defined as follow:
--               Hab(x) = [(a * x + b) mod p] mod m for all a, b 
-                         p is a fixed prime > |U|, 
-                         1 ≤ a ≤ p − 1, 
-                         0 ≤ b ≤ p − 1 
+-       H = { h(x) = [(a * x + b) mod p] mod m } for all a, b 
+              p is a fixed prime > |U|, 
+              1 ≤ a ≤ p − 1, 
+              0 ≤ b ≤ p − 1 
 - H is a universal family for the set of integers between 0 and p − 1:
-    - `|H| = p * (p - 1)`: there're p possible values for b and (p - 1) possible values for a
+    - `|H| = p * (p - 1)`: 
+    - There're (p - 1) possible values for a 
+    - There're p possible values for b
 - **Collision Probability**:
     - if for any 2 keys x, y ∈ U, x != y: `Pr[h(x) = h(y)] ≤ 1 / m`
 - For more details:
@@ -1117,31 +1137,7 @@
 
 </details>
 
-<details>
-<summary>Hashing: Dynamic Hash table</summary>
 
-- **Hash Table**: is an implementation of a Set or a Map using hashing
-- **Dynamic Hash table**:
-    - It's good when the number of keys n is unknown in advance
-    - It resizes the hash table when α becomes too large (same idea as dynamic arrays)
-    - It chooses new hash function and rehash all the objects
-    - Let's choose to Keep the load factor below 0.9 (`α ≤ 0.9`);
-        -       Rehash(T):
-                    loadFactor = T.numberOfKeys / T.size
-                    if loadFactor > 0.9:
-                        Create Tnew of size 2 × T.size
-                        Choose hnew with cardinality Tnew.size
-                        For each object in T:
-                            Insert object in Tnew using hnew
-                            T = Tnew, h = hnew
-        - The result of the rehash method is a new hash table wit an α == 0.5
-        - We should call Rehash after each operation with the hash table
-        - Single rehashing takes **O(n)** time, 
-        - Amortized running time of each operation with hash table is: **O(1)** on average, because rehashing will be rare
-- For more details:
-    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
-
-</details>
 
 <details>
 <summary>Binary Search Tree (BST)</summary>
