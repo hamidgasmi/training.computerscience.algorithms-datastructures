@@ -1013,16 +1013,27 @@
 <summary>Hashing: Universal Family for integers</summary>
 
 - It's defined as follow:
--       H = { h(x) = [(a * x + b) mod p] mod m } for all a, b 
-              p is a fixed prime > |U|, 
-              1 ≤ a ≤ p − 1, 
-              0 ≤ b ≤ p − 1 
+-       Hp = { hab(x) = [(a * x + b) mod p] mod m } for all a, b 
+               p is a fixed prime > |U|, 
+               1 ≤ a ≤ p − 1, 
+               0 ≤ b ≤ p − 1
+- Question: How to choose p so that mod p operation = O(1)
 - H is a universal family for the set of integers between 0 and p − 1:
     - `|H| = p * (p - 1)`: 
     - There're (p - 1) possible values for a 
     - There're p possible values for b
 - **Collision Probability**:
     - if for any 2 keys x, y ∈ U, x != y: `Pr[h(x) = h(y)] ≤ 1 / m`
+- How to choose a hashing function for integers:
+    - Identify the universe size: |U|
+    - Choose a prime number p > |U|
+    - Choose hash table size:
+        - Choose m = O(n)
+        - So that 0.5 < α < 1
+        - See Universal Family description
+    - Choose random hash function from universal family Hp:
+        - Choose random a ∈ [1, p − 1]
+        - Choose random b ∈ [0, p − 1]
 - For more details:
     - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
@@ -1037,13 +1048,13 @@
     - E.g., if S[0] is not used, then h(“aa”) = h(“ba”) = ··· = h(“za”)
 - It uses Polynomial Hashing:
 -                         |S|
-            Hp = { h(S) =  ∑ S[i] * x^i mod p } for all x
+            Pp = { hx(S) =  ∑ S[i] * x^i mod p } for all x
                          i = 0
                     p a fixed prime, 
                     |S| the length of the string S 
                     x (the multiplier) is fixed: 1 ≤ x ≤ p − 1
-- H is a universal family:
-    - `|Hp| = p - 1`: 
+- *Pp* is a universal family:
+    - `|Pp| = p - 1`: 
     - There're (p - 1) possible values for x
 -           PolyHash(S, p, x)
                 hash = 0
@@ -1056,11 +1067,14 @@
             hash = S[2] mod p
             hash = S[1] + S[2] * x mod p
             hash = S[0] + S[1] * x + S[2] * x^2 mod p
-- **Collision Probability**:
-    - For any 2 different strings s1 and s2 of length at most L + 1, 
-    - if we choose h from *Pp* at random (by selecting a random x ∈ [1, p − 1]), 
-    - The probability of collision: **Pr[h(s1) = h(s2)] ≤ L / p**
-- Question: How to choose p so that O(mod p) = O(1)
+- How to store strings in a hash table:
+    - 1st, apply random *hx* from *Pp*
+    - 2nd, hash the resulting value again using universal family for integers, *hab* from *Hp*
+    - `hm(S) = hab(hx(S)) mod m`
+    - **Collision Probability**:
+        - For any 2 different strings s1 and s2 of length at most L + 1, 
+        - if we choose h from *Pp* at random (by selecting a random x ∈ [1, p − 1]), 
+        - The probability of collision: **Pr[h(s1) = h(s2)] ≤ L / p**
 - E.g., Phone Book 2:
     - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
     - The following operation must be fast: Call person by name
