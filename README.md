@@ -1047,9 +1047,9 @@
     - It uses all the characters in the hash function because otherwise there will be many collisions
     - E.g., if S[0] is not used, then h(“aa”) = h(“ba”) = ··· = h(“za”)
 - It uses Polynomial Hashing:
--                         |S|
+-                          |S|
             Pp = { hx(S) =  ∑ S[i] * x^i mod p } for all x
-                         i = 0
+                          i = 0
                     p a fixed prime, 
                     |S| the length of the string S 
                     x (the multiplier) is fixed: 1 ≤ x ≤ p − 1
