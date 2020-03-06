@@ -526,7 +526,7 @@
                     Erase(Key):               O(n)                                 Remove key from list
                Boolean Empty():               O(1)                                 Empty list?
           AddBefore(Node, Key):               O(n)                                 Adds key before node
-           AddAfter(Node, Key):               O(n)                                 Adds key after node 
+           AddAfter(Node, Key):               O(1)                                 Adds key after node 
 - **Doubly-Linked List**:
     - Its node consists of a key, a pointer to the next node and a pointer to the previous node
     -                APIs                    Time (wout tail)   Time (w tail)
@@ -539,8 +539,8 @@
              Boolean Find(Key):               O(n)                                 
                     Erase(Key):               O(n)                                 
                Boolean Empty():               O(1)                                 
-          AddBefore(Node, Key):               O(n)
-           AddAfter(Node, Key):               O(n)
+          AddBefore(Node, Key):               O(1)
+           AddAfter(Node, Key):               O(1)
 - Programming Languages:
     - Python:
 - For more details:
