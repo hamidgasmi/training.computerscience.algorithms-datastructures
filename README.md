@@ -1074,7 +1074,20 @@
     - **Collision Probability**:
         - For any 2 different strings s1 and s2 of length at most L + 1, 
         - if we choose h from *Pp* at random (by selecting a random x ∈ [1, p − 1]), 
-        - The probability of collision: **Pr[h(s1) = h(s2)] ≤ L / p**
+        - The probability of collision: `Pr[h(s1) = h(s2)] ≤ 1/m + L/p`
+        - If p > m * L, `Pr[h(s1) = h(s2)] ≤ O(1/m)`
+    - How to choose a hashing function for strings:
+        - Identify the max length of the strings: L + 1
+        - Choose a hash table size:
+            - Choose m = O(n)
+            - So that 0.5 < α < 1
+            - See Universal Family description
+        - Choose a prime number such that `p > m * L`
+        - Choose a random hash function for integers from universal family *Hp*:
+            - Choose a random a ∈ [1, p − 1]
+            - Choose a random b ∈ [0, p − 1]
+        - Choose a random hash function for strings from universal family *Pp*
+            - Choose a random x ∈ [1, p − 1]
 - E.g., Phone Book 2:
     - Problem: Design a data structure to store phone book contacts: names of people along with their phone numbers
     - The following operation must be fast: Call person by name
