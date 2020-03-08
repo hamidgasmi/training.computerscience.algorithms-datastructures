@@ -196,7 +196,7 @@ def unit_tests(s):
     test_count = 0
     len_s = len(s)
 
-    while duplicate <= 1000:
+    while duplicate <= 1:
         test_count +=1
         i = random.randint(0, len_s - 1)
         j = random.randint(i, len_s - 1)
@@ -224,6 +224,9 @@ def unit_tests(s):
             assert(result_naive == result_rope)
     
     print("Test run: ", str(test_count))
+    with open('/home/hamid/source/training.computerscience.algorithms-datastructures/2-data-sructures-fundamentals/5_binary_search_trees/rope_tests/output.txt', 'w') as f:
+        print('Test run: ' + str(test_count), file=f)
+        f.close
 
     return True
 
