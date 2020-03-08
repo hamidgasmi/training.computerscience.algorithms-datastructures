@@ -1168,8 +1168,6 @@
 
 </details>
 
-
-
 <details>
 <summary>Binary Search Tree (BST)</summary>
 
@@ -1360,6 +1358,59 @@
 
 ## Graph Algorithms
 
+<details>
+<summary>Decomposition of Graphs</summary>
+
+- Implementation, Time Complexity and Operations:
+
+- Programming Languages:
+    - Python:
+    - C++:
+    - Java:
+- Related Problems:
+    - 
+- Use Cases:
+    - 
+- For more details:
+    - UC San Diego Course:[]()
+
+</details>
+
+<details>
+<summary>Paths in Graphs</summary>
+
+- Implementation, Time Complexity and Operations:
+
+- Programming Languages:
+    - Python:
+    - C++:
+    - Java:
+- Related Problems:
+    - 
+- Use Cases:
+    - 
+- For more details:
+    - UC San Diego Course:[]()
+
+</details>
+
+<details>
+<summary>Minimum Spanning Trees</summary>
+
+- Implementation, Time Complexity and Operations:
+
+- Programming Languages:
+    - Python:
+    - C++:
+    - Java:
+- Related Problems:
+    - 
+- Use Cases:
+    - 
+- For more details:
+    - UC San Diego Course:[]()
+
+</details>
 ---
 
 ## NP-Complete Problem
