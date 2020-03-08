@@ -1,5 +1,5 @@
-# python3
 import sys
+import random
 
 # Splay tree implementation
 
@@ -167,11 +167,79 @@ class Rope:
       (left, right) = self.split(self.root, k + 1)
       self.root = self.merge(left, middle)
       self.root = self.merge(self.root, right)
-      
-if __name__ == '__main__':
-    rope = Rope(sys.stdin.readline().strip())
-    q = int(sys.stdin.readline())
-    for _ in range(q):
-        i, j, k = map(int, sys.stdin.readline().strip().split())
+
+#Running Time: O(|s|)
+def rope_naive(s, i, j, k):
+    
+    #Extract of s[i:j]
+    s0 = s[0:i] if i > 0 else ""
+    si = s[i:j + 1]
+    sj_plus_1 = s[j + 1: len(s)] if j < len(s) - 1 else ""
+    #new s without s[i:j]
+    s = s0 + sj_plus_1
+
+    # Concatenation:
+    s0 = s[0:k] if k > 0 else ""
+    sk = s[k: len(s)] if k < len(s) else ""
+    s = s0 + si + sk
+
+    return s
+
+def unit_tests(s):
+    # Test cases:
+    # I'll generate all possible cases for i, j, k
+    # To make sure that a test case isn't generated twice, I'll use a set data structure where I'll store a hash calculated from i, j, k
+    # since i, j, k < len(s) < 100: the hash = i + 100 * j + 100^2 * k is a good hash since it doesn't generate collisions
+    arguments = set()
+    result_naive = s
+    duplicate = 0
+    test_count = 0
+    len_s = len(s)
+
+    while duplicate <= 1000:
+        test_count +=1
+        i = random.randint(0, len_s - 1)
+        j = random.randint(i, len_s - 1)
+        k = random.randint(0, len_s - (j - i + 1))
+        hash = i + 100 * j + 10000 * k
+        
+        if hash in arguments:
+            duplicate += 1
+        else:
+            duplicate = 0
+            arguments.add(hash)
+
+        s = result_naive
+        result_naive = rope_naive(result_naive, i, j, k)
         rope.process(i, j, k)
-    print(rope.result())
+        result_rope = rope.result()
+        if result_naive != result_rope:
+            print("s: ", s)
+            print("(i, j, k, hash, duplicate, count) : (", "{0:0=2d}".format(i) + ", " + "{0:0=2d}".format(j) + ", " + \
+                                                            "{0:0=2d}".format(k) + ", " + "{0:0=6d}".format(hash) + ", " + \
+                                                            "{0:0=4d}".format(duplicate) + ", " + \
+                                                            str(test_count) + ")")
+            print("result_naive: ", result_naive)
+            print("rope.result(): ", result_rope)
+            assert(result_naive == result_rope)
+    
+    print("Test run: ", str(test_count))
+
+    return True
+
+if __name__ == '__main__':
+    s = sys.stdin.readline().strip()
+    rope = Rope(s)
+
+    testunits = True
+    #testunits = False
+    if testunits:
+        unit_tests(s)
+    else:
+        #Production section
+        q = int(sys.stdin.readline())
+        for _ in range(q):
+            i, j, k = map(int, sys.stdin.readline().strip().split())
+            rope.process(i, j, k)
+
+        print(rope.result())
