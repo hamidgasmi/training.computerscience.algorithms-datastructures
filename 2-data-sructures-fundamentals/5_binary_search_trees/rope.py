@@ -224,9 +224,6 @@ def unit_tests(s):
             assert(result_naive == result_rope)
     
     print("Test run: ", str(test_count))
-    with open('/home/hamid/source/training.computerscience.algorithms-datastructures/2-data-sructures-fundamentals/5_binary_search_trees/rope_tests/output.txt', 'w') as f:
-        print('Test run: ' + str(test_count), file=f)
-        f.close
 
     return True
 
