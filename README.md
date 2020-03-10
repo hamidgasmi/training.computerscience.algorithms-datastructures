@@ -1483,20 +1483,79 @@
 ## Graph Algorithms
 
 <details>
-<summary>Decomposition of Graphs</summary>
+<summary>Graphs: Basics</summary>
 
+- It's a collection of 
+    - **V** **vertices**, and 
+    - **E** **edges** 
+    - Each edge connects a pair of vertices
+- A **Loop** connect a vertex to itself
+- Multiple edges between same vertices
+- A **Simple** graph 
+    - It's a graph
+    - It doesn't have loops 
+    - It doesn't have multiple edges between same vertices
+- The **degree** a vertex:
+    - It's also called **valency** of a vertex
+    - It's the number of edges that are incident to the vertex
 - Implementation, Time Complexity and Operations:
-
+    - **Edge List**: 
+        - It consists of storing the graph as a list of edges
+        - Each edge is a pair of vertices,
+        - E.g., Edges List: (A, B) --> (A, C ) --> (A, D) --> (C , D)
+    - **Adjacency Matrix**:
+        - Matrix[i,j] = 1 if there is an edge, 0 if there is not
+        - E.g.
+                    A   B   C   D
+                A   0   1   1   1
+                B   1   0   0   0
+                C   1   0   0   1
+                D   1   0   1   0
+    - **Adjacency List**:
+        - Each vertex keeps a list of adjacent vertices (neighbors)
+        - E.g.
+            Vertices:  Neighbors 
+             A          B -> C -> D
+             B          A
+             C          A -> D
+             D          A -> C
+    -       Time Complexity         Edge List   Adjacency Matrix    Adjacency List
+                  IsEdge(v1, v2):       O(|E|)         O(1)              O(deg)
+                     ListAllEdge:       O(|E|)         O(|V|^2)          O(|E|)
+                ListNeighbors(v):       O(|E|)         O(|V|)            O(deg)
+- **Density**:
+    - A **Dense Graph**:
+        - It's a graph where a large fraction of pairs of vertices are connected by edges
+        - |E | ≈ |V|^2
+        - E.g., Routes between cities:
+        - It could be represented as a dense graph
+        - There is actually some transportation option that will get you between basically any pair of cities on the map
+        - What matter is not whether or not it's possible to get between 2 cities, but how hard it is to get between these cities
+    - A **Sparse Graph**:
+        - It's a graph where each vertex has only a few edges
+        - |E| ≈ |V|
+        - E.g. 1, we could represent the internet as a sparse graph,
+        - There are billions of web pages on the internet, but any given web page is only gonna have links to a few dozen others
+        - E.g. 2. social networks
+    - **Asymptotique analysis depends on the Density of the graph**
 - Programming Languages:
     - Python:
     - C++:
     - Java:
 - Related Problems:
     - 
-- Use Cases:
-    - 
 - For more details:
-    - UC San Diego Course:[]()
+    - UC San Diego Course:[Basics](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_1_basics.pdf)
+    - UC San Diego Course:[Representation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_2_representations.pdf)
+    - Khanacademy [Introduction to Graphs](https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/describing-graphs)
+
+</details>
+
+<details>
+<summary>Graphs: Exploring</summary>
+
+- For more details:
+    - UC San Diego Course:[Exploring Graphs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_3_explore.pdf)
 
 </details>
 
@@ -1535,6 +1594,7 @@
     - UC San Diego Course:[]()
 
 </details>
+
 ---
 
 ## NP-Complete Problem
