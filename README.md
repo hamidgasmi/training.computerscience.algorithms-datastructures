@@ -551,20 +551,64 @@
 <details>
 <summary>Stacks</summary>
 
-- For more details:
-    - [Stacks and Queues Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
+- It could be implemented with an array:
+    - We should keep track of the latestest element pushed index which is different from its capacity `len(array)`
+    -           Push(key): 
+                    if max-index + 1 <  len(array): 
+                        max-index += 1 
+                        array[max-index] = key
+    -           Top(): 
+                    if max-index >= 0: 
+                        return array[max-index]
+    -           Pop(): 
+                    if max-index >= 0: 
+                        value = array[max-index]
+                        max-index -= 1 
+                        return value
+- It could be implemented with a Singly-Linked-List:
+    -           Push(key): PushFront(Key)PushFront(Key)
+    -           Top(): TopFront()
+    -           Pop(): PopFront()
+-             Time Complexity: Array Imp.     Singly-Linked List      Comment     
+                    Push(key):  Θ(1)           Θ(1)   
+                    Key Top():  Θ(1)           Θ(1)       
+                    Key Pop():  Θ(1)           Θ(1)     
+             Space Complexity:  Θ(n)           Θ(2 * n) = O(n)         Linked-List uses more space because of the pointers         
 - Programming Languages:
     - Python:
+        - `List`
+        - `collections.deque`
+        - `queue.LifoQueue`
+        - [For more details](https://www.geeksforgeeks.org/stack-in-python/)
+- For more details:
+    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
+    - [Implementation with an Array: Visualization](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
+    - [Implementation with a Linked List: Visualization](https://www.cs.usfca.edu/~galles/visualization/StackLL.html)
 
 </details>
 
 <details>
 <summary>Queues</summary>
 
-- For more details:
-    - [Stacks and Queues Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
+(Key): 
+Key Top(): 
+Key Pop(): 
+
+- It has the following methods:
+    -                            Time Complexity       Comment
+                      Push(key):  Θ(1)                  Adds key to collection   
+                      Key Top():  Θ(1)                  Returns most recently-added key
+                      Key Pop():  Θ(1)                  Removes and returns most recently-added key
 - Programming Languages:
     - Python:
+        - `List`
+        - `collections.deque` class
+        - `queue.Queue` class
+        - [More details](https://www.geeksforgeeks.org/queue-in-python/)
+- For more details:
+    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
+    - [Implementation with an Array: Visualization](https://www.cs.usfca.edu/~galles/visualization/QueueArray.html)
+    - [Implementation with a Linked List: Visualization](https://www.cs.usfca.edu/~galles/visualization/QueueLL.html)
 
 </details>
 
@@ -607,7 +651,7 @@
         - Its height is Low: it's equal to **log n**
         - It could be stored effeciently as an array
 - For more details:
-    - [Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_3_trees.pdf)
+    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_3_trees.pdf)
 
 </details>
 
