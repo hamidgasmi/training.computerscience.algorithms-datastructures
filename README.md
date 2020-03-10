@@ -551,6 +551,7 @@
 <details>
 <summary>Stacks</summary>
 
+- LIFO: Last-In First-Out
 - It could be implemented with an array:
     - We should keep track of the latestest element pushed index which is different from its capacity `len(array)`
     -           Push(key): 
@@ -565,10 +566,13 @@
                         value = array[max-index]
                         max-index -= 1 
                         return value
+    -          Empty(): 
+                    return max-index == -1
 - It could be implemented with a Singly-Linked-List:
-    -           Push(key): PushFront(Key)PushFront(Key)
-    -           Top(): TopFront()
-    -           Pop(): PopFront()
+    -           Push(key): list.PushFront(Key)
+    -           Top(): return list.TopFront()
+    -           Pop(): return list.PopFront()
+    -         Empty(): return list.Empty()
 -             Time Complexity: Array Imp.     Singly-Linked List      Comment     
                     Push(key):  Θ(1)           Θ(1)   
                     Key Top():  Θ(1)           Θ(1)       
@@ -580,6 +584,8 @@
         - `collections.deque`
         - `queue.LifoQueue`
         - [For more details](https://www.geeksforgeeks.org/stack-in-python/)
+- Related Problems:
+    - [Balanced Brackets](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/21)
 - For more details:
     - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
     - [Implementation with an Array: Visualization](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
@@ -590,21 +596,41 @@
 <details>
 <summary>Queues</summary>
 
-(Key): 
-Key Top(): 
-Key Pop(): 
-
-- It has the following methods:
-    -                            Time Complexity       Comment
-                      Push(key):  Θ(1)                  Adds key to collection   
-                      Key Top():  Θ(1)                  Returns most recently-added key
-                      Key Pop():  Θ(1)                  Removes and returns most recently-added key
+- It could be implemented with an array:
+    - We should have a **circular** array
+    - We should keep track of the latestest inserted element index (we'll use it for reads): `read-index`
+    - We should keep track of the most recent inserted element index(we'll use it for writes): `write-index`
+    - Initially: `read-index == write-index == 0`
+    -           Empty(): return (read-index == write-index)
+    -           Full(): return (read-index == write-index + 1)
+    -           Enqueue(key): 
+                    if Not Full(): 
+                        array[write-index] = key
+                        write-index = write-index + 1 if write-index < len(array) - 1 else 0
+    -           Dequeue(): 
+                    if Not Empty():
+                        value = array[read-index]
+                        read-index = read-index + 1 if read-index < len(array) - 1 else 0
+                        return value
+- It could be implemented with a Doubly-Linked-List with a tail:
+    - The list head will be used for reads
+    - The list writes will be used for writes
+    -           Empty(): return list.Empty()
+    -           Enqueue(key): list.PushBack(Key)
+    -           Dequeue(): list.PopFront()
+-             Time Complexity: Array Imp.     Singly-Linked List      Comment     
+                    Push(key):  Θ(1)           Θ(1)   
+                    Key Top():  Θ(1)           Θ(1)       
+                    Key Pop():  Θ(1)           Θ(1)     
+             Space Complexity:  Θ(n)           Θ(2 * n) = O(n)         Linked-List uses more space because of the pointers
 - Programming Languages:
     - Python:
         - `List`
         - `collections.deque` class
         - `queue.Queue` class
         - [More details](https://www.geeksforgeeks.org/queue-in-python/)
+- Related Problems:
+    - 
 - For more details:
     - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
     - [Implementation with an Array: Visualization](https://www.cs.usfca.edu/~galles/visualization/QueueArray.html)
