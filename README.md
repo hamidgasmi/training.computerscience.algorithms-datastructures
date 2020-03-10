@@ -725,12 +725,66 @@
 <details>
 <summary>Amortized Analysis</summary>
 
+- **Amortized cost**: 
+    - Given a sequence of n operations, 
+    - The amortized cost is: **Cost(n operations) / n**
 - Methods to calculate amortized cost:
     - The **Aggregate method**: 
         - It calculates amortized cost based on amortized cost definition
-        - E.g. Dynamic Array:
-    - The **Banker's Method**:
-    - The **Physicist's Method**:
+        - E.g. Dynamic Array: n calls to PushBack
+        - Let ci = cost of i-th insertion
+        -                   _ i - 1 if i - 1 is a power of 2
+                          / 
+                ci = 1 + |
+                          \ _ 0 otherwise
+                                  n              ⌊log 2 (n−1)⌋
+                Amortized Cost =  ∑ ci / n = (n + ∑ 2^j        ) / n 
+                               = O(n)/n = O(1)
+    - The **Banker's Method**: it consists of:
+        - Charging extra for each cheap operation
+        - Saving the extra charge as **tokens** in our data structure (conceptually)
+        - Using the tokens to pay for expensive operations
+        - It is like an amortizing loan
+        - E.g. Dynamic Array: n calls to PushBack:
+        - 1. Charge 3 for each insertion: 
+            - Use 1 token to pay the cost for insertion;
+            - Place 1 token on the newly-inserted element
+            - Plase 1 token on the capacity / 2 elements prior
+        - 2. When Resize is needed: 
+            - Use 1 token To pay for moving the existing elements (all token in the array will dispear)
+            - When all old array elements are moved to the new array, insert new element (go to 1)
+    - The **Physicist's Method**: it consists of:
+        - Defining a **potential function*, **Φ** which maps states of the data structure to integers:
+            - `Φ(h0 ) = 0`
+            - `Φ(ht ) ≥ 0`
+    - Amortized cost for operation t: `ct + Φ(ht) − Φ(ht−1)`
+    - Choose Φ so that:
+        - if ct is small, the potential increases
+        - if ct is large, the potential decreases by the same scale
+    - The sum of the amortized costs is: 
+                                n       n
+                Φ(hn) − Φ(h0) + ∑ ci ≥  ∑ ci
+                               i=0     i=0                
+    - E.g. Dynamic Array: n calls to PushBack:
+    - Let Φ(h) = 2 × size − capacity
+        - Φ(h0) = 2 × 0 − 0 = 0
+        - Φ(hi) = 2 × size − capacity > 0 (since size > capacity/2)
+    - Calculating Amortized cost for operation i (adding element i): `ci + Φ(hi) − Φ(hi−1)`:
+        -Without resize: 
+                ci = 1; 
+                Φ(hi) = 2 * (k + 1) - c 
+                Φ(hi-1) = 2 * k - 2 - c 
+                ci + Φ(hi) − Φ(hi−1) = 1 + 2 * k - c - 2 * k + 2 + c = +3
+        - With resize:
+                ci = k + 1; 
+                Φ(hi) = 2 * (k + 1) - 2 * k = 2 since there is a resize, the array capacity is doubled
+                Φ(hi-1) = 2 * k - k = k since before the resize, the array capacity is equal to the array size
+                ci + Φ(hi) − Φ(hi−1) = k + 1 + 2 - k = +3
+- Related Problems:
+    - [Dynamic Array with a Popback Operation I](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/24)
+    - [Dynamic Array with a Popback Operation II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/25)
+    - [Dynamic Array with a Popback Operation III](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/26)
+    - [Dynamic Array with a PopMany Operation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/27)
 - More details:
     - [Amortized Analysis](https://youtu.be/U5XKyIVy2Vc) 
     - [UC San Diego](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
