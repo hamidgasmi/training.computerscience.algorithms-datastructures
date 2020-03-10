@@ -762,24 +762,24 @@
         - if ct is small, the potential increases
         - if ct is large, the potential decreases by the same scale
     - The sum of the amortized costs is: 
-                                n       n
+    -                           n       n
                 Φ(hn) − Φ(h0) + ∑ ci ≥  ∑ ci
                                i=0     i=0                
     - E.g. Dynamic Array: n calls to PushBack:
-    - Let Φ(h) = 2 × size − capacity
-        - Φ(h0) = 2 × 0 − 0 = 0
-        - Φ(hi) = 2 × size − capacity > 0 (since size > capacity/2)
+    - Let `Φ(h) = 2 × size − capacity`
+        - `Φ(h0) = 2 × 0 − 0 = 0`
+        - `Φ(hi) = 2 × size − capacity > 0` (since size > capacity/2)
     - Calculating Amortized cost for operation i (adding element i): `ci + Φ(hi) − Φ(hi−1)`:
         -Without resize: 
-                ci = 1; 
-                Φ(hi) = 2 * (k + 1) - c 
-                Φ(hi-1) = 2 * k - 2 - c 
-                ci + Φ(hi) − Φ(hi−1) = 1 + 2 * k - c - 2 * k + 2 + c = +3
+                    ci = 1; 
+                    Φ(hi) = 2 * (k + 1) - c 
+                    Φ(hi-1) = 2 * k - 2 - c 
+                    ci + Φ(hi) − Φ(hi−1) = 1 + 2 * k - c - 2 * k + 2 + c = +3
         - With resize:
-                ci = k + 1; 
-                Φ(hi) = 2 * (k + 1) - 2 * k = 2 since there is a resize, the array capacity is doubled
-                Φ(hi-1) = 2 * k - k = k since before the resize, the array capacity is equal to the array size
-                ci + Φ(hi) − Φ(hi−1) = k + 1 + 2 - k = +3
+                    ci = k + 1; 
+                    Φ(hi) = 2 * (k + 1) - 2 * k = 2 since there is a resize, the array capacity is doubled
+                    Φ(hi-1) = 2 * k - k = k since before the resize, the array capacity is equal to the array size
+                    ci + Φ(hi) − Φ(hi−1) = k + 1 + 2 - k = +3
 - Related Problems:
     - [Dynamic Array with a Popback Operation I](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/24)
     - [Dynamic Array with a Popback Operation II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/25)
