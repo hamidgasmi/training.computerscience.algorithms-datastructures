@@ -554,25 +554,25 @@
 - LIFO: Last-In First-Out
 - It could be implemented with an array:
     - We should keep track of the latestest element pushed index which is different from its capacity `len(array)`
-    -           Push(key): 
+                Push(key): 
                     if max-index + 1 <  len(array): 
                         max-index += 1 
                         array[max-index] = key
-    -           Top(): 
+                Top(): 
                     if max-index >= 0: 
                         return array[max-index]
-    -           Pop(): 
+                Pop(): 
                     if max-index >= 0: 
                         value = array[max-index]
                         max-index -= 1 
                         return value
-    -          Empty(): 
+               Empty(): 
                     return max-index == -1
 - It could be implemented with a Singly-Linked-List:
-    -           Push(key): list.PushFront(Key)
-    -           Top(): return list.TopFront()
-    -           Pop(): return list.PopFront()
-    -         Empty(): return list.Empty()
+                Push(key): list.PushFront(Key)
+                Top(): return list.TopFront()
+                Pop(): return list.PopFront()
+              Empty(): return list.Empty()
 -             Time Complexity: Array Imp.     Singly-Linked List      Comment     
                     Push(key):  Θ(1)           Θ(1)   
                     Key Top():  Θ(1)           Θ(1)       
@@ -601,13 +601,13 @@
     - We should keep track of the latestest inserted element index (we'll use it for reads): `read-index`
     - We should keep track of the most recent inserted element index(we'll use it for writes): `write-index`
     - Initially: `read-index == write-index == 0`
-    -           Empty(): return (read-index == write-index)
-    -           Full(): return (read-index == write-index + 1)
-    -           Enqueue(key): 
+                Empty(): return (read-index == write-index)
+                Full(): return (read-index == write-index + 1)
+                Enqueue(key): 
                     if Not Full(): 
                         array[write-index] = key
                         write-index = write-index + 1 if write-index < len(array) - 1 else 0
-    -           Dequeue(): 
+                Dequeue(): 
                     if Not Empty():
                         value = array[read-index]
                         read-index = read-index + 1 if read-index < len(array) - 1 else 0
@@ -615,9 +615,9 @@
 - It could be implemented with a Doubly-Linked-List with a tail:
     - The list head will be used for reads
     - The list writes will be used for writes
-    -           Empty(): return list.Empty()
-    -           Enqueue(key): list.PushBack(Key)
-    -           Dequeue(): list.PopFront()
+                Empty(): return list.Empty()
+                Enqueue(key): list.PushBack(Key)
+                Dequeue(): list.PopFront()
 -             Time Complexity: Array Imp.     Singly-Linked List      Comment     
                     Push(key):  Θ(1)           Θ(1)   
                     Key Top():  Θ(1)           Θ(1)       
