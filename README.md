@@ -770,13 +770,13 @@
         - `Φ(h0) = 2 × 0 − 0 = 0`
         - `Φ(hi) = 2 × size − capacity > 0` (since size > capacity/2)
     - Calculating Amortized cost for operation i (adding element i): `ci + Φ(hi) − Φ(hi−1)`:
-        -Without resize: 
-                    ci = 1; 
+        - Without resize:    
+        -           ci = 1; 
                     Φ(hi) = 2 * (k + 1) - c 
                     Φ(hi-1) = 2 * k - 2 - c 
                     ci + Φ(hi) − Φ(hi−1) = 1 + 2 * k - c - 2 * k + 2 + c = +3
         - With resize:
-                    ci = k + 1; 
+        -           ci = k + 1; 
                     Φ(hi) = 2 * (k + 1) - 2 * k = 2 since there is a resize, the array capacity is doubled
                     Φ(hi-1) = 2 * k - k = k since before the resize, the array capacity is equal to the array size
                     ci + Φ(hi) − Φ(hi−1) = k + 1 + 2 - k = +3
