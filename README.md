@@ -1553,10 +1553,19 @@
 </details>
 
 <details>
-<summary>Graphs: Exploring</summary>
+<summary>Depth-First Search (DFS)</summary>
 
 - For more details:
     - UC San Diego Course:[Exploring Graphs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_3_explore.pdf)
+    - [DFS: Visualization](https://www.cs.usfca.edu/~galles/visualization/DFS.html)
+
+</details>
+
+<details>
+<summary>Breadth-First Search (BFS)</summary>
+
+- For more details:
+    - Khanacademy [BFS](https://www.khanacademy.org/computing/computer-science/algorithms/breadth-first-search/a/breadth-first-search-and-its-uses)
 
 </details>
 
