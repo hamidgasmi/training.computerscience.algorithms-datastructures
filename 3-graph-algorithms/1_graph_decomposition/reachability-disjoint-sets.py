@@ -7,7 +7,8 @@ class DisjointSets(ABC):
         self.rank = [0] * n
         self.buildDisjointSets(edges)
     
-    # Time Complexity: O(|E|)
+    # Time Complexity (Rank Heuristic): O(|E| log|E|)
+    # Time Complexity (Path Compression): O(|E| log*|E|)
     # Space Complexity: O(1)
     def buildDisjointSets(self, edges):
         for i in range(0, len(edges)):
@@ -53,12 +54,12 @@ class MazeDisjointSetCompressPathHeuristic(DisjointSets):
 def reach(edges, n, u, v, solution):
 
     if solution == 3:
-        # Good job! (Max time used: 0.04/5.00, max memory used: 10145792/536870912.)
+        # Good job! (Max time used: 0.04/5.00, max memory used: 10055680/536870912.)  
         aMazeSets = MazeDisjointSetRankHeuristic(n, edges)
         return 1 if aMazeSets.find(u) == aMazeSets.find(v) else 0
 
     elif solution == 4:
-        # Good job! (Time used: 0.04/5.00, memory used: 9732096/536870912.)
+        # Good job! (Max time used: 0.04/5.00, max memory used: 10031104/536870912.)
         aMazeSets = MazeDisjointSetCompressPathHeuristic(n, edges)
         return 1 if aMazeSets.find(u) == aMazeSets.find(v) else 0
 
