@@ -2,18 +2,28 @@ import sys
 from queue import Queue 
 
 class MazeGraph:
-    def __init__(self, n, adj):
+    def __init__(self, n, adj, solution):
         self.adj = adj
         self.visited = [False] * n
+        if solution == 2:
+            self.enqueued = [False] * n
 
     def visit(self, v):
         self.visited[v] = True
 
+    def enqueue(self, q, v):
+        if not self.enqueued[v]:
+            q.put(v)
+            self.enqueued[v] = True
+
     def isVisited(self, v):
         return self.visited[v]
 
-    # Time Complexity: O(|V|)
-    # Space Complexity: O(|V|)
+    # Time Complexity: O(|V| + |E|):
+    # .... Each vertex is explored exactly once
+    # .... Each vertex checks each neighbor
+    # Space Complexity: O(|V|):
+    # .... Each vertex calls explore method recursively for 1 neighbor at a time
     # Good job! (Max time used: 0.03/5.00, max memory used: 9535488/536870912.)
     def explore_dfs(self, u, v):
         if u == v:
@@ -27,8 +37,12 @@ class MazeGraph:
 
         return 0
 
-    # Time Complexity: O(|V|)
-    # Space Complexity: O(|V|)
+    # Time Complexity: O(|V| + |E|)
+    # .... Each vertex is explored exactly once
+    # .... Each vertex checks each neighbor
+    # Space Complexity: O(|V|):
+    # .... Each vertex is enqueued only once
+    # Result: Good job! (Max time used: 0.04/5.00, max memory used: 10084352/536870912.)
     def explore_bfs(self, u, v, q):
         if u == v:
             return 1
@@ -41,14 +55,13 @@ class MazeGraph:
             self.visit(u)
 
             for i in range(len(adj[u])):
-                if not self.isVisited(adj[u][i]):
-                    q.put(adj[u][i])
+                self.enqueue(q, adj[u][i])
                
         return 0
 
 def reach(adj, n, u, v, solution):
 
-    aMaze = MazeGraph(n, adj)
+    aMaze = MazeGraph(n, adj, solution)
     if solution == 1:
         return aMaze.explore_dfs(u, v) 
     elif solution == 2:
