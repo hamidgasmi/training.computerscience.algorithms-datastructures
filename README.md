@@ -987,6 +987,7 @@
     - Building a Network:
 - Related Problems:
     - [Find whether individual x is a friend of individual y](https://github.com/hamidgasmi/algorithms-datastructures/issues/33)
+    - [Finding an Exit from a Maze](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/87)
     - [Dish Owner](https://github.com/hamidgasmi/algorithms-datastructures/issues/35)
     - [Galactik Football](https://github.com/hamidgasmi/algorithms-datastructures/issues/36)
     - [Merging tables](https://github.com/hamidgasmi/algorithms-datastructures/issues/32)
