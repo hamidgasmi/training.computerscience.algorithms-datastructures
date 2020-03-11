@@ -69,6 +69,7 @@ def reach(adj, n, u, v, solution):
         return aMaze.explore_bfs(u, v, q)
     elif solution == 3:
         return 0
+        
     else:
         return 0
 
