@@ -5,7 +5,7 @@ class MazeGraph:
     def __init__(self, n, edges):
         self.adj = [[] for _ in range(n)]
         self.buildAdjacencyList(edges)
-        self.visited = [False] * n
+        self.visited = []
 
     # Time Complexity: O(|E|)
     # Space Complexity: O(1)
@@ -16,6 +16,9 @@ class MazeGraph:
 
     def isVisited(self, v):
         return self.visited[v]
+
+    def unvisitAll(self):
+        self.visited = [False] * n
 
     # Time Complexity: O(|E|)
     # Space Complexity: O(|V|):
@@ -32,6 +35,7 @@ class MazeGraph:
     # Space Complexity: O(|V|):
 
     def DFS(self):
+        self.unvisitAll()
         
         connected_components = 0
         for v in range(len(self.adj)):
