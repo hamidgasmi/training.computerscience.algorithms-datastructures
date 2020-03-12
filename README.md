@@ -1490,6 +1490,8 @@
     - **V** **vertices**, and 
     - **E** **edges** 
     - Each edge connects a pair of vertices
+    - A collection of undirected edges forms an **Undirected graph**
+    - A collection of directed edges forms an **Directed graph** 
 - A **Loop** connect a vertex to itself
 - Multiple edges between same vertices
 - A **Simple** graph 
@@ -1539,10 +1541,9 @@
         - There are billions of web pages on the internet, but any given web page is only gonna have links to a few dozen others
         - E.g. 2. social networks
     - **Asymptotique analysis depends on the Density of the graph**
-- Programming Languages:
-    - Python:
-    - C++:
-    - Java:
+- **Connected Components**:
+    - A Graph vertices can be partitioned into Connected Components 
+    - So that v is reachable from w if and only if they are in the same connected component
 - Related Problems:
     - 
 - For more details:
@@ -1555,6 +1556,61 @@
 <details>
 <summary>Depth-First Search (DFS)</summary>
 
+- We will explore new edges in Depth First order
+- We will follow a long path forward, only backtracking when we hit a dead end
+- Loop on all virtices:
+        def DFS(G):
+            mark unvisited all vertices v ∈ G.V
+
+            for v ∈ G.V:
+                if not visited (v):
+                    Explore(v)
+
+- Explore 1 path until hitting a dead end:      
+        def Explore (v ):
+            visited (v ) = true
+            for (v , w) ∈ E:
+                if not visited (w):
+                    Explore (w)
+- Time complexity:
+    -            Implementation:    Explore()        DFS
+                  Adjacency List:    O(degre)       O(|V| + ∑ degre for all v) = O(|V| + |E|)
+                Adjacency Matrix:    O(|V|)         O(|V|^2)
+    - Number of calls to explore:
+        - Each explored vertex is marked visited
+        - No vertex is explored after visited once
+        - Each vertex is explored exactly once
+    - Checking for neighbors: O(|E|)
+        - Each vertex checks each neighbor.
+        - Total number of neighbors over all vertices is O(|E|)
+    - We prefer adjacency list representation!
+- Space Complexity:
+- DFS **Previsit** and **Postvisit** Functions:
+    - Plain DFS just marks all vertices as visited
+    - We need to keep track of other data to be useful
+    - Augment functions to store additional information
+    -     def Explore (v ):
+            visited(v) = true
+            previsit (v)
+            for (v , w) ∈ E:
+                if not visited (w):
+                    Explore (w)
+            postvisit (v)
+    - E.g., **Clock**:
+        - Keep track of order of visits
+        - Clock ticks at each pre-/post- visit
+        - Records previsit and postvisit times for each v
+        -       previsit (v )
+                    pre (v) ← clock
+                    clock ← clock + 1
+        -       postvisit (v )
+                    post (v ) ← clock
+                    clock ← clock + 1
+        - It tells us about the execution of DFS
+        - For any u, v the intervals [ pre(u), post(u)] and [ pre (v), post (v)] are either nested or disjoint
+        - Nested: u: [ 1, 6 ], v [ 3, 4 ]: v is reachable from u
+        - Disjoint: u [ 1, 6 ], v [ 9, 11 ]: v isn't reachable from u
+        - Interleaved (isn't possible)  u [ 1, 6 ], v [ 3, 8 ]
 - For more details:
     - UC San Diego Course:[Exploring Graphs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_3_explore.pdf)
     - [DFS: Visualization](https://www.cs.usfca.edu/~galles/visualization/DFS.html)
