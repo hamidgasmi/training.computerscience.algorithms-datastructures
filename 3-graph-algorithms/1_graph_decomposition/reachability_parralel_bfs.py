@@ -47,8 +47,8 @@ class MazeGraph:
             if self.visit(u):
                 return 1
 
-            for i in range(len(self.adj[u])):
-                self.enqueue(self.adj[u][i])
+            for a in self.adj[u]:
+                self.enqueue(a)
 
         return 0
 

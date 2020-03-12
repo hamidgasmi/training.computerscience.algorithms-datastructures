@@ -41,9 +41,9 @@ class MazeGraph:
             return 1
 
         self.visit(u)
-        for i in range(len(self.adj[u])):
-            if not self.isVisited(self.adj[u][i]):
-                if self.explore_dfs(self.adj[u][i], v) == 1:
+        for a in self.adj[u]:
+            if not self.isVisited(a):
+                if self.explore_dfs(a, v) == 1:
                     return 1
 
         return 0
@@ -65,8 +65,8 @@ class MazeGraph:
                 return 1
             self.visit(u)
 
-            for i in range(len(self.adj[u])):
-                self.enqueue(q, self.adj[u][i])
+            for a in self.adj[u]:
+                self.enqueue(q, a)
         return 0
 
     def enqueue(self, q, v):
@@ -95,4 +95,4 @@ if __name__ == '__main__':
     x, y = data[2 * m:]
     x, y = x - 1, y - 1
 
-    print(reach(n, edges, x, y, 2))
+    print(reach(n, edges, x, y, 1))
