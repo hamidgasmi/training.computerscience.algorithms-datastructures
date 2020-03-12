@@ -1508,20 +1508,20 @@
         - E.g., Edges List: (A, B) --> (A, C ) --> (A, D) --> (C , D)
     - **Adjacency Matrix**:
         - Matrix[i,j] = 1 if there is an edge, 0 if there is not
-        - E.g.
-                    A   B   C   D
-                A   0   1   1   1
-                B   1   0   0   0
-                C   1   0   0   1
-                D   1   0   1   0
+        - E.g.      Undirected              Directed
+                    A   B   C   D           A   B   C   D
+                A   0   1   1   1       A   0   1   1   1
+                B   1   0   0   0       B   0   0   0   0
+                C   1   0   0   1       C   0   1   0   1
+                D   1   0   1   0       D   0   1   0   0
     - **Adjacency List**:
         - Each vertex keeps a list of adjacent vertices (neighbors)
         - E.g.
-            Vertices:  Neighbors 
-             A          B -> C -> D
-             B          A
-             C          A -> D
-             D          A -> C
+            Vertices:  Neighbors (Undirected)   Neighbors (Directed)
+             A          B -> C -> D              B -> C -> D
+             B          A                        
+             C          A -> D                   B
+             D          A -> C                   B
     -       Time Complexity         Edge List   Adjacency Matrix    Adjacency List
                   IsEdge(v1, v2):       O(|E|)         O(1)              O(deg)
                      ListAllEdge:       O(|E|)         O(|V|^2)          O(|E|)
@@ -1544,8 +1544,16 @@
 - **Connected Components**:
     - A Graph vertices can be partitioned into Connected Components 
     - So that v is reachable from w if and only if they are in the same connected component
-- Related Problems:
-    - 
+- A **Cycle** in a graph:
+    - It's a sequence of vertices v1,..., vn so that 
+    - (v1, v2 ),..., (vn−1, vn), (vn, v1) are all edges
+    - Cycle graphs cannot be linearly ordered (typologically ordered)
+- E.g.
+    - Directed Graph:
+        - Streets with one-way roads
+        - Links between webpages
+        - Followers on social network
+        - Dependencies between tasks
 - For more details:
     - UC San Diego Course:[Basics](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_1_basics.pdf)
     - UC San Diego Course:[Representation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_2_representations.pdf)
@@ -1558,6 +1566,7 @@
 
 - We will explore new edges in Depth First order
 - We will follow a long path forward, only backtracking when we hit a dead end
+- It doesn't matter if the graph is directed or undirected
 - Loop on all virtices:
         def DFS(G):
             mark unvisited all vertices v ∈ G.V
@@ -1614,6 +1623,38 @@
 - For more details:
     - UC San Diego Course:[Exploring Graphs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_3_explore.pdf)
     - [DFS: Visualization](https://www.cs.usfca.edu/~galles/visualization/DFS.html)
+
+</details>
+
+<details>
+<summary>DAGs: Topological Sort</summary>
+
+- A **DAG**:
+    - **Directed Acyclic Graph**
+    - It's a directed graph G without any cycle
+- A **source** is a vertex with no incoming edges
+- A **sink** is a vertex with no outgoing edges
+- A Topological Sort:
+    - Find sink; Put at end of order; Remove from graph; Repeat
+    - It's the DFS algorithm
+    -       TopologicalSort (G )
+                DFS (G)
+                Sort vertices by reverse post-order
+- For more details:
+    - UC San Diego Course:[DAGs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_6_dags.pdf)
+    - UC San Diego Course:[Topological Sort](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_7_topological-sort.pdf)
+    - [Topological Sort using DFS: Visualization](https://www.cs.usfca.edu/~galles/visualization/TopoSortDFS.html)
+    - [Topological sort using indegree array: Visualization](https://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html)
+
+</details>
+
+<details>
+<summary>DAGs: Strongly Connected Components</summary>
+
+- For more details:
+    - UC San Diego Course:[Strongly Connected Components I](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_8_strongly-connected-components.pdf)
+    - UC San Diego Course:[Strongly Connected Components II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_9_computing-sccs.pdf)
+    - [Strongly connected components: Visualization](https://www.cs.usfca.edu/~galles/visualization/ConnectedComponent.html)
 
 </details>
 
