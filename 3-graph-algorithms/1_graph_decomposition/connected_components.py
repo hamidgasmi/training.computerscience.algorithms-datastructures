@@ -25,18 +25,17 @@ class MazeGraph:
     # .... Each vertex calls recursively explore method for 1 neighbor at a time
     def explore(self, v):
         self.visited[v] = True
-        for a in range(len(self.adj[v])):
-            if not self.isVisited(self.adj[v][a]):
-                self.explore(self.adj[v][a])
+        for a in self.adj[v]:
+            if not self.isVisited(a):
+                self.explore(a)
 
     # Time Complexity: O(|V| + |E|):
     # .... Each vertex is explored exactly once
     # .... Each vertex checks each neighbor
     # Space Complexity: O(|V|):
-
     def DFS(self):
         self.unvisitAll()
-        
+
         connected_components = 0
         for v in range(len(self.adj)):
             if not self.visited[v]:
