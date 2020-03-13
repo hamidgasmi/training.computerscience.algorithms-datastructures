@@ -1,9 +1,6 @@
-#Uses python3
-
 import sys
 
 sys.setrecursionlimit(200000)
-
 
 def number_of_strongly_connected_components(adj):
     result = 0
