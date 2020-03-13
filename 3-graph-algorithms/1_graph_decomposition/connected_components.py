@@ -18,7 +18,7 @@ class MazeGraph:
         return self.visited[v]
 
     def unvisitAll(self):
-        self.visited = [False] * n
+        self.visited = [False] * len(self.adj)
 
     # Time Complexity: O(|E|)
     # Space Complexity: O(|V|):
