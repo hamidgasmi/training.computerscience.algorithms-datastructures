@@ -1643,14 +1643,24 @@
 - For more details:
     - UC San Diego Course:[DAGs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_6_dags.pdf)
     - UC San Diego Course:[Topological Sort](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_7_topological-sort.pdf)
+    - Geeks for Geeks: [topological sort with In-degree](https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/)
     - [Topological Sort using DFS: Visualization](https://www.cs.usfca.edu/~galles/visualization/TopoSortDFS.html)
     - [Topological sort using indegree array: Visualization](https://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html)
 
 </details>
 
 <details>
-<summary>DAGs: Strongly Connected Components</summary>
+<summary>Strongly Connected Components</summary>
 
+- **Connected vertices**:
+    - 2 vertices v, w in a directed graph are connected:
+    - if you can reach v from w and can reach w from v
+- **Strongly connected graph**: is a directed graph where every vertex is reachable from every other vertex
+- **Strongly connected components**: It's a collection of subgraphs of an arbitrary directed graph that are strongly connected
+- **Metagraph**:
+    - It's formed from all strongly connected components
+    - Each stromgly connected components is represented by a vertice
+    - **The metagraph of a directed graph is always a DAG**
 - For more details:
     - UC San Diego Course:[Strongly Connected Components I](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_8_strongly-connected-components.pdf)
     - UC San Diego Course:[Strongly Connected Components II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_9_computing-sccs.pdf)
