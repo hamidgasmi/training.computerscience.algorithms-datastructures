@@ -1675,7 +1675,7 @@
 - Find all SCCs of a directed graph G:
     -       SCCs (G, Gr):
                 Run DFS(Gr):
-                fir v ∈ V in reverse postorder:
+                for v ∈ V in reverse postorder:
                     if v isn't visited:
                         Explore(v, G): vertices found are first SCC
                         Mark visited vertices as new SCC
