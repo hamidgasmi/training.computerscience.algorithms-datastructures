@@ -1632,8 +1632,8 @@
 - A **DAG**:
     - **Directed Acyclic Graph**
     - It's a directed graph G without any cycle
-- A **source** is a vertex with no incoming edges
-- A **sink** is a vertex with no outgoing edges
+- A **source** vertex is a vertex with no incoming edges
+- A **sink** vertex is a vertex with no outgoing edges
 - A Topological Sort:
     - Find sink; Put at end of order; Remove from graph; Repeat
     - It's the DFS algorithm
@@ -1656,11 +1656,31 @@
     - 2 vertices v, w in a directed graph are connected:
     - if you can reach v from w and can reach w from v
 - **Strongly connected graph**: is a directed graph where every vertex is reachable from every other vertex
-- **Strongly connected components**: It's a collection of subgraphs of an arbitrary directed graph that are strongly connected
+- **Strongly connected components**, **SCC**: It's a collection of subgraphs of an arbitrary directed graph that are strongly connected
 - **Metagraph**:
     - It's formed from all strongly connected components
     - Each stromgly connected components is represented by a vertice
     - **The metagraph of a directed graph is always a DAG**
+- **Sink Components** 
+    - It's a subgrph of a directed graph with no outgoing edges
+    - If v is in a sink SCC, `explore (v)` finds this SCC
+- **Source Components** 
+    - It's a subgrph of a directed graph with no incoming edges
+    - The vertex with the largest postorder number is in a source component
+- **Reverse Graph**, **G^R** 
+    - It's a directed graph obtained from G by reversing the direction of all of its edges
+    - G^R and G have same SCCs
+    - Source components of G^R are sink components of G
+    - **The vertex with largest postorder in G^R is in a sink SCC of G**
+- Find all SCCs of a directed graph G:
+    -       SCCs (G, Gr):
+                Run DFS(Gr):
+                fir v ∈ V in reverse postorder:
+                    if v isn't visited:
+                        Explore(v, G): vertices found are first SCC
+                        Mark visited vertices as new SCC
+    - Time Complexity: O(|V| + |E|)
+        - It's essentially DFS on Gr and then on G
 - For more details:
     - UC San Diego Course:[Strongly Connected Components I](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_8_strongly-connected-components.pdf)
     - UC San Diego Course:[Strongly Connected Components II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_9_computing-sccs.pdf)
