@@ -588,8 +588,8 @@
     - [Balanced Brackets](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/21)
 - For more details:
     - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
-    - [Implementation with an Array: Visualization](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
-    - [Implementation with a Linked List: Visualization](https://www.cs.usfca.edu/~galles/visualization/StackLL.html)
+    - Visualization:[Implementation with an Array](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
+    - Visualization:[Implementation with a Linked List](https://www.cs.usfca.edu/~galles/visualization/StackLL.html)
 
 </details>
 
@@ -633,8 +633,8 @@
     - 
 - For more details:
     - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
-    - [Implementation with an Array: Visualization](https://www.cs.usfca.edu/~galles/visualization/QueueArray.html)
-    - [Implementation with a Linked List: Visualization](https://www.cs.usfca.edu/~galles/visualization/QueueLL.html)
+    - Visualization:[Implementation with an Array](https://www.cs.usfca.edu/~galles/visualization/QueueArray.html)
+    - Visualization:[Implementation with a Linked List](https://www.cs.usfca.edu/~galles/visualization/QueueLL.html)
 
 </details>
 
@@ -1463,7 +1463,7 @@
     - UC San Diego Course: [Split and Merge](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_3_binary_search_trees_split_merge.pdf) operations
     - Geeks for Geeks: [AVL tree insertion](https://www.geeksforgeeks.org/avl-tree-set-1-insertion/)
     - Geeks for Geeks: [AVL tree deletion](https://www.geeksforgeeks.org/avl-tree-set-2-deletion/)
-    - [Visualization](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html)
+    - Visualization:[AVL Tree](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html)
 
 </details>
 
@@ -1475,7 +1475,7 @@
     - UC San Diego Course: [Splay Trees Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_1_binary_search_trees_splay_trees_introduction.pdf)
     - UC San Diego Course: [Splay Tree Implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_2_binary_search_trees_splay_tree_implementation.pdf)
     - UC San Diego Course: [Splay Tree Analysis](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_3_binary_search_trees_splay_tree_analysis.pdf)
-    - [Visualization](https://www.cs.usfca.edu/~galles/visualization/SplayTree.html)
+    - Visualization:[Splay Tree](https://www.cs.usfca.edu/~galles/visualization/SplayTree.html)
 
 </details>
 
@@ -1622,7 +1622,7 @@
         - Interleaved (isn't possible)  u [ 1, 6 ], v [ 3, 8 ]
 - For more details:
     - UC San Diego Course:[Exploring Graphs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_3_explore.pdf)
-    - [DFS: Visualization](https://www.cs.usfca.edu/~galles/visualization/DFS.html)
+    - Visualization:[DFS](https://www.cs.usfca.edu/~galles/visualization/DFS.html)
 
 </details>
 
@@ -1644,8 +1644,8 @@
     - UC San Diego Course:[DAGs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_6_dags.pdf)
     - UC San Diego Course:[Topological Sort](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_7_topological-sort.pdf)
     - Geeks for Geeks: [topological sort with In-degree](https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/)
-    - [Topological Sort using DFS: Visualization](https://www.cs.usfca.edu/~galles/visualization/TopoSortDFS.html)
-    - [Topological sort using indegree array: Visualization](https://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html)
+    - Visualization:[Topological Sort using DFS](https://www.cs.usfca.edu/~galles/visualization/TopoSortDFS.html)
+    - Visualization:[Topological sort using indegree array](https://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html)
 
 </details>
 
@@ -1684,7 +1684,60 @@
 - For more details:
     - UC San Diego Course:[Strongly Connected Components I](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_8_strongly-connected-components.pdf)
     - UC San Diego Course:[Strongly Connected Components II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_9_computing-sccs.pdf)
-    - [Strongly connected components: Visualization](https://www.cs.usfca.edu/~galles/visualization/ConnectedComponent.html)
+    - Visualization:[Strongly connected components](https://www.cs.usfca.edu/~galles/visualization/ConnectedComponent.html)
+
+</details>
+
+<details>
+<summary>Paths in Graphs: Path and Distance (Basic)</summary>
+
+- A **Path**:
+    - It's a collection of edges that connects 2 vertices u, v
+    - It could exist multiple paths linking same vertices
+- **Path length**:
+    - L(P)
+    - It's the number of edges of a path
+- **Distance**
+    - It's between 2 nodes in a graph
+    - It's the length of the shortest possible path between these nodes  
+    - For any any pair of vertices u, v: **Distance(u, v) in a directed graph is >= Distance(u, v) in the corresponding undirected graph**
+- **Distance Layers**:
+    - For a given vertex v in  a graph, it's a way of representing the graph by repositioning all its nodes from top to bottom with increasing distance from v
+    - Layer 0: contains the vertex v
+    - Layer 1: contains all vertices which distance to v is: 1
+    - ...
+    - E.g.:     G:       Layers    Distance Layers from A       Distance Layers from C
+            A -- B -- C    0           A                               C
+                      |                |                             /   \
+                      D    1           B                            B     D
+                                       |                            |
+                           2           C                            A
+                                       |
+                           3           D
+    - In a Undirected graph, **Edges are possible between same layer nodes or adjacent layers nodes** 
+        - In other words, there is no edge between nodes of a layer l and nodes of layers < l - 1 and layers > l + 1 
+        - E.g. From example above:
+        -       Distance Layers from C:
+            0       C                                                  C
+                  /   \                                              / | \
+            1    B     D => there is no edge => if there an edge => B  A  D
+                 |          between A and C     between A and C
+            2    A
+    - In an Directed graph, **Edges are possible between same layer nodes, adjacent layers nodes and to all previous layers**
+    - E.g. 
+    - Edges between layer 3 and any previous layer 2, 1, 0 are possible: this doesn't change the distance between D and A
+    - Edges between layer 0 or 1 and layer 3 are still not possible: this does change the distance between D and A
+    -       Distance Layers from C:
+            0       D                                                  D
+                  /   \                                              /   \
+                 ↓     ↓                                            ↓     ↓
+            1    C     E => there is no edge => if an edge =>       C_    E
+                 ↓          from C to A          from C to A        ↓ ↓
+            2    B                                                  B  A (A would be in layer 2)
+                 ↓
+            3    A
+- For more details:
+    - UC San Diego Course:[Path and Distance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
 
 </details>
 
@@ -1692,27 +1745,13 @@
 <summary>Breadth-First Search (BFS)</summary>
 
 - For more details:
+    - UC San Diego Course:[BFS](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
     - Khanacademy [BFS](https://www.khanacademy.org/computing/computer-science/algorithms/breadth-first-search/a/breadth-first-search-and-its-uses)
+    - Visualization:[BFS](https://www.cs.usfca.edu/~galles/visualization/BFS.html)
 
 </details>
 
-<details>
-<summary>Paths in Graphs</summary>
 
-- Implementation, Time Complexity and Operations:
-
-- Programming Languages:
-    - Python:
-    - C++:
-    - Java:
-- Related Problems:
-    - 
-- Use Cases:
-    - 
-- For more details:
-    - UC San Diego Course:[]()
-
-</details>
 
 <details>
 <summary>Minimum Spanning Trees</summary>
