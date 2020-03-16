@@ -107,7 +107,6 @@
         - A strings that contains a sequence of a single letter (“aaaaaaa”) or 2 letters ("abbaabaa") as opposed to those composed of all possible Latin letters
     - Encoding (ASCII, UTF-8, UTF-16)?
     - Special characters
-    - such as those with only small numbers or a small range of large numbers, 
 - When dealing with **arrays/lists**:
     - Biased/Degenerate tests: 
         - It's empty
@@ -1620,6 +1619,9 @@
         - Nested: u: [ 1, 6 ], v [ 3, 4 ]: v is reachable from u
         - Disjoint: u [ 1, 6 ], v [ 9, 11 ]: v isn't reachable from u
         - Interleaved (isn't possible)  u [ 1, 6 ], v [ 3, 8 ]
+- Related problems:
+    - Detect there is a cycle in a graph:
+        - [Checking Consistency of CS Curriculum](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/95)
 - For more details:
     - UC San Diego Course: [Exploring Graphs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_3_explore.pdf)
     - Visualization: [DFS](https://www.cs.usfca.edu/~galles/visualization/DFS.html)
@@ -1640,6 +1642,8 @@
     -       TopologicalSort (G )
                 DFS (G)
                 Sort vertices by reverse post-order
+- Related problems:
+    - [Determining an Order of Courses](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/96)
 - For more details:
     - UC San Diego Course: [DAGs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_6_dags.pdf)
     - UC San Diego Course: [Topological Sort](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_7_topological-sort.pdf)
@@ -1681,6 +1685,8 @@
                         Mark visited vertices as new SCC
     - Time Complexity: O(|V| + |E|)
         - It's essentially DFS on Gr and then on G
+- Related Problems:
+    - [Checking Whether Any Intersection in a City is Reachable from Any Other](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/97)
 - For more details:
     - UC San Diego Course: [Strongly Connected Components I](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_8_strongly-connected-components.pdf)
     - UC San Diego Course: [Strongly Connected Components II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_9_computing-sccs.pdf)
@@ -1744,6 +1750,17 @@
 <details>
 <summary>Breadth-First Search (BFS)</summary>
 
+- Related problems:
+    - [Computing the Minimum Number of Flight Segments](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/131)
+    - A **bipartite** graph:
+        - It's a graph which vertices can be split into 2 parts such that each edge of the graph joins to vertices from different parts 
+        - It arises naturally in applications where a graph is used to model connections between objects of two different types 
+            - E.g. 1, Boys and Girls
+            - E.g. 2, Students and Dormitories
+        - An alternative definition: 
+            - It's a graph which vertices can be colored with two colors (say, black and white) 
+            - Such that the endpoints of each edge have different colors
+        - Problem: [Check if a graph is bipartite](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/132)
 - For more details:
     - UC San Diego Course: [BFS](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
     - Khanacademy [BFS](https://www.khanacademy.org/computing/computer-science/algorithms/breadth-first-search/a/breadth-first-search-and-its-uses)
