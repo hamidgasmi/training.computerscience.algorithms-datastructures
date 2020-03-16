@@ -1750,6 +1750,26 @@
 <details>
 <summary>Breadth-First Search (BFS)</summary>
 
+- Implementation, Time Complexity:
+    - Time Complexity: O(|V| + |E|)
+    -           BFS(G , S):
+                    for all u ∈ V:
+                        dist [u] ← ∞
+                        dist [S] ← 0
+                    Q ← {S} { queue containing just S}
+                    while Q is not empty:
+                        u ← Dequeue (Q)
+                        for all (u, v) ∈ u.E:
+                            if dist [v ] = ∞ :
+                                Enqueue (Q, v)
+                                dist [v] ← dist [u] + 1
+- A node is **discovered** when it's found for the 1st time and enqueued
+- A node is **processed** when it's dequeued from the BFS queue: all its unvisited neighbors are discovered (enqueued) 
+- By the time a node u at distance d from S is dequeued, all the nodes at distance at most d have already been discovered (enqueued)
+- **BSF Queue property**:
+    - At any moment, if the 1st node in the queue is at distance d from S, then all the nodes in the queue are either at distance d or d + 1 from S
+    - All the nodes in the queue at distance d go before (if any) all the nodes at distance d + 1
+    - Nodes at distance > d + 1 will be discovered when d + 1 are processed => all d are gone
 - Related problems:
     - [Computing the Minimum Number of Flight Segments](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/131)
     - A **bipartite** graph:
