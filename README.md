@@ -1735,11 +1735,10 @@
         - Edges between layer 0 or 1 and layer 3 are still not possible: this does change the distance between D and A
         -       Distance Layers from C:
                 0       D                                                  D
-                      /   \                                              /   \
-                     ↓     ↓                                            ↓     ↓
-                1    C     E => there is no edge => if an edge =>       C_    E
-                     ↓          from C to A          from C to A        ↓ ↓
-                2    B                                                  B  A (A would be in layer 2)
+                      ↙   ↘                                              ↙   ↘
+                1    C     E => there is no edge => if an edge =>       C     E
+                     ↓          from C to A          from C to A       ↙ ↘
+                2    B                                                B   A (A would be in layer 2)
                      ↓
                 3    A
 - For more details:
@@ -1755,15 +1754,15 @@
     - Time Complexity: O(|V| + |E|)
     -           BFS(G , S):
                     for all u ∈ V:
-                        dist [u] ← ∞
-                        dist [S] ← 0
+                        dist[u] ← ∞
+                    dist[S] ← 0
                     Q ← {S} { queue containing just S}
                     while Q is not empty:
                         u ← Dequeue (Q)
                         for all (u, v) ∈ u.E:
-                            if dist [v ] = ∞ :
-                                Enqueue (Q, v)
-                                dist [v] ← dist [u] + 1
+                            if dist[v ] = ∞ :
+                                Enqueue(Q, v)
+                                dist[v] ← dist[u] + 1
 - BSF Properties:
     - A node is **discovered** when it's found for the 1st time and enqueued
     - A node is **processed** when it's dequeued from the BFS queue: all its unvisited neighbors are discovered (enqueued) 
@@ -1791,13 +1790,20 @@
 </details>
 
 <details>
-<summary>Shortest Path Tree</summary>
+<summary>Shortest Path Tree & Shortest Path</summary>
 
-- It's a new graph G(A) generated from a Graph G for which:
+- The **Shortest Path Tree** is a new graph G(A) generated from a Graph G for which:
     - We take the vertex A as a starting node and
     - Find all the distances from A to all the other nodes
-    - It's a new graph because it doesn't have all G's edges
-    -          G:              G(A):
+    - G(A) has less edges than G (this is why it's new)
+    - G(A) has directed edges: we only draw an edge from v to u, if u is the previous vertex of v
+    - A node u is the **Previous** node of node v means that node v was discovered while we were processing node u
+    - **For every node, there is a previous node**, except the node we discovered 1st 
+    - E.g., in the graph G below:
+        - B is discovered while we were processing A, A is the previous vertex of B
+        - C is discovered while we were processing B, B is the previous vertex of B
+        - For every node, there is a previous node except for the node A
+    -          G:              G(A): Shortest Path Tree (A)
             F--A--B              A
             |/ |  |            ↗↗ ↖↖
             E--D--C           B D E F
@@ -1805,6 +1811,36 @@
             G--H--I           C   G
                              ↗ ↖
                             H   I
+- The **Shortest Path** from A to any node v:
+        - We use the Shortest Path Tree
+        - We build a path from the node v to the node A, by going to the top of the tree until A is reached
+        - This path is in the opposite direction to the edges of the initial graph
+        - We need to reverse the resulted path to get the Shortest path from A to v
+- Implementation, Time Complexity:
+    - Time Complexity: O(|V| + |E|)
+    -           BFS(G , S):
+                    for all u ∈ V:
+                        dist[u] ← ∞
+                        prev[u] ← nil
+                    dist[S] ← 0
+                    Q ← {S} { queue containing just S}
+                    while Q is not empty:
+                        u ← Dequeue (Q)
+                        for all (u, v) ∈ u.E:
+                            if dist[v ] = ∞ :
+                                Enqueue(Q, v)
+                                dist[v] ← dist[u] + 1
+                                prev[v] ← u
+                
+                ReconstructPath(S, u, prev)
+                    result ← empty
+                    while u != S:
+                        result.append(u)
+                        u ← prev[u]
+                    
+                    return Reverse(result)
+- Related Problems:
+    - 
 - For more details:
      - UC San Diego Course: [Shortest Path Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
 
