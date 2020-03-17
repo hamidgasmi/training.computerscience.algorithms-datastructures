@@ -1888,10 +1888,10 @@
                                   Total:      O(|V|^2)         O((|V| + |E|) * Log|V|)
         - In case of a **sparse graph**:
             - |E| ≈ |V|
-            - **Binary Heap implementation is more efficient: T(n) = O(|V|)*Log|V|)**
+            - **Binary Heap implementation is more efficient**: T(n) = O(|V|)*Log|V|)
         - In case of **dense graph**:
             - |E| ≈ |V|^2
-            - **Array implementation is more efficient: T(n) = O(|V|^2)**
+            - **Array implementation is more efficient**: T(n) = O(|V|^2)
 - Related Problems:
     - 
 - For more details:
