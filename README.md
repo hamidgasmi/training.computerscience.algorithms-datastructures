@@ -1876,6 +1876,8 @@
                             dist[v] ← dist[u] + w(u, v)
                             prev[v] ← u
                             H.ChangePriority(v, dist[v])
+    -           ReconstructPath(A, μ, prev):
+                    Similar as BFS ReconstructPath algorithm
     - Time Complexity: 
         - T(n) = T(Initializations) + T(H.MakeQueue) + |V|*T(H.ExtractMin) + |E|*T(H.ChangePriority)
         - Priority Queue could be implemented as an **Array**
@@ -1893,7 +1895,7 @@
             - |E| ≈ |V|^2
             - **Array implementation is more efficient**: T(n) = O(|V|^2)
 - Related Problems:
-    - 
+    - [Computing the Minimum Cost of a Flight](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/133)
 - For more details:
      - UC San Diego Course: [Dijkstra's algorithm]()
      - Visualization: [Dijkstra's algorithm](https://www.cs.usfca.edu/~galles/visualization/Dijkstra.html)
@@ -1904,9 +1906,10 @@
 <summary>Bellman-Ford algorithm</summary>
 
 - Related Problems:
-    - 
+    - [Detecting Anomalies in Currency Exchange Rates](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/134)
+    - [Exchanging Money Optimally](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/135)
 - For more details:
-     - UC San Diego Course: [Bellman-Ford algorithm]()
+    - UC San Diego Course: [Bellman-Ford algorithm]()
 
 </details>
 
