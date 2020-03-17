@@ -1553,6 +1553,7 @@
         - Links between webpages
         - Followers on social network
         - Dependencies between tasks
+- Any path with at least |V| edges contains a cycle
 - For more details:
     - UC San Diego Course: [Basics](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_1_basics.pdf)
     - UC San Diego Course: [Representation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_2_representations.pdf)
@@ -1850,7 +1851,6 @@
 - **Weighted** Graph:
     - It's a directed or undirected graph where
     - Every edge between 2 nodes (μ, ν) has a weight: **ω(μ, ν)**
-- For Dijkstra's algorithm ω(μ, ν) >
 - **ω-length** of a Path:
     - It's denoted as: **Lω(P)**
     - For a path P: μ0, μ1, ..., μn
@@ -1864,20 +1864,22 @@
     - dω(μ, ν) = ∞ for all not connected μ and ν
 - Implementation, Time Complexity:
     -       Dijkstra(G, A):
-                for all u in G.V: #Initializations
+                for all u in G.V: # Initializations
                     dist[u] ← ∞
                     prev[u] ← nil
                 dist[A] ← 0
-                H ← MakeQueue(V) #dist-value as keys
+                H ← MakeQueue(V) # dist-value as keys
                 while H is not empty:
                     u ← H.ExtractMin(H)
                     for v in u.E:
-                        if dist[v] > dist[u] + w(u, v)
-                            dist[v] ← dist[u] + w(u, v)
-                            prev[v] ← u
-                            H.ChangePriority(v, dist[v])
+                        Relax(G, H, u, v, dist, prev)
+    -       Relax(G, H, u, v, dist, prev) # Relax v
+                if dist[v] > dist[u] + w(u, v)
+                    dist[v] ← dist[u] + w(u, v)
+                        prev[v] ← u
+                        H.ChangePriority(v, dist[v])
     -           ReconstructPath(A, μ, prev):
-                    Similar as BFS ReconstructPath algorithm
+                    Same as BFS ReconstructPath algorithm
     - Time Complexity: 
         - T(n) = T(Initializations) + T(H.MakeQueue) + |V|*T(H.ExtractMin) + |E|*T(H.ChangePriority)
         - Priority Queue could be implemented as an **Array**
@@ -1894,6 +1896,16 @@
         - In case of **dense graph**:
             - |E| ≈ |V|^2
             - **Array implementation is more efficient**: T(n) = O(|V|^2)
+- Conditions:
+    - **ω(μ, ν) ≥ 0** for all μ, ν in G
+    - E.g., see the graph below and compute Dijkstra(G, S)
+    - The result dist[A] = +5 => it's wrong!
+    - This is because Dijkstra's algorithm relies on the fact that a shortest path from s to t goes only through vertices that are closer to s than t
+    -                t
+                  5/  |
+                  S   | -20
+                 10\  | 
+                     B
 - Related Problems:
     - [Computing the Minimum Cost of a Flight](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/133)
 - For more details:
@@ -1905,7 +1917,51 @@
 <details>
 <summary>Bellman-Ford algorithm</summary>
 
+- A **Negative weight cycle**:
+    - In the example below the negate cycle is: A → B → C → A => Lω(A → B → C → A) = 1 - 3 - 2 = -4
+    -             -2
+               A ←←← C
+            4↗  1↘  ↗-3
+            S     B
+    - By going ∞ of time around the negative cycle: 
+    - The result is that the distance between S to any connected node ν in the Graph is -∞
+    - d(S, A) = d(S, B) = d(S, C) = d(S, D) = -∞
+- Conditions: 
+    - There is no restriction on the weight: ω(μ, ν) (it could be positive or negative)
+    - But it must not exist any negative weight cycle in the graph
+- Implementation, Time Complexity:
+    -       Bellman-Ford(G, S):
+                #no negative weight cycles in G
+                for all u ∈ V :
+                    dist[u] ← ∞
+                    prev[u] ← nil
+                dist[S] ← 0
+                repeat |V| − 1 times:
+                    for all (u, v) ∈ G.E:
+                        Relax(u, v)
+    -       Relax(G, H, u, v, dist, prev) # Relax v
+                Same as BFS Relax algorithm
+    -       ReconstructPath(A, μ, prev):
+                Same as BFS ReconstructPath algorithm
+    - Time Complexity: **O(|V||E|)**
+- Find Negative Cycles:
+    - A graph G contains a negative weight cycle if and only if |V|-th (additional) iteration of BellmanFord(G , S) updates some dist-value
 - Related Problems:
+    - Maximum product over paths:
+        -            0.88       0.84                           8.08
+                 US -----> EUR ------> GBP ------> ... -> NOK ------> RUB
+                 $1        €1 * 0.88  £1 * 0.88 * 0.84                ₽1 * 0.88 * 0.84 * ... * 8.08 (Product)
+        - Input: Currency exchange graph with weighted directed edges ei between some pairs of currencies with weights rei corresponding to the exchange rate
+        - Output:          k
+                  Maximize ∏ rej = re1 * re2 * ... * rek over paths (e1, e2, ..., ek) from USD to RUP in the graph
+                          j=1
+        - This could be reduce to a short path roblem by:
+        - Replace product with sum by taking logarithms of weights
+        - Negate weights to solve minimization problem instead of maximization problem
+        -           k             k                  k
+                Max ∏ rej <=> Max ∑ log(rej) <=> Min ∑ ( - log(rej))
+                   j=1           j=1                j=1
+        - The new problem is: Find the shortest path between USD and RUR in a weighted graph where **ω(rei) = (− log(rei))**
     - [Detecting Anomalies in Currency Exchange Rates](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/134)
     - [Exchanging Money Optimally](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/135)
 - For more details:
