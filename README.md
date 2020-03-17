@@ -1858,6 +1858,16 @@
 </details>
 
 <details>
+<summary>Bellman-Ford algorithm</summary>
+
+- Related Problems:
+    - 
+- For more details:
+     - UC San Diego Course: [Bellman-Ford algorithm]()
+
+</details>
+
+<details>
 <summary>Minimum Spanning Trees</summary>
 
 - Implementation, Time Complexity and Operations:
