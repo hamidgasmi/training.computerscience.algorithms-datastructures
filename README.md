@@ -1863,29 +1863,29 @@
     - dω(μ, μ) = 0 for any node μ in G
     - dω(μ, ν) = ∞ for all not connected μ and ν
 - Implementation, Time Complexity:
-    -           Dijkstra(G, A):
-                    for all u in G.V: #Initializations
-                        dist[u] ← ∞
-                        prev[u] ← nil
-                    dist[A] ← 0
-                    H ← MakeQueue(V) #dist-value as keys
-                    while H is not empty:
-                        u ← H.ExtractMin(H)
-                        for v in u.E:
-                            if dist[v] > dist[u] + w(u, v)
-                                dist[v] ← dist[u] + w(u, v)
-                                prev[v] ← u
-                                H.ChangePriority(v, dist[v])
+    -       Dijkstra(G, A):
+                for all u in G.V: #Initializations
+                    dist[u] ← ∞
+                    prev[u] ← nil
+                dist[A] ← 0
+                H ← MakeQueue(V) #dist-value as keys
+                while H is not empty:
+                    u ← H.ExtractMin(H)
+                    for v in u.E:
+                        if dist[v] > dist[u] + w(u, v)
+                            dist[v] ← dist[u] + w(u, v)
+                            prev[v] ← u
+                            H.ChangePriority(v, dist[v])
     - Time Complexity: 
         - T(n) = T(Initializations) + T(H.MakeQueue) + |V|*T(H.ExtractMin) + |E|*T(H.ChangePriority)
         - Priority Queue could be implemented as an **Array**
         - Priority Queue could be implemented as a **Binary Heap**
-        -           Time/Implementation      Array            Binary Heap
-                       T(Initialization):      O(V)             O(V)
-                          T(H.MakeQueue):      O(V)             O(V)
-                     |V|*T(H.ExtractMin):      |V| * O(|V|)     |V| * O(Log|V|)
-                     |E|*T(H.ChangePriority):  |E| * O(1)       |E| * O(Log|V|)
-                                       Total:  O(|V|^2)         O((|V| + |E|) * Log|V|)
+        -       Time/Implementation          Array            Binary Heap
+                      T(Initialization):      O(V)             O(V)
+                         T(H.MakeQueue):      O(V)             O(V)
+                    |V|*T(H.ExtractMin):      |V| * O(|V|)     |V| * O(Log|V|)
+                |E|*T(H.ChangePriority):      |E| * O(1)       |E| * O(Log|V|)
+                                  Total:      O(|V|^2)         O((|V| + |E|) * Log|V|)
         - In case of a **sparse graph**:
             - |E| ≈ |V|
             - **Binary Heap implementation is more efficient: T(n) = O(|V|)*Log|V|)**
