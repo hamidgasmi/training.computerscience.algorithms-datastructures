@@ -558,10 +558,10 @@
                         max-index += 1 
                         array[max-index] = key
     -           Top(): 
-                    if max-index >= 0: 
+                    if max-index ≥ 0: 
                         return array[max-index]
     -           Pop(): 
-                    if max-index >= 0: 
+                    if max-index ≥ 0: 
                         value = array[max-index]
                         max-index -= 1 
                         return value
@@ -1524,7 +1524,7 @@
     -       Time Complexity         Edge List   Adjacency Matrix    Adjacency List
                   IsEdge(v1, v2):       O(|E|)         O(1)              O(deg)
                      ListAllEdge:       O(|E|)         O(|V|^2)          O(|E|)
-                ListNeighbors(v):       O(|E|)         O(|V|)            O(deg)
+                ListNeighbors(ν):       O(|E|)         O(|V|)            O(deg)
 - **Density**:
     - A **Dense Graph**:
         - It's a graph where a large fraction of pairs of vertices are connected by edges
@@ -1542,7 +1542,7 @@
     - **Asymptotique analysis depends on the Density of the graph**
 - **Connected Components**:
     - A Graph vertices can be partitioned into Connected Components 
-    - So that v is reachable from w if and only if they are in the same connected component
+    - So that ν is reachable from w if and only if they are in the same connected component
 - A **Cycle** in a graph:
     - It's a sequence of vertices v1,..., vn so that 
     - (v1, v2 ),..., (vn−1, vn), (vn, v1) are all edges
@@ -1568,11 +1568,11 @@
 - It doesn't matter if the graph is directed or undirected
 - Loop on all virtices:
         def DFS(G):
-            mark unvisited all vertices v ∈ G.V
+            mark unvisited all vertices ν ∈ G.V
 
-            for v ∈ G.V:
-                if not visited (v):
-                    Explore(v)
+            for ν ∈ G.V:
+                if not visited (ν):
+                    Explore(ν)
 
 - Explore 1 path until hitting a dead end:      
         def Explore (v ):
@@ -1582,7 +1582,7 @@
                     Explore (w)
 - Time complexity:
     -            Implementation:    Explore()        DFS
-                  Adjacency List:    O(degre)       O(|V| + ∑ degre for all v) = O(|V| + |E|)
+                  Adjacency List:    O(degre)       O(|V| + ∑ degre for all ν) = O(|V| + |E|)
                 Adjacency Matrix:    O(|V|)         O(|V|^2)
     - Number of calls to explore:
         - Each explored vertex is marked visited
@@ -1598,27 +1598,27 @@
     - We need to keep track of other data to be useful
     - Augment functions to store additional information
     -     def Explore (v ):
-            visited(v) = true
-            previsit (v)
+            visited(ν) = true
+            previsit (ν)
             for (v , w) ∈ E:
                 if not visited (w):
                     Explore (w)
-            postvisit (v)
+            postvisit (ν)
     - E.g., **Clock**:
         - Keep track of order of visits
         - Clock ticks at each pre-/post- visit
         - Records previsit and postvisit times for each v
         -       previsit (v )
-                    pre (v) ← clock
+                    pre (ν) ← clock
                     clock ← clock + 1
         -       postvisit (v )
                     post (v ) ← clock
                     clock ← clock + 1
         - It tells us about the execution of DFS
-        - For any u, v the intervals [ pre(u), post(u)] and [ pre (v), post (v)] are either nested or disjoint
-        - Nested: u: [ 1, 6 ], v [ 3, 4 ]: v is reachable from u
-        - Disjoint: u [ 1, 6 ], v [ 9, 11 ]: v isn't reachable from u
-        - Interleaved (isn't possible)  u [ 1, 6 ], v [ 3, 8 ]
+        - For any μ, ν the intervals [ pre(μ), post(μ)] and [ pre(μ), post(μ)] are either nested or disjoint
+        - Nested: μ: [ 1, 6 ], ν [ 3, 4 ]: ν is reachable from μ
+        - Disjoint: μ [ 1, 6 ], ν [ 9, 11 ]: ν isn't reachable from μ
+        - Interleaved (isn't possible) μ[ 1, 6 ], ν [ 3, 8 ]
 - Related problems:
     - Detect there is a cycle in a graph:
         - [Checking Consistency of CS Curriculum](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/95)
@@ -1657,8 +1657,8 @@
 <summary>Strongly Connected Components</summary>
 
 - **Connected vertices**:
-    - 2 vertices v, w in a directed graph are connected:
-    - if you can reach v from w and can reach w from v
+    - 2 vertices ν, w in a directed graph are connected:
+    - if you can reach ν from w and can reach w from v
 - **Strongly connected graph**: is a directed graph where every vertex is reachable from every other vertex
 - **Strongly connected components**, **SCC**: It's a collection of subgraphs of an arbitrary directed graph that are strongly connected
 - **Metagraph**:
@@ -1667,7 +1667,7 @@
     - **The metagraph of a directed graph is always a DAG**
 - **Sink Components** 
     - It's a subgrph of a directed graph with no outgoing edges
-    - If v is in a sink SCC, `explore (v)` finds this SCC
+    - If ν is in a sink SCC, `explore (ν)` finds this SCC
 - **Source Components** 
     - It's a subgrph of a directed graph with no incoming edges
     - The vertex with the largest postorder number is in a source component
@@ -1679,9 +1679,9 @@
 - Find all SCCs of a directed graph G:
     -       SCCs (G, Gr):
                 Run DFS(Gr):
-                for v ∈ V in reverse postorder:
-                    if v isn't visited:
-                        Explore(v, G): vertices found are first SCC
+                for ν ∈ V in reverse postorder:
+                    if ν isn't visited:
+                        Explore(ν, G): vertices found are first SCC
                         Mark visited vertices as new SCC
     - Time Complexity: O(|V| + |E|)
         - It's essentially DFS on Gr and then on G
@@ -1695,22 +1695,22 @@
 </details>
 
 <details>
-<summary>Paths in Graphs: Path and Distance (Basics)</summary>
+<summary>Paths in unweighted Graphs: Path and Distance (Basics)</summary>
 
 - A **Path**:
-    - It's a collection of edges that connects 2 vertices u, v
+    - It's a collection of edges that connects 2 vertices μ, ν
     - It could exist multiple paths linking same vertices
 - **Path length**:
     - L(P)
     - It's the number of edges of a path
-- **Distance**
+- **Distance** in **unweighted** graph
     - It's between 2 nodes in a graph
     - It's the length of the shortest possible path between these nodes  
-    - For any any pair of vertices u, v: **Distance(u, v) in a directed graph is >= Distance(u, v) in the corresponding undirected graph**
+    - For any any pair of vertices μ, ν: **Distance(μ, ν) in a directed graph is ≥ Distance(μ, ν in the corresponding undirected graph**
 - **Distance Layers**:
-    - For a given vertex v in  a graph, it's a way of representing the graph by repositioning all its nodes from top to bottom with increasing distance from v
+    - For a given vertex ν in  a graph, it's a way of representing the graph by repositioning all its nodes from top to bottom with increasing distance from ν
     - Layer 0: contains the vertex v
-    - Layer 1: contains all vertices which distance to v is: 1
+    - Layer 1: contains all vertices which distance to ν is: 1
     - ...
     - E.g.:     G:       Layers    Distance Layers from A       Distance Layers from C
             A -- B -- C    0           A                               C
@@ -1753,20 +1753,20 @@
 - Implementation, Time Complexity:
     - Time Complexity: O(|V| + |E|)
     -           BFS(G , S):
-                    for all u ∈ V:
-                        dist[u] ← ∞
+                    for all μ ∈ V:
+                        dist[μ] ← ∞
                     dist[S] ← 0
                     Q ← {S} { queue containing just S}
                     while Q is not empty:
-                        u ← Dequeue (Q)
-                        for all (u, v) ∈ u.E:
+                       μ ← Dequeue (Q)
+                        for all (μ, ν) ∈ u.E:
                             if dist[v ] = ∞ :
-                                Enqueue(Q, v)
-                                dist[v] ← dist[u] + 1
+                                Enqueue(Q, ν)
+                                dist[ν] ← dist[μ] + 1
 - BSF Properties:
     - A node is **discovered** when it's found for the 1st time and enqueued
     - A node is **processed** when it's dequeued from the BFS queue: all its unvisited neighbors are discovered (enqueued) 
-    - By the time a node u at distance d from S is dequeued, all the nodes at distance at most d have already been discovered (enqueued)
+    - By the time a nodeμat distance d from S is dequeued, all the nodes at distance at most d have already been discovered (enqueued)
     - **BSF Queue property**:
         - At any moment, if the 1st node in the queue is at distance d from S, then all the nodes in the queue are either at distance d or d + 1 from S
         - All the nodes in the queue at distance d go before (if any) all the nodes at distance d + 1
@@ -1796,8 +1796,8 @@
     - We take the vertex A as a starting node and
     - Find all the distances from A to all the other nodes
     - G(A) has less edges than G (this is why it's new)
-    - G(A) has directed edges: we only draw an edge from v to u, if u is the previous vertex of v
-    - A node u is the **Previous** node of node v means that node v was discovered while we were processing node u
+    - G(A) has directed edges: we only draw an edge from ν to μ, ifμis the previous vertex of v
+    - A node μ is the **Previous** node of node ν means that node ν was discovered while we were processing node μ
     - **For every node, there is a previous node**, except the node we discovered 1st 
     - E.g., in the graph G below:
         - B is discovered while we were processing A, A is the previous vertex of B
@@ -1811,31 +1811,31 @@
             G--H--I           C   G
                              ↗ ↖
                             H   I
-- The **Shortest Path** from A to any node v:
+- The **Shortest Path** from A to any node ν:
         - We use the Shortest Path Tree
-        - We build a path from the node v to the node A, by going to the top of the tree until A is reached
+        - We build a path from the node ν to the node A, by going to the top of the tree until A is reached
         - This path is in the opposite direction to the edges of the initial graph
         - We need to reverse the resulted path to get the Shortest path from A to v
 - Implementation, Time Complexity:
     - Time Complexity: O(|V| + |E|)
     -           BFS(G , S):
-                    for all u ∈ V:
-                        dist[u] ← ∞
-                        prev[u] ← nil
+                    for all μ ∈ V:
+                        dist[μ] ← ∞
+                        prev[μ] ← nil
                     dist[S] ← 0
                     Q ← {S} { queue containing just S}
                     while Q is not empty:
-                        u ← Dequeue (Q)
-                        for all (u, v) ∈ u.E:
+                        μ ← Dequeue (Q)
+                        for all (μ, ν) ∈ u.E:
                             if dist[v ] = ∞ :
-                                Enqueue(Q, v)
-                                dist[v] ← dist[u] + 1
-                                prev[v] ← u
-    -           ReconstructPath(S, u, prev)
+                                Enqueue(Q, ν)
+                                dist[ν] ← dist[μ] + 1
+                                prev[ν] ← u
+    -           ReconstructPath(S, μ, prev)
                     result ← empty
-                    while u != S:
-                        result.append(u)
-                        u ← prev[u]
+                    while μ != S:
+                        result.append(μ)
+                        μ ← prev[μ]
                     
                     return Reverse(result)
 - Related Problems:
@@ -1845,8 +1845,53 @@
 </details>
 
 <details>
-<summary>Fastest Route: Dijkstra's algorithm</summary>
+<summary>Fastest Route in weighted Graphs: Dijkstra's algorithm</summary>
 
+- **Weighted** Graph:
+    - It's a directed or undirected graph where
+    - Every edge between 2 nodes (μ, ν) has a weight: **ω(μ, ν)**
+- For Dijkstra's algorithm ω(μ, ν) >
+- **ω-length** of a Path:
+    - It's denoted as: **Lω(P)**
+    - For a path P: μ0, μ1, ..., μn
+    -                n
+            Lω(P) =  ∑ ω(μi-1, μi)
+                   i = 1
+- **Distance** in a **weighted** graph between 2 nodes μ and ν:
+    - It's symbolized: **dω(μ, ν)**
+    - It's the smallest **ω-length** of any μ - ν path
+    - dω(μ, μ) = 0 for any node μ in G
+    - dω(μ, ν) = ∞ for all not connected μ and ν
+- Implementation, Time Complexity:
+    -           Dijkstra(G, A):
+                    for all u in G.V: #Initializations
+                        dist[u] ← ∞
+                        prev[u] ← nil
+                    dist[A] ← 0
+                    H ← MakeQueue(V) #dist-value as keys
+                    while H is not empty:
+                        u ← H.ExtractMin(H)
+                        for v in u.E:
+                            if dist[v] > dist[u] + w(u, v)
+                                dist[v] ← dist[u] + w(u, v)
+                                prev[v] ← u
+                                H.ChangePriority(v, dist[v])
+    - Time Complexity: 
+        - T(n) = T(Initializations) + T(H.MakeQueue) + |V|*T(H.ExtractMin) + |E|*T(H.ChangePriority)
+        - Priority Queue could be implemented as an **Array**
+        - Priority Queue could be implemented as a **Binary Heap**
+        -           Time/Implementation      Array            Binary Heap
+                       T(Initialization):      O(V)             O(V)
+                          T(H.MakeQueue):      O(V)             O(V)
+                     |V|*T(H.ExtractMin):      |V| * O(|V|)     |V| * O(Log|V|)
+                     |E|*T(H.ChangePriority):  |E| * O(1)       |E| * O(Log|V|)
+                                       Total:  O(|V|^2)         O((|V| + |E|) * Log|V|)
+        - In case of a **sparse graph**:
+            - |E| ≈ |V|
+            - **Binary Heap implementation is more efficient: T(n) = O(|V|)*Log|V|)**
+        - In case of **dense graph**:
+            - |E| ≈ |V|^2
+            - **Array implementation is more efficient: T(n) = O(|V|^2)**
 - Related Problems:
     - 
 - For more details:
