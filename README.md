@@ -1839,7 +1839,6 @@
                     
                     return Reverse(result)
 - Related Problems:
-    - 
 - For more details:
      - UC San Diego Course: [Shortest Path Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
 
