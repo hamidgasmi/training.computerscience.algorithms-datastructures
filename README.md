@@ -1695,7 +1695,7 @@
 </details>
 
 <details>
-<summary>Paths in Graphs: Path and Distance (Basic)</summary>
+<summary>Paths in Graphs: Path and Distance (Basics)</summary>
 
 - A **Path**:
     - It's a collection of edges that connects 2 vertices u, v
@@ -1843,6 +1843,17 @@
     - 
 - For more details:
      - UC San Diego Course: [Shortest Path Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
+
+</details>
+
+<details>
+<summary>Fastest Route: Dijkstra's algorithm</summary>
+
+- Related Problems:
+    - 
+- For more details:
+     - UC San Diego Course: [Dijkstra's algorithm]()
+     - Visualization: [Dijkstra's algorithm](https://www.cs.usfca.edu/~galles/visualization/Dijkstra.html)
 
 </details>
 
