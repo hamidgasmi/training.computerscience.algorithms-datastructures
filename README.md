@@ -1831,8 +1831,7 @@
                                 Enqueue(Q, v)
                                 dist[v] ← dist[u] + 1
                                 prev[v] ← u
-                
-                ReconstructPath(S, u, prev)
+    -           ReconstructPath(S, u, prev)
                     result ← empty
                     while u != S:
                         result.append(u)
