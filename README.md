@@ -1750,6 +1750,7 @@
 <details>
 <summary>Breadth-First Search (BFS)</summary>
 
+- To traverse all nodes at one layer before progressing the next layer
 - Implementation, Time Complexity:
     - Time Complexity: O(|V| + |E|)
     -           BFS(G , S):
@@ -1763,13 +1764,14 @@
                             if dist [v ] = ∞ :
                                 Enqueue (Q, v)
                                 dist [v] ← dist [u] + 1
-- A node is **discovered** when it's found for the 1st time and enqueued
-- A node is **processed** when it's dequeued from the BFS queue: all its unvisited neighbors are discovered (enqueued) 
-- By the time a node u at distance d from S is dequeued, all the nodes at distance at most d have already been discovered (enqueued)
-- **BSF Queue property**:
-    - At any moment, if the 1st node in the queue is at distance d from S, then all the nodes in the queue are either at distance d or d + 1 from S
-    - All the nodes in the queue at distance d go before (if any) all the nodes at distance d + 1
-    - Nodes at distance > d + 1 will be discovered when d + 1 are processed => all d are gone
+- BSF Properties:
+    - A node is **discovered** when it's found for the 1st time and enqueued
+    - A node is **processed** when it's dequeued from the BFS queue: all its unvisited neighbors are discovered (enqueued) 
+    - By the time a node u at distance d from S is dequeued, all the nodes at distance at most d have already been discovered (enqueued)
+    - **BSF Queue property**:
+        - At any moment, if the 1st node in the queue is at distance d from S, then all the nodes in the queue are either at distance d or d + 1 from S
+        - All the nodes in the queue at distance d go before (if any) all the nodes at distance d + 1
+        - Nodes at distance > d + 1 will be discovered when d + 1 are processed => all d are gone
 - Related problems:
     - [Computing the Minimum Number of Flight Segments](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/131)
     - A **bipartite** graph:
@@ -1788,7 +1790,25 @@
 
 </details>
 
+<details>
+<summary>Shortest Path Tree</summary>
 
+- It's a new graph G(A) generated from a Graph G for which:
+    - We take the vertex A as a starting node and
+    - Find all the distances from A to all the other nodes
+    - It's a new graph because it doesn't have all G's edges
+    -          G:              G(A):
+            F--A--B              A
+            |/ |  |            ↗↗ ↖↖
+            E--D--C           B D E F
+            |   / |           ↑   ↑
+            G--H--I           C   G
+                             ↗ ↖
+                            H   I
+- For more details:
+     - UC San Diego Course: [Shortest Path Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
+
+</details>
 
 <details>
 <summary>Minimum Spanning Trees</summary>
