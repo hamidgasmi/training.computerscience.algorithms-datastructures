@@ -1914,7 +1914,7 @@
 </details>
 
 <details>
-<summary>Bellman-Ford algorithm</summary>
+<summary>Fastest Route in weighted Graphs: Bellman-Ford algorithm</summary>
 
 - A **Negative weight cycle**:
     - In the example below the negative cycle is: A → B → C → A => Lω(A → B → C → A) = 1 - 3 - 2 = -4
@@ -1993,7 +1993,7 @@
     - [Detecting Anomalies in Currency Exchange Rates](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/134)
     - [Exchanging Money Optimally](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/135)
 - For more details:
-    - UC San Diego Course: [Bellman-Ford algorithm]()
+    - UC San Diego Course: [Bellman-Ford algorithm](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/2_paths_in_graphs/10_paths_in_graphs_3_bellman_ford.pdf)
 
 </details>
 
