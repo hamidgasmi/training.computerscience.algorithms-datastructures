@@ -1504,7 +1504,7 @@
     - **Edge List**: 
         - It consists of storing the graph as a list of edges
         - Each edge is a pair of vertices,
-        - E.g., Edges List: (A, B) --> (A, C ) --> (A, D) --> (C , D)
+        - E.g., Edges List: (A, B) ——> (A, C ) ——> (A, D) ——> (C , D)
     - **Adjacency Matrix**:
         - Matrix[i,j] = 1 if there is an edge, 0 if there is not
         - E.g.      Undirected              Directed
@@ -1553,7 +1553,6 @@
         - Links between webpages
         - Followers on social network
         - Dependencies between tasks
-- Any path with at least |V| edges contains a cycle
 - For more details:
     - UC San Diego Course: [Basics](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_1_basics.pdf)
     - UC San Diego Course: [Representation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_2_representations.pdf)
@@ -1714,13 +1713,13 @@
     - Layer 1: contains all vertices which distance to ν is: 1
     - ...
     - E.g.:     G:       Layers    Distance Layers from A       Distance Layers from C
-            A -- B -- C    0           A                               C
-                      |                |                             /   \
-                      D    1           B                            B     D
-                                       |                            |
-                           2           C                            A
-                                       |
-                           3           D
+            A — B — C    0           A                               C
+                    |                |                             /   \
+                    D    1           B                            B     D
+                                     |                            |
+                         2           C                            A
+                                     |
+                         3           D
     - In a Undirected graph, **Edges are possible between same layer nodes or adjacent layers nodes** 
         - In other words, there is no edge between nodes of a layer l and nodes of layers < l - 1 and layers > l + 1 
         - E.g. From example above:
@@ -1805,13 +1804,13 @@
         - C is discovered while we were processing B, B is the previous vertex of B
         - For every node, there is a previous node except for the node A
     -          G:              G(A): Shortest Path Tree (A)
-            F--A--B              A
-            |/ |  |            ↗↗ ↖↖
-            E--D--C           B D E F
-            |   / |           ↑   ↑
-            G--H--I           C   G
-                             ↗ ↖
-                            H   I
+            F — A — B              A
+            | / |   |            ↗↗ ↖↖
+            E — D — C           B D E F
+            |     / |           ↑   ↑
+            G — H — I           C   G
+                               ↗ ↖
+                              H   I
 - The **Shortest Path** from A to any node ν:
         - We use the Shortest Path Tree
         - We build a path from the node ν to the node A, by going to the top of the tree until A is reached
@@ -1918,7 +1917,7 @@
 <summary>Bellman-Ford algorithm</summary>
 
 - A **Negative weight cycle**:
-    - In the example below the negate cycle is: A → B → C → A => Lω(A → B → C → A) = 1 - 3 - 2 = -4
+    - In the example below the negative cycle is: A → B → C → A => Lω(A → B → C → A) = 1 - 3 - 2 = -4
     -             -2
                A ←←← C
             4↗  1↘  ↗-3
@@ -1944,12 +1943,29 @@
     -       ReconstructPath(A, μ, prev):
                 Same as BFS ReconstructPath algorithm
     - Time Complexity: **O(|V||E|)**
+- Properties:
+    - After k iterations of relaxations, for any node u, dist[u] is the smallest length of a path from S to u that contains at most k edges
+    - Any path with at least |V| edges contains a cycle
+    - This cycle can be removed without making the path longer (because the cycle weight isn't negative)
+    - Shortest path contains at most V − 1 edges and will be found after V − 1 iterations
+    - Bellman–Ford algorithm correctly finds dist[u] = d (S, u):
+        - If there is no negative weight cycle reachable from S and 
+        - u is reachable from this negative weight cycle
 - Find Negative Cycles:
-    - A graph G contains a negative weight cycle if and only if |V|-th (additional) iteration of BellmanFord(G , S) updates some dist-value
+    - A graph G contains a negative weight cycle if and only if |V|-th (additional) iteration of BellmanFord(G , S) updates some dist-value:
+    - Run |V| iterations of Bellman-Ford algorithm
+    - Save node v related on the last iteration: 
+        - v isn't necessary on the cycle 
+        - but it's reachable from the cycle
+        - Otherwise, it couldn't be relaxed on the |V|-th iteration!
+        - In fact, it means that there is a path length which is shorter than any path which contains few edges and
+        - this path with at least |V| edges contains a cycle and if we remove the cycle, the path must become longer
+    - Start from x ← v, follow the link x ← prev[x] for |V| times — will be definitely on the cycle
+    - Save y ← x and go x ← prev[x] until x = y again
 - Related Problems:
     - Maximum product over paths:
         -            0.88       0.84                           8.08
-                 US -----> EUR ------> GBP ------> ... -> NOK ------> RUB
+                 US —————> EUR —————> GBP —————> ... —> NOK ————————> RUB
                  $1        €1 * 0.88  £1 * 0.88 * 0.84                ₽1 * 0.88 * 0.84 * ... * 8.08 (Product)
         - Input: Currency exchange graph with weighted directed edges ei between some pairs of currencies with weights rei corresponding to the exchange rate
         - Output:          k
@@ -1962,6 +1978,18 @@
                 Max ∏ rej <=> Max ∑ log(rej) <=> Min ∑ ( - log(rej))
                    j=1           j=1                j=1
         - The new problem is: Find the shortest path between USD and RUR in a weighted graph where **ω(rei) = (− log(rei))**
+    - Find if an **Infinite Arbitrage** is possible from a currency S to a currency u: 
+        - It's possible to get any (+∞) amount of currency u from currency S if and only if u is reachable from some node w for which dist[w] decreased on iteration V of Bellman-Ford (there is a negative cycle in a graph)
+        - Do |V| iterations of Bellman–Ford
+        - Save all nodes relaxed on V-th iteration — set A
+        - Put all nodes from A in queue Q
+        - Do BFS with queue Q and find all nodes reachable from A: all those nodes and only those can have infinite arbitrage
+    - Reconstruct the Infinite Arbitrage from a currency S to a currency u:
+        - See problem above
+        - During BFS, remember the parent of each visited node
+        - Reconstruct the path to u from some node w relaxed on iteration V
+        - Go back from w to find negative cycle from which w is reachable
+        - Use this negative cycle to achieve infinite arbitrage from S to u
     - [Detecting Anomalies in Currency Exchange Rates](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/134)
     - [Exchanging Money Optimally](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/135)
 - For more details:
