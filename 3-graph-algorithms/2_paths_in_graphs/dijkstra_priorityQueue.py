@@ -26,7 +26,7 @@ class Graph:
         parents = [None] * len(self.adjacency_list)
         parents[s] = -1
 
-        q = queue.PriorityQueue()
+        q = queue.PriorityQueue(n)
         for v in range(0, len(self.adjacency_list)):
             if v == s:
                 continue
