@@ -1,4 +1,3 @@
-#Uses python3
 import sys
 import queue
 from collections import namedtuple
@@ -18,64 +17,46 @@ class Graph:
             self.adjacency_list[s - 1].append(Edge(d - 1, w))
 
     # Implementation: Bellman-Ford algorithm
-    def shortest_paths(self, s, distances):
+    def shortest_paths(self, s, distances, reachable, shortest):
         n = self.v_size()
         parents = [-1] * n
+        
         distances[s] = 0
-        negative_cycle_reachable_nodes = []
+        reachable[s] = 1
+        
+        q = queue.Queue()
 
         # Find shortest paths
         for i in range(n):
             for v in range(n):
-                for a_tuple in self.adjacency_list[v]:
-                    a_candidate_distance = distances[v] + a_tuple.weight
-                    if distances[a_tuple.vertex] > a_candidate_distance:
-                        distances[a_tuple.vertex] = a_candidate_distance
-                        parents[a_tuple.vertex] = v
-                        
-                        if i == n - 1:
-                            negative_cycle_reachable_nodes.append(a_tuple.vertex)
-                            distances[s] = - 10**19
+                if distances[v] != 10**19:
+                    for a_tuple in self.adjacency_list[v]:
+                        a_candidate_distance = distances[v] + a_tuple.weight
+                        if distances[a_tuple.vertex] > a_candidate_distance:
+                            distances[a_tuple.vertex] = a_candidate_distance
+                            parents[a_tuple.vertex] = v
+                            reachable[a_tuple.vertex] = 1
+                            if i == n - 1:
+                                q.put(a_tuple.vertex)
                             
-        # Find all negative cycles
+        # Find all negative cycles (BFS traversal)
         visited = [False] * n
-        for v in negative_cycle_reachable_nodes:
-            cycle_v = self.get_cycle(v, parents)
-            # Visit all nodes reachable from a negative cycle
-            self.dfs(cycle_v, distances, visited)
-    
-    def get_cycle(self, v, parents):
-        # Find a node in a cycle where v is reachable from
-        cycle_v = v
-        for _ in range(self.v_size()):
-            cycle_v = parents[cycle_v]
+        self.bfs(q, shortest, visited)
+            
+    def bfs(self, q, shortest, visited):
+        while not q.empty():
+            v = q.get()
+            visited[v] = True
+            shortest[v] = 0
+            for a_tuple in self.adjacency_list[v]:
+                if not visited[a_tuple.vertex]:
+                    q.put(a_tuple.vertex)
 
-        return cycle_v
-
-        # Find all nodes of the cycle
-        #cycle = []
-        #cycle.append(cycle_v)
-        #p = parents[cycle_v]
-        #while p != cycle_v:
-        #    cycle.append(p)
-        #    p = parents[p]
-        # return cycle
-
-    def dfs(self, s, distances, visited):
-        if visited[s]:
-            return
-        
-        visited[s] = True
-        distances[s] = - 10**19
-
-        for a_tuple in self.adjacency_list[s]:
-            self.dfs(a_tuple.vertex, distances, visited)
-
-def shortet_paths(n, edges, s, distance):
+def shortet_paths(n, edges, s, distances, reachable, shortest):
 
     aGraph = Graph(n, edges)
 
-    aGraph.shortest_paths(s, distances)
+    aGraph.shortest_paths(s, distances, reachable, shortest)
 
 if __name__ == '__main__':
     input = sys.stdin.read()
@@ -88,11 +69,13 @@ if __name__ == '__main__':
     s = data[0]
     s -= 1
     distances = [10**19] * n
-    shortet_paths(n, edges, s, distances)
+    reachable = [0] * n
+    shortest = [1] * n
+    shortet_paths(n, edges, s, distances, reachable, shortest)
     for x in range(n):
-        if distances[x] == 10**19:
-            print('*')
-        elif distances[x] == - 10**19:
-            print('-')
+        if reachable[x] == 0:
+            print("*")
+        elif shortest[x] == 0:
+            print("-")
         else:
             print(distances[x])
