@@ -2002,7 +2002,7 @@
 
 - Input: A connected, undirected graph *G(V, E)* with positive edge weights
 - Output: A subset of edges *E' ⊆ E* of minimum total weight such that *G(V, E') is connected
-- E.g. G(V, E, Total Weight: 34)         G'(V, E', Total Weight: 14)
+- E.g. G(V, E, Total Weight: 34)         G'(V, E', Total Weight: 14): MST
 -         4   8                             |E| = 5 = |V| - 1
         A — B — C                           A — B   C
        2| \1 \6 |1                          | \   \ |
@@ -2022,14 +2022,44 @@
 <summary>Minimum Spanning Trees (MST): Kruskal's algorithm</summary>
 
 - Repeatedly add the next lightest edge if this doesn’t produce a cycle
-- 
+- It's a greedy algorithm:
+    - **Greedy choice**: to choose the lightest edge that doesn't produce a cycle
+    - Prove that this choice is safe: see the course slide
+    - Iterate: solve the same problem without the edge chosen above
 - Implementation, Time Complexity and Operations:
-
+    - To use disjoint sets data structure
+    - Initially, each vertex lies in a separate set
+    - Each set is the set of vertices of a connected component
+    - To check whether the current edge {u, v} produces a cycle, we check whether u and v belong to the same set
+    -           Kruskal(G):
+                    for all u ∈ V :
+                        MakeSet(v)
+                    X ← empty set
+                    Sort the edges E by weight
+                    for all {u, v} ∈ E in non-decreasing weight order:
+                        if Find(u) != Find(v):
+                            add {u, v} to X
+                            Union(u, v)
+                    return X
+    - T(n) = |V| T(MakeSet) + T(Sorting E) + 2 * |E| T(Find) + (|V| - 1) * T(Union)
+    - T(MakeSet) = O(1)
+    - T(Sorting E) = O(|E| Log|E|) = O(2|E|Log|V|) = O(|E|Log|V|): in a simple graph, |E| = O(|V|^2)
+    - T(Find) = T(Union) = O(log|V|)
+    - T(n) = O(|V|) + O(|E|Log|V|) + O(|E|Log|V|) + O(|V|Log|V|) = O((|E| + |V|) log|V|)
+    - **T(n) = O((|E|) log|V|)**
+    - If |E| is given **sorted** and Disjoint set is implemented with **Compression Heuristic**
+        - T(Sorting E) = O(1)
+        - T(Find) = T(Union) = O(log*|V|)
+        - T(n) = O(|V|) + O(1) + O(|E|log*|V|) + O(|V|log*|V|) = O(|V|) + O((|E| + |V|) log*|V|) = O(|V|) + O((|E|log*|V|)
+        - **T(n) = O((|E|log*|V|)**
+        - It's **linear**!
 - Related Problems:
     - Building a network
     - [Building Roads to Connect Cities](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/136)
+    - [Clustering](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/137)
 - For more details:
     - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
+    - Visualization: [Kruskal MST](https://www.cs.usfca.edu/~galles/visualization/Kruskal.html)
 
 </details>
 
