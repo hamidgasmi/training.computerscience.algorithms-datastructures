@@ -1998,20 +1998,52 @@
 </details>
 
 <details>
-<summary>Minimum Spanning Trees</summary>
+<summary>Minimum Spanning Trees (MST): Basics</summary>
 
+- Input: A connected, undirected graph *G(V, E)* with positive edge weights
+- Output: A subset of edges *E' ⊆ E* of minimum total weight such that *G(V, E') is connected
+- E.g. G(V, E, Total Weight: 34)         G'(V, E', Total Weight: 14)
+-         4   8                             |E| = 5 = |V| - 1
+        A — B — C                           A — B   C
+       2| \1 \6 |1                          | \   \ |
+        D — E — F                           D   E   F
+          3   9
+- An **MST** is a tree: 
+        - It's an undirected graph that is connected and acyclic
+        - A **tree** on **n vertices** has **n - 1 edges**
+- Any connected undirected graph *G(V, E)* with *|E| = |V| - 1* is a tree
+- An undirected graph is a tree if there is a unique path between any pair of its vertices
+- For more details:
+    - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
+
+</details>
+
+<details>
+<summary>Minimum Spanning Trees (MST): Kruskal's algorithm</summary>
+
+- Repeatedly add the next lightest edge if this doesn’t produce a cycle
+- 
 - Implementation, Time Complexity and Operations:
 
-- Programming Languages:
-    - Python:
-    - C++:
-    - Java:
 - Related Problems:
-    - 
-- Use Cases:
-    - 
+    - Building a network
+    - [Building Roads to Connect Cities](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/136)
 - For more details:
-    - UC San Diego Course: []()
+    - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
+
+</details>
+
+<details>
+<summary>Minimum Spanning Trees (MST): Prim’s algorithm</summary>
+
+- Repeatedly attach a new vertex to the current tree by a lightest edge
+- Implementation, Time Complexity and Operations:
+
+- Related Problems:
+    - Building a network
+    - [Building Roads to Connect Cities](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/136)
+- For more details:
+    - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
 
 </details>
 
