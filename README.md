@@ -2103,7 +2103,6 @@
 - Related Problems:
     - Building a network
     - [Building Roads to Connect Cities](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/136)
-    - [Clustering](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/137)
 - For more details:
     - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
     - Visualization: [Prim’s MST](https://www.cs.usfca.edu/~galles/visualization/Prim.html)
