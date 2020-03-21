@@ -2054,12 +2054,11 @@
     - T(Find) = T(Union) = O(log|V|)
     - T(n) = O(|V|) + O(|E|Log|V|) + O(|E|Log|V|) + O(|V|Log|V|) = O((|E| + |V|) log|V|)
     - **T(n) = O((|E|) log|V|)**
-    - If |E| is given **sorted** and Disjoint set is implemented with **Compression Heuristic**
+    - If E is given already **sorted** and Disjoint set is implemented with **Compression Heuristic**
         - T(Sorting E) = O(1)
         - T(Find) = T(Union) = O(log*|V|)
         - T(n) = O(|V|) + O(1) + O(|E|log*|V|) + O(|V|log*|V|) = O(|V|) + O((|E| + |V|) log*|V|) = O(|V|) + O((|E|log*|V|)
-        - **T(n) = O((|E|log*|V|)**
-        - It's **linear**!
+        - T(n) = O((|E|log*|V|): it's **linear**!
 - Related Problems:
     - Building a network
     - [Building Roads to Connect Cities](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/136)
@@ -2098,9 +2097,9 @@
                     {The resulted MST is in parent}
     - T(n) = |V| T(ExtractMin) + |E| T (ChangePriority)
         - Array-based implementation: O(|V|^2)
-        - Binary heap-based-based implementation: O((|V| + |E|) log |V|) = O(|E| log |V|)
-        - In case of a **sparse graph** (|E| ≈ |V|): **Binary Heap implementation is more efficient**: **T(n) = O(|V|)*Log|V|)**
-        - In case of **dense graph** (|E| ≈ |V|^2): **Array implementation is more efficient**: **T(n) = O(|V|^2)**
+        - Binary heap-based implementation: O((|V| + |E|) log |V|) = O(|E| log |V|)
+        - In case of a **sparse graph** (*|E| ≈ |V|*): **Binary Heap implementation is more efficient**: **T(n) = O(|V|)*Log|V|)**
+        - In case of **dense graph** (*|E| ≈ |V|^2*): **Array implementation is more efficient**: **T(n) = O(|V|^2)**
 - Related Problems:
     - Building a network
     - [Building Roads to Connect Cities](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/136)
