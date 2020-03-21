@@ -1,4 +1,3 @@
-#Uses python3
 import sys
 import math
 import queue
@@ -24,8 +23,7 @@ def minimum_distance(x, y):
     while not hq.empty():
         p = hq.get()
         visited[p.index] = True
-        #print("(i, x, y, distances): ", p.index, p.x, p.y, distances)
-        #print("hq.empty", "empty" if hq.empty() else "not empty")
+
         for i in range(n):
             if not visited[i]:
                 candidate_distance = math.sqrt((p.x - x[i])**2 + (p.y - y[i])**2)
