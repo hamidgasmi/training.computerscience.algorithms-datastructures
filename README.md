@@ -2095,9 +2095,9 @@
                                 parent[z] ← v
                                 ChangePriority(PrioQ, z, cost[z])
                     {The resulted MST is in parent}
-    - T(n) = |V| T(ExtractMin) + |E| T (ChangePriority)
-        - Array-based implementation: O(|V|^2)
-        - Binary heap-based implementation: O((|V| + |E|) log |V|) = O(|E| log |V|)
+    - *T(n) = |V| T(ExtractMin) + |E| T(ChangePriority)*
+        - Array-based implementation: *O(|V|^2)*
+        - Binary heap-based implementation: *O((|V| + |E|) log |V|) = O(|E| log |V|)*
         - In case of a **sparse graph** (*|E| ≈ |V|*): **Binary Heap implementation is more efficient**: **T(n) = O(|V|)*Log|V|)**
         - In case of **dense graph** (*|E| ≈ |V|^2*): **Array implementation is more efficient**: **T(n) = O(|V|^2)**
 - Related Problems:
