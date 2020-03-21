@@ -2021,11 +2021,18 @@
 <details>
 <summary>Minimum Spanning Trees (MST): Kruskal's algorithm</summary>
 
-- Repeatedly add the next lightest edge if this doesn’t produce a cycle
 - It's a greedy algorithm:
-    - **Greedy choice**: to choose the lightest edge that doesn't produce a cycle
+    - Let be a graph *G(V, E)* and *X ⊆ E*
+    - Let start with: 
+        - All *V*: all vertices form then a forest: T1, T2, ..., T|V|
+        - *X : { }* is empty
+    - **Greedy choice**: to choose the lightest edge *e* from *E*:
+        - If *e* produces a cycle in the tree *Ti* in the forest, ignore then *e*
+        - If *e* doesn't produce a cycle in Ti, add then *e* in *X*
     - Prove that this choice is safe: see the course slide
-    - Iterate: solve the same problem without the edge chosen above
+    - Iterate: 
+        - Solve the same problem without the edge *e* chosen above
+        - Repeatedly add the next lightest edge if this doesn’t produce a cycle
 - Implementation, Time Complexity and Operations:
     - To use disjoint sets data structure
     - Initially, each vertex lies in a separate set
@@ -2067,13 +2074,40 @@
 <summary>Minimum Spanning Trees (MST): Prim’s algorithm</summary>
 
 - Repeatedly attach a new vertex to the current tree by a lightest edge
+- It's a greedy algorithm:
+    - Let be a graph *G(V, E)* and *X* is a subtree
+    - Let start with *X* contains 1 (any) vertice
+    - **Greedy choice**: to choose the lightest edge *e* a vertex of *X* and a vertex not in the tree, *X*
+    - Prove that this choice is safe: see the course slide
+    - Iteration: X is always a subtree, grows by one edge at each iteration
 - Implementation, Time Complexity and Operations:
-
+    - It's similar to Dijkstra's algorithm
+    -           Prim(G)
+                    for all u ∈ V:
+                        cost[u] ← ∞, 
+                        parent[u] ← nil
+                    cost[u0] ← 0 {pick any initial vertex u0}
+                    PrioQ ← MakeQueue(V) {priority is cost}
+                    while PrioQ is not empty:
+                        v ← ExtractMin(PrioQ)
+                        for all {v, z} ∈ E:
+                            if z ∈ PrioQ and cost[z] > w (v , z):
+                                cost[z] ← w (v, z) 
+                                parent[z] ← v
+                                ChangePriority(PrioQ, z, cost[z])
+                    {The resulted MST is in parent}
+    - T(n) = |V| T(ExtractMin) + |E| T (ChangePriority)
+        - Array-based implementation: O(|V|^2)
+        - Binary heap-based-based implementation: O((|V| + |E|) log |V|) = O(|E| log |V|)
+        - In case of a **sparse graph** (|E| ≈ |V|): **Binary Heap implementation is more efficient**: **T(n) = O(|V|)*Log|V|)**
+        - In case of **dense graph** (|E| ≈ |V|^2): **Array implementation is more efficient**: **T(n) = O(|V|^2)**
 - Related Problems:
     - Building a network
     - [Building Roads to Connect Cities](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/136)
+    - [Clustering](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/137)
 - For more details:
     - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
+    - Visualization: [Prim’s MST](https://www.cs.usfca.edu/~galles/visualization/Prim.html)
 
 </details>
 
