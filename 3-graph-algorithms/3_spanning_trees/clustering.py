@@ -6,7 +6,6 @@ def clustering(x, y, k):
     #write your code here
     return -1.
 
-
 if __name__ == '__main__':
     input = sys.stdin.read()
     data = list(map(int, input.split()))
