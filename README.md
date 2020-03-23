@@ -1706,20 +1706,20 @@
 - **Distance** in **unweighted** graph
     - It's between 2 nodes in a graph
     - It's the length of the shortest possible path between these nodes  
-    - For any any pair of vertices μ, ν: **Distance(μ, ν) in a directed graph is ≥ Distance(μ, ν in the corresponding undirected graph**
+    - For any any pair of vertices μ, ν: **Distance(μ, ν) in a directed graph is ≥ Distance(μ, ν) in the corresponding undirected graph**
 - **Distance Layers**:
     - For a given vertex ν in  a graph, it's a way of representing the graph by repositioning all its nodes from top to bottom with increasing distance from ν
     - Layer 0: contains the vertex v
     - Layer 1: contains all vertices which distance to ν is: 1
     - ...
-    - E.g.:     G:       Layers    Distance Layers from A       Distance Layers from C
-            A — B — C    0           A                               C
-                    |                |                             /   \
-                    D    1           B                            B     D
-                                     |                            |
-                         2           C                            A
-                                     |
-                         3           D
+    - E.g.:     G:         Layers    Distance Layers from A       Distance Layers from C
+                A — B — C    0           A                               C
+                        |                |                             /   \
+                        D    1           B                            B     D
+                                         |                            |
+                             2           C                            A
+                                         |
+                             3           D
     - In a Undirected graph, **Edges are possible between same layer nodes or adjacent layers nodes** 
         - In other words, there is no edge between nodes of a layer l and nodes of layers < l - 1 and layers > l + 1 
         - E.g. From example above:
@@ -1766,7 +1766,7 @@
 - BSF Properties:
     - A node is **discovered** when it's found for the 1st time and enqueued
     - A node is **processed** when it's dequeued from the BFS queue: all its unvisited neighbors are discovered (enqueued) 
-    - By the time a nodeμat distance d from S is dequeued, all the nodes at distance at most d have already been discovered (enqueued)
+    - By the time a node μ at distance d from S is dequeued, all the nodes at distance at most d have already been discovered (enqueued)
     - **BSF Queue property**:
         - At any moment, if the 1st node in the queue is at distance d from S, then all the nodes in the queue are either at distance d or d + 1 from S
         - All the nodes in the queue at distance d go before (if any) all the nodes at distance d + 1
@@ -1796,7 +1796,7 @@
     - We take the vertex A as a starting node and
     - Find all the distances from A to all the other nodes
     - G(A) has less edges than G (this is why it's new)
-    - G(A) has directed edges: we only draw an edge from ν to μ, ifμis the previous vertex of v
+    - G(A) has directed edges: we only draw an edge from ν to μ, if μ is the previous vertex of v
     - A node μ is the **Previous** node of node ν means that node ν was discovered while we were processing node μ
     - **For every node, there is a previous node**, except the node we discovered 1st 
     - E.g., in the graph G below:
