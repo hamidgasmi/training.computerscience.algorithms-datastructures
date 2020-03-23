@@ -1712,7 +1712,8 @@
     - Layer 0: contains the vertex v
     - Layer 1: contains all vertices which distance to ν is: 1
     - ...
-    - E.g.:     G:         Layers    Distance Layers from A       Distance Layers from C
+    - E.g.:  
+     -          G:         Layers    Distance Layers from A       Distance Layers from C
                 A — B — C    0           A                               C
                         |                |                             /   \
                         D    1           B                            B     D
