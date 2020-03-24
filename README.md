@@ -2181,6 +2181,63 @@
 
 </details>
 
+<details>
+<summary>Traveling Salesman Problem (TSP)</summary>
+
+- Input: Pairwise distances between *n* cities and a **budget** *b*
+- Output: A cycle that visits each vertex **exactly once** and has **total length** at most *b*
+- It's a search problem:
+    - *I*: a graph G(V, E)
+    - *S*: a sequence of *n* vertices
+    - *C*: trace *S* and check whether it forms a cycle, it visits each vertex exactly once and it has a total length of at most *b*
+    - *T(C) = O(|V|)*
+    - It's the **decision** version of TSP
+- It's also usually stated as an **optimization** problem:
+    - But it's not so clear: how could we check a given cycle whether it's optimal or not?
+- These 2 versions are **hardly** different:
+    - Optimization version can be used to solve Decision version:
+        - If we have an algorithm that solves an optimization problem, we can use it to solve the decision version
+        - If we have an algorithm that finds an optimal cycle, we can use it to check whether it's a cycle of a length at most *b* or not
+    - Decision version can be used to solve Optimization version:
+        - If we have an algorithm that for every *b*, it checks whether there is a cycle of lengths at most *b*
+        - We can use it to find the optimal value of *b* by using *binary section*:
+        - 1st., We check whether there is an optimal cycle of length at most 100, for example
+        - If yes, 2nd., we check whether there's an optimal cycle of length at most 50
+        - If there is no such cycle, 3rd., we check whether there's an optimal cycle of length at most 75
+        - Eventually, we'll find the value of *b* such that there is a cycle of length *b* but there is no cycle of smaller length
+        - At this point, we have found the optimal solution
+- Solutions:
+    - For a graph of n vertices
+    - Brute force: Check all permutations:
+        - Running Time: O(n!)
+        - It's totally impratical: n = 15, n! = 10^12
+    - Dynamic programming:
+        - Running Time: O(n^2 * 2^n)
+        - It's exponential running time
+        - No significantly better upper bound is known
+        - E.g. we have no algorithm that solves this problem in time for example, O(1.99^n)
+    - There are **heuristic algorithms**:
+        - In practice, there're algorithms that solve ths problem quite well (n is equal several thousands)
+        - But we have no guarantee of the running time
+    - There are **approximation algorithms**:
+        - We have no guarantee of the running time
+        - Their solution isn't optimal but it's not much worse than optimal
+        - They guarantee a cycle at most 2 times longer than an optimal one
+- It's a problem that we get from  the **minimum spanning tree** problem with an additional resrtriction:
+    - The restriction: that tree that we're looking for should be actually a path
+    - MST problem has an efficient solution: O(|E| log |V|) or O(|V|^2)
+    - TSP problem doesn't have a know polynomial algorthm
+    - See Kruskal's and Prim's algorithms from course [Graph Algorithms](#graph-algorithms) above
+- Related Problems:
+    - Delivery Company
+    - Drilling Holes in a Circuit Board
+- For more details:
+    - UC San Diego Course:[Traveling Salesman Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - Developers Google: [solving a TSP with OR-Tools](https://developers.google.com/optimization/routing/tsp)
+    - Wikipedia: [Travelling salesman problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem)
+
+</details>
+
 ---
 
 ## String Processing and Pattern Matching Algorithms
