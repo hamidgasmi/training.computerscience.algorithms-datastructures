@@ -2148,21 +2148,21 @@
     - Brute Force Solution: list all possible assignments of formula's variables and check if each of them falsify/satisfy F
     - E.g., F2: (x ∨ y ∨ z)(x ∨ y )(y ∨ z):
         - Brute Force solution: there're 8 possible assignment for x, y, z:
-        -           x   y   z   F
-                    0   0   0   Falsified
-                    0   0   1   Falsified
-                    0   1   0   Falsified
-                    0   1   1   Falsified
-                    1   0   0   Satisfied
-                    1   0   1   Falsified
-                    1   1   0   Falsified
-                    1   1   1   Satisfied
-                    It's satisfiable: set (x, y, z): {(1, 1, 1), (1, 0, 0)}
+        -     x   y   z   F
+              0   0   0   Falsified
+              0   0   1   Falsified
+              0   1   0   Falsified
+              0   1   1   Falsified
+              1   0   0   Satisfied
+              1   0   1   Falsified
+              1   1   0   Falsified
+              1   1   1   Satisfied
+              It's satisfiable: set (x, y, z): {(1, 1, 1), (1, 0, 0)}
     - E.g., F3: (x ∨ y ∨ z)(x ∨ !y )(y ∨ !z)(z ∨ !x)(!x ∨ !y ∨ !z)
         - Another solution:
-        -           Let assume x=0  ==(by F3.2: x ∨ !y)=> y=0 ==(by F3.3)==> z=0 ==(by F3.1)==> F3.1 is falsified ==> Initial assumption is wrong
-                    Let assume x=1  ==(by F3.4: z ∨ !x)=> z=1 ==(by F3.3)==> y=1 ==(by F3.5)==> F3.5 is falsified ==> Initial assumption is wrong
-                    F3 is unsatifiable
+        -     Let assume x=0  (by F3.2: x ∨ !y)-> y=0 (by F3.3)-> z=0 (by F3.1)-> F3.1 is falsified -> Initial assumption is wrong
+              Let assume x=1  (by F3.4: z ∨ !x)-> z=1 (by F3.3)-> y=1 (by F3.5)-> F3.5 is falsified -> Initial assumption is wrong
+              Therefore, F3 is unsatifiable
         - F3 is unsatifiable
 - **Search problem**:
     - It's an algorithm *C* that takes an **instance** *I* (input) and a candidate **solution** *S*, 
