@@ -2138,8 +2138,44 @@
         - Brute Force solution: O(n!)
         - It's extremely slow!
         - n! grows even faster than any exponential function
-- **Search Problems**:
-    - 
+- Boolean **Satisfiability** problem (**SAT**):
+    - Input: Formula F in **conjunctive normal form** (**CNF**)
+        - It's a set of a logical clauses
+        - Each clause is a **logical or** or a **disjunction** of few literals
+        - E.g., F1: (x ∨ !y)(!x ∨ !y)(x ∨ y), x, y are Boolean variables
+    - Output: An assignment of Boolean values to the variables of F satisfying all clauses, if exists
+        - E.g., F1 is satisfiable: set x = 1, y = 0
+    - Brute Force Solution: list all possible assignments of formula's variables and check if each of them falsify/satisfy F
+    - E.g., F2: (x ∨ y ∨ z)(x ∨ y )(y ∨ z):
+        - Brute Force solution: there're 8 possible assignment for x, y, z:
+        -           x   y   z   F
+                    0   0   0   Falsified
+                    0   0   1   Falsified
+                    0   1   0   Falsified
+                    0   1   1   Falsified
+                    1   0   0   Satisfied
+                    1   0   1   Falsified
+                    1   1   0   Falsified
+                    1   1   1   Satisfied
+                    It's satisfiable: set (x, y, z): {(1, 1, 1), (1, 0, 0)}
+    - E.g., F3: (x ∨ y ∨ z)(x ∨ !y )(y ∨ !z)(z ∨ !x)(!x ∨ !y ∨ !z)
+        - Another solution:
+                    Let assume x=0  ==(by F3.2: x ∨ !y)=> y=0 ==(by F3.3)==> z=0 ==(by F3.1)==> F3.1 is falsified ==> Initial assumption is wrong
+                    Let assume x=1  ==(by F3.4: z ∨ !x)=> z=1 ==(by F3.3)==> y=1 ==(by F3.5)==> F3.5 is falsified ==> Initial assumption is wrong
+                    F3 is unsatifiable
+        - F3 is unsatifiable
+- **Search problem**:
+    - It's an algorithm *C* that takes an **instance** *I* (input) and a candidate **solution** *S*, 
+    - It runs in time **polynomial in the length of I** 
+    - This forces the length of *S* to be polynomial in the length of *I*: 
+        - If S has an exponential size 
+        - It would require an exponential time just to write down a solution for the instance *I*
+    - We say that *S* is a solution to *I* ***iff C(S, I) = true***
+    - E.g. SAT is a typical search problem:
+        - *I* is a Boolean formula
+        - *S* is an assignment of Boolean constants to its variables
+        - *C* scan the formula from left to right and check whethere *S* satisfies all clauses of *I*
+        - *T(C)* is polynomial in the length of the formula, *I*
 - For more details:
     - UC San Diego Course:[Brute Force Search](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
