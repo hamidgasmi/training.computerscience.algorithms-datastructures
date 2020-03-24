@@ -2163,7 +2163,6 @@
         -     Let assume x=0  (by F3.2: x ∨ !y)-> y=0 (by F3.3)-> z=0 (by F3.1)-> F3.1 is falsified -> Initial assumption is wrong
               Let assume x=1  (by F3.4: z ∨ !x)-> z=1 (by F3.3)-> y=1 (by F3.5)-> F3.5 is falsified -> Initial assumption is wrong
               Therefore, F3 is unsatifiable
-        - F3 is unsatifiable
 - **Search problem**:
     - It's an algorithm *C* that takes an **instance** *I* (input) and a candidate **solution** *S*, 
     - It runs in time **polynomial in the length of I** 
@@ -2226,7 +2225,7 @@
 - It's a problem that we get from  the **minimum spanning tree** problem with an additional resrtriction:
     - The restriction: that tree that we're looking for should be actually a path
     - MST problem has an efficient solution: O(|E| log |V|) or O(|V|^2)
-    - TSP problem doesn't have a know polynomial algorthm
+    - TSP problem doesn't have a know polynomial algorithm
     - See Kruskal's and Prim's algorithms from course [Graph Algorithms](#graph-algorithms) above
 - Related Problems:
     - Delivery Company
@@ -2235,6 +2234,33 @@
     - UC San Diego Course:[Traveling Salesman Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
     - Developers Google: [solving a TSP with OR-Tools](https://developers.google.com/optimization/routing/tsp)
     - Wikipedia: [Travelling salesman problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem)
+
+</details>
+
+<details>
+<summary>Hamiltonian Cycle Problem</summary>
+
+- Input: A graph (directed or undirected)
+- Output: A cycle that visits each vertex of the graph exactly once
+- It's a search problem:
+    - *I*: a graph G(V, E)
+    - *S*: a sequence of *n* vertices
+    - *C*: trace *S* and check whether it forms a cycle and it visits each vertex exactly once
+    - *T(C) = O(|V|)* is polynomial in the length of the formula, *I*
+    - It forces the length of *S*, *n*, to be polynomial in the length of *I*, *|V|*
+- It looks very similar to **Eulerian cycle**
+    - Input: A graph
+    - Output: A cycle that visits each edge of the graph exactly once
+    - It has an efficient solution
+    - A graph has an Eulerian cycle if and only if it is connected and the degree of each vertex is even
+    - Find Eulerian cycle for a graph G(V, E)
+        - Find all cycles of of G
+        - Traverse these cycles:
+        - While traversing a cycle, if a node of 2nd cycle is found, then traverse the 2nd cycle
+        - When, we come back to this node, continue traversing the previous cycle
+    - Eulerian cycle problem has an efficient solution
+    - Hamiltonian Cycle Problem doesn't have a know polynomial algorithm
+- UC San Diego Course:[Traveling Salesman Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
