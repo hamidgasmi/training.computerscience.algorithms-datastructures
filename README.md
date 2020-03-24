@@ -2115,14 +2115,33 @@
 ## NP-Complete Problem
 
 <details>
-<summary>Introduction</summary>
+<summary>Introduction: Search Problems</summary>
 
-- Implementation, Time Complexity and Operations:
-    - 
-- Related Problems:
+- Brute Force Search:
+    - Polunomial vs. Exponential:
+    -       n: the size of the input and a machine of 10^9 operations per second
+                                       Polynomial Algo.      | Exponential Algo.
+                       Running time:  O(n)  O(n^2)  O(n^3)   |  2^n
+            Max n running time < 1s:  10^9  10^4.5  10^3     |  29
+             (< 10^9 operations)
+    - Polynomial algorithms are considered efficient
+    - **Exponential** algorithms are considered impratical
+        - E.g. 1, Partition n objects into 2 sets: there're 2^n ways
+        - E.g. 2, Partition a graph vertices into 2 sets to find a cut
+        - Brute Force solution: O(2^n)
+        - It allows to handle graphs of 29 vertices for 1 second
+        - E.g. 3, Find a minumum spanning tree in a complete graph
+        - Brute Force solution: O(n^(n - 2)) (there're n^n-2 spaning trees in a complete graph of n vertices)
+        - n^n grows even faster than 2^n
+    - **Factorial** alogorithms:
+        - E.g., Permutations problems: there're n! possible permutations of n objects
+        - Brute Force solution: O(n!)
+        - It's extremely slow!
+        - n! grows even faster than any exponential function
+- **Search Problems**:
     - 
 - For more details:
-    - UC San Diego Course:[]()
+    - UC San Diego Course:[Brute Force Search](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
