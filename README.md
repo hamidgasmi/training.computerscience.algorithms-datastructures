@@ -2133,7 +2133,7 @@
         - E.g. 3, Find a minumum spanning tree in a complete graph
         - Brute Force solution: O(n^(n - 2)) (there're n^n-2 spaning trees in a complete graph of n vertices)
         - n^n grows even faster than 2^n
-    - **Factorial** alogorithms:
+    - **Factorial** algorithms:
         - E.g., Permutations problems: there're n! possible permutations of n objects
         - Brute Force solution: O(n!)
         - It's extremely slow!
@@ -2160,7 +2160,7 @@
                     It's satisfiable: set (x, y, z): {(1, 1, 1), (1, 0, 0)}
     - E.g., F3: (x ∨ y ∨ z)(x ∨ !y )(y ∨ !z)(z ∨ !x)(!x ∨ !y ∨ !z)
         - Another solution:
-                    Let assume x=0  ==(by F3.2: x ∨ !y)=> y=0 ==(by F3.3)==> z=0 ==(by F3.1)==> F3.1 is falsified ==> Initial assumption is wrong
+        -           Let assume x=0  ==(by F3.2: x ∨ !y)=> y=0 ==(by F3.3)==> z=0 ==(by F3.1)==> F3.1 is falsified ==> Initial assumption is wrong
                     Let assume x=1  ==(by F3.4: z ∨ !x)=> z=1 ==(by F3.3)==> y=1 ==(by F3.5)==> F3.5 is falsified ==> Initial assumption is wrong
                     F3 is unsatifiable
         - F3 is unsatifiable
