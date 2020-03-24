@@ -2260,7 +2260,22 @@
         - When, we come back to this node, continue traversing the previous cycle
     - Eulerian cycle problem has an efficient solution
     - Hamiltonian Cycle Problem doesn't have a know polynomial algorithm
-- UC San Diego Course:[Traveling Salesman Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+- UC San Diego Course:[Hamiltonian Cycle Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+
+</details>
+
+<details>
+<summary>Longest path Problem</summary>
+
+- Input: a weighted graph, 2 vertices *s*, *t*, and a budget *b*
+- Output: a simple path (containing no repeated vertices) of total length at least *b*
+- It looks very similar to **Shortest Path** problem:
+    - Find a simple path from *s* to *t* of total length at most *b*
+    - It can be solved efficiently with a BFS traversal, if the graph is unweighted: O(|V| + |E|)
+    - It can be solved efficiently with Dijkstra's algorithm, if the graph is weighted and all weight are positive
+    - It can be solved efficiently with a Bellman-Ford's algorithm, if the graph is weighted and weights could be positive and negative
+    - Longest path Problem doesn't have a know polynomial algorithm
+- UC San Diego Course:[Longest path Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
