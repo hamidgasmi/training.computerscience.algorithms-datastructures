@@ -2115,7 +2115,7 @@
 ## NP-Complete Problem
 
 <details>
-<summary>Introduction: Search Problems</summary>
+<summary>Search Problems</summary>
 
 - Brute Force Search:
     - Polunomial vs. Exponential:
@@ -2305,6 +2305,62 @@
     - If P = NP, the all search problems can be solved in polynomial time
     - If  != NP, then there exist search problems that cannot be solved in polynomial time
 - UC San Diego Course: [Class P and NP](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+
+</details>
+
+<details>
+<summary>NP-Completeness</summary>
+
+- **Reduction**: 
+    - We say that a search problem *A* is **reduced** to a search problem *B* 
+    - We write ***A → B*** 
+    - If there exists a polynomial time algorithm *f* that converts any instance *I* of *A* into an instance *f(I)* of *B*, 
+    - together with a polynomial time algorithm *h* that converts any solution *S* to *f(I)* back to a solution *h(S)* to *A* 
+    - If there is no solution to *f(I)*, then there is no solution to *I*
+    - In other words, Instance *Ia* of *A* → *f(Ia) = Ib* Instance of *B* → Algorithm for *B*:
+        - No solution to *Ib = f(Ia)* → no solution to *Ia*
+        - Solution *Sb* to *Ib = f(Ia)* → solution *Sa = h(Sb)* to *Ia* 
+        - *f* runs in a polynomial time
+        - *h* runs in a polunomial time
+    - If B is easy (can be solved in polynomial time), then so is A
+    - If A is hard (cannot be solved in polynomial time), then so is B
+    - **Reductions Compose**: If A → B and B → C, then A → C
+- **NP-Complete** Problems:
+    - A search problem is called NP-complete if all other search problems reduce to it
+    - If A → B and A is NP-Complete, then so is B
+    - All search problems → SAT problem → 3-SAT problem → Independent set problem (ISP) → vertex cover problem
+- Independent set problem (ISP) → vertex cover problem:
+- 3-SAT problem → Independent set problem:
+- SAT problem → 3-SAT problem:
+- UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
+
+</details>
+
+<details>
+<summary>Coping with NP-Completness: Introduction</summary>
+
+- UC San Diego Course: [Coping with NP-completness: Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_1_introduction.pdf)
+
+</details>
+
+<details>
+<summary>Coping with NP-Completness: Special Cases</summary>
+
+- UC San Diego Course: [Coping with NP-completness: Special Cases](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_2_special_cases.pdf)
+
+</details>
+
+<details>
+<summary>Coping with NP-Completness: Exact Algorithms</summary>
+
+- UC San Diego Course: [Coping with NP-completness: Exact Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_3_exact_algorithms.pdf)
+
+</details>
+
+<details>
+<summary>Coping with NP-Completness: Approximation Algorithms</summary>
+
+- UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
 
 </details>
 
