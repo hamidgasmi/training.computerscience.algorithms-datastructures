@@ -2279,6 +2279,55 @@
 
 </details>
 
+<details>
+<summary>Integer Linear Programming Problem (ILP)</summary>
+
+- Input: A system of linear inequalities Ax ≤ b
+- Output: Integer solution
+- It looks very similar to **Real Linear Programming** problem (**LP**):
+    - Find a **real** solution of a system of linear inequalities
+    - It can be solved in practice by using **Simplex** mothod
+        - It'sn't bounded by polynomials
+        - It can have exponential running time in some pathological cases
+    - It can be also by using **ellipsoid** method:
+        - It has a polynomial upperbound running time
+    - It can be also solved by using **interior point** method:
+        - It has a polynomial upperbound running time
+    - Integer Linear Programming Problem doesn't have a know polynomial algorithm
+- The SAT problem can be **reduced** to ILP problem:
+    - For each variable xi of F, add 2 inequalities 0 ≤ xi ≤ 1
+    - Write each negation, !xi: 1 - xi 
+    - For each clause like (xi ∨ !xj ∨ !xk), add an inequality: xi + (1−xj) + (1−xk) ≥ 1 
+    - Formally for each clause of the form (ℓ1 ∨ ℓ2 ∨ ⋯ ∨ ℓk), add an inequality m1 + m2 + ⋯ + mk ≥ 1:
+        - mi = ℓi, if ℓi is a variable xj, 
+        - mi = (1 − xj), if li is the negation of a variable xj
+- UC San Diego Course:[Longest path Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+
+</details>
+
+<details>
+<summary>Independent Set Problem</summary>
+
+- Input: a graph and a budget *b*
+- Output: a subset of a size at least *b* vertices such that no 2 of them are adjacent
+- It's a search problem:
+    - *I*: a graph G(V, E)
+    - *S*: a set of *b* vertices
+    - *C*: check a set of vertices *S* whether it's an independent set and it has a size of at least b
+    - *T(C)* is polynomial in the length of the formula, *I*
+- It's easy to solve **Independent Sets in a Tree**:
+    - Input: a tree
+    - Output: Find an independent set of size at least *b* in a given tree
+    - It can be found by a simple greedy algorithm
+    - 1st., It is safe to take into a solution all the leaves
+    - 2nd., to remove all the leaves from the tree together with all their parents
+    - 3rd., Iterate
+    - It can be solved efficiently
+    - Independent Set Problem doesn't have a know polynomial algorithm
+- UC San Diego Course:[Longest path Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+
+</details>
+
 ---
 
 ## String Processing and Pattern Matching Algorithms
