@@ -2175,163 +2175,121 @@
         - *S* is an assignment of Boolean constants to its variables
         - *C* scan the formula from left to right and check whethere *S* satisfies all clauses of *I*
         - *T(C)* is polynomial in the length of the formula, *I*
-- For more details:
-    - UC San Diego Course: [Brute Force Search](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
-
-</details>
-
-<details>
-<summary>Traveling Salesman Problem (TSP)</summary>
-
-- Input: Pairwise distances between *n* cities and a **budget** *b*
-- Output: A cycle that visits each vertex **exactly once** and has **total length** at most *b*
-- It's a search problem:
-    - *I*: a graph G(V, E)
-    - *S*: a sequence of *n* vertices
-    - *C*: trace *S* and check whether it forms a cycle, it visits each vertex exactly once and it has a total length of at most *b*
-    - *T(C) = O(|V|)*
-    - It's the **decision** version of TSP
-- It's also usually stated as an **optimization** problem:
-    - But it's not so clear: how could we check a given cycle whether it's optimal or not?
-- These 2 versions are **hardly** different:
-    - Optimization version can be used to solve Decision version:
-        - If we have an algorithm that solves an optimization problem, we can use it to solve the decision version
-        - If we have an algorithm that finds an optimal cycle, we can use it to check whether it's a cycle of a length at most *b* or not
-    - Decision version can be used to solve Optimization version:
-        - If we have an algorithm that for every *b*, it checks whether there is a cycle of lengths at most *b*
-        - We can use it to find the optimal value of *b* by using *binary section*:
-        - 1st., We check whether there is an optimal cycle of length at most 100, for example
-        - If yes, 2nd., we check whether there's an optimal cycle of length at most 50
-        - If there is no such cycle, 3rd., we check whether there's an optimal cycle of length at most 75
-        - Eventually, we'll find the value of *b* such that there is a cycle of length *b* but there is no cycle of smaller length
-        - At this point, we have found the optimal solution
-- Solutions:
-    - For a graph of n vertices
-    - Brute force: Check all permutations:
-        - Running Time: O(n!)
-        - It's totally impratical: n = 15, n! = 10^12
-    - Dynamic programming:
-        - Running Time: O(n^2 * 2^n)
+- **Traveling Salesman** Problem (**TSP**)
+    - Input: Pairwise distances between *n* cities and a **budget** *b*
+    - Output: A cycle that visits each vertex **exactly once** and has **total length** at most *b*
+    - It's a search problem:
+        - *I*: a graph G(V, E)
+        - *S*: a sequence of *n* vertices
+        - *C*: trace *S* and check whether it forms a cycle, it visits each vertex exactly once and it has a total length of at most *b*
+        - *T(C) = O(|V|)*
+        - It's the **decision** version of TSP
+    - It's also usually stated as an **optimization** problem:
+        - But it's not so clear: how could we check a given cycle whether it's optimal or not?
+    - These 2 versions are **hardly** different:
+        - Optimization version can be used to solve Decision version:
+            - If we have an algorithm that solves an optimization problem, we can use it to solve the decision version
+            - If we have an algorithm that finds an optimal cycle, we can use it to check whether it's a cycle of a length at most *b* or not
+        - Decision version can be used to solve Optimization version:
+            - If we have an algorithm that for every *b*, it checks whether there is a cycle of lengths at most *b*
+            - We can use it to find the optimal value of *b* by using *binary section*:
+            - 1st., We check whether there is an optimal cycle of length at most 100, for example
+            - If yes, 2nd., we check whether there's an optimal cycle of length at most 50
+            - If there is no such cycle, 3rd., we check whether there's an optimal cycle of length at most 75
+            - Eventually, we'll find the value of *b* such that there is a cycle of length *b* but there is no cycle of smaller length
+            - At this point, we have found the optimal solution
+    - Brute force Solutions: 
+        - Check all permutations: n = 15, n! = 10^12
+        - Running time: O(n!)
+        - It's totally impratical: 
+    - Dynamic programming solution: 
+        - Running time: O(n^2 * 2^n) 
         - It's exponential running time
         - No significantly better upper bound is known
         - E.g. we have no algorithm that solves this problem in time for example, O(1.99^n)
-    - There are **heuristic algorithms**:
+    - **heuristic algorithm** solutions:
         - In practice, there're algorithms that solve ths problem quite well (n is equal several thousands)
         - But we have no guarantee of the running time
-    - There are **approximation algorithms**:
+    - **Approximation algorithm** solution:
         - We have no guarantee of the running time
         - Their solution isn't optimal but it's not much worse than optimal
         - They guarantee a cycle at most 2 times longer than an optimal one
-- It's a problem that we get from  the **minimum spanning tree** problem with an additional resrtriction:
-    - The restriction: that tree that we're looking for should be actually a path
-    - MST problem has an efficient solution: O(|E| log |V|) or O(|V|^2)
-    - TSP problem doesn't have a know polynomial algorithm
-    - See Kruskal's and Prim's algorithms from course [Graph Algorithms](#graph-algorithms) above
-- Related Problems:
-    - Delivery Company
-    - Drilling Holes in a Circuit Board
+    - It's a problem that we get from  the **minimum spanning tree** problem with an additional resrtriction:
+        - The restriction: that tree that we're looking for should be actually a path
+        - MST problem has an efficient solution: O(|E| log |V|) or O(|V|^2)
+        - TSP problem doesn't have a know polynomial algorithm
+        - See Kruskal's and Prim's algorithms from course [Graph Algorithms](#graph-algorithms) above
+- **Hamiltonian Cycle** Problem:
+    - Input: A graph (directed or undirected)
+    - Output: A cycle that visits each vertex of the graph exactly once
+    - It's a search problem:
+        - *I*: a graph G(V, E)
+        - *S*: a sequence of *n* vertices
+        - *C*: trace *S* and check whether it forms a cycle and it visits each vertex exactly once
+        - *T(C) = O(|V|)* is polynomial in the length of the formula, *I*
+        - It forces the length of *S*, *n*, to be polynomial in the length of *I*, *|V|*
+    - It looks very similar to **Eulerian cycle**
+        - Input: A graph
+        - Output: A cycle that visits each edge of the graph exactly once
+        - It has an efficient solution
+        - A graph has an Eulerian cycle if and only if it is connected and the degree of each vertex is even
+        - Find Eulerian cycle for a graph G(V, E): Find all cycles of of G; Traverse a cycle; While traversing a cycle, if a node of 2nd cycle is found, then traverse the 2nd cycle; when, we come back to this node, continue traversing the previous cycle
+    - Eulerian cycle problem has an efficient solution
+    - Hamiltonian Cycle Problem doesn't have a know polynomial algorithm
+- **Longest path** Problem:
+    - Input: a weighted graph, 2 vertices *s*, *t*, and a budget *b*
+    - Output: a simple path (containing no repeated vertices) of total length at least *b*
+    - It looks very similar to **Shortest Path** problem:
+        - Find a simple path from *s* to *t* of total length at most *b*
+        - It can be solved efficiently with a BFS traversal, if the graph is unweighted: O(|V| + |E|)
+        - It can be solved efficiently with Dijkstra's algorithm, if the graph is weighted and all weight are positive
+        - It can be solved efficiently with a Bellman-Ford's algorithm, if the graph is weighted and weights could be positive and negative
+        - Longest path Problem doesn't have a know polynomial algorithm
+- **Integer Linear Programming Problem** (**ILP**):
+    - Input: a system of linear inequalities *Ax ≤ b*
+    - Output: Integer solution
+    - It looks very similar to **Real Linear Programming** problem (**LP**):
+        - Find a **real** solution of a system of linear inequalities
+        - It can be solved in practice by using **Simplex** mothod: it's not bounded by polynomials; exponential running time in some pathological cases
+        - It can be also by using **ellipsoid** method: it has a polynomial upperbound running time
+        - It can be also solved by using **interior point** method: it has a polynomial upperbound running time
+        - ILP problem doesn't have a know polynomial algorithm
+    - The SAT problem can be **reduced** to ILP problem:
+        - For each variable xi of F, add 2 inequalities 0 ≤ xi ≤ 1
+        - Write each negation, !xi: 1 - xi 
+        - For each clause like (xi ∨ !xj ∨ !xk), add an inequality: xi + (1−xj) + (1−xk) ≥ 1 
+        - Formally for each clause of the form (ℓ1 ∨ ℓ2 ∨ ⋯ ∨ ℓk), 
+        - Add an inequality m1 + m2 + ⋯ + mk ≥ 1
+        - mi = ℓi, if ℓi is a variable xj, 
+        - mi = (1 − xj), if li is the negation of a variable xj
+- **Independent Set** Problem: 
+    - Input: a graph and a budget *b*
+    - Output: a subset of a size at least *b* vertices such that no 2 of them are adjacent
+    - It's a search problem:
+        - *I*: a graph G(V, E)
+        - *S*: a set of *b* vertices
+        - *C*: check a set of vertices *S* whether it's an independent set and it has a size of at least b
+        - *T(C)* is polynomial in the length of the formula, *I*
+    - It's easy to solve **Independent Sets in a Tree**:
+        - Input: a tree
+        - Output: Find an independent set of size at least *b* in a given tree
+        - It can be found by a simple greedy algorithm
+        - 1st., It is safe to take into a solution all the leaves
+        - 2nd., to remove all the leaves from the tree together with all their parents
+        - 3rd., Iterate
+        - It can be solved efficiently
+        - Independent Set Problem doesn't have a know polynomial algorithm
 - For more details:
-    - UC San Diego Course: [Traveling Salesman Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
     - Developers Google: [solving a TSP with OR-Tools](https://developers.google.com/optimization/routing/tsp)
     - Wikipedia: [Travelling salesman problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem)
 
 </details>
 
 <details>
-<summary>Hamiltonian Cycle Problem</summary>
-
-- Input: A graph (directed or undirected)
-- Output: A cycle that visits each vertex of the graph exactly once
-- It's a search problem:
-    - *I*: a graph G(V, E)
-    - *S*: a sequence of *n* vertices
-    - *C*: trace *S* and check whether it forms a cycle and it visits each vertex exactly once
-    - *T(C) = O(|V|)* is polynomial in the length of the formula, *I*
-    - It forces the length of *S*, *n*, to be polynomial in the length of *I*, *|V|*
-- It looks very similar to **Eulerian cycle**
-    - Input: A graph
-    - Output: A cycle that visits each edge of the graph exactly once
-    - It has an efficient solution
-    - A graph has an Eulerian cycle if and only if it is connected and the degree of each vertex is even
-    - Find Eulerian cycle for a graph G(V, E)
-        - Find all cycles of of G
-        - Traverse these cycles:
-        - While traversing a cycle, if a node of 2nd cycle is found, then traverse the 2nd cycle
-        - When, we come back to this node, continue traversing the previous cycle
-    - Eulerian cycle problem has an efficient solution
-    - Hamiltonian Cycle Problem doesn't have a know polynomial algorithm
-- UC San Diego Course: [Hamiltonian Cycle Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
-
-</details>
-
-<details>
-<summary>Longest path Problem</summary>
-
-- Input: a weighted graph, 2 vertices *s*, *t*, and a budget *b*
-- Output: a simple path (containing no repeated vertices) of total length at least *b*
-- It looks very similar to **Shortest Path** problem:
-    - Find a simple path from *s* to *t* of total length at most *b*
-    - It can be solved efficiently with a BFS traversal, if the graph is unweighted: O(|V| + |E|)
-    - It can be solved efficiently with Dijkstra's algorithm, if the graph is weighted and all weight are positive
-    - It can be solved efficiently with a Bellman-Ford's algorithm, if the graph is weighted and weights could be positive and negative
-    - Longest path Problem doesn't have a know polynomial algorithm
-- UC San Diego Course: [Longest path Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
-
-</details>
-
-<details>
-<summary>Integer Linear Programming Problem (ILP)</summary>
-
-- Input: A system of linear inequalities Ax ≤ b
-- Output: Integer solution
-- It looks very similar to **Real Linear Programming** problem (**LP**):
-    - Find a **real** solution of a system of linear inequalities
-    - It can be solved in practice by using **Simplex** mothod
-        - It'sn't bounded by polynomials
-        - It can have exponential running time in some pathological cases
-    - It can be also by using **ellipsoid** method:
-        - It has a polynomial upperbound running time
-    - It can be also solved by using **interior point** method:
-        - It has a polynomial upperbound running time
-    - Integer Linear Programming Problem doesn't have a know polynomial algorithm
-- The SAT problem can be **reduced** to ILP problem:
-    - For each variable xi of F, add 2 inequalities 0 ≤ xi ≤ 1
-    - Write each negation, !xi: 1 - xi 
-    - For each clause like (xi ∨ !xj ∨ !xk), add an inequality: xi + (1−xj) + (1−xk) ≥ 1 
-    - Formally for each clause of the form (ℓ1 ∨ ℓ2 ∨ ⋯ ∨ ℓk), add an inequality m1 + m2 + ⋯ + mk ≥ 1:
-        - mi = ℓi, if ℓi is a variable xj, 
-        - mi = (1 − xj), if li is the negation of a variable xj
-- UC San Diego Course: [ILP Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
-
-</details>
-
-<details>
-<summary>Independent Set Problem</summary>
-
-- Input: a graph and a budget *b*
-- Output: a subset of a size at least *b* vertices such that no 2 of them are adjacent
-- It's a search problem:
-    - *I*: a graph G(V, E)
-    - *S*: a set of *b* vertices
-    - *C*: check a set of vertices *S* whether it's an independent set and it has a size of at least b
-    - *T(C)* is polynomial in the length of the formula, *I*
-- It's easy to solve **Independent Sets in a Tree**:
-    - Input: a tree
-    - Output: Find an independent set of size at least *b* in a given tree
-    - It can be found by a simple greedy algorithm
-    - 1st., It is safe to take into a solution all the leaves
-    - 2nd., to remove all the leaves from the tree together with all their parents
-    - 3rd., Iterate
-    - It can be solved efficiently
-    - Independent Set Problem doesn't have a know polynomial algorithm
-- UC San Diego Course: [Independent Set Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
-
-</details>
-
-<details>
 <summary>Class P and NP</summary>
 
-- **P** is the class of all search problems that can be solved in polynomial time
+- **P** is the class of all search problems that can be solved in polynomial time:
     - It contains all problems whose solution can be found efficiently
     - E.g., MST, Shortest path, LP, IS on trees
 - **NP** is the class of all search problems
