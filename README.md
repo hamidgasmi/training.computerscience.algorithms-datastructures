@@ -2176,7 +2176,7 @@
         - *C* scan the formula from left to right and check whethere *S* satisfies all clauses of *I*
         - *T(C)* is polynomial in the length of the formula, *I*
 - For more details:
-    - UC San Diego Course:[Brute Force Search](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Brute Force Search](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2231,7 +2231,7 @@
     - Delivery Company
     - Drilling Holes in a Circuit Board
 - For more details:
-    - UC San Diego Course:[Traveling Salesman Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Traveling Salesman Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
     - Developers Google: [solving a TSP with OR-Tools](https://developers.google.com/optimization/routing/tsp)
     - Wikipedia: [Travelling salesman problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem)
 
@@ -2260,7 +2260,7 @@
         - When, we come back to this node, continue traversing the previous cycle
     - Eulerian cycle problem has an efficient solution
     - Hamiltonian Cycle Problem doesn't have a know polynomial algorithm
-- UC San Diego Course:[Hamiltonian Cycle Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+- UC San Diego Course: [Hamiltonian Cycle Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2275,7 +2275,7 @@
     - It can be solved efficiently with Dijkstra's algorithm, if the graph is weighted and all weight are positive
     - It can be solved efficiently with a Bellman-Ford's algorithm, if the graph is weighted and weights could be positive and negative
     - Longest path Problem doesn't have a know polynomial algorithm
-- UC San Diego Course:[Longest path Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+- UC San Diego Course: [Longest path Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2301,7 +2301,7 @@
     - Formally for each clause of the form (ℓ1 ∨ ℓ2 ∨ ⋯ ∨ ℓk), add an inequality m1 + m2 + ⋯ + mk ≥ 1:
         - mi = ℓi, if ℓi is a variable xj, 
         - mi = (1 − xj), if li is the negation of a variable xj
-- UC San Diego Course:[Longest path Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+- UC San Diego Course: [ILP Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2324,7 +2324,29 @@
     - 3rd., Iterate
     - It can be solved efficiently
     - Independent Set Problem doesn't have a know polynomial algorithm
-- UC San Diego Course:[Longest path Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+- UC San Diego Course: [Independent Set Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+
+</details>
+
+<details>
+<summary>Class P and NP</summary>
+
+- **P** is the class of all search problems that can be solved in polynomial time
+    - It contains all problems whose solution can be found efficiently
+    - E.g., MST, Shortest path, LP, IS on trees
+- **NP** is the class of all search problems
+    - It stands for “**non-deterministic polynomial time**”: 
+    - One can guess a solution, and then verify its correctness in polynomial time
+    - It contains all problems whose solutions can be efficiently verified
+    - E.g., TSP, Longest path, ILP, IS on graphs
+- The main **open problem** in Computer Science:
+    - It asks whether these 2 classes are equal? 
+    - Is P equal to NP?
+    - It's also know as **P vs. NP question**
+    - The problem is open, we don't know whether these 2 classes are equal
+    - If P = NP, the all search problems can be solved in polynomial time
+    - If  != NP, then there exist search problems that cannot be solved in polynomial time
+- UC San Diego Course: [Class P and NP](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
