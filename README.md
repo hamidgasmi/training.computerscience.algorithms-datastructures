@@ -2399,21 +2399,31 @@
         - Let F: (x v y)
         - The reduction produces a graph *G* of a single edge between x and y 
         - This graph has two independent sets of size 1, but the formula has three satisfying assignments
-- SAT problem → 3-SAT problem:
-    - SAT problem:
-        - Input: 
-        - Output: 
-    - problem:
-        - Input: 
-        - Output: 
-    - 
-    - `f(G(V, E), b) = (G(V, E), |V| − b)`
-    - `h(S) = `
+- SAT → 3-SAT:
+    - Goal: 
+        - Transform a CNF formula *F* into an equisatisfiable 3-CNF formula, *F'*
+        - We need to get rid of clauses of length more than 3 in an input formula
+        - That is, reduce a problem to its special case
+        - 
+    - *f*:
+        - For each clause *C* with more than 3 laterals: *C = (l1 ∨ l2 ∨ A)*, where *A* is an OR of at least 2 literals
+        - Introduce a fresh variable *y* and 
+        - Replace *C* with the following 2 clauses: *(l1 ∨ l2 ∨ y), (y ∨ A)*
+        - The 2nd clause is shorter than *C*
+        - Repeat while there is a long clause
+    - *h*
+        - Given a satisfying assignment for *F'* 
+        - Throw away the values of all new variables *y'* to get a satisfying assignment of the initial formula
     - Time Complexity:
-        - *T() = T(f) + T(Indpendent Set) + T(h)*
-        - T(f) = 
-        - T(h) = 
-    - E.g: 
+        - T(SAT) = T(f) + T(3-SAT) + T(h)
+        - Let *m* be the number of clauses of *F*
+        - Let *L* be the number of the clause with the highest number of literals
+        - *T(SAT) = T(f) + T(3-SAT) + T(h)
+        - T(f) = O(m * L) = Polynomial
+            - At each iteration we replace a clause with a shorter clause (length(C) - 1) and a 3-clause
+            - For each clause, the total number of iterations is at most the total number of literals of the initial formula
+            - We repeat this transformation for each clause
+        - T(h) = O(L) = Polynomial
 - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
 
 </details>
