@@ -2320,8 +2320,8 @@
     - In other words, Instance *Ia* of *A* → *f(Ia) = Ib* Instance of *B* → Algorithm for *B*:
         - No solution to *Ib = f(Ia)* → no solution to *Ia*
         - Solution *Sb* to *Ib = f(Ia)* → solution *Sa = h(Sb)* to *Ia* 
-        - *f* runs in a polynomial time
-        - *h* runs in a polunomial time
+        - ***f*** runs in a polynomial time
+        - ***h*** runs in a polunomial time
     - If B is easy (can be solved in polynomial time), then so is A
     - If A is hard (cannot be solved in polynomial time), then so is B
     - **Reductions Compose**: If A → B and B → C, then A → C
@@ -2329,7 +2329,31 @@
     - A search problem is called NP-complete if all other search problems reduce to it
     - If A → B and A is NP-Complete, then so is B
     - All search problems → SAT problem → 3-SAT problem → Independent set problem (ISP) → vertex cover problem
-- Independent set problem (ISP) → vertex cover problem:
+- **Independent set problem (ISP) → vertex cover problem**:
+    - Independent set problem:
+        - Input: a simple and undirected graph *G(V, E)* and a budget *b*
+        - Output: a subset of at least *b* vertices such that no 2 of them are adjacent
+    - Vertex cover problem:
+        - Input: a simple and undirected graph *G(V, E)* and a budget *b*
+        - Output: a subset of at most *b* vertices that touches every edge
+    - *I* is an independent set of *G(V, E)*, if and only if *V − I* is a vertex cover of G
+    - `f(G(V, E), b) = (G(V, E), |V| − b)`
+    - `h(S) = V − S`
+        - It's the subset output from Vertex cover algorithm
+        - If there is no such set, there is no independent set of size at least b
+    - Time Complexity:
+        - *T(Indpendent Set) = T(f) + T(Vertex Color) + T(h)*
+        - T(f) = O(1)
+        - T(h) = O(n)
+    - E.g: Independent set: *G(V, S)* and *b* = 4
+    -            G(V, S)          Vertex Cover: f(G, b = 8-4)
+            B −−−−−−−−−−− C     ^B −−−−−−−−−−− C
+            | \         / |      | \         / |
+            |  F −−−−− G  |      |  F −−−−− G^ |
+            |  |       |  | ---> |  |       |  | S: {B, D, E, G} ---> h(S) = V - S = {A, C, F, H}
+            |  E −−−−− H  |      | ^E −−−−− H  |
+            | /         \ |      | /         \ |
+            A −−−−−−−−−−− D      A −−−−−−−−−−− D^
 - 3-SAT problem → Independent set problem:
 - SAT problem → 3-SAT problem:
 - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
