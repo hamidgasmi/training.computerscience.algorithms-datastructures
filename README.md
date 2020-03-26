@@ -2309,7 +2309,7 @@
 </details>
 
 <details>
-<summary>NP-Completeness</summary>
+<summary>Reduction & NP-Completeness</summary>
 
 - **Reduction**: 
     - We say that a search problem *A* is **reduced** to a search problem *B* 
@@ -2329,33 +2329,91 @@
     - A search problem is called NP-complete if all other search problems reduce to it
     - If A → B and A is NP-Complete, then so is B
     - All search problems → SAT problem → 3-SAT problem → Independent set problem (ISP) → vertex cover problem
-- **Independent set problem (ISP) → vertex cover problem**:
+- **IS Problem → Vertex Cover Problem**:
     - Independent set problem:
         - Input: a simple and undirected graph *G(V, E)* and a budget *b*
         - Output: a subset of at least *b* vertices such that no 2 of them are adjacent
     - Vertex cover problem:
         - Input: a simple and undirected graph *G(V, E)* and a budget *b*
         - Output: a subset of at most *b* vertices that touches every edge
-    - *I* is an independent set of *G(V, E)*, if and only if *V − I* is a vertex cover of G
+    - *I* is an independent set of *G(V, E)*, if and only if *V − I* is a vertex cover of *G*
     - `f(G(V, E), b) = (G(V, E), |V| − b)`
     - `h(S) = V − S`
         - It's the subset output from Vertex cover algorithm
-        - If there is no such set, there is no independent set of size at least b
+        - If there is no such set, there is no independent set of size at least *b*
     - Time Complexity:
-        - *T(Indpendent Set) = T(f) + T(Vertex Color) + T(h)*
+        - T(Indpendent Set) = T(f) + T(Vertex Color) + T(h)
         - T(f) = O(1)
         - T(h) = O(n)
-    - E.g: Independent set: *G(V, S)* and *b* = 4
-    -            G(V, S)          Vertex Cover: f(G, b = 8-4)
+    - E.g., Independent set (ISP): *G(V, S)* and *b* = 4
+    -            G(V, E)          Vertex Cover: f(G(V, E), b = 8 - 4 = 4)
             B −−−−−−−−−−− C     ^B −−−−−−−−−−− C
             | \         / |      | \         / |
             |  F −−−−− G  |      |  F −−−−− G^ |
-            |  |       |  | ---> |  |       |  | S: {B, D, E, G} ---> h(S) = V - S = {A, C, F, H}
-            |  E −−−−− H  |      | ^E −−−−− H  |
+            |  |       |  | ---> |  |       |  | S: {B, D, E, G}
+            |  E −−−−− H  |      | ^E −−−−− H  | h(S) = V - S = {A, C, F, H}
             | /         \ |      | /         \ |
             A −−−−−−−−−−− D      A −−−−−−−−−−− D^
-- 3-SAT problem → Independent set problem:
+- **3-SAT problem → IS Problem**:
+    - 3-SAT problem:
+        - Input: Formula *F* in 3-CNF (a collection of clauses each having at most 3 literals)
+        - Output: An assignment of Boolean values to the variables of F satisfying all clauses, if exists
+    - *f*:
+        - For each clause of the input formula *F*, introduce 3 (or 2, or 1) vertices in G labeled with the literals of this clause 
+        - Join every 2 of literals of each clause
+        - Join every pair of vertices labeled with complementary literals
+        - ***F* is satisfiable if and only if *G* has independent set of size equal to the number of clauses in *F***
+    - *h(S)*:
+        - If there is no solution for *G*, then *F* is **Unsatisfiable**
+        - If there is a solution for *G*, then *F* is **Satisfiable** 
+        - Let *S* be this solution
+        - Read the labels of the vertices from *S* to get a satisfying assignment of *F*
+    - Time Complexity:
+        - T(3-SAT problem) = T(f) + T(ISP) + T(h)
+        - T(f) = T(Scan all *F* clauses) + T(Join every pair of vertices labeled with complementary literals)
+            - Let *m* be the number of clauses of *F*
+            - T(Scan all *F* clauses and introduce 3 or 2 or 1 vertices) = O(3 * m) = O(m)
+            - T(Join every pair of vertices labeled with complementary literals) = O(m^2)
+            - T(f) = O(m^2)
+        - T(h) = O(m)
+    - E.g: 
+    -           F = (x ∨ y ∨ z)(x v !y)(y v !z)(!x v z)
+                For each clause, introduce 3 (or 2, or 1) vertices labeled with this clause literals:
+                    Clause 1:   Clause 2    Clause 3    Clause 4:
+                     x y z       x !y        y !z        !x z
+                Join every 2 of literals of each clause:
+                    Clause 1:   Clause 2    Clause 3    Clause 4:
+                        x          x           y           !x
+                      /   \        |           |            |
+                     z −−− y      !y          !z            z
+                Join every pair of vertices labeled with complementary literals: G(V, E)
+                          _________________________________
+                         /          ______________________ \
+                        x          x           y           !x
+                      /   \        |         / |            |
+                     z −−− y −−−− !y _______/ !z −−−−−−−−−− z
+                     \_________________________/
+                Find independent set of size 4 for G(V, E):
+                S: {x, x, y, z}, {z, x, y, z}
+    - NB: **It's not true that the number of satisfying assignments of F is equal to the number of independent sets of G**:
+        - Let F: (x v y)
+        - The reduction produces a graph *G* of a single edge between x and y 
+        - This graph has two independent sets of size 1, but the formula has three satisfying assignments
 - SAT problem → 3-SAT problem:
+    - SAT problem:
+        - Input: 
+        - Output: 
+    - problem:
+        - Input: 
+        - Output: 
+    - 
+    - `f(G(V, E), b) = (G(V, E), |V| − b)`
+    - `h(S) = `
+    - Time Complexity:
+        - *T() = T(f) + T(Indpendent Set) + T(h)*
+        - T(f) = 
+        - T(h) = 
+    - E.g: 
 - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
 
 </details>
