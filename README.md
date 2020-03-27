@@ -2525,7 +2525,7 @@
         - The corresponding search space has a size about 2^729 ≈ 10^220 (huges!!!)
         - State-of-the-art SAT-solvers find a satisfying assignment in blink of an eye
 - Related Problems:
-    - Solve Sudoku Puzzle
+    - [Solve Sudoku Puzzle](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/141)
 - For more details:
     - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
     - [Mini-Sat Solver](https://msoos.github.io/cryptominisat_web/)
