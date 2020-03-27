@@ -2399,7 +2399,7 @@
         - Let F: (x v y)
         - The reduction produces a graph *G* of a single edge between x and y 
         - This graph has two independent sets of size 1, but the formula has three satisfying assignments
-- SAT → 3-SAT:
+- **SAT → 3-SAT**:
     - Goal: 
         - Transform a CNF formula *F* into an equisatisfiable 3-CNF formula, *F'*
         - We need to get rid of clauses of length more than 3 in an input formula
@@ -2424,6 +2424,70 @@
             - For each clause, the total number of iterations is at most the total number of literals of the initial formula
             - We repeat this transformation for each clause
         - T(h) = O(L) = Polynomial
+- **Circuit SAT → SAT**:
+    - A **circuit**: 
+        - It's a directed acyclic graph of in-degree at most 2 
+        - Nodes of in-degree 0 are called **inputs** and are marked by Boolean variables and constants 
+        - Nodes of in-degree 1 and 2 are called **gates**: 
+        - Gates of in-degree 1 are labeled with NOT
+        - Gates of in-degree 2 are labeled with AND or OR 
+        - One of the sinks is marked as **output**
+        - E.g., 
+        -           Circuit:
+                           OR Output (a sink)
+                          ↗   ↖
+                        OR      \
+                      ↗   ↖      \
+                     NOT   \      OR
+                     ↑      \      ↖     
+                    AND      OR     \
+                   ↗   ↖   ↗   ↖     \
+                  x      y      z     1
+    - A **Circuit-SAT**:
+        - Input: a circuit
+        - Output: an assignment of Boolean values to the input variables of the circuit that makes the output true
+    - SAT is a special case of Circuit-SAT as a CNF formula can be represented as a circuit
+    - Goal: 
+        - We need to design a polynomial time algorithm that for a given circuit outputs a CNF formula which is satisfiable, 
+        - if and only if the circuit is satisfiable
+    - *f*:
+        - Introduce a Boolean variable for each gate
+        - For each gate, write down a few clauses that describe the relationship between this gate and its direct predecessors
+        -           NOT Gates:
+                    z  NOT
+                        ↑   (h v z)(!x v !z)
+                        x
+        -           AND Gates:
+                    z  AND
+                      ↗   ↖     (x v !z)(y v !z)(!x v !y v z)
+                     x      y
+        -           OR Gates:
+                    z  OR
+                      ↗   ↖     (!x v z)(!y v z)(x v y v !z)
+                     x      y
+        -           Output Gate:
+                    z   (z)
+     - *h*: Scan all the literals and return the value of the literal whose label corresponds to the output
+    - Time Complexity:
+        - T(Circuit SAT) = T(f) + T(SAT) + T(h)
+        - T(f): O(nbr of gates): takes polynomial time
+        - T(SAT) takes polynomial time (see above)
+        - T(h): O(nbr of gates)
+- **All of NP → Circuit SAT**
+    - Let *A* be a search problem
+        - We know that there's an algorithm *C* that takes an instance *I* of *A* and a candidate solution *S* and
+        - checks whether *S* is a solution for *I* in time polynomial in *|I|*
+        - In particular, *|S|* is polynomial in *|I|*
+    - Goal: Reduce every search problem to a Circuit-SAT
+        - A computer is in fact a circuit of constant size implemented on a chip
+        - Each step of the algorithm *C(I , S)* is performed by this computer’s circuit
+        - This gives a circuit of size polynomial in *|I|* that has input bits for *I* and *S* and 
+        - outputs whether *S* is a solution for *I* (a separate circuit for each input length)
+    - *f*:
+        - Take a circuit corresponding to C(I , ·)
+        - The inputs to this circuit encode candidate solutions
+        - Use a Circuit-SAT algorithm for this circuit to find a solution (if exists)
+- **All of NP → Circuit SAT → SAT → 3-SAT → ISP → Vertex Cover Problem**
 - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
 
 </details>
