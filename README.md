@@ -2493,6 +2493,32 @@
 </details>
 
 <details>
+<summary>Using SAT-solvers</summary>
+
+- Solving Hard Problems in Practice:
+    - It's to reduce the problem to SAT
+    - Many problems are reduced to SAT in a natural way
+    - Then use one of SAT solvers: there're many of them and they're very efficient
+- Sudoku Puzzle:
+    - Fill in with digits the partially completed 9 × 9 grid so that:
+        - Each row contains all the digits from 1 to 9, 
+        - Each column contains all the digits from 1 to 9, and 
+        - Each of the nine 3 × 3 subgrids contains all the digits from 1 to 9
+    - There will be 9 × 9 × 9 = 729 Boolean variables: 
+        - For 1 ≤ i, j, k ≤ 9, Xijk = 1, if and only if the cell [i, j] contains the digit k
+        - Xijk = 0, otherwise
+    - Express with a SAT that **Exactly one Is True**:
+        - For 3 literals: (l1 v l2 v l3)(!l1 v !l2)(!l1 v !l3)(!l2 v !l3)
+        - The long clause (l1 v l2 v l3): l1 or l2 or l3 should be equal to 1
+        - !li v lj: we shouldn't assign the value 1 to the i-th and j-th literal, simultaneously
+        - For K literals: the long clause with K literals + {\displaystyle \textstyle {\binom {K}{2}}} (k choose 2) clauses of 2 literals
+- Related Problems:
+    - Solve Sudoku Puzzle
+- UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
+
+</details>
+
+<details>
 <summary>Coping with NP-Completness: Introduction</summary>
 
 - UC San Diego Course: [Coping with NP-completness: Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_1_introduction.pdf)
