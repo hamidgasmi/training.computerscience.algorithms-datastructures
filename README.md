@@ -2304,7 +2304,8 @@
     - The problem is open, we don't know whether these 2 classes are equal
     - If P = NP, the all search problems can be solved in polynomial time
     - If  != NP, then there exist search problems that cannot be solved in polynomial time
-- UC San Diego Course: [Class P and NP](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+- For more details:
+    - UC San Diego Course: [Class P and NP](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2488,7 +2489,8 @@
         - The inputs to this circuit encode candidate solutions
         - Use a Circuit-SAT algorithm for this circuit to find a solution (if exists)
 - **All of NP → Circuit SAT → SAT → 3-SAT → ISP → Vertex Cover Problem**
-- UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
+- For more details:
+    - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
 
 </details>
 
@@ -2511,10 +2513,22 @@
         - For 3 literals: (l1 v l2 v l3)(!l1 v !l2)(!l1 v !l3)(!l2 v !l3)
         - The long clause (l1 v l2 v l3): l1 or l2 or l3 should be equal to 1
         - !li v lj: we shouldn't assign the value 1 to the i-th and j-th literal, simultaneously
-        - For K literals: the long clause with K literals + {\displaystyle \textstyle {\binom {K}{2}}} (k choose 2) clauses of 2 literals
+        - For K literals: the long clause with K literals + (K choose 2) clauses of 2 literals
+    - Constraints:
+        - ExactlyOneOf(Xij1, Xij2,..., Xij9): a cell[i, j] contains exactly one digit
+        - ExactlyOneOf(Xi1k, Xi1k,..., Xi1k): k appears exactly once in a row i
+        - ExactlyOneOf(X1jk, X2jk,..., X9jk): k appears exactly once in a column j
+        - ExactlyOneOf(X11k, X12k,..., X33k): k appears exactly once in 3 x 3 block
+        - if Cell[i,j] is given with the value k: Xijk = 1 (it must be equal to true)
+    - Resulting Formula:
+        - 729 variables
+        - The corresponding search space has a size about 2^729 ≈ 10^220 (huges!!!)
+        - State-of-the-art SAT-solvers find a satisfying assignment in blink of an eye
 - Related Problems:
     - Solve Sudoku Puzzle
-- UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
+- For more details:
+    - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
+    - [Mini-Sat Solver](https://msoos.github.io/cryptominisat_web/)
 
 </details>
 
