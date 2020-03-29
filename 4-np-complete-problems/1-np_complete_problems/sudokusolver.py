@@ -49,9 +49,9 @@ for (i, j) in itertools.product(digits, repeat=2):
         k = int(puzzle[i - 1][j - 1])
         assert(k in digits)
         #[i,j] already contains k:
-        clauses.append(varnum(i, j, k))
+        clauses.append([varnum(i, j, k)])
 
-with open('temp.cnf', 'w') as f:
+with open('tmp.cnf', 'w') as f:
     f.write("p cnf {} {}\n".format(999, len(clauses)))
     for c in clauses:
         c.append(0)
@@ -78,3 +78,6 @@ with open("tmp.sat", "r") as satfile:
                             break
 
                 print("")
+
+os.remove("tmp.sat")
+os.remove("tmp.cnf")
