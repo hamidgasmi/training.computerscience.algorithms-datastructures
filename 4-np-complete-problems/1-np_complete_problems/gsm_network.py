@@ -13,65 +13,74 @@ import itertools
 #     (Xv1 V Xu1 V Xw1)(-Xv1 V -Xu1)(-Xv1 V -Xw1)(-Xu1 V -Xw1)
 #     (Xv2 V Xu2 V Xw2)(-Xv2 V -Xu2)(-Xv2 V -Xw2)(-Xu2 V -Xw2)
 #     (Xv3 V Xu3 V Xw3)(-Xv3 V -Xu3)(-Xv3 V -Xw3)(-Xu3 V -Xw3)
-
 clauses = []
 
 colors = range(1, 4)
 
 def vertice_color_num(v, color):
     assert(color in colors)
-    return len(colors) * v + color
+    return len(colors) * (v - 1) + color
 
 def exactly_one_of(literals):
-    clauses.append([l for l in literals])
+    if len(literals) >= len(colors):
+        clauses.append([l for l in literals])
 
     for pair in itertools.combinations(literals, 2):
         clauses.append([-l for l in pair])
 
-def createClauses(n, edges):
+def vertices_list_num(vertices_list):
+    list_num = 0
+    for v in vertices_list:
+       list_num *= 10 
+       list_num += v
+
+    return list_num
+
+def create_sat_clauses(n, edges):
 
     adjacency_list = [[] for _ in range(n)]
     for (a, b) in edges:
-        adjacency_list[a - 1].append(b - 1)
-        adjacency_list[b - 1].append(a - 1)
+        adjacency_list[a - 1].append(b)
+        adjacency_list[b - 1].append(a)
 
     clauses_set = set()
-    for v in range(n):
+    for i in range(n):
 
-        # v must have 1 color only:
+        v = i +1
+
+        # Clause 1: vertice v has exactly color:
         exactly_one_of([vertice_color_num(v, color) for color in colors])
 
+        if len(adjacency_list) == 0:
+            continue
+
+        adjacency_list[i].append(v)
+        adjacency_list[i].sort()
+        list_num = vertices_list_num(adjacency_list[i])
+
+        # If 2 vertices have the same adjacency list, then it's not necessary to generate clauses of the second vertice
+        if list_num in clauses_set:
+            continue
+        clauses_set.add(list_num)
+
         for color in colors:
+
+            # Clause 2: A color c appears exactly once on vertices v and its adjacent vertices:            
             literals = []
-            literals.append(vertice_color_num(v, color))
-            adjacency_colors_num = vertice_color_num(v, color)
-            for a in adjacency_list[v]:
-                adjacency_colors_num += vertice_color_num(a, color)
-                literals.append(vertice_color_num(a, color))
-
-            if adjacency_colors_num in clauses_set:
-                continue
+            for u in adjacency_list[i]:
+                literals.append(vertice_color_num(u, color))
             exactly_one_of(literals)
-            clauses_set.add(adjacency_colors_num)
 
-def printEquisatisfiableSatFormula(n):
+def print_equisatisfiable_sat_formula(n):
     
     print(len(clauses), n * 3)
     for c in clauses:
         for l in c:
             print(l, end=" ")
-            
         print(0, end="")
         print("")
 
-if __name__ == '__main__':
-    
-    n, m = map(int, input().split())
-    edges = [ list(map(int, input().split())) for i in range(m) ]
-    
-    createClauses(n, edges)
-    printEquisatisfiableSatFormula(n)
-
+def sat_solver():
     with open('tmp.cnf', 'w') as f:
         f.write("p cnf {} {}\n".format(n * 3, len(clauses)))
         for c in clauses:
@@ -90,3 +99,12 @@ if __name__ == '__main__':
 
     os.remove("tmp.sat")
     os.remove("tmp.cnf")
+
+if __name__ == '__main__':
+    
+    n, m = map(int, input().split())
+    edges = [ list(map(int, input().split())) for i in range(m) ]
+    
+    create_sat_clauses(n, edges)
+    print_equisatisfiable_sat_formula(n)
+    sat_solver()
