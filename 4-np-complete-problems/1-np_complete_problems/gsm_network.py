@@ -35,7 +35,7 @@ def createClauses(n, edges):
         adjacency_list[a - 1].append(b - 1)
         adjacency_list[b - 1].append(a - 1)
 
-    visited_adjacency_set = set()
+    clauses_set = set()
     for v in range(n):
 
         # v must have 1 color only:
@@ -44,22 +44,19 @@ def createClauses(n, edges):
         for color in colors:
             literals = []
             literals.append(vertice_color_num(v, color))
-            adjacency_num = vertice_color_num(v, color)
+            adjacency_colors_num = vertice_color_num(v, color)
             for a in adjacency_list[v]:
-                adjacency_num += vertice_color_num(a, color)
+                adjacency_colors_num += vertice_color_num(a, color)
                 literals.append(vertice_color_num(a, color))
 
-            if adjacency_num in visited_adjacency_set:
+            if adjacency_colors_num in clauses_set:
                 continue
             exactly_one_of(literals)
-            visited_adjacency_set.add(adjacency_num)
-
+            clauses_set.add(adjacency_colors_num)
 
 def printEquisatisfiableSatFormula(n):
     
-    C = len(clauses)
-    V = n * 3
-    print(C, V)
+    print(len(clauses), n * 3)
     for c in clauses:
         for l in c:
             print(l, end=" ")
@@ -75,22 +72,21 @@ if __name__ == '__main__':
     createClauses(n, edges)
     printEquisatisfiableSatFormula(n)
 
-    #with open('tmp.cnf', 'w') as f:
-    #    f.write("p cnf {} {}\n".format(999, len(clauses)))
-    #    for c in clauses:
-    #        c.append(0)
-    #        f.write(" ".join(map(str, c))+"\n")
+    with open('tmp.cnf', 'w') as f:
+        f.write("p cnf {} {}\n".format(n * 3, len(clauses)))
+        for c in clauses:
+            c.append(0)
+            f.write(" ".join(map(str, c))+"\n")
 
-    #os.system("minisat tmp.cnf tmp.sat")
+    os.system("minisat tmp.cnf tmp.sat")
 
-    #with open("tmp.sat", "r") as satfile:
-    #    for line in satfile:
-    #        if line.split()[0] == "UNSAT":
-    #            print("There is no solution")
+    with open("tmp.sat", "r") as satfile:
+        for line in satfile:
+            if line.split()[0] == "UNSAT":
+                print("There is no solution")
 
-    #        elif line.split()[0] == "SAT":
-    #            print("SATISFIABLE")
+            elif line.split()[0] == "SAT":
+                print("SATISFIABLE")
 
-
-    #os.remove("tmp.sat")
-    #os.remove("tmp.cnf")
+    os.remove("tmp.sat")
+    os.remove("tmp.cnf")
