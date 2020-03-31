@@ -1,4 +1,5 @@
 #Uses python3
+import os
 import sys
 import itertools
 
@@ -19,7 +20,7 @@ colors = range(1, 4)
 
 def vertice_color_num(v, color):
     assert(color in colors)
-    return 10 * v + color
+    return len(colors) * v + color
 
 def exactly_one_of(literals):
     clauses.append([l for l in literals])
@@ -31,24 +32,28 @@ def createClauses(n, edges):
 
     adjacency_list = [[] for _ in range(n)]
     for (a, b) in edges:
-        adjacency_list[a - 1].append(b)
-        #adjacency_list[b - 1].append(a)
+        adjacency_list[a - 1].append(b - 1)
+        adjacency_list[b - 1].append(a - 1)
 
+    visited_adjacency_set = set()
     for v in range(n):
 
         # v must have 1 color only:
-        exactly_one_of([vertice_color_num(v + 1, color) for color in colors])
-
-        # v and all its adjacent vertices must have different colors:
-        if len(adjacency_list[v]) == 0:
-            continue
+        exactly_one_of([vertice_color_num(v, color) for color in colors])
 
         for color in colors:
             literals = []
-            literals.append(vertice_color_num(v + 1, color))
+            literals.append(vertice_color_num(v, color))
+            adjacency_num = vertice_color_num(v, color)
             for a in adjacency_list[v]:
+                adjacency_num += vertice_color_num(a, color)
                 literals.append(vertice_color_num(a, color))
-            exactly_one_of(literals)   
+
+            if adjacency_num in visited_adjacency_set:
+                continue
+            exactly_one_of(literals)
+            visited_adjacency_set.add(adjacency_num)
+
 
 def printEquisatisfiableSatFormula(n):
     
@@ -58,6 +63,8 @@ def printEquisatisfiableSatFormula(n):
     for c in clauses:
         for l in c:
             print(l, end=" ")
+            
+        print(0, end="")
         print("")
 
 if __name__ == '__main__':
@@ -67,3 +74,23 @@ if __name__ == '__main__':
     
     createClauses(n, edges)
     printEquisatisfiableSatFormula(n)
+
+    #with open('tmp.cnf', 'w') as f:
+    #    f.write("p cnf {} {}\n".format(999, len(clauses)))
+    #    for c in clauses:
+    #        c.append(0)
+    #        f.write(" ".join(map(str, c))+"\n")
+
+    #os.system("minisat tmp.cnf tmp.sat")
+
+    #with open("tmp.sat", "r") as satfile:
+    #    for line in satfile:
+    #        if line.split()[0] == "UNSAT":
+    #            print("There is no solution")
+
+    #        elif line.split()[0] == "SAT":
+    #            print("SATISFIABLE")
+
+
+    #os.remove("tmp.sat")
+    #os.remove("tmp.cnf")
