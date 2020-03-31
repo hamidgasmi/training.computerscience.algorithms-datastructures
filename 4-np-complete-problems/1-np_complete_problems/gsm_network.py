@@ -58,7 +58,7 @@ def create_sat_clauses(n, edges):
         adjacency_list[i].sort()
         list_num = vertices_list_num(adjacency_list[i])
 
-        # If 2 vertices have the same adjacency list, then it's not necessary to generate clauses of the second vertice
+        # If 2 vertices have the same adjacency list, then it's not necessary to generate clauses of the 2nd vertice
         if list_num in clauses_set:
             continue
         clauses_set.add(list_num)
