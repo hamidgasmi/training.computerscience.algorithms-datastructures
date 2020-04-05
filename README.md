@@ -630,7 +630,6 @@
         - `queue.Queue` class
         - [More details](https://www.geeksforgeeks.org/queue-in-python/)
 - Related Problems:
-    - 
 - For more details:
     - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
     - Visualization: [Implementation with an Array](https://www.cs.usfca.edu/~galles/visualization/QueueArray.html)
@@ -1454,9 +1453,7 @@
                                       R1'.height = h2
     - Steps to follow for a **Split**:
 - Related Problems:
-    - 
 - Use Cases:
-    - 
 - For more details:
     - UC San Diego Course: [AVL tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_1_binary_search_trees_avl_trees.pdf)
     - UC San Diego Course: [AVL Tree implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_2_binary_search_trees_avl_tree_implementation.pdf)
