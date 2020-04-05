@@ -14,6 +14,7 @@
 - [String Processing and Pattern Matching Algorithms](#string-processing-and-pattern-matching-algorithms)
 - [Dynamic Programming: Applications In Machine Learning and Genomics](#dynamic-programming-applications-in-machine-learning-and-genomics)
 - [Graph Algorithms in Genome Sequencing ](#graph-algorithms-in-genome-sequencing)
+- [Problem Solving Patterns](#problem-solving-patterns)
 - [References](#references)
 
 ## Prerequisites
@@ -2577,6 +2578,21 @@
 
 ---
 
+## Problem Solving Patterns:
+
+<details>
+<summary>Bitwise Pattern</summary>
+
+- It's particularly related XOR operation
+- a XOR a = 0
+- Related problems:
+    - [Swap 2 numbers without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/147)
+    - [Single number withotu extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
+    
+</details>
+
+---
+
 ## References
 
 <details>
@@ -2609,5 +2625,3 @@
 - [Top 10 Algorithms for Coding Interview](https://www.programcreek.com/2012/11/top-10-algorithms-for-coding-interview/)
 
 </details>
-
----
