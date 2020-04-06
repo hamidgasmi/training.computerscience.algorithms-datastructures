@@ -2536,6 +2536,18 @@
 <details>
 <summary>Coping with NP-Completness: Introduction</summary>
 
+- To show that there is no known efficient algorithm for a problem:
+    - We show that it's a **hard** search problem
+    - That is, we show that our problem is **NP-complete**
+- If P different to NP, then there is no ***polynomial time*** algorithm that finds an ***optimal solution*** to an NP-complete problem in ***all cases***:
+    - 1st, we want that our algorithm to have polynomial time
+    - 2nd, we want it to return an optimal solution
+    - 3rd, we want it to do so for all cases
+    - In practice, to solve an NP-Complete problem, we might want to **relax** one of this conditions:
+    -                                   Poly. time      Opt. Sol.   All Cases:
+            Spacial Cases Algorithms:       Yes            Yes         No
+            Approvimation Algorithms:       Yes            No          Yes
+                     Exact Algorithm:       No             Yes         Yes
 - UC San Diego Course: [Coping with NP-completness: Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_1_introduction.pdf)
 
 </details>
