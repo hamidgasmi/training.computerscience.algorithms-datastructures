@@ -2113,7 +2113,7 @@
 ## NP-Complete Problem
 
 <details>
-<summary>Search Problems</summary>
+<summary>Search Problems: Introduction</summary>
 
 - Brute Force Search:
     - Polunomial vs. Exponential:
@@ -2136,31 +2136,6 @@
         - Brute Force solution: O(n!)
         - It's extremely slow!
         - n! grows even faster than any exponential function
-- Boolean **Satisfiability** problem (**SAT**):
-    - Input: Formula F in **conjunctive normal form** (**CNF**)
-        - It's a set of a logical clauses
-        - Each clause is a **logical or** or a **disjunction** of few literals
-        - E.g., F1: (x ∨ !y)(!x ∨ !y)(x ∨ y), x, y are Boolean variables
-    - Output: An assignment of Boolean values to the variables of F satisfying all clauses, if exists
-        - E.g., F1 is satisfiable: set x = 1, y = 0
-    - Brute Force Solution: list all possible assignments of formula's variables and check if each of them falsify/satisfy F
-    - E.g., F2: (x ∨ y ∨ z)(x ∨ y )(y ∨ z):
-        - Brute Force solution: there're 8 possible assignment for x, y, z:
-        -     x   y   z   F
-              0   0   0   Falsified
-              0   0   1   Falsified
-              0   1   0   Falsified
-              0   1   1   Falsified
-              1   0   0   Satisfied
-              1   0   1   Falsified
-              1   1   0   Falsified
-              1   1   1   Satisfied
-              It's satisfiable: set (x, y, z): {(1, 1, 1), (1, 0, 0)}
-    - E.g., F3: (x ∨ y ∨ z)(x ∨ !y )(y ∨ !z)(z ∨ !x)(!x ∨ !y ∨ !z)
-        - Another solution:
-        -     Let assume x=0  (by F3.2: x ∨ !y)-> y=0 (by F3.3)-> z=0 (by F3.1)-> F3.1 is falsified -> Initial assumption is wrong
-              Let assume x=1  (by F3.4: z ∨ !x)-> z=1 (by F3.3)-> y=1 (by F3.5)-> F3.5 is falsified -> Initial assumption is wrong
-              Therefore, F3 is unsatifiable
 - **Search problem**:
     - It's an algorithm *C* that takes an **instance** *I* (input) and a candidate **solution** *S*, 
     - It runs in time **polynomial in the length of I** 
@@ -2168,23 +2143,74 @@
         - If S has an exponential size 
         - It would require an exponential time just to write down a solution for the instance *I*
     - We say that *S* is a solution to *I* ***iff C(S, I) = true***
-    - E.g. SAT is a typical search problem:
-        - *I* is a Boolean formula
-        - *S* is an assignment of Boolean constants to its variables
-        - *C* scan the formula from left to right and check whethere *S* satisfies all clauses of *I*
-        - *T(C)* is polynomial in the length of the formula, *I*
-- **Traveling Salesman** Problem (**TSP**)
-    - Input: Pairwise distances between *n* cities and a **budget** *b*
-    - Output: A cycle that visits each vertex **exactly once** and has **total length** at most *b*
-    - It's a search problem:
-        - *I*: a graph G(V, E)
-        - *S*: a sequence of *n* vertices
-        - *C*: trace *S* and check whether it forms a cycle, it visits each vertex exactly once and it has a total length of at most *b*
-        - *T(C) = O(|V|)*
-        - It's the **decision** version of TSP
-    - It's also usually stated as an **optimization** problem:
-        - But it's not so clear: how could we check a given cycle whether it's optimal or not?
-    - These 2 versions are **hardly** different:
+- For more details:
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - Developers Google: [solving a TSP with OR-Tools](https://developers.google.com/optimization/routing/tsp)
+    - Wikipedia: [Travelling salesman problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem)
+
+</details>
+
+<details>
+<summary>Search Problems: Satisfiability Problem (SAT)</summary>
+
+- Input: Formula F in **conjunctive normal form** (**CNF**):
+    - It's a set of a logical clauses
+    - Each clause is a **logical or** or a **disjunction** of few literals
+    - E.g., F1: (x ∨ !y)(!x ∨ !y)(x ∨ y), x, y are Boolean variables
+- Output: An assignment of Boolean values to the variables of F satisfying all clauses, if exists
+    - E.g., F1 is satisfiable: set x = 1, y = 0
+- Brute Force Solution: 
+    - List all possible assignments of formula's variables 
+    - Check if each of them falsify/satisfy F
+    - Running Time: O(2^|V|) |V| is the variable #
+- It's a search problem:
+    - *I* is a Boolean formula
+    - *S* is an assignment of Boolean constants to its variables
+    - *C* scan the formula from left to right and check whethere *S* satisfies all clauses of *I*
+    - *T(C)* is polynomial in the length of the formula, *I*
+- Special Case: **3-SAT problem**:
+    - Input: Formula *F* in 3-CNF (a collection of clauses each having at most 3 literals)
+    - Output: An assignment of Boolean values to the variables of F satisfying all clauses, if exists
+- E.g., F2: (x ∨ y ∨ z)(x ∨ y )(y ∨ z):
+    - Brute Force solution: there're 8 possible assignment for x, y, z:
+    -     x   y   z   F
+          0   0   0   Falsified
+          0   0   1   Falsified
+          0   1   0   Falsified
+          0   1   1   Falsified
+          1   0   0   Satisfied
+          1   0   1   Falsified
+          1   1   0   Falsified
+          1   1   1   Satisfied
+          It's satisfiable: set (x, y, z): {(1, 1, 1), (1, 0, 0)}
+- E.g., F3: (x ∨ y ∨ z)(x ∨ !y )(y ∨ !z)(z ∨ !x)(!x ∨ !y ∨ !z)
+    - Another solution:
+    -     Let assume x=0  (by F3.2: x ∨ !y)-> y=0 (by F3.3)-> z=0 (by F3.1)-> F3.1 is falsified -> Initial assumption is wrong
+          Let assume x=1  (by F3.4: z ∨ !x)-> z=1 (by F3.3)-> y=1 (by F3.5)-> F3.5 is falsified -> Initial assumption is wrong
+          Therefore, F3 is unsatifiable
+- For more details:
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+
+</details>
+
+<details>
+<summary>Search Problems: Traveling Salesman Problem (TSP)</summary>
+
+- Input: Pairwise distances between *n* cities and a **budget** *b*
+- Output: A cycle that visits each vertex **exactly once** and has **total length** at most *b*
+- Brute force Solutions: 
+    - Check all permutations: n = 15, n! = 10^12
+    - Running time: O(n!)
+    - It's totally impratical
+- It's a search problem:
+    - *I*: a graph G(V, E)
+    - *S*: a sequence of *n* vertices
+    - *C*: trace *S* and check whether it forms a cycle, it visits each vertex exactly once and it has a total length of at most *b*
+    - *T(C) = O(|V|)*
+    - It's the **decision** version of TSP
+- It's also usually stated as an **optimization** problem:
+    - But it's not so clear: how could we check a given cycle whether it's optimal or not?
+- These 2 versions are **hardly** different:
         - Optimization version can be used to solve Decision version:
             - If we have an algorithm that solves an optimization problem, we can use it to solve the decision version
             - If we have an algorithm that finds an optimal cycle, we can use it to check whether it's a cycle of a length at most *b* or not
@@ -2196,93 +2222,120 @@
             - If there is no such cycle, 3rd., we check whether there's an optimal cycle of length at most 75
             - Eventually, we'll find the value of *b* such that there is a cycle of length *b* but there is no cycle of smaller length
             - At this point, we have found the optimal solution
-    - Brute force Solutions: 
-        - Check all permutations: n = 15, n! = 10^12
-        - Running time: O(n!)
-        - It's totally impratical: 
-    - Dynamic programming solution: 
+- Dynamic programming solution: 
         - Running time: O(n^2 * 2^n) 
         - It's exponential running time
         - No significantly better upper bound is known
         - E.g. we have no algorithm that solves this problem in time for example, O(1.99^n)
-    - **heuristic algorithm** solutions:
+- **heuristic algorithm** solutions:
         - In practice, there're algorithms that solve ths problem quite well (n is equal several thousands)
         - But we have no guarantee of the running time
-    - **Approximation algorithm** solution:
+- **Approximation algorithm** solution:
         - We have no guarantee of the running time
         - Their solution isn't optimal but it's not much worse than optimal
         - They guarantee a cycle at most 2 times longer than an optimal one
-    - It's a problem that we get from  the **minimum spanning tree** problem with an additional resrtriction:
+- It's a problem that we get from  the **minimum spanning tree** problem with an additional resrtriction:
         - The restriction: that tree that we're looking for should be actually a path
         - MST problem has an efficient solution: O(|E| log |V|) or O(|V|^2)
         - TSP problem doesn't have a know polynomial algorithm
         - See Kruskal's and Prim's algorithms from course [Graph Algorithms](#graph-algorithms) above
-- **Hamiltonian Cycle** Problem:
-    - Input: A graph (directed or undirected)
-    - Output: A cycle that visits each vertex of the graph exactly once
-    - It's a search problem:
-        - *I*: a graph G(V, E)
-        - *S*: a sequence of *n* vertices
-        - *C*: trace *S* and check whether it forms a cycle and it visits each vertex exactly once
-        - *T(C) = O(|V|)* is polynomial in the length of the formula, *I*
-        - It forces the length of *S*, *n*, to be polynomial in the length of *I*, *|V|*
-    - It looks very similar to **Eulerian cycle**
-        - Input: A graph
-        - Output: A cycle that visits each edge of the graph exactly once
-        - It has an efficient solution
-        - A graph has an Eulerian cycle if and only if it is connected and the degree of each vertex is even
-        - Find Eulerian cycle for a graph G(V, E): Find all cycles of of G; Traverse a cycle; While traversing a cycle, if a node of 2nd cycle is found, then traverse the 2nd cycle; when, we come back to this node, continue traversing the previous cycle
-    - Eulerian cycle problem has an efficient solution
-    - Hamiltonian Cycle Problem doesn't have a know polynomial algorithm
-- **Longest path** Problem:
-    - Input: a weighted graph, 2 vertices *s*, *t*, and a budget *b*
-    - Output: a simple path (containing no repeated vertices) of total length at least *b*
-    - It looks very similar to **Shortest Path** problem:
-        - Find a simple path from *s* to *t* of total length at most *b*
-        - It can be solved efficiently with a BFS traversal, if the graph is unweighted: O(|V| + |E|)
-        - It can be solved efficiently with Dijkstra's algorithm, if the graph is weighted and all weight are positive
-        - It can be solved efficiently with a Bellman-Ford's algorithm, if the graph is weighted and weights could be positive and negative
-        - Longest path Problem doesn't have a know polynomial algorithm
-- **Integer Linear Programming Problem** (**ILP**):
-    - Input: a system of linear inequalities *Ax ≤ b*
-    - Output: Integer solution
-    - It looks very similar to **Real Linear Programming** problem (**LP**):
-        - Find a **real** solution of a system of linear inequalities
-        - It can be solved in practice by using **Simplex** mothod: it's not bounded by polynomials; exponential running time in some pathological cases
-        - It can be also by using **ellipsoid** method: it has a polynomial upperbound running time
-        - It can be also solved by using **interior point** method: it has a polynomial upperbound running time
-        - ILP problem doesn't have a know polynomial algorithm
-    - The SAT problem can be **reduced** to ILP problem:
-        - For each variable xi of F, add 2 inequalities 0 ≤ xi ≤ 1
-        - Write each negation, !xi: 1 - xi 
-        - For each clause like (xi ∨ !xj ∨ !xk), add an inequality: xi + (1−xj) + (1−xk) ≥ 1 
-        - Formally for each clause of the form (ℓ1 ∨ ℓ2 ∨ ⋯ ∨ ℓk), 
-        - Add an inequality m1 + m2 + ⋯ + mk ≥ 1
-        - mi = ℓi, if ℓi is a variable xj, 
-        - mi = (1 − xj), if li is the negation of a variable xj
-- **Independent Set** Problem: 
-    - Input: a graph and a budget *b*
-    - Output: a subset of a size at least *b* vertices such that no 2 of them are adjacent
-    - It's a search problem:
-        - *I*: a graph G(V, E)
-        - *S*: a set of *b* vertices
-        - *C*: check a set of vertices *S* whether it's an independent set and it has a size of at least b
-        - *T(C)* is polynomial in the length of the formula, *I*
-    - It's easy to solve **Independent Sets in a Tree**:
-        - Input: a tree
-        - Output: Find an independent set of size at least *b* in a given tree
-        - It can be found by a simple greedy algorithm
-        - 1st., It is safe to take into a solution all the leaves
-        - 2nd., to remove all the leaves from the tree together with all their parents
-        - 3rd., Iterate
-        - It can be solved efficiently
-        - Independent Set Problem doesn't have a know polynomial algorithm
 - For more details:
     - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
     - Developers Google: [solving a TSP with OR-Tools](https://developers.google.com/optimization/routing/tsp)
     - Wikipedia: [Travelling salesman problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem)
 
 </details>
+
+<details>
+<summary>Search Problems: Hamiltonian Cycle Problem</summary>
+
+- Input: A graph (directed or undirected)
+- Output: A cycle that visits each vertex of the graph exactly once
+- It's a search problem:
+    - *I*: a graph G(V, E)
+    - *S*: a sequence of *n* vertices
+    - *C*: trace *S* and check whether it forms a cycle and it visits each vertex exactly once
+    - *T(C) = O(|V|)* is polynomial in the length of the formula, *I*
+    - It forces the length of *S*, *n*, to be polynomial in the length of *I*, *|V|*
+- It looks very similar to **Eulerian cycle**
+    - Input: A graph
+    - Output: A cycle that visits each edge of the graph exactly once
+    - It has an efficient solution
+    - A graph has an Eulerian cycle if and only if it is connected and the degree of each vertex is even
+    - Find Eulerian cycle for a graph G(V, E): 
+        - Find all cycles of of G; 
+        - Traverse a cycle; 
+        - While traversing a cycle:
+        - If a node of 2nd cycle is found, then traverse the 2nd cycle; 
+        - When, we come back to this node, continue traversing the previous cycle
+- Eulerian cycle problem has an efficient solution
+- Hamiltonian Cycle Problem doesn't have a know polynomial algorithm
+- For more details:
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+
+</details>
+
+<details>
+<summary>Search Problems: Longest path Problem</summary>
+
+- Input: a weighted graph, 2 vertices *s*, *t*, and a budget *b*
+- Output: a simple path (containing no repeated vertices) of total length at least *b*
+- It looks very similar to **Shortest Path** problem:
+    - Find a simple path from *s* to *t* of total length at most *b*
+    - It can be solved efficiently with a BFS traversal, if the graph is unweighted: O(|V| + |E|)
+    - It can be solved efficiently with Dijkstra's algorithm, if the graph is weighted and all weight are positive
+    - It can be solved efficiently with a Bellman-Ford's algorithm, if the graph is weighted and weights could be positive and negative
+    - Longest path Problem doesn't have a know polynomial algorithm
+- For more details:
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+
+</details>
+
+<details>
+<summary>Search Problems: Integer Linear Programming Problem (ILP)</summary>
+
+- Input: a system of linear inequalities *Ax ≤ b*
+- Output: Integer solution
+- It looks very similar to **Real Linear Programming** problem (**LP**):
+    - Find a **real** solution of a system of linear inequalities
+    - It can be solved in practice by using **Simplex** mothod: it's not bounded by polynomials; exponential running time in some pathological cases
+    - It can be also by using **ellipsoid** method: it has a polynomial upperbound running time
+    - It can be also solved by using **interior point** method: it has a polynomial upperbound running time
+    - ILP problem doesn't have a know polynomial algorithm
+- For more details:
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+
+</details>
+
+<details>
+<summary>Search Problems: Independent Set Problem (ISP)</summary>
+
+- Input: a simple and undirected graph *G(V, E)* and a budget *b*
+- Output: a subset of a size at least *b* vertices such that no 2 of them are adjacent
+- It's a search problem:
+    - *I*: a graph G(V, E)
+    - *S*: a set of *b* vertices
+    - *C*: check a set of vertices *S* whether it's an independent set and it has a size of at least b
+    - *T(C)* is polynomial in the length of the formula, *I*
+- It's easy to solve **Independent Sets in a Tree**:
+    - Input: a tree
+    - Output: Find an independent set of size at least *b* in a given tree
+    - It can be found by a simple greedy algorithm
+    - 1st., It is safe to take into a solution all the leaves
+    - 2nd., to remove all the leaves from the tree together with all their parents
+    - 3rd., Iterate
+    - It can be solved efficiently
+- Independent Set Problem doesn't have a know polynomial algorithm
+- For more details:
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    
+</details>
+
+<details>
+<summary>Search Problems: Vertex Cover problem</summary>
+
+- Input: a simple and undirected graph *G(V, E)* and a budget *b*
+- Output: a subset of at most *b* vertices that touches every edge
 
 <details>
 <summary>Class P and NP</summary>
@@ -2328,13 +2381,15 @@
     - A search problem is called NP-complete if all other search problems reduce to it
     - If A → B and A is NP-Complete, then so is B
     - All search problems → SAT problem → 3-SAT problem → Independent set problem (ISP) → vertex cover problem
+- **SAT problem → ILP**:
+    - For each variable xi of F, add 2 inequalities 0 ≤ xi ≤ 1
+    - Write each negation, !xi: 1 - xi 
+    - For each clause like (xi ∨ !xj ∨ !xk), add an inequality: xi + (1−xj) + (1−xk) ≥ 1 
+    - Formally for each clause of the form (ℓ1 ∨ ℓ2 ∨ ⋯ ∨ ℓk), 
+    - Add an inequality m1 + m2 + ⋯ + mk ≥ 1
+    - mi = ℓi, if ℓi is a variable xj, 
+    - mi = (1 − xj), if li is the negation of a variable xj
 - **IS Problem → Vertex Cover Problem**:
-    - Independent set problem:
-        - Input: a simple and undirected graph *G(V, E)* and a budget *b*
-        - Output: a subset of at least *b* vertices such that no 2 of them are adjacent
-    - Vertex cover problem:
-        - Input: a simple and undirected graph *G(V, E)* and a budget *b*
-        - Output: a subset of at most *b* vertices that touches every edge
     - *I* is an independent set of *G(V, E)*, if and only if *V − I* is a vertex cover of *G*
     - `f(G(V, E), b) = (G(V, E), |V| − b)`
     - `h(S) = V − S`
@@ -2354,9 +2409,6 @@
             | /         \ |      | /         \ |
             A −−−−−−−−−−− D      A −−−−−−−−−−− D^
 - **3-SAT problem → IS Problem**:
-    - 3-SAT problem:
-        - Input: Formula *F* in 3-CNF (a collection of clauses each having at most 3 literals)
-        - Output: An assignment of Boolean values to the variables of F satisfying all clauses, if exists
     - *f*:
         - For each clause of the input formula *F*, introduce 3 (or 2, or 1) vertices in G labeled with the literals of this clause 
         - Join every 2 of literals of each clause
@@ -2403,7 +2455,6 @@
         - Transform a CNF formula *F* into an equisatisfiable 3-CNF formula, *F'*
         - We need to get rid of clauses of length more than 3 in an input formula
         - That is, reduce a problem to its special case
-        - 
     - *f*:
         - For each clause *C* with more than 3 laterals: *C = (l1 ∨ l2 ∨ A)*, where *A* is an OR of at least 2 literals
         - Introduce a fresh variable *y* and 
@@ -2556,7 +2607,8 @@
 <summary>Coping with NP-Completness: Special Cases</summary>
 
 - An NP-complete problem doesn't exclude an efficient algorithm for special cases of the problem
-- 2-Satisfiability:
+- Special Case 1: **2-SAT**:
+    - It's a special case of SAT problem
     - Consider a clause: (l1 ∨ l2):
         - l1 and l2 can't be both equal to 0
         - If l1 = 0, then l2 = 1 (implication: !l1 V l2 = l1 → l2)
@@ -2598,6 +2650,9 @@
             - Check if x and !x are in the same SCC: = O(n + m)
             - Topo. Sort of SCCs components:?
             - Assignments: O(n + m)
+- Special Case 2: **Independent Sets in Trees**
+    - It's a special case of ISP problem
+
 - UC San Diego Course: [Coping with NP-completness: Special Cases](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_2_special_cases.pdf)
 
 </details>
