@@ -2337,6 +2337,8 @@
 - Input: a simple and undirected graph *G(V, E)* and a budget *b*
 - Output: a subset of at most *b* vertices that touches every edge
 
+</details>
+
 <details>
 <summary>Class P and NP</summary>
 
