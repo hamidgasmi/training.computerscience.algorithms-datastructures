@@ -2555,6 +2555,49 @@
 <details>
 <summary>Coping with NP-Completness: Special Cases</summary>
 
+- An NP-complete problem doesn't exclude an efficient algorithm for special cases of the problem
+- 2-Satisfiability:
+    - Consider a clause: (l1 ∨ l2):
+        - l1 and l2 can't be both equal to 0
+        - If l1 = 0, then l2 = 1 (implication: !l1 V l2 = l1 → l2)
+        - If l2 = 0, then l1 = 1 (implication: !l2 V l1 = l2 → l1)
+        - x → y is equivalent to !x v y therefore: x v y is equivalent to !x → y
+        - x → y by definiton of the implication: !y → !x
+        - So (x v y) is equivalent to (!x → y) and (!y v x)
+        - Implication is transitive: if x → y and y → z then x → z
+    - **Implication Graph**:
+        - For each variable x, introduce 2 vertices labeled by x and !x
+        - For each 2-clause (l1 ∨ l2), introduce **2 directed edges** !l1 → l2 and !l2 → l1
+        - For each 1-clause (li), introduce an edge !li → li
+        - It's **Skew-Symmetric**: if there is an edge l1 → l2, then there is an edge !l2 → !l1
+        - If there is a directed path from l1 to l2, then there is a directed path from !l2 to !l1
+        - **Transitivity**: if all edges are satisfied by an assignment and there is a path from l1 to l2, then it can't be the case that l1 = 1 and l2 = 0
+    - **Strongly Connected Components**:
+        - All variables lying in the same SCC of the implication graph should be assigned the same value
+        - If a SCC contains a variable x and !x, then the corresponding formula is unsatisfiable
+        - If no SCC contain a variable and its negation, then formula is satisfiable!
+    - Implementation and Time Complexity:
+        - Our goal is to assign truth values to the variables so that each edge in the implication graph is “satisfied”
+        - That is, there is no edge from 1 to 0
+        -       2_SAT(2_CNF_F):
+                    Construct the implicaion graph G
+                    Find SCC's of G
+                    For all variables x:
+                        if x and !x lie in the same SCC of G:
+                            return "unsatisfiable"
+                    Find a topological ordering of SCC's
+                    For all SCC's C in reverse order:
+                        If literals of C aren't assigned yet:
+                            set all of them to 1
+                            set their negations to 0
+                    return the satisfying assignment
+        - Time Complexity is linear (polynomial): O(|F|)
+            - Let n, m the number of variables and clauses respectively:
+            - Construct G: O(n + m): we get a graph G(V, E) where |V| = 2n and |E| = 2m
+            - Find SCCs: O(n + m): Construct reversed Gr + 2 DFS
+            - Check if x and !x are in the same SCC: = O(n + m)
+            - Topo. Sort of SCCs components:?
+            - Assignments: O(n + m)
 - UC San Diego Course: [Coping with NP-completness: Special Cases](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_2_special_cases.pdf)
 
 </details>
