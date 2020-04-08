@@ -2211,17 +2211,17 @@
 - It's also usually stated as an **optimization** problem:
     - But it's not so clear: how could we check a given cycle whether it's optimal or not?
 - These 2 versions are **hardly** different:
-        - Optimization version can be used to solve Decision version:
-            - If we have an algorithm that solves an optimization problem, we can use it to solve the decision version
-            - If we have an algorithm that finds an optimal cycle, we can use it to check whether it's a cycle of a length at most *b* or not
-        - Decision version can be used to solve Optimization version:
-            - If we have an algorithm that for every *b*, it checks whether there is a cycle of lengths at most *b*
-            - We can use it to find the optimal value of *b* by using *binary section*:
-            - 1st., We check whether there is an optimal cycle of length at most 100, for example
-            - If yes, 2nd., we check whether there's an optimal cycle of length at most 50
-            - If there is no such cycle, 3rd., we check whether there's an optimal cycle of length at most 75
-            - Eventually, we'll find the value of *b* such that there is a cycle of length *b* but there is no cycle of smaller length
-            - At this point, we have found the optimal solution
+    - Optimization version can be used to solve Decision version:
+        - If we have an algorithm that solves an optimization problem, we can use it to solve the decision version
+        - If we have an algorithm that finds an optimal cycle, we can use it to check whether it's a cycle of a length at most *b* or not
+    - Decision version can be used to solve Optimization version:
+        - If we have an algorithm that for every *b*, it checks whether there is a cycle of lengths at most *b*
+        - We can use it to find the optimal value of *b* by using *binary section*:
+        - 1st., We check whether there is an optimal cycle of length at most 100, for example
+        - If yes, 2nd., we check whether there's an optimal cycle of length at most 50
+        - If there is no such cycle, 3rd., we check whether there's an optimal cycle of length at most 75
+        - Eventually, we'll find the value of *b* such that there is a cycle of length *b* but there is no cycle of smaller length
+        - At this point, we have found the optimal solution
 - Dynamic programming solution: 
         - Running time: O(n^2 * 2^n) 
         - It's exponential running time
@@ -2317,15 +2317,15 @@
     - *S*: a set of *b* vertices
     - *C*: check a set of vertices *S* whether it's an independent set and it has a size of at least b
     - *T(C)* is polynomial in the length of the formula, *I*
-- It's easy to solve **Independent Sets in a Tree**:
-    - Input: a tree
-    - Output: Find an independent set of size at least *b* in a given tree
-    - It can be found by a simple greedy algorithm
-    - 1st., It is safe to take into a solution all the leaves
-    - 2nd., to remove all the leaves from the tree together with all their parents
-    - 3rd., Iterate
-    - It can be solved efficiently
 - Independent Set Problem doesn't have a know polynomial algorithm
+- Special Case 1: **Independent Set in a Tree**:
+    - Input: A tree
+    - Output: Find an independent set of size at least *b* in a given tree
+    - **Maximum Independent Set in a Tree**:
+        - Output: An independent set of maximum size
+- Special Case 2: **Maximum Weighted Independent Set in a Tree**:
+    - Input: A tree with weights on vertices
+    - Output: An independent set of maximum total weight
 - For more details:
     - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
     
@@ -2652,9 +2652,77 @@
             - Check if x and !x are in the same SCC: = O(n + m)
             - Topo. Sort of SCCs components:?
             - Assignments: O(n + m)
-- Special Case 2: **Independent Sets in Trees**
+- Special Case 2: **Maximum ISP in Trees**
     - It's a special case of ISP problem
-
+    - It can be found by a simple greedy algorithm
+    - 1st., It is safe to take into a solution all the leaves:
+        - Let consider an optimal solution without some leaves
+        - This means that their parent are included in the optimal solution
+        - If we replace their parents by all their parents children:
+        - Then the new solution will be optimal too: the # of non leave nodes <= the # of theirs children
+        - It is safe to take all the leaves
+    - 2nd., to remove all the leaves from the tree together with all their parents
+    - 3rd., Iterate
+    -                       A
+                          / |  \
+                        B   C    D
+                        |   |   /  \
+                        E   F  G    H
+                             / | \
+                            I  J  K
+    - Implementation and Time Complexity:
+        -       MaximumISPGreedy(Tree T)
+                    While T is not empty:
+                        Take all the leaves to the solution
+                        Remove them and their parents from T
+                    Return the constructed solution
+        - Time Complexity: O(|T|)
+        - Instead of removing vertices from the tree
+        - For each vertex, we keep track of the number of its children
+        - So when we remove a vertex, we decrease by 1 the number of children of its parent
+        - We also maintain a queue of all vertices that do not have any children currently
+        - So in each iteration, we know the the leaves of the current tree
+- Special Case 3: **Maximum Weighted ISP in Trees**:
+    - It's a special case of ISP problem
+    - It could be solved effeciently with a **Dynamic programming** technic with **memorization**
+    - D(v) is the maximum weight of an independent set in a subtree rooted at v
+    -       D(v) = max { w (v) + ∑︁ D(w)    , ∑︁ D(w)  }
+                                 grand       children
+                                 children    w of v
+                                 w of v
+    -       Function FunParty(v)
+                if D(v) = ∞:
+                    if v has no children:
+                        D(v) ← w (v)
+                    else:
+                        m1 ← w (v)
+                        for all children u of v:
+                            for all children w of u:
+                                m1 ← m 1 + FunParty(w)
+                        m0 ← 0
+                        for all children u of v :
+                            m0 ← m 0 + FunParty(u)
+                            D(v) ← max(m1 , m0 )
+                return D(v)
+    - Running Time: O(|T|)
+        - For each vertice, D(v) is computed only once thanks to the memorization
+        - For each vertice, D(v) is called O(1) time: no more than 2 times exactely: 1st when parent is computed, 2nd when grandparent is computed
+- Special Case 4: **Maximum ISP in a Bipartite graph**:
+    - We know that the complement of any independent set in a graph is its vertex cover 
+    - So we will compute a minimum vertex cover of a graph
+    - We use the **Kőnig's theorem** that states that: 
+        - The number of vertices in a minimum vertex cover of a bipartite graph is equal to the number of edges in a maximum matching in the graph 
+        - The proof of this theorem is **constructive**: it provides a polynomial time algorithm that transforms a given maximum matching into a minimum vertex cover 
+        - In turn, a maximum matching can be found using **flow techniques**
+- Related Problems:
+    - Plan a fun party 1:
+        - We're organizing a company party
+        - We would like to invite as many people as possible with a single constraint
+        - No person should attend a party with his or her direct boss
+    - [Plan a fun party 2](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/149):
+        - We're organizing a company party again
+        - However this time, instead of maximizing the number of attendees, 
+        - We would like to maximize the total fun factor
 - UC San Diego Course: [Coping with NP-completness: Special Cases](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_2_special_cases.pdf)
 
 </details>
