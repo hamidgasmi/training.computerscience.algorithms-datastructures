@@ -2599,7 +2599,7 @@
     - In practice, to solve an NP-Complete problem, we might want to **relax** one of this conditions:
     -                                   Poly. time      Opt. Sol.   All Cases:
             Spacial Cases Algorithms:       Yes            Yes         No
-            Approvimation Algorithms:       Yes            No          Yes
+            Approximation Algorithms:       Yes            No          Yes
                      Exact Algorithm:       No             Yes         Yes
 - UC San Diego Course: [Coping with NP-completness: Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_1_introduction.pdf)
 
@@ -2731,7 +2731,10 @@
 <details>
 <summary>Coping with NP-Completness: Exact Algorithms</summary>
 
+- They're also called **intelligent exhaustive search**:
+- They're finding an optimal solution without going through all candidate solutions
 - 3-SAT: Backtracking:
+- Local Search:
 - UC San Diego Course: [Coping with NP-completness: Exact Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_3_exact_algorithms.pdf)
 
 </details>
