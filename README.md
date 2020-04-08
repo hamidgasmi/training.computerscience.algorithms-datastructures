@@ -2724,12 +2724,14 @@
         - However this time, instead of maximizing the number of attendees, 
         - We would like to maximize the total fun factor
 - UC San Diego Course: [Coping with NP-completness: Special Cases](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_2_special_cases.pdf)
+- [Kőnig's theorem](https://en.wikipedia.org/wiki/K%C5%91nig%27s_theorem_(graph_theory))
 
 </details>
 
 <details>
 <summary>Coping with NP-Completness: Exact Algorithms</summary>
 
+- 3-SAT: Backtracking:
 - UC San Diego Course: [Coping with NP-completness: Exact Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_3_exact_algorithms.pdf)
 
 </details>
