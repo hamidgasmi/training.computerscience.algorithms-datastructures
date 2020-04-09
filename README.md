@@ -2734,11 +2734,10 @@
 - They're also called **intelligent exhaustive search**:
 - They're finding an optimal solution without going through all candidate solutions
 - **3-SAT: Backtracking**:
-    - Construct a solution piece by piece
-    - Backtrack if the current partial solution cannot be extended to a valid solution
     - Instead of considering all 2^n branches of the recursion tree, we track carefully each branch
     - When we realize that a branch is dead (cannot be extended to a solution), we immediately cut it
-    -                           (x1 V x2 V x3 V x4)(!x1)(x1 V x2 V !x3)(x1 V !x2)(x2 V !x4)
+    - It can be used for general CNF formulas
+    -           E.g.:           (x1 V x2 V x3 V x4)(!x1)(x1 V x2 V !x3)(x1 V !x2)(x2 V !x4)
                                                ↙                      ↘ 
                                   1. x1 = 0  ↙                          ↘ 8. x1 = 1 
                             (x2 V x3 V x4)(x2 V !x3)(!x2)(x2 V !x4)             (!x1) Unsatisfiable
@@ -2771,11 +2770,67 @@
             - It leads to a very efficient algorithm that are able to solve formulas with thousands of variables
             - E.g., SAT-solvers
 - **3-SAT: Local Search**:
-    - SAT-solvers:
-        - With Back tracking: 
+    - Start with a candidate solution
+    - Iteratively move from the current candidate to its neighbor trying to improve the candidate
+    - A candidate solution is a truth assignment to the CNF formula variables, that is, a vector from {0, 1}^n
+    - **Hamming Distance** between 2 assignments:
+        - Let be 2 assignments α, β ∈ {0, 1}^n 
+        - It's the **number of bits where they differ**
+        - *dist(α, β) = |{i : αi != βi}|*
+    - **Hamming ball** with **center** α ∈ {0, 1}^n and radius r:
+        - It's denoted by ***H(α, r)***, 
+        - It's the set of **all truth assignments from {0, 1}^n at distance at most r from α
+        - E.g. 1, H(1011, 0) = {1011} = Assignments at distance 0
+        - E.g. 2, H(1011, 1) = {1010} U {1001, 1111, 0011} = Assignments at distance 0 Union Assignements at distance 1
+        - E.g. 3, H(1011, 2) = {1011} U {0011, 1111, 1001} U {1010, 0111, 0001, 0010, 1101, 1110, 1000}
+    - Assume that H(α, r) contains a satisfying assignment β for F, we can then find a (possibly different) satisfying assignment in time **O(|F| * 3^r)**:
+        - If α satisfies F , return α
+        - Otherwise, take an unsatisfied clause — say (xi V !xj V xk)
+        - Since this clause is unsatisfied, xi = 0, xj = 1, xk = 0
+        - Let αi, αj, αk be assignments resulting from α by flipping the i-th, j-th, k-th bit, respectively dist(α, αi) = dist(α, αj) = dist(α, αk) = 1
+        - If none of them is satisfying F, we make the same steps
+        - We know that at least in one of the branches, we get closer to β
+        - Hence there are at most 3^r recursive calls
+    -       Check_Ball(F, α, r):
+                if α satisfies F:
+                    return α
+                if r = 0:
+                    return “not found”
+                xi, xj, xk ← variables of unsatisfied clause
+                αi, αj, αk ← α with bits i, j, k flipped
+
+                β = Check_Ball(F, αi, r − 1)
+                if β != "not found"
+                    return β
+                β = Check_Ball(F, αj, r − 1)
+                if β != "not found"
+                    return β
+                β = Check_Ball(F, αk, r − 1)
+                if β != "not found"
+                    return β
+                return "not found"
+    - Assume that F has a satisfying assignment β:
+        - If it has more 1’s than 0’s then it has distance at most n/2 from all-1’s assignment
+        - If it has more 0's than 1's then it has distance at most n/2 from all-0’s assignment
+    -       Solve_SAT(F):
+                α = 11...1
+                β = Check_Ball(F, α, n/2)
+                if β != "not found"
+                    return β
+                α = 00...0
+                β = Check_Ball(F, α, n/2)
+                if β != "not found"
+                    return β
+                return "not found"
+    - Time Complexity: O(F * 3^n/2) = O(F * 1.733^n):
+        - It's exponential
+        - However, it's **exponentially faster** than a brute force search algorithm:
+            - Brute Force Search algorithm goes through all 2^n truth assignments!
+            - 2^n / 1.733^n = 1.15^n (it's exponentially faster)
+            - For n = 100, local search algorithm is 1 million time faster than a brute force search solution
 - **TSP: Dynamic Programming**:
 - **TSP: Branch-and-Bound**:
-    -
+    - Create a SAT-solvers
     -
 - Related Problems:
     - 
