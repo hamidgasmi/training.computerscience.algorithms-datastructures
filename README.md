@@ -2733,8 +2733,48 @@
 
 - They're also called **intelligent exhaustive search**:
 - They're finding an optimal solution without going through all candidate solutions
-- 3-SAT: Backtracking:
-- Local Search:
+- **3-SAT: Backtracking**:
+    - Construct a solution piece by piece
+    - Backtrack if the current partial solution cannot be extended to a valid solution
+    - Instead of considering all 2^n branches of the recursion tree, we track carefully each branch
+    - When we realize that a branch is dead (cannot be extended to a solution), we immediately cut it
+    -                           (x1 V x2 V x3 V x4)(!x1)(x1 V x2 V !x3)(x1 V !x2)(x2 V !x4)
+                                  1. x1 = 0  ↙                          ↘ 8. x1 = 1 
+                            (x2 V x3 V x4)(x2 V !x3)(!x2)(x2 V !x4)             (!x1) Unsatisfiable
+                            2. x2 = 0  ↙                    ↘ 7.x2 = 1 
+                        (x3 V x4)(!x3)(!x4)                  (!x2) Unsatisfiable (backtrack)
+                        3. x3 = 0  ↙  ↘ 6.x3 = 1
+                       (x4)(!x4)        (!x3) Unsatisfiable (backtrack)
+                4.x4 = 0 ↙  ↘ 5.x4 = 1
+                   Unsatisf.  Unsatisfiable (backtrack)
+    -       Solve_SAT(F):
+                if F has no clauses:
+                    return “sat”
+                if F contains an empty clause:
+                    return “unsat”
+                x ← unassigned variable of F
+                if SolveSAT(F [x ← 0]) = “sat”:
+                    return “sat”
+                if SolveSAT(F [x ← 1]) = “sat”:
+                    return “sat”
+                return “unsat”
+    - Time Complexity: O(F 2^n)
+        - It might be exponential
+        - However in practice, it's improved by complicated heuristics:
+            - For simpliying formula before branching and 
+            - For selecting the next variable for branching on
+            - For choosing the value for the next variable
+            - It leads to a very efficient algorithm that are able to solve formulas with thousands of variables
+            - E.g., SAT-solvers
+- **3-SAT: Local Search**:
+    - SAT-solvers:
+        - With Back tracking: 
+- **TSP: Dynamic Programming**:
+- **TSP: Branch-and-Bound**:
+    -
+    -
+- Related Problems:
+    - 
 - UC San Diego Course: [Coping with NP-completness: Exact Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_3_exact_algorithms.pdf)
 
 </details>
