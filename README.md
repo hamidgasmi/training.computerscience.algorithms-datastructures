@@ -2739,14 +2739,18 @@
     - Instead of considering all 2^n branches of the recursion tree, we track carefully each branch
     - When we realize that a branch is dead (cannot be extended to a solution), we immediately cut it
     -                           (x1 V x2 V x3 V x4)(!x1)(x1 V x2 V !x3)(x1 V !x2)(x2 V !x4)
+                                               ↙                      ↘ 
                                   1. x1 = 0  ↙                          ↘ 8. x1 = 1 
                             (x2 V x3 V x4)(x2 V !x3)(!x2)(x2 V !x4)             (!x1) Unsatisfiable
-                            2. x2 = 0  ↙                    ↘ 7.x2 = 1 
+                                         ↙                ↘ 
+                            2. x2 = 0  ↙                    ↘ 7.x2 = 1
                         (x3 V x4)(!x3)(!x4)                  (!x2) Unsatisfiable (backtrack)
-                        3. x3 = 0  ↙  ↘ 6.x3 = 1
+                                    ↙  ↘ 
+                        3. x3 = 0 ↙      ↘ 6.x3 = 1
                        (x4)(!x4)        (!x3) Unsatisfiable (backtrack)
-                4.x4 = 0 ↙  ↘ 5.x4 = 1
-                   Unsatisf.  Unsatisfiable (backtrack)
+                           ↙  ↘ 
+                4.x4 = 0 ↙      ↘ 5.x4 = 1
+                   Unsatisf.    Unsatisfiable (backtrack)
     -       Solve_SAT(F):
                 if F has no clauses:
                     return “sat”
