@@ -2857,7 +2857,7 @@
                         for all i ∈ S, i != 1:
                             for all j ∈ S, j != i:
                                 C(S, i) ← min{ C(S, i), C(S − {i}, j) + dji }
-                return min i {C ({1, . . . , n}, i) + d i,1 }
+                return MINi { C( { 1, ... , n }, i) + di1 } for all i ∈ { 1, ... , n }
     - How to iterate through all subsets of {1, . . . , n}?
         - There is a natural one-to-one correspondence between integers in the range from 0 and 2^n − 1 and subsets of {0, . . . , n − 1}:
         - k <---> { i : i-th bit of k is 1 }
