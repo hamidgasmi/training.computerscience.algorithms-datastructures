@@ -2882,10 +2882,25 @@
     - Space Complexity: O(n . 2^n):
         - The dynamic programming table has n . 2^n cells
 - **TSP: Branch-and-Bound**:
-    - Create a SAT-solvers
-    -
+    - It can be viewed as a generalization of backtracking for optimization problems
+    - We grow a tree of partial solutions 
+    - At each node of the recursion tree, 
+        - We check whether the current partial solution can be extended to a solution which is better than the best solution found so far
+        - If not, we don’t continue this branch
+    -       E.g., 
+                    1                       0
+                 1 --- 2           _________1_________
+             10 | 1\ /2 |5        /         |         \
+                |  / \  |      1 2        1 3         4 10 
+                 4 --- 3        / \        / \
+                    3        6 3  4 3   6 2   4 4
+                               |  |       |   |
+                            9  4  3 6   8 4   2 6
+                               |  |           |
+                           19  1  1 7         1 7
+            Best total weight: 7
 - Related Problems:
-    - 
+    - Create a SAT-solvers
 - UC San Diego Course: [Coping with NP-completness: Exact Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_3_exact_algorithms.pdf)
 
 </details>
