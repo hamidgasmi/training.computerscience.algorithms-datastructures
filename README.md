@@ -2901,6 +2901,7 @@
             Best total weight: 7
 - Related Problems:
     - Create a SAT-solvers
+    - [School Bus](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/150)
 - UC San Diego Course: [Coping with NP-completness: Exact Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_3_exact_algorithms.pdf)
 
 </details>
