@@ -2196,8 +2196,8 @@
 <details>
 <summary>Search Problems: Traveling Salesman Problem (TSP)</summary>
 
-- Input: Pairwise distances between *n* cities and a **budget** *b*
-- Output: A cycle that visits each vertex **exactly once** and has **total length** at most *b*
+- Input: A **complete** graph with **weights** on edges and a **budget** *b*
+- Output: A cycle that visits each vertex **exactly once** and has **total weight** at most *b*
 - Brute force Solutions: 
     - Check all permutations: n = 15, n! = 10^12
     - Running time: O(n!)
@@ -2828,7 +2828,57 @@
             - Brute Force Search algorithm goes through all 2^n truth assignments!
             - 2^n / 1.733^n = 1.15^n (it's exponentially faster)
             - For n = 100, local search algorithm is 1 million time faster than a brute force search solution
-- **TSP: Dynamic Programming**:
+- **TSP: Dynamic Programming**: 
+    - Assumptions:
+        - Vertices are integers from 1 to n 
+        - The start of our cycle starts and ends at vertex 1
+    - Dynamic Programming:
+        - We are going to use dynamic programming: instead of solving 1 problem we will solve a collection of (overlapping) subproblems
+        - A subproblem refers to a partial solution 
+        - A reasonable partial solution in case of TSP is the initial part of a cycle
+        - To continue building a cycle, we need to know the last vertex as well as the set of already visited vertices
+    - Subproblems:
+        - For a subset of vertices S ⊆ {1, . . . , n}, containing the vertex 1 and a vertex i ∈ S, 
+        - Let C (S, i) be the length of the shortest path that starts at 1, ends at i and visits all vertices from S exactly once
+        - C({1}, 1) = 0 and C(S, 1) = +∞ when |S| > 1
+    - Recurrence Relation:
+        - Consider the second-to-last vertex j on the required shortest path from 1 to i visiting all vertices from S
+        - The subpath from 1 to j is the shortest one visiting all vertices from S − {i} exactly once
+        - C(S, i) = min{ C(S − {i}, j) + dji }, where the minimum is over all j ∈ S such that j != i
+    - Order of Subproblems:
+        - We need to process all subsets S ⊆ {1, . . . , n} in an order that guarantees that:
+        - When computing the value of C(S, i), the values of C(S − {i}, j) have already been computed
+        - We can process subsets in order of increasing size
+    -       TSP(G):
+                C({1}, 1) ← 0
+                for s from 2 to n:
+                    for all 1 ∈ S ⊆ {1, . . . , n} of size s:
+                        C(S, 1) ← +∞
+                        for all i ∈ S, i ̸ = 1:
+                            for all j ∈ S, j != i:
+                                C(S, i) ← min{ C(S, i), C(S − {i}, j) + dji }
+                return min i {C ({1, . . . , n}, i) + d i,1 }
+    - How to iterate through all subsets of {1, . . . , n}?
+        - There is a natural one-to-one correspondence between integers in the range from 0 and 2^n − 1 and subsets of {0, . . . , n − 1}:
+        - k <---> { i : i-th bit of k is 1 }
+        -           E.g.
+                        k   bin(k)  { i : i-th bit of k is 1 }
+                        0    000      ∅
+                        1    001     {0}
+                        2    010     {1}
+                        3    011     {0,1}
+                        4    100     {2}
+                        5    101     {0, 2}
+                        6    110     {1, 2}
+                        7    111     {0, 1, 2}
+    - How to find out the integer corresponding to S − {j} (for j ∈ S)?
+        - We need to flip the j-th bit of k (from 1 to 0)
+        - We compute a bitwise parity (XOR) of k and 2^j (that has 1 only in j-th position)
+        - In C/C++, Java, Python: k ^ (1 < < j)
+    - Time Complexity: O(n^2 2^n)
+        - It's exponential
+        - It's much better than n!
+        - n = 100, n! / (n^2 . 2^n) ~ 10^120
 - **TSP: Branch-and-Bound**:
     - Create a SAT-solvers
     -
