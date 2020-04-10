@@ -2854,7 +2854,7 @@
                 for s from 2 to n:
                     for all 1 ∈ S ⊆ {1, . . . , n} of size s:
                         C(S, 1) ← +∞
-                        for all i ∈ S, i ̸ = 1:
+                        for all i ∈ S, i != 1:
                             for all j ∈ S, j != i:
                                 C(S, i) ← min{ C(S, i), C(S − {i}, j) + dji }
                 return min i {C ({1, . . . , n}, i) + d i,1 }
@@ -2879,6 +2879,8 @@
         - It's exponential
         - It's much better than n!
         - n = 100, n! / (n^2 . 2^n) ~ 10^120
+    - Space Complexity: O(n . 2^n):
+        - The dynamic programming table has n . 2^n cells
 - **TSP: Branch-and-Bound**:
     - Create a SAT-solvers
     -
