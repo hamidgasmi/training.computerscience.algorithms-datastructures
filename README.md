@@ -2239,6 +2239,13 @@
         - MST problem has an efficient solution: O(|E| log |V|) or O(|V|^2)
         - TSP problem doesn't have a know polynomial algorithm
         - See Kruskal's and Prim's algorithms from course [Graph Algorithms](#graph-algorithms) above
+- **Metric TSP**:
+    - It's a special case of TSP
+    - Input: 
+        - An undirected graph G(V, E) 
+        - G doesn't have negative edge weights
+        - G weights satisfy the triangle inequality: for all u, v, w ∈ V, d(u, v) + d(v, w) ≥ d(u, w)
+    - Output: A cycle of minimum total length visiting each vertex exactly once
 - For more details:
     - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
     - Developers Google: [solving a TSP with OR-Tools](https://developers.google.com/optimization/routing/tsp)
@@ -3002,6 +3009,9 @@
                     add u, v to C
                     remove from E all edges incident to u, v
                 return C
+- **TSP**:
+
+
 - UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
 
 </details>
