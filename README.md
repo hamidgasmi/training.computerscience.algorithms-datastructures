@@ -2911,7 +2911,7 @@
                         "1/2" it's because each minimum edge weight is included twice
                         Prove: If the cycle below a TSP then:
                             TSP = 1/2 (∑︀ (2 edges included in the cycle) for all v ∈ V
-                                = 1/2 (For v=1 (w12 + wn1) + For v=2 (w12 + w23) + ...) each weight is included 2
+                                = 1/2 (w12 + wn1 (v=1) + w12 + w23 (v=2) + ...) each weight is included 2
                                 For a vertice v, 
                                 The ∑︀ of weight of Edges included in the cycle is greater than 
                                 The ∑︀ of the 2 min weights of edges adjacent to v
