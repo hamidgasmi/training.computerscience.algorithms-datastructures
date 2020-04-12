@@ -2909,6 +2909,16 @@
             - E.g. 1, The length of an optimal TSP cycle is at least: 
             -           1/2 ∑︀ (2 min length edges adjacent to v) v ∈ V
                         "1/2" it's because each minimum edge weight is included twice
+                        Prove: If the cycle above a TSP than
+                            TSP = 1/2 (∑︀ (2 edges included in the cycle) for all v ∈ V
+                                = 1/2 (For v=1 (w12 + wn1) + For v=2 (w12 + w23) + ...) each weight is included 2
+                                For a vertice v, the sum of weight of Edges included in the cycle is greater than the sum of 2 min weight edges
+                            therefore: TSP < 1/2 ∑︀ (2 min length edges adjacent to v) v ∈ V
+                                  1 __w12__ 2
+                            wn1  /          \ w23
+                                n            3
+                                 \ ...i.... /
+                                  wij   wik
             -               ___________ 1 _________
                            /            |           \
                           2             3 LB = 7     4 LB = 9 < 7
