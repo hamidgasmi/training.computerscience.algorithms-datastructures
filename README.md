@@ -2906,7 +2906,9 @@
         - In the example above, to decide whether to cut a branch or not, we used the length of the path corresponding to the branch
         - It's the simplest possible lower bound: any extension of a path has length at least the length of the path
         - Modern TSP-solvers use smarter lower bounds to solve instances with thousands of vertices
-            - E.g. 1, The length of an optimal TSP cycle is at least: 1/2 ∑︀ (2 min length edges adjacent to v) v ∈ V
+            - E.g. 1, The length of an optimal TSP cycle is at least: 
+            -           1/2 ∑︀ (2 min length edges adjacent to v) v ∈ V
+                        "1/2" it's because each minimum edge weight is included twice
             -               ___________ 1 _________
                            /            |           \
                           2             3 LB = 7     4 LB = 9 < 7
@@ -2918,8 +2920,6 @@
                         1   1
                       (19) (7)
                     Solution 2 cuts more and earlier than solution 1
-
-                "1/2" it's because each minimum edge weight is included twice
                     LB from 2 by assuming we branched from 1 to 2:
                         1/2 (w(1, 2) + w(1, 3) + w(2, 1) + w(2, 4) + w(3, 1) + w(3, 4) + w(4, 2) + w(4, 1)) = 1/2 (14) = 7
                     LB from 3 by assuming we branched from 1 to 3:
@@ -2965,8 +2965,8 @@
                            2   3
                         LB = MST + w(1, 4) = 9
 
-                    LB from 2 by assuming we branche from 1 to 3 to 2: LB = MST + w(1, 3) + w(3, 2) = 2 + 1 + 5 = 8
-                    LB from 4 by assuming we branche from 1 to 3 to 2: LB = MST + w(1, 3) + w(3, 2) = 2 + 1 + 3 = 6
+                    LB from 2 by assuming we branche from 1 to 3 to 2: LB = MST + w(1, 3) + w(3, 2) = 8
+                    LB from 4 by assuming we branche from 1 to 3 to 2: LB = MST + w(1, 3) + w(3, 2) = 6
     - Time Complexity: O(n^2 2^n)
         - It's exponential
         - It's much better than n!
