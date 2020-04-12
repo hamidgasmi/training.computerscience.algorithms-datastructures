@@ -2929,7 +2929,7 @@
                     LB from 4 by assuming we branched from 1 to 2 to 4:
                         1/2 (w(1, 2) + w(1, 3) + w(2, 1) + w(2, 4) + w(3, 1) + w(3, 4) + w(4, 2) + w(4, 1)) = 1/2 (14) = 7
 
-            - E.g. 2, The length of an optimal TSP cycle is at least: The length of a MST
+            - E.g. 2, The length of an optimal TSP cycle is at least: The length of a MST:
                             _________________ 1 __________________
                            /                  |                   \
                           2 LB = 6            3 LB = 6 < 7         4 LB = 9 < 7
