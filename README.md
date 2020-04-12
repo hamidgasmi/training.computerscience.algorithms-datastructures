@@ -2196,20 +2196,20 @@
 <details>
 <summary>Search Problems: Traveling Salesman Problem (TSP)</summary>
 
-- Input: A **complete** graph with **weights** on edges and a **budget** *b*
-- Output: A cycle that visits each vertex **exactly once** and has **total weight** at most *b*
-- Brute force Solutions: 
-    - Check all permutations: n = 15, n! = 10^12
-    - Running time: O(n!)
-    - It's totally impratical
-- It's a search problem:
-    - *I*: a graph G(V, E)
-    - *S*: a sequence of *n* vertices
-    - *C*: trace *S* and check whether it forms a cycle, it visits each vertex exactly once and it has a total length of at most *b*
-    - *T(C) = O(|V|)*
-    - It's the **decision** version of TSP
-- It's also usually stated as an **optimization** problem:
-    - But it's not so clear: how could we check a given cycle whether it's optimal or not?
+- Optimization version:
+    - Input: A **complete** graph with **weights** on edges
+    - Output: A cycle that visits each vertex **exactly once** and has **minimum total weight**
+    - It's not a search problem:
+        - How could we check in polynomial time a given cycle *S* whether it's the optimal solution or not for an instance *I*?
+        - Such algorithm *C* doesn't exist
+- **Decision version**:
+    - Input: A **complete** graph with **weights** on edges and a **budget** *b*
+    - Output: A cycle that visits each vertex **exactly once** and has **total weight** at most *b*
+    - It's a **search problem**:
+        - *I*: a graph G(V, E)
+        - *S*: a sequence of *n* vertices
+        - *C*: trace *S* and check whether it forms a cycle, it visits each vertex exactly once and it has a total length of at most *b*
+        - *T(C) = O(|V|)*
 - These 2 versions are **hardly** different:
     - Optimization version can be used to solve Decision version:
         - If we have an algorithm that solves an optimization problem, we can use it to solve the decision version
@@ -2222,6 +2222,10 @@
         - If there is no such cycle, 3rd., we check whether there's an optimal cycle of length at most 75
         - Eventually, we'll find the value of *b* such that there is a cycle of length *b* but there is no cycle of smaller length
         - At this point, we have found the optimal solution
+- Brute force Solutions: 
+    - Check all permutations: n = 15, n! = 10^12
+    - Running time: O(n!)
+    - It's totally impratical
 - Dynamic programming solution: 
         - Running time: O(n^2 * 2^n) 
         - It's exponential running time
@@ -2341,9 +2345,22 @@
 <details>
 <summary>Search Problems: Vertex Cover problem</summary>
 
-- Input: a simple and undirected graph *G(V, E)* and a budget *b*
-- Output: a subset of at most *b* vertices that touches every edge
-
+- Optimization version:
+    - Input: a simple and undirected graph *G(V, E)*
+    - Output: a subset of vertices of **minimum size** that touches every edge
+    - It's not a search problem:
+        - Although, there is an algorithm *C* such that for an instance *I*: *G(V, E)* and a candidate solution *S*: a given subset of vertices
+        - It can check in polynomial time of length *I* that *S* touches every edges of *I*
+        - How could we check in polynomial time of length *I* whether *S* is the optimal solution (has minimum size) or not for *I*?
+- Search version:
+    - Input: a simple and undirected graph *G(V, E)* and a budget *b*
+    - Output: a subset of at most *b* vertices that touches every edge
+    - It's a **search problem**:
+        - *I*: a graph G(V, E)
+        - *S*: a sequence of *n* vertices
+        - *C*: trace *S* and check whether it touches every edge and has a total size of at most *b*
+        - *T(C) = O(|V| + |E|)*
+        
 </details>
 
 <details>
