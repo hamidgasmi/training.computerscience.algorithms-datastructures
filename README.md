@@ -3017,7 +3017,7 @@
 
 - They work in time polynomial of the size of the input
 - They may return a solution that **isn't optimal** but it's **guaranteed to be a solution close to optimal**
-- **Vertex Cover** Problem:
+- **Vertex Cover** Problem (Optimization version):
     -       ApproxVertexCover(G(V, E))
                 C ← empty set
                 while E is not empty:
@@ -3045,10 +3045,8 @@
                     |C| = 8
                     |M| = 4 = OPT = |{A, C, E, G}| = |{B, D, F, H}|
                     |C| = 2 * OPT
-    - This approximation algorithm is the best one that we know: E.g., No 1.99-approximation algorithm is known
+    - This approximation algorithm is the best one that we know: particularly, **No 1.99-approximation algorithm is known**
 - **TSP**:
-
-
 - UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
 
 </details>
