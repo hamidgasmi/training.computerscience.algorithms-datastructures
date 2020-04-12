@@ -2881,8 +2881,10 @@
         - n = 100, n! / (n^2 . 2^n) ~ 10^120
     - Space Complexity: O(n . 2^n):
         - The dynamic programming table has n . 2^n cells
-- **TSP: Branch-and-Bound**:
-    - It can be viewed as a generalization of backtracking for optimization problems
+- **TSP: Branch-and-Bound** technique:
+    - It can be viewed as a generalization of backtracking technique:
+        - The backtracking technique is usually used fro solving decisions problems
+        - The branch-and-bound technique is usually used for **optimization problems**
     - We grow a tree of partial solutions 
     - At each node of the recursion tree, 
         - We check whether the current partial solution can be extended to a solution which is better than the best solution found so far
@@ -2890,15 +2892,84 @@
     -       E.g., 
                     1                       0
                  1 --- 2           _________1_________
-             10 | 1\ /2 |5        /         |         \
-                |  / \  |      1 2        1 3         4 10 
-                 4 --- 3        / \        / \
-                    3        6 3  4 3   6 2   4 4
-                               |  |       |   |
-                            9  4  3 6   8 4   2 6
-                               |  |           |
-                           19  1  1 7         1 7
+              4 | 1\ /2 |5        /         |         \
+                |  / \  |      1 2        1 3          4 4
+                 4 --- 3        / \        / \        / \
+                    3        6 3  4 3   6 2   4 4  7 3   2 6
+                               |  |       |   |          |
+                            9  4  3 6   8 4   2 6        3 (11 > 7)
+                               |  |     Cut   |          Cut
+                               1  1           1
+                   Costs:    (19)(7)         (7)
             Best total weight: 7
+    - **Lower Bound** (LB):
+        - In the example above, to decide whether to cut a branch or not, we used the length of the path corresponding to the branch
+        - It's the simplest possible lower bound: any extension of a path has length at least the length of the path
+        - Modern TSP-solvers use smarter lower bounds to solve instances with thousands of vertices
+            - E.g. 1, The length of an optimal TSP cycle is at least: 1/2 ∑︀ (2 min length edges adjacent to v) v ∈ V
+            -               ___________ 1 _________
+                           /            |           \
+                          2             3 LB = 7     4 LB = 9 < 7
+                         / \            Cut          Cut
+                        3   4 LB = 7 < 19
+                        |   | Branch...
+                        4   3
+                        |   |
+                        1   1
+                      (19) (7)
+                    Solution 2 cuts more and earlier than solution 1
+
+                "1/2" it's because each minimum edge weight is included twice
+                    LB from 2 by assuming we branched from 1 to 2:
+                        1/2 (w(1, 2) + w(1, 3) + w(2, 1) + w(2, 4) + w(3, 1) + w(3, 4) + w(4, 2) + w(4, 1)) = 1/2 (14) = 7
+                    LB from 3 by assuming we branched from 1 to 3:
+                        1/2 (w(1, 2) + w(1, 3) + w(2, 1) + w(2, 4) + w(3, 1) + w(3, 4) + w(4, 2) + w(4, 1)) = 1/2 (14) = 7
+                    LB from 4 by assuming we branched from 1 to 4:
+                        1/2 (w(1, 2 or 3) + w(1, 4) + w(2, 1) + w(2, 4) + w(3, 1) + w(3, 4) + w(4, 2) + w(4, 1)) = 1/2 (18) = 9
+                    LB from 4 by assuming we branched from 1 to 2 to 4:
+                        1/2 (w(1, 2) + w(1, 3) + w(2, 1) + w(2, 4) + w(3, 1) + w(3, 4) + w(4, 2) + w(4, 1)) = 1/2 (14) = 7
+
+            - E.g. 2, The length of an optimal TSP cycle is at least: The length of a MST
+                            _________________ 1 __________________
+                           /                  |                   \
+                          2 LB = 6            3 LB = 6 < 7         4 LB = 9 < 7
+                         / \                 / \                   Cut
+                        3   4        LB=8   2   4 LB = 6
+                        |   |          >7 Cut   | Branch
+                        4   3                   2
+                        |   |                   |
+                        1   1                   1
+                      (19) (7)                 (7)
+
+                       LB from 2 by assuming we branched from 1 to 2:
+                        MST of V - {1}  
+                              2
+                           2 / 
+                            4
+                             \ 3
+                              3
+                        LB = MST + w(1, 2) = 6
+
+                    LB from 3 by assuming we branched from 1 to 3:
+                        MST of V - {1}  
+                              3
+                           3 / 
+                            4
+                             \ 2
+                              2
+                        LB = MST + w(1, 3) = 6
+              
+                    LB from 4 by assuming we branched from 1 to 4:
+                             4
+                          2 / \ 3
+                           2   3
+                        LB = MST + w(1, 4) = 9
+
+                    LB from 2 by assuming we branche from 1 to 3 to 2: LB = MST + w(1, 3) + w(3, 2) = 2 + 1 + 5 = 8
+                    LB from 4 by assuming we branche from 1 to 3 to 2: LB = MST + w(1, 3) + w(3, 2) = 2 + 1 + 3 = 6
+    - Time Complexity: O(n^2 2^n)
+        - It's exponential
+        - It's much better than n!
 - Related Problems:
     - Create a SAT-solvers
     - [School Bus](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/150)
