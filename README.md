@@ -2992,6 +2992,16 @@
 <details>
 <summary>Coping with NP-Completness: Approximation Algorithms</summary>
 
+- They work in time polynomial of the size of the input
+- They may return a solution that **isn't optimal** but it's **guaranteed to be a solution close to optimal**
+- **Vertex Cover** Problem:
+    -       ApproxVertexCover(G(V, E))
+                C ← empty set
+                while E is not empty:
+                    {u, v} ← any edge from E
+                    add u, v to C
+                    remove from E all edges incident to u, v
+                return C
 - UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
 
 </details>
