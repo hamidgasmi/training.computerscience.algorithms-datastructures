@@ -3025,6 +3025,27 @@
                     add u, v to C
                     remove from E all edges incident to u, v
                 return C
+    - It's **2-approximate**: 
+        - It returns a vertex cover that is at most **twice as large as an optimal one** 
+        - It runs in polynomial time
+        - |C| = 2 * |M| ≤ 2 * OPT
+        - M: a set of all edges returned by the algorithm
+        - M forms a **matching**: all the endpoints of edges in M are disjoined (e.g.: M: {(1, 2), (3, 4), (5,6)})
+        - It means that any vertex cover must take at least one vertex from each edges in M (to make sure they're covered)
+        - It means that any vertex cover must be at least the cardinality of size |M|
+        - It means that particularly OPT >= |M|
+    - |M| the size of any mathcing is a **lower bound** of OPT
+    - The **bound is tight**: there are graphs for which the algorithm returns a vertex cover of size twice the minimum size
+        -           E.g. A bipartite graph:
+                    A ------ B
+                    C ------ D
+                    E ------ F
+                    G ------ H
+                    M = {(A, B), (C, D), (E, F), (G, H)}
+                    |C| = 8
+                    |M| = 4 = OPT = |{A, C, E, G}| = |{B, D, F, H}|
+                    |C| = 2 * OPT
+    - This approximation algorithm is the best one that we know: E.g., No 1.99-approximation algorithm is known
 - **TSP**:
 
 
