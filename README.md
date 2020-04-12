@@ -2145,8 +2145,6 @@
     - We say that *S* is a solution to *I* ***iff C(S, I) = true***
 - For more details:
     - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
-    - Developers Google: [solving a TSP with OR-Tools](https://developers.google.com/optimization/routing/tsp)
-    - Wikipedia: [Travelling salesman problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem)
 
 </details>
 
