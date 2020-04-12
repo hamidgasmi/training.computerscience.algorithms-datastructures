@@ -2244,11 +2244,12 @@
         - See Kruskal's and Prim's algorithms from course [Graph Algorithms](#graph-algorithms) above
 - **Metric TSP**:
     - It's a special case of TSP
-    - Input: 
-        - An undirected graph G(V, E) 
-        - G doesn't have negative edge weights
-        - G weights satisfy the triangle inequality: for all u, v, w ∈ V, d(u, v) + d(v, w) ≥ d(u, w)
-    - Output: A cycle of minimum total length visiting each vertex exactly once
+    - Optimization version:
+        - Input: 
+            - An undirected graph *G(V, E)*
+            - *G* doesn't have negative edge weights
+            - *G* weights satisfy the triangle inequality: for all `u, v, w ∈ V, d(u, v) + d(v, w) ≥ d(u, w)`
+        - Output: A cycle of minimum total length visiting each vertex exactly once
 - For more details:
     - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
     - Developers Google: [solving a TSP with OR-Tools](https://developers.google.com/optimization/routing/tsp)
@@ -3028,7 +3029,7 @@
     - It's **2-approximate**: 
         - It returns a vertex cover that is at most **twice as large as an optimal one** 
         - It runs in polynomial time
-        - |C| = 2 * |M| ≤ 2 * OPT
+        - `|C| = 2 * |M| ≤ 2 * OPT`
         - M: a set of all edges returned by the algorithm
         - M forms a **matching**: all the endpoints of edges in M are disjoined (e.g.: M: {(1, 2), (3, 4), (5,6)})
         - It means that any vertex cover must take at least one vertex from each edges in M (to make sure they're covered)
@@ -3046,7 +3047,10 @@
                     |M| = 4 = OPT = |{A, C, E, G}| = |{B, D, F, H}|
                     |C| = 2 * OPT
     - This approximation algorithm is the best one that we know: particularly, **No 1.99-approximation algorithm is known**
-- **TSP**:
+- **Metric TSP**  (optimization problem):
+    - It's **2-approximate**: 
+        - It returns a cycle that is at most twice as long as an optimal cycle 
+        - `C ≤ 2 * OPT`
 - UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
 
 </details>
