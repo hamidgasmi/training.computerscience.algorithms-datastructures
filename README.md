@@ -2200,8 +2200,9 @@
     - Input: A **complete** graph with **weights** on edges
     - Output: A cycle that visits each vertex **exactly once** and has **minimum total weight**
     - It's not a search problem:
-        - How could we check in polynomial time a given cycle *S* whether it's the optimal solution or not for an instance *I*?
-        - Such algorithm *C* doesn't exist
+        - Although, there is an algorithm *C* such that for an instance *I*: *G(V, E)* and a candidate solution *S*: a given path
+        - It can check in polynomial time of length *I* that *S* forms a cycle and visits all vertices exactly once
+        - How could we check in polynomial time of length *I* whether *S* is the optimal solution or not for *I*?
 - **Decision version**:
     - Input: A **complete** graph with **weights** on edges and a **budget** *b*
     - Output: A cycle that visits each vertex **exactly once** and has **total weight** at most *b*
@@ -2360,7 +2361,7 @@
         - *S*: a sequence of *n* vertices
         - *C*: trace *S* and check whether it touches every edge and has a total size of at most *b*
         - *T(C) = O(|V| + |E|)*
-        
+
 </details>
 
 <details>
