@@ -3115,13 +3115,13 @@
             A --- C   E --- G    Delete r edges     A --- C --- E --- G
             |       \/      |   ---------------->   |                 |
             |       /\      |    Add r edges        |                 |
-            B --- D   F --- H                       B --- D --- F --- H
+            B --- D   F --- H        r = 2          B --- D --- F --- H
     -       E.g. 2 Neighborhood of r = 2 and center S (a suboptimal Solution):
             (S): could be improved by replacing (C, I, E) path (weight 4) by (D, I, F) path (weight 2)
             A --- C     E --- G         
             |      \   /      |   Delete 2 edges
-            |       \ /       |  ----------------> this suboptimal solution cannot be improved by changing 2 edges
-            |        I        |   Add 2 edges      We need to all changing 3 edges: 
+            |       \ /       |  ----------------> Suboptimal solution can't be improved by changing 2 edges
+            |        I        |   Add 2 edges      We need to allow all changing 3 edges: 
             |                 |                       to delete 3 edges (C, I), (I, E), (D, F) and 
             B --- D --- F --- H                       to add 3 edges (C, E), (D, I), (I, F)
     - Performance:
@@ -3131,7 +3131,7 @@
     - It works well in practice with some additional tricks:
         - E.g. of a trick is to allow our algorithm to re-start 
         - Start with 1 solution, do some local search; Save the found solution
-        - Restart from some completely different points (selected at random or at not) and then save these found solutions
+        - Restart from some completely different points (selected at random or not) and then save these found solutions
         - Finally, return the best solution among all found solutions
 - For more details:
     - UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
