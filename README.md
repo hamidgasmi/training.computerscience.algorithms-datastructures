@@ -3054,7 +3054,7 @@
                     |M| = 4 = OPT = |{A, C, E, G}| = |{B, D, F, H}|
                     |C| = 2 * OPT
     - This approximation algorithm is the best one that we know: particularly, **No 1.99-approximation algorithm is known**
-- **Metric TSP**  (optimization problem):
+- **Metric TSP** (optimization problem):
     - Let G be an undirected graph with non-negative edge weights, then `MST(G) ≤ TSP(G)`
         - It's true for all undirected graph
         - It's not particularly required to the graph to be metric
@@ -3094,6 +3094,46 @@
         - In other words, there is no α-approximation algorithm for the general version of TSP for any polynomial time computable function α
         - In fact, if we design that find α approximation for the general TSP, then it can be used to solve Hamiltonian cycle Problem in polynomial time
         - So if P != NP, then the General TSP version has no good approximation
+- TSP **Local Search**:
+    -       LocalSearch:
+                s ← some initial solution
+                while there is a solution s' in the neighborhood of s which is better than s:
+                    s ← s'
+                return s
+    - It computes a local optimum instead of a global optimum
+    - The quality and running time of this algorithm depends on how we define the neighborhood:
+        - The larger is the neighborhood, the better is the resulting solution and the higher is the running time
+        - E.g., we might define the neighborhood of some solution as the search of all possible solution
+        - Then, this algorithm in 1 iteration will need to go through all possible candidate solutions and to find the best one
+        - So, this algorithm will be actually the same as the brute force search algorithm
+    - **Distance between 2 solutions**:
+        - Let *s* and *s'* be 2 cycles visiting each vertex of the graph exactly once
+        - We say that the distance between *s* and *s'* is at most *d*, If one can get *s'* by deleting *d* edges from *s* and adding other *d* edges
+    - The **Neighborhood N(s, r)** with center s and and **radius** r is **all cycles with distance at most r from s**
+    -       E.g. 1 Neighborhood of r = 2 and center S (a suboptimal Solution):
+            (S):
+            A --- C   E --- G    Delete r edges     A --- C --- E --- G
+            |       \/      |   ---------------->   |                 |
+            |       /\      |    Add r edges        |                 |
+            B --- D   F --- H                       B --- D --- F --- H
+    -       E.g. 2 Neighborhood of r = 2 and center S (a suboptimal Solution):
+            (S): could be improved by replacing (C, I, E) path (weight 4) by (D, I, F) path (weight 2)
+            A --- C     E --- G         
+            |      \   /      |   Delete 2 edges
+            |       \ /       |  ----------------> this suboptimal solution cannot be improved by changing 2 edges
+            |        I        |   Add 2 edges      We need to all changing 3 edges: 
+            |                 |                       to delete 3 edges (C, I), (I, E), (D, F) and 
+            B --- D --- F --- H                       to add 3 edges (C, E), (D, I), (I, F)
+    - Performance:
+        - Trade-off between quality and running time of a single iteration
+        - The larger is the neighborhood (r), the better is the resulting solution but the higher is the running time
+        - The number of iterations may be exponential and the quality of the found cycle may be poor
+    - It works well in practice with some additional tricks:
+        - E.g. of a trick is to allow our algorithm to re-start 
+        - Start with 1 solution, do some local search; Save the found solution
+        - Restart from some completely different points (selected at random or at not) and then save these found solutions
+        - Finally, return the best solution among all found solutions
+- For more details:
     - UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
 
 </details>
