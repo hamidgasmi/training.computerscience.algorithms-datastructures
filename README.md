@@ -3072,7 +3072,7 @@
         - `C ≤ 2 * L ≤ 2 * OPT`
         - L the total wight of the MST a **lower bound** of OPT
     -       E.g. Let's imagine a graph with 4 vertices:
-                1.MST (T):             (D):                           (E): Total Weight (E) = 2 Weight(T) = 2 * L
+                1.MST (T):             (D):                  (E): Total Weight (E) = 2 * Weight(T) = 2 * L
                     A                   A                     A
                     |   2.Double       /_\   3.Eulerian     2/_\3       1      2     3    4     5     6
                     B   -------->       B    --------->     __B__   : C --> B --> A --> B --> D --> B --> C
