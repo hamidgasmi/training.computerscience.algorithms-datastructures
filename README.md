@@ -2231,8 +2231,8 @@
         - No significantly better upper bound is known
         - E.g. we have no algorithm that solves this problem in time for example, O(1.99^n)
 - **heuristic algorithm** solutions:
-        - In practice, there're algorithms that solve ths problem quite well (n is equal several thousands)
-        - But we have no guarantee of the running time
+    - In practice, there're algorithms that solve ths problem quite well (n is equal several thousands)
+    - But we have no guarantee of the running time
 - **Approximation algorithm** solution:
         - We have no guarantee of the running time
         - Their solution isn't optimal but it's not much worse than optimal
@@ -2244,10 +2244,14 @@
         - See Kruskal's and Prim's algorithms from course [Graph Algorithms](#graph-algorithms) above
 - **Metric TSP**:
     - It's a special case of TSP
+    - It deals with a **Metric Graph**: 
+        - It an undirected complete graph *G(V, E)* 
+        - It doesn't have negative edge weights
+        - Its weights satisfy the triangle inequality: for all `u, v, w ∈ V, d(u, v) + d(v, w) ≥ d(u, w)`
+        - E.g., A graph whose vertices are points on a plane and the weight between 2 vertices is the distance between them
     - Optimization version:
         - Input: 
-            - An undirected graph *G(V, E)*
-            - *G* doesn't have negative edge weights
+            - A **Metric Graph**: An undirected graph *G(V, E)*; it doesn't have negative edge weights
             - *G* weights satisfy the triangle inequality: for all `u, v, w ∈ V, d(u, v) + d(v, w) ≥ d(u, w)`
         - Output: A cycle of minimum total length visiting each vertex exactly once
 - For more details:
@@ -2281,6 +2285,9 @@
         - When, we come back to this node, continue traversing the previous cycle
 - Eulerian cycle problem has an efficient solution
 - Hamiltonian Cycle Problem doesn't have a know polynomial algorithm
+- Special Cases:
+    - Find a Hamiltonian Graph in Complete Graph
+    - See below approximation Algorithm TSP
 - For more details:
     - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
@@ -3037,7 +3044,7 @@
         - It means that particularly OPT >= |M|
     - |M| the size of any mathcing is a **lower bound** of OPT
     - The **bound is tight**: there are graphs for which the algorithm returns a vertex cover of size twice the minimum size
-        -           E.g. A bipartite graph:
+        -       E.g. A bipartite graph:
                     A ------ B
                     C ------ D
                     E ------ F
@@ -3048,10 +3055,46 @@
                     |C| = 2 * OPT
     - This approximation algorithm is the best one that we know: particularly, **No 1.99-approximation algorithm is known**
 - **Metric TSP**  (optimization problem):
+    - Let G be an undirected graph with non-negative edge weights, then `MST(G) ≤ TSP(G)`
+        - It's true for all undirected graph
+        - It's not particularly required to the graph to be metric
+        - In fact, by removing any edge from an optimum TSP cycle, we get a path *P* which is a spanning tree of G (it's not necessary an MST)
+        - Therefore, `MST(G) ≤ P ≤ TSP(G)`
+    -       ApproxMetricTSP(G):
+                T ← minimum spanning tree of G
+                D ← Create a graph D from T by duplicating (doubling) every edge, 
+                Find an Eulerian cycle E in D
+                H = Create a Hamiltonian cycle that visits vertices in the order of their first appearance in E
+                return H
     - It's **2-approximate**: 
-        - It returns a cycle that is at most twice as long as an optimal cycle 
-        - `C ≤ 2 * OPT`
-- UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
+        - It returns a cycle that is at most twice as long as an optimal cycle
+        - It runs in polynomial time
+        - `C ≤ 2 * L ≤ 2 * OPT`
+        - L the total wight of the MST a **lower bound** of OPT
+    -       E.g. Let's imagine a graph with 4 vertices:
+                1.MST (T):             (D):                           (E): Total Weight (E) = 2 Weight(T) = 2 * L
+                    A                   A                     A
+                    |   2.Double       /_\   3.Eulerian     2/_\3       1      2     3    4     5     6
+                    B   -------->       B    --------->     __B__   : C --> B --> A --> B --> D --> B --> C
+                  /   \   Edges       /| |\    Cycle     1/|6   4|\5
+                 C     D              C   D               C       D
+                4. Create a cycle (H):
+                                ↗----->-----↘ ↗----->-----↘
+                   C --> B --> A -x-> B -x-> D -x-> B -x-> C
+                                      ^--B-visited--^before
+                        Weight(A, B) + Weight(B, D) ≤ Weight(A, D): G is a metric graph
+                        Weight(D, B) + Weight(B, C) ≤ Weight(D, C): G is a metric graph
+                5. Return C --> B --> A --> D --> C
+                        Total Weight (H) ≤ Total Weight (E)
+                        Total Weight (H) ≤ 2 * L ≤ 2 * OPT
+    - The currently best known approximation algorithm for metric TSP is **Christofides’** algorithm that achieves a factor of **1.5**
+    - If P != NP, then:
+        - The General TSP version has no good approximation
+        - It can NOT be approximated within any polynomial time computable function
+        - In other words, there is no α-approximation algorithm for the general version of TSP for any polynomial time computable function α
+        - In fact, if we design that find α approximation for the general TSP, then it can be used to solve Hamiltonian cycle Problem in polynomial time
+        - So if P != NP, then the General TSP version has no good approximation
+    - UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
 
 </details>
 
