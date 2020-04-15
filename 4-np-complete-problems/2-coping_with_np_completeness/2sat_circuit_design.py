@@ -22,8 +22,8 @@ def isSatisfiable_naive():
 class ImplicationGraph:
     def __init__(self, n, clauses):
         self.adjacency_list = [[] for _ in range(2 * n)]
-        self.reversed_adjacency_list = [[] for _ in range(2 * n)]
-        self.build_adjacency_list(clauses)
+        self.build_adjacency_list(n, clauses)
+        self.build_reversed_adjacency_list()
 
     def sat_variables_count(self):
         len(self.adjacency_list) // 2
@@ -40,14 +40,36 @@ class ImplicationGraph:
     def get_vertice_num(self, variable_num):
         return variable_num - 1 if variable_num > 0 else (-1) * variable_num - 1 + self.sat_variables_count()
 
-    # It will build 2 adjacency lists:
-    # ... 1. 1st one corresponds to the implication graph G
-    # ... 2. 2nd one corresponds to the reversed graph of G, Gr
-    def build_adjacency_list(self, clauses):
+    # Time Complexity: O(|C|)
+    def build_adjacency_list(self, n, clauses):
 
-        for c in clauses):
-            pass
+        for c in clauses:
+            l = c[0]
+            v_non_l = self.get_vertice_num((-1) * l)
+            v_l  = self.get_vertice_num(l)
+            if len(c) == 1:
+                # (l): to create an edge from -l to l: -l --> l
+                self.adjacency_list[v_non_l].append(v_l)
 
+            else:
+                k = c[1]
+                v_k = self.get_vertice_num(k)
+                v_non_k = self.get_vertice_num((-1) * k)
+                # (l V k): to create 2 edges from !l to k and !k to l: 
+                # ... !l --> k 
+                # ... !k --> l
+                self.adjacency_list[v_non_l].append(self.get_vertice_num(v_k))
+                self.adjacency_list[v_non_k].append(self.get_vertice_num(v_l))
+    
+    # Time Complexity: O(|E|) = O(|Edges|) = O(2 |Clauses|) = O(|C|)
+    def build_reversed_adjacency_list(self):
+
+        self.reversed_adjacency_list = [[] for _ in range(self.vertices_count())]
+
+        for v in range(self.vertices_count()):
+            for a in self.adjacency_list[v]:
+                self.reversed_adjacency_list[a].append(v)
+    
 if __name__ == "__main__":
     
     n, m = map(int, input().split())
