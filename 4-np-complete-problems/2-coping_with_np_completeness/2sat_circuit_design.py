@@ -1,11 +1,8 @@
 # python3
-n, m = map(int, input().split())
-clauses = [ list(map(int, input().split())) for i in range(m) ]
 
-# This solution tries all possible 2^n variable assignments.
-# It is too slow to pass the problem.
-# Implement a more efficient algorithm here.
-def isSatisfiable():
+# Naive Solution:
+# Time Complexity: O(2^n)
+def isSatisfiable_naive():
     for mask in range(1<<n):
         result = [ (mask >> i) & 1 for i in range(n) ]
         formulaIsSatisfied = True
@@ -22,9 +19,14 @@ def isSatisfiable():
             return result
     return None
 
-result = isSatisfiable()
-if result is None:
-    print("UNSATISFIABLE")
-else:
-    print("SATISFIABLE");
-    print(" ".join(str(-i-1 if result[i] else i+1) for i in range(n)))
+if __name__ == "__main__":
+    
+    n, m = map(int, input().split())
+    clauses = [ list(map(int, input().split())) for i in range(m) ]
+
+    result = isSatisfiable_naive()
+    if result is None:
+        print("UNSATISFIABLE")
+    else:
+        print("SATISFIABLE")
+        print(" ".join(str(-i-1 if result[i] else i+1) for i in range(n)))
