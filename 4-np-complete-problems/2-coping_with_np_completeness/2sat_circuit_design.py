@@ -1,4 +1,5 @@
 # python3
+import sys
 
 class Implication_graph:
     def __init__(self, n, clauses):
@@ -85,7 +86,7 @@ class Implication_graph:
         # ... Source vertices in Gr have the highest postorder
         # ... A source vertice in Gr is Sink vertice in G
         self.dfs(self.reversed_adjacency_list, None, dfs_postorder)
-        print("dfs_postorder: ", dfs_postorder)
+        #print("dfs_postorder: ", dfs_postorder)
 
         # 2. Find SCCs in G
         sccs = []
@@ -105,19 +106,22 @@ class Implication_graph:
         # sccs is ordered in reversed topological order
         vertice_assignment = [-1] * self.vertices_count
         for scc in strongly_connected_components:
+            
+            scc_vertices = set()
             for v in scc:
-                if vertice_assignment[v] == -1:
-                    vertice_assignment[v] = 1
 
-                    non_v = self.non_vertice_num(v)
-                    if vertice_assignment[non_v] == -1:
-                        vertice_assignment[non_v] = 0
+                scc_vertices.add(v)
 
-                if vertice_assignment[non_v] == 1:
+                non_v = self.non_vertice_num(v)
+                if non_v in scc_vertices:
                     return None
 
-        print("sccs: ", strongly_connected_components)
-        print("vertice_assignment: ", vertice_assignment)
+                if vertice_assignment[v] == -1:
+                    vertice_assignment[v] = 1
+                    vertice_assignment[non_v] = 0
+                    
+        #print("sccs: ", strongly_connected_components)
+        #print("vertice_assignment: ", vertice_assignment)
         return vertice_assignment[:self.sat_variables_count]
 
 
@@ -148,6 +152,8 @@ def isSatisfiable_naive(n, clauses):
 
 if __name__ == "__main__":
     
+    sys.setrecursionlimit(10**7)
+
     n, m = map(int, input().split())
     clauses = [ list(map(int, input().split())) for i in range(m) ]
 
