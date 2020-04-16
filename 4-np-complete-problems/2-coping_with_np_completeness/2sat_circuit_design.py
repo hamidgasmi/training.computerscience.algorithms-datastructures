@@ -1,5 +1,6 @@
 # python3
 import sys
+from collections import deque
 
 class Implication_graph:
     def __init__(self, n, clauses):
@@ -54,9 +55,29 @@ class Implication_graph:
         for v in range(self.vertices_count):
             for a in self.adjacency_list[v]:
                 self.reversed_adjacency_list[a].append(v)
+    
+    def explore_iterative(self, v, an_adjacency_list, preorder_visits, postorder_visits):
+        
+        stack = deque()
+        stack.append(v)
 
-        #for v in range(self.vertices_count:
-        #    print("Vertice V (" + str(v) + ") Reversed Adjacency list: ", self.reversed_adjacency_list[v])
+        while stack:
+            
+            v = stack[-1] # Top
+            self.visited[v] = True
+            if preorder_visits != None:
+                preorder_visits.append(v)
+
+            all_v_adjacents_visited = True
+            for a in an_adjacency_list[v]:
+                if not self.visited[a]:
+                    stack.append(a)
+                    all_v_adjacents_visited = False
+
+            if all_v_adjacents_visited:
+                stack.pop()
+                if postorder_visits != None:
+                    postorder_visits.append(v)
 
     def explore(self, v, an_adjacency_list, preorder_visits, postorder_visits):
         
@@ -71,12 +92,15 @@ class Implication_graph:
         if postorder_visits != None:
             postorder_visits.append(v)
 
-    def dfs(self, an_adjacency_list, dfs_preorder, dfs_postorder):
+    def dfs(self, an_adjacency_list, dfs_preorder, dfs_postorder, iterative):
         self.visited = [False] * self.vertices_count
 
         for v in range(self.vertices_count):
             if not self.visited[v]:
-                self.explore(v, an_adjacency_list, dfs_preorder, dfs_postorder)
+                if iterative:
+                    self.explore_iterative(v, an_adjacency_list, dfs_preorder, dfs_postorder)
+                else:
+                    self.explore(v, an_adjacency_list, dfs_preorder, dfs_postorder)
 
     def stronly_connected_components(self):
 
@@ -85,8 +109,7 @@ class Implication_graph:
         # 1. Find postorder in Gr
         # ... Source vertices in Gr have the highest postorder
         # ... A source vertice in Gr is Sink vertice in G
-        self.dfs(self.reversed_adjacency_list, None, dfs_postorder)
-        #print("dfs_postorder: ", dfs_postorder)
+        self.dfs(self.reversed_adjacency_list, None, dfs_postorder, iterative = True)
 
         # 2. Find SCCs in G
         sccs = []
@@ -95,7 +118,7 @@ class Implication_graph:
             v = dfs_postorder[i]
             if not self.visited[v]:
                 sccs.append([])
-                self.explore(v, self.adjacency_list, None, sccs[len(sccs) - 1])
+                self.explore_iterative(v, self.adjacency_list, None, sccs[len(sccs) - 1])
 
         return sccs
 
@@ -120,10 +143,7 @@ class Implication_graph:
                     vertice_assignment[v] = 1
                     vertice_assignment[non_v] = 0
                     
-        #print("sccs: ", strongly_connected_components)
-        #print("vertice_assignment: ", vertice_assignment)
         return vertice_assignment[:self.sat_variables_count]
-
 
 def isSatisfiable(n, clauses):
     
@@ -152,7 +172,7 @@ def isSatisfiable_naive(n, clauses):
 
 if __name__ == "__main__":
     
-    sys.setrecursionlimit(10**7)
+    #sys.setrecursionlimit(10**7)
 
     n, m = map(int, input().split())
     clauses = [ list(map(int, input().split())) for i in range(m) ]
