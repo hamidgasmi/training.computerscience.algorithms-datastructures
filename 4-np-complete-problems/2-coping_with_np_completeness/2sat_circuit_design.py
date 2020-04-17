@@ -1,6 +1,13 @@
 import sys
 from collections import deque
 
+# This problem can be reduced to a 2-SAT problem
+# 2-SAT problem can be then solved efficiently by using an implication graph
+# It's solved 3 different ways:
+# ... 1- Naive solution
+# ... 2- Implication graph + recursive DFS
+# ... 3- Implication graph + Iterative DFS
+
 class Implication_graph:
     
     def __init__(self, n, clauses):
@@ -109,14 +116,14 @@ class Implication_graph:
                 else:
                     self.explore(v, an_adjacency_list, dfs_preorder, dfs_postorder)
 
-    def stronly_connected_components(self):
+    def stronly_connected_components(self, iterative):
 
         dfs_postorder = []
 
         # 1. Find postorder in Gr
         # ... Source vertices in Gr have the highest postorder
         # ... A source vertice in Gr is Sink vertice in G
-        self.dfs(self.reversed_adjacency_list, None, dfs_postorder, iterative = True)
+        self.dfs(self.reversed_adjacency_list, None, dfs_postorder, iterative)
 
         # 2. Find SCCs in G
         sccs = []
@@ -125,13 +132,16 @@ class Implication_graph:
             v = dfs_postorder[i]
             if not self.visited[v]:
                 sccs.append([])
-                self.explore_iterative(v, self.adjacency_list, None, sccs[len(sccs) - 1])
+                if iterative:
+                    self.explore_iterative(v, self.adjacency_list, None, sccs[len(sccs) - 1])
+                else:
+                    self.explore(v, self.adjacency_list, None, sccs[len(sccs) - 1])
 
         return sccs
 
-    def solve_2sat(self):
+    def solve_2sat(self, iterative):
 
-        strongly_connected_components = self.stronly_connected_components()
+        strongly_connected_components = self.stronly_connected_components(iterative)
         
         # sccs is ordered in reversed topological order
         vertice_assignment = [-1] * self.vertices_count
@@ -159,11 +169,11 @@ class latest_visited_vertice_adjacent:
         self.vertice = vertice
         self.adjacent_index = adjacent_index
 
-def isSatisfiable(n, clauses):
+def isSatisfiable(n, clauses, iterative):
     
     g = Implication_graph(n, clauses)
     
-    return g.solve_2sat()
+    return g.solve_2sat(iterative)
 
 # Naive Solution:
 # Time Complexity: O(2^n)
@@ -190,9 +200,9 @@ if __name__ == "__main__":
 
     n, m = map(int, input().split())
     clauses = [ list(map(int, input().split())) for i in range(m) ]
-
+    
     #result = isSatisfiable_naive(n, clauses)
-    result = isSatisfiable(n, clauses)
+    result = isSatisfiable(n, clauses, iterative=True)
 
     if result is None:
         print("UNSATISFIABLE")
