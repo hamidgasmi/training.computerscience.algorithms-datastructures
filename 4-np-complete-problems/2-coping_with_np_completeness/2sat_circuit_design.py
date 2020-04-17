@@ -1,8 +1,8 @@
-# python3
 import sys
 from collections import deque
 
 class Implication_graph:
+    
     def __init__(self, n, clauses):
         self.sat_variables_count = n
         self.vertices_count = 2 * n
@@ -56,41 +56,48 @@ class Implication_graph:
             for a in self.adjacency_list[v]:
                 self.reversed_adjacency_list[a].append(v)
     
-    def explore_iterative(self, v, an_adjacency_list, preorder_visits, postorder_visits):
-        
-        stack = deque()
-        stack.append(v)
-
-        while stack:
-            
-            v = stack[-1] # Top
-            self.visited[v] = True
-            if preorder_visits != None:
-                preorder_visits.append(v)
-
-            all_v_adjacents_visited = True
-            for a in an_adjacency_list[v]:
-                if not self.visited[a]:
-                    stack.append(a)
-                    all_v_adjacents_visited = False
-
-            if all_v_adjacents_visited:
-                stack.pop()
-                if postorder_visits != None:
-                    postorder_visits.append(v)
-
-    def explore(self, v, an_adjacency_list, preorder_visits, postorder_visits):
-        
+    def previsit(self, v, preorder_visits):
         self.visited[v] = True
         if preorder_visits != None:
             preorder_visits.append(v)
+
+    def postvisit(self, v, postorder_visits):
+        if postorder_visits != None:
+            postorder_visits.append(v)
+
+    def explore_iterative(self, v, an_adjacency_list, preorder_visits, postorder_visits):
+        
+        stack = deque()
+        stack.append(latest_visited_vertice_adjacent(v, -1))
+
+        while stack:
+            
+            latest_v_a = stack.pop()
+            v = latest_v_a.vertice
+            adjacent_index = latest_v_a.adjacent_index + 1
+
+            if adjacent_index == 0:
+                self.previsit(v, preorder_visits)
+            
+            if adjacent_index >= len(an_adjacency_list[v]):
+                self.postvisit(v, postorder_visits)
+                continue
+            
+            stack.append(latest_visited_vertice_adjacent(v, adjacent_index))
+
+            a = an_adjacency_list[v][adjacent_index]
+            if not self.visited[a]:
+                stack.append(latest_visited_vertice_adjacent(a, -1))
+
+    def explore(self, v, an_adjacency_list, preorder_visits, postorder_visits):
+        
+        self.previsit(v, preorder_visits)
 
         for a in an_adjacency_list[v]:
             if not self.visited[a]:
                 self.explore(a, an_adjacency_list, preorder_visits, postorder_visits)
 
-        if postorder_visits != None:
-            postorder_visits.append(v)
+        self.postvisit(v, postorder_visits)
 
     def dfs(self, an_adjacency_list, dfs_preorder, dfs_postorder, iterative):
         self.visited = [False] * self.vertices_count
@@ -145,6 +152,13 @@ class Implication_graph:
                     
         return vertice_assignment[:self.sat_variables_count]
 
+# Utility class to use for DFS iterative to store in a stack
+class latest_visited_vertice_adjacent:
+
+    def __init__(self, vertice, adjacent_index):
+        self.vertice = vertice
+        self.adjacent_index = adjacent_index
+
 def isSatisfiable(n, clauses):
     
     g = Implication_graph(n, clauses)
@@ -185,4 +199,3 @@ if __name__ == "__main__":
     else:
         print("SATISFIABLE")
         print(" ".join(str(i + 1 if result[i] else -i-1) for i in range(n)))
-        #print(" ".join(str(-i-1 if result[i] else i+1) for i in range(n)))
