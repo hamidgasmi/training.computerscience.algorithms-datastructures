@@ -51,9 +51,6 @@ class Implication_graph:
                 self.adjacency_list[v_non_l].append(v_k)
                 self.adjacency_list[v_non_k].append(v_l)
 
-        #for v in range(self.vertices_count:
-        #    print("Vertice V (" + str(v) + ") Adjacency list: ", self.adjacency_list[v])
-    
     # Time Complexity: O(|E|) = O(|Edges|) = O(2 |Clauses|) = O(|C|)
     def build_reversed_adjacency_list(self):
 
@@ -71,7 +68,34 @@ class Implication_graph:
     def postvisit(self, v, postorder_visits):
         if postorder_visits != None:
             postorder_visits.append(v)
-
+    
+    # The method below does a DFS exploration from a vertice:
+    #   - It visits all unvisited vertices reachable from a vertice, v
+    #   - It's not a DFS traversal
+    #   - It uses the following class attribute "self.visited" to know whether a vertice is already visited or not
+    #
+    # It's iterative:
+    #   - It mimics the recursive version
+    #   - It uses a stack to track previous virtice visited
+    #   - It puts in the stack 1 adjacent vertice at once
+    #   - Each element in the stack is in the format: vertice, current adjacent index
+    #   - It avoids the stack to contain twice or more the same vertice: 
+    #   - E.g.,   Graph:      Stack at the end of each iteration: 
+    #        A --- B --- C    I-0  |  I-1  |  I-2  |  I-3 | I-4  |  I-5  |
+    #         \   /         (A, -1)|(B, -1)|(C, -1)|(B, 0)|(A, 0)|(E, -1)|
+    #           E                  |(A, 0) |(B, 0) |(A, 0)|      |(A, 1) |
+    #                              |       |(A, 0) |      |      |       |
+    # It's kept general: 
+    #   - It doesn't do any specific operation on vertices
+    #   - Specific operations must be applied by traversing the 2 lists the method returns:
+    #   - 1. preorder_visits list: it contains all vertices ordered by when they're previsited
+    #   - 2. postorder_visits: it contains all vertices ordered by when they're postvisited
+    #   - Here, it's called by "DFS traversal" and "Find Strongly Connected Components" methods
+    #
+    # Time Complexity: O(|V| + |E|)
+    # Space Complexity: O(|V|)
+    #   - Worst case: explore a linked list from its head
+    #   - The stack will contain all vertices
     def explore_iterative(self, v, an_adjacency_list, preorder_visits, postorder_visits):
         
         stack = deque()
@@ -107,8 +131,8 @@ class Implication_graph:
         self.postvisit(v, postorder_visits)
 
     def dfs(self, an_adjacency_list, dfs_preorder, dfs_postorder, iterative):
+        
         self.visited = [False] * self.vertices_count
-
         for v in range(self.vertices_count):
             if not self.visited[v]:
                 if iterative:
