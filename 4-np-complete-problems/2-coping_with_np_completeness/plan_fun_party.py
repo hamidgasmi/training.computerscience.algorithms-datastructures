@@ -1,4 +1,3 @@
-#uses python3
 import sys
 import threading
 
@@ -16,40 +15,59 @@ class Tree:
         self.build_children_list(edges)
 
     def build_children_list(self, edges):
-        
         self.children_list = [[] for _ in range(self.size)]
         for p, c in edges:
             self.children_list[p - 1].append(c - 1)
             self.children_list[c - 1].append(p - 1)
 
-def dfs(tree, vertex, parent):
-    for child in tree[vertex].children:
-        if child != parent:
-            dfs(tree, child, vertex)
+    def total_weight_dfs(self, v, parent, total_weight):
+        
+        if total_weight[v] > 0:
+            return
 
-    # This is a template function for processing a tree using depth-first search.
-    # Write your code here.
-    # You may need to add more parameters to this function for child processing.
+        if len(self.children_list[v]) == 0:
+            total_weight[v] = self.weights[v]
 
-def MaxWeightIndependentTreeSubset(size):
-    #size = len(tree)
-    if size == 0:
+        children_weight = 0
+        grand_children_weight = 0
+        for child in self.children_list[v]:
+            if child == parent:
+                continue
+            
+            self.total_weight_dfs(child, v, total_weight)
+            children_weight += total_weight[child]
+
+            for grand_child in self.children_list[child]:
+                if grand_child == v:
+                    continue
+
+                grand_children_weight += total_weight[grand_child]
+
+        if self.weights[v] + grand_children_weight < children_weight:
+            total_weight[v] = children_weight
+        else:
+            total_weight[v] = self.weights[v] + grand_children_weight
+        
+def MaxWeightIndependentTreeSubset(tree):
+    
+    if tree.size == 0:
         return 0
-    #dfs(tree, 0, -1)
-    # You must decide what to return.
-    return 0
 
+    total_weight = [0] * tree.size
+    tree.total_weight_dfs(0, -1, total_weight)
+    
+    return total_weight[0]
 
 def main():
     
     size = int(input())
     weights = [w for w in map(int, input().split())]
     edges = []
-    for i in range(1, size):
+    for _ in range(1, size):
         edges.append(list(map(int, input().split())))
     tree = Tree(size, weights, edges)
 
-    weight = MaxWeightIndependentTreeSubset(size)
+    weight = MaxWeightIndependentTreeSubset(tree)
     print(weight)
 
 if __name__ == "__main__":
