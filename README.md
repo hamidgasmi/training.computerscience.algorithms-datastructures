@@ -2733,7 +2733,7 @@
                         m0 ← 0
                         for all children u of v :
                             m0 ← m 0 + FunParty(u)
-                            D(v) ← max(m1 , m0 )
+                D(v) ← max(m1 , m0 )
                 return D(v)
     - Running Time: O(|T|)
         - For each vertice, D(v) is computed only once thanks to the memorization
