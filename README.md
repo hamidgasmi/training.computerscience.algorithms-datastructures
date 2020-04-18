@@ -2747,7 +2747,7 @@
         - In turn, a maximum matching can be found using **flow techniques**
 - Related Problems:
     - [Integrated Circuit Design](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/148)
-    - Plan a fun party 1:
+    - [Plan a party 1](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/153):
         - We're organizing a company party
         - We would like to invite as many people as possible with a single constraint
         - No person should attend a party with his or her direct boss
