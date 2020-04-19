@@ -2,7 +2,7 @@ WARNING: for repeatability, setting FPU to use double precision
 ============================[ Problem Statistics ]=============================
 |                                                                             |
 |  Number of variables:            12                                         |
-|  Number of clauses:              37                                         |
+|  Number of clauses:              34                                         |
 |  Parse time:                   0.00 s                                       |
 |  Eliminated clauses:           0.00 Mb                                      |
 |  Simplification time:          0.00 s                                       |
@@ -12,46 +12,43 @@ Solved by simplification
 restarts              : 0
 conflicts             : 0              (0 /sec)
 decisions             : 0              (-nan % random) (0 /sec)
-propagations          : 1              (1015 /sec)
+propagations          : 2              (2081 /sec)
 conflict literals     : 0              (-nan % deleted)
 Memory used           : 23.00 MB
-CPU time              : 0.000985 s
+CPU time              : 0.000961 s
 
 UNSATISFIABLE
-37 12
+34 12
 1 2 3 0
 -1 -2 0
 -1 -3 0
 -2 -3 0
-1 4 7 10 0
 -1 -4 0
--1 -7 0
--1 -10 0
--4 -7 0
--4 -10 0
--7 -10 0
-2 5 8 11 0
 -2 -5 0
--2 -8 0
--2 -11 0
--5 -8 0
--5 -11 0
--8 -11 0
-3 6 9 12 0
 -3 -6 0
+-1 -7 0
+-2 -8 0
 -3 -9 0
+-1 -10 0
+-2 -11 0
 -3 -12 0
--6 -9 0
--6 -12 0
--9 -12 0
 4 5 6 0
 -4 -5 0
 -4 -6 0
 -5 -6 0
+-4 -7 0
+-5 -8 0
+-6 -9 0
+-4 -10 0
+-5 -11 0
+-6 -12 0
 7 8 9 0
 -7 -8 0
 -7 -9 0
 -8 -9 0
+-7 -10 0
+-8 -11 0
+-9 -12 0
 10 11 12 0
 -10 -11 0
 -10 -12 0
