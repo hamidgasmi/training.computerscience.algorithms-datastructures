@@ -1,4 +1,3 @@
-#Uses python3
 import os
 import sys
 import itertools
@@ -7,9 +6,19 @@ import itertools
 # There're |V| vertices, let v be a vertice: 1 <= v <= 500
 # There're 3 colors, let c be a color: 1 <= c <= 3
 # Let Xvc be a literal that corresponds to a vertice v colored with c:
-# A vertice must be colored only once: 
-#     (Xv1 V Xv2 V Xv3)(-Xv1 V -Xv2)(-Xv1 V -Xv3)(-Xv2 v -Xv3)
-# Let (u, w) 2 vertices adjacent to v: u, v, w must have different colors:
+#     E.g., for v = 1
+#           X11 = 3 * 0 + 1 = 1
+#           X12 = 2
+#           X13 = 3
+#     E.g., for v = 2
+#           X11 = 3 * (2 - 1) + 1 = 4
+#           X12 = 5
+#           X13 = 6
+# A vertice must be colored:
+#     (Xv1 V Xv2 V Xv3)
+# A vertice can't have 2 different colors at the same time: it must be colored only once: 
+#     (-Xv1 V -Xv2)(-Xv1 V -Xv3)(-Xv2 v -Xv3)
+# Vertice (u, w) adjacents to v must have different colors:
 #     (Xv1 V Xu1 V Xw1)(-Xv1 V -Xu1)(-Xv1 V -Xw1)(-Xu1 V -Xw1)
 #     (Xv2 V Xu2 V Xw2)(-Xv2 V -Xu2)(-Xv2 V -Xw2)(-Xu2 V -Xw2)
 #     (Xv3 V Xu3 V Xw3)(-Xv3 V -Xu3)(-Xv3 V -Xw3)(-Xu3 V -Xw3)
@@ -25,16 +34,11 @@ def exactly_one_of(literals):
     if len(literals) >= len(colors):
         clauses.append([l for l in literals])
 
+    not_same_value(literals)
+
+def not_same_value(literals):
     for pair in itertools.combinations(literals, 2):
         clauses.append([-l for l in pair])
-
-def vertices_list_num(vertices_list):
-    list_num = 0
-    for v in vertices_list:
-       list_num *= 10 
-       list_num += v
-
-    return list_num
 
 def create_sat_clauses(n, edges):
 
@@ -46,30 +50,29 @@ def create_sat_clauses(n, edges):
     clauses_set = set()
     for i in range(n):
 
-        v = i +1
+        v = i + 1
 
         # Clause 1: vertice v has exactly color:
         exactly_one_of([vertice_color_num(v, color) for color in colors])
 
-        if len(adjacency_list) == 0:
+        if len(adjacency_list[i]) == 0:
             continue
+        
+        # Clause 2: 2 adjacent vertices must have different colors
+        # Clauses corresponding to an edge A --- B must be generated only once
+        for a in adjacency_list[i]:
+            edge_num = max(a, v) * 1000 + min(a, v)
 
-        adjacency_list[i].append(v)
-        adjacency_list[i].sort()
-        list_num = vertices_list_num(adjacency_list[i])
+            if edge_num in clauses_set:
+                continue
+            
+            clauses_set.add(edge_num)
 
-        # If 2 vertices have the same adjacency list, then it's not necessary to generate clauses of the 2nd vertice
-        if list_num in clauses_set:
-            continue
-        clauses_set.add(list_num)
-
-        for color in colors:
-
-            # Clause 2: A color c appears exactly once on vertices v and its adjacent vertices:            
-            literals = []
-            for u in adjacency_list[i]:
-                literals.append(vertice_color_num(u, color))
-            exactly_one_of(literals)
+            for color in colors:
+                literals = []
+                literals.append(vertice_color_num(v, color))
+                literals.append(vertice_color_num(a, color))
+                not_same_value(literals)
 
 def print_equisatisfiable_sat_formula(n):
     
