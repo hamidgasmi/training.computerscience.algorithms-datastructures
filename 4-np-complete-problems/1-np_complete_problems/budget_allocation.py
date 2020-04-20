@@ -5,10 +5,12 @@ from sys import stdin
 
 # Analysis:
 # Let Xi a boolean variable for i in { 1, 2, 3 }:
-# Each variable Xi must have a value: (Xi V -Xi)
+# At least one variable must be selected: (X1 V X2 V X3)
 # For each inequality, find all vectors X (X1, X2, X3) that invalidate the inequality:
 # ... There're 8 different vectors X
 # ... Add a clause for each invalidating vector
+# ... If 0 0 0 is invalidating the inequality, (X1, X2, X3) shound't be equal to (0, 0, 0)
+# ... It's equivalent to: X1 V X2 V X3
 def add_inequality_invalidating_clauses(a, b, clauses, clause_set):
   
   len_a = len(a)
