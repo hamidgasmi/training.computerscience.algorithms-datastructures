@@ -1,4 +1,3 @@
-# python3
 import itertools
 from sys import stdin
 
@@ -9,12 +8,16 @@ from sys import stdin
 # ... Add a clause for each invalidating vector
 # ... If 0 0 0 is invalidating the inequality, (X1, X2, X3) shound't be equal to (0, 0, 0)
 # ... It's equivalent to: X1 V X2 V X3
+# Special Cases:
+# ... If all coefficient are equal to 0 for an inequality and b < 0, then there is no solution
+# ... If the formula reaches 8 cases, then there is no solution
 def build_clauses(A, b, clauses):
 
     unsatisfiable = False  
     var_nbr = len(A[0])
-    # Clause: Xi Values that are invalidating an inequality must be excluded
     combination_nbr = 2 ** var_nbr
+
+    # Clause: Xi Values that are invalidating an inequality must be excluded
     for combination in itertools.product(range(2), repeat=var_nbr):
 
       clause = []
