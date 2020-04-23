@@ -35,10 +35,7 @@ INF = 10 ** 9
 # ... So, to loop on all possible vertices, we just need to loop s from 1 to 2**n - 1
 def shortest_path(w, S, C):
 
-    #print("C: ", C)
-    #print("S, C[S]: ", S, C[S])
-
-    shortest_path_length = INF 
+    shortest_path_length = INF
     for i in C[S]:
         if C[S][i] + w[i][0] >= shortest_path_length:
             continue
@@ -47,29 +44,26 @@ def shortest_path(w, S, C):
     if shortest_path_length == INF:
         return -1, []
 
-    shortest_path = []
+    path_length = shortest_path_length
+    shortest_path = [-1] * len(w[0])
+    shortest_path[0] = 1
+    
+    prev_v = 0
+    pos = len(w[0]) - 1
     while S > 0:
-        prev_v = 0
-        curr_v = -1
-        path_length = INF 
+    
         for i in C[S]:
-            if C[S][i] + w[i][prev_v] >= path_length:
-                continue
-            
-            path_length = C[S][i] + w[i][prev_v]
-            curr_v = i
+            if C[S][i] == path_length - w[i][prev_v]:
+                shortest_path[pos] = i + 1
 
-        if path_length == INF:
-            break
+                pos -= 1
+                path_length -= w[i][prev_v]
+                prev_v = i
+                S = S ^ (1 << i)
+                
+                break
         
-        #print("C[S], curr_v, path_length: ", C[S], curr_v, path_length)
-        shortest_path.append(curr_v + 1)
-        S = S ^ (1 << curr_v)
-        prev_v = curr_v
-        #print("S', path: ", S, shortest_path)
-        
-    shortest_path.append(1)
-    return shortest_path_length, shortest_path[::-1]
+    return shortest_path_length, shortest_path
 
 def optimal_path(w):
 
@@ -119,16 +113,7 @@ def optimal_path(w):
                 v_j = map_v_bit_position[j]
                 C_S[v_i] = min(C_S[v_i], C_S_minus_i[v_j] + w[v_j][v_i])
                 j *= 2
-    #print(C)
-    #print(C[S])
-    #path_length = INF
-    #for i in C[S]:
-    #    if C[S][i] + w[i][1] >= path_length:
-    #        continue
-        
-    #    path_length = C[S][i] + w[i][0]
 
-    #print(path_length)
     return shortest_path(w, S, C)
 
 def optimal_path_naive(graph):
