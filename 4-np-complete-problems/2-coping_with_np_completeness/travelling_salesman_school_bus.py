@@ -38,23 +38,38 @@ def shortest_path(w, S, C):
     #print("C: ", C)
     #print("S, C[S]: ", S, C[S])
 
-    path = []
-    path.append(1)
-    path_length = INF 
-    
+    shortest_path_length = INF 
+    for i in C[S]:
+        if C[S][i] + w[i][0] >= shortest_path_length:
+            continue
+        shortest_path_length = C[S][i] + w[i][0]
+
+    if shortest_path_length == INF:
+        return -1, []
+
+    shortest_path = []
     while S > 0:
-        prev_v = 1
+        prev_v = 0
+        curr_v = -1
+        path_length = INF 
         for i in C[S]:
-            if C[S][i] + w[i][1] >= path_length:
+            if C[S][i] + w[i][prev_v] >= path_length:
                 continue
+            
+            path_length = C[S][i] + w[i][prev_v]
+            curr_v = i
 
-            path_length = C[S][i] + w[i][v]
-            v = -1
-
-
-
-
-    return -1 if path_length == INF else path_length, path
+        if path_length == INF:
+            break
+        
+        #print("C[S], curr_v, path_length: ", C[S], curr_v, path_length)
+        shortest_path.append(curr_v + 1)
+        S = S ^ (1 << curr_v)
+        prev_v = curr_v
+        #print("S', path: ", S, shortest_path)
+        
+    shortest_path.append(1)
+    return shortest_path_length, shortest_path[::-1]
 
 def optimal_path(w):
 
@@ -105,16 +120,16 @@ def optimal_path(w):
                 C_S[v_i] = min(C_S[v_i], C_S_minus_i[v_j] + w[v_j][v_i])
                 j *= 2
     #print(C)
-    print(C[S])
-    path_length = INF
-    for i in C[S]:
-        if C[S][i] + w[i][1] >= path_length:
-            continue
+    #print(C[S])
+    #path_length = INF
+    #for i in C[S]:
+    #    if C[S][i] + w[i][1] >= path_length:
+    #        continue
         
-        path_length = C[S][i] + w[i][0]
+    #    path_length = C[S][i] + w[i][0]
 
-    print(path_length)
-    #return shortest_path(w, S, C)
+    #print(path_length)
+    return shortest_path(w, S, C)
 
 def optimal_path_naive(graph):
     # This solution tries all the possible sequences of stops.
@@ -163,5 +178,5 @@ def read_data():
 
 
 if __name__ == '__main__':
-    optimal_path(read_data())
+    print_answer(*optimal_path(read_data()))
     #print_answer(*optimal_path_naive(read_data()))
