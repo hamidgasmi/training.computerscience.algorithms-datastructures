@@ -1,5 +1,9 @@
 import sys
 from collections import deque
+from collections import namedtuple
+
+# Utility data-structure to use for DFS iterative to store in a stack
+latest_visited_vertice_adjacent = namedtuple('latest_visited_vertice_adjacent', ['vertice', 'adjacent_index'])
 
 # This problem can be reduced to a 2-SAT problem
 # 2-SAT problem can be then solved efficiently by using an implication graph
@@ -186,12 +190,7 @@ class Implication_graph:
                     
         return vertice_assignment[:self.sat_variables_count]
 
-# Utility class to use for DFS iterative to store in a stack
-class latest_visited_vertice_adjacent:
 
-    def __init__(self, vertice, adjacent_index):
-        self.vertice = vertice
-        self.adjacent_index = adjacent_index
 
 def isSatisfiable(n, clauses, iterative):
     
