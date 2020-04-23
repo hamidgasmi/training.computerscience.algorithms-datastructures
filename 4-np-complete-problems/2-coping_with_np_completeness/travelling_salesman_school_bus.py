@@ -1,8 +1,6 @@
-# python3
 from itertools import permutations
 
 INF = 10 ** 9
-
 # Analysis: 
 # Input data structure: a weighted graph
 # ... Bus depot, children homes and the school are represented with vertices
@@ -75,7 +73,7 @@ def optimal_path(w):
     map_v_bit_position = dict()
     for i in range(n):
         map_v_bit_position[b] = i
-        b *= 2
+        b = b << 1
 
     # C(S, i)
     C = dict()
@@ -87,8 +85,8 @@ def optimal_path(w):
         C_S = C[s]
 
         i = 1
-        while i * 2 <= s: # for all vertices i in s
-            i *= 2
+        while (i << 1) <= s: # for all vertices i in s
+            i = i << 1
             v_i = map_v_bit_position[i]
             
             if i & s == 0: # the vertice i isn't included in s
@@ -107,12 +105,12 @@ def optimal_path(w):
             while j <= s_minus_i: #for all vertices j in s (j != i):
 
                 if s_minus_i & j == 0: # the vertice j isn't included in s_minus_i
-                    j *= 2
+                    j = j << 1
                     continue
                 
                 v_j = map_v_bit_position[j]
                 C_S[v_i] = min(C_S[v_i], C_S_minus_i[v_j] + w[v_j][v_i])
-                j *= 2
+                j = j << 1
 
     return shortest_path(w, S, C)
 
@@ -159,8 +157,6 @@ def read_data():
         graph[u][v] = graph[v][u] = weight
     
     return graph
-
-
 
 if __name__ == '__main__':
     print_answer(*optimal_path(read_data()))
