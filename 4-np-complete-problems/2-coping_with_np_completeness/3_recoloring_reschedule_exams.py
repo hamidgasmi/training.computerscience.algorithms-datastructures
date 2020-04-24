@@ -1,4 +1,3 @@
-# python3
 import sat2_circuit_design
 
 class Reduct_3_coloring_to_2_sat:
@@ -35,11 +34,12 @@ class Reduct_3_coloring_to_2_sat:
             self.clauses.append(possible_colors_clause)
             self.clauses.append(exactly_one_clause)
         
-        # Clauses 4: Each vertice color must be different to all adjacent vertices color
+        # Clauses 4: Each vertice possible colors must be different to its adjacent vertices possible colors
+        #            If
         for (u, v) in edges:
             
             for c in range(0, 3):
-                if "RGB"[c % 3] in (colors[u - 1], colors[v - 1]):
+                if "RGB"[c % 3] in (colors[u - 1], colors[v - 1]): #
                     continue
                 self.clauses.append([ -self.sat_v_num(u, "RGB"[c % 3]), -self.sat_v_num(v, "RGB"[c % 3])])
 
@@ -52,8 +52,6 @@ class Reduct_3_coloring_to_2_sat:
             return None
 
         new_colors = []
-        #print(self.clauses)
-        print(self.sat_solution)
         for i in range(len(self.sat_solution)):
             if self.sat_solution[i] == 1:
                 new_colors.append("BRG"[(i+1)%3])
