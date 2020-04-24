@@ -190,8 +190,6 @@ class Implication_graph:
                     
         return vertice_assignment[:self.sat_variables_count]
 
-
-
 def isSatisfiable(n, clauses, iterative):
     
     g = Implication_graph(n, clauses)
