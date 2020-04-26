@@ -2544,7 +2544,7 @@
         - For each gate, write down a few clauses that describe the relationship between this gate and its direct predecessors
         -           NOT Gates:
                     z  NOT
-                        ↑   (h v z)(!x v !z)
+                        ↑   (x v z)(!x v !z)
                         x
         -           AND Gates:
                     z  AND
