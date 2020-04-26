@@ -2394,26 +2394,32 @@
 </details>
 
 <details>
-<summary>Reduction & NP-Completeness</summary>
+<summary>Reduction</summary>
 
-- **Reduction**: 
-    - We say that a search problem *A* is **reduced** to a search problem *B* 
-    - We write ***A → B*** 
-    - If there exists a polynomial time algorithm *f* that converts any instance *I* of *A* into an instance *f(I)* of *B*, 
-    - together with a polynomial time algorithm *h* that converts any solution *S* to *f(I)* back to a solution *h(S)* to *A* 
-    - If there is no solution to *f(I)*, then there is no solution to *I*
-    - In other words, Instance *Ia* of *A* → *f(Ia) = Ib* Instance of *B* → Algorithm for *B*:
-        - No solution to *Ib = f(Ia)* → no solution to *Ia*
-        - Solution *Sb* to *Ib = f(Ia)* → solution *Sa = h(Sb)* to *Ia* 
-        - ***f*** runs in a polynomial time
-        - ***h*** runs in a polunomial time
-    - If B is easy (can be solved in polynomial time), then so is A
-    - If A is hard (cannot be solved in polynomial time), then so is B
-    - **Reductions Compose**: If A → B and B → C, then A → C
-- **NP-Complete** Problems:
-    - A search problem is called NP-complete if all other search problems reduce to it
-    - If A → B and A is NP-Complete, then so is B
-    - All search problems → SAT problem → 3-SAT problem → Independent set problem (ISP) → vertex cover problem
+- We write ***A → B*** 
+- We say that a search problem *A* is **reduced** to a search problem *B*, if:
+    - There exists a polynomial time algorithm *f* that converts any instance *I* of *A* into an instance *f(I)* of *B*, and
+    - There exists a polynomial time algorithm *h* that converts any solution *S* to *f(I)* back to a solution *h(S)* to *A*
+- If there is no solution to *f(I)*, then there is no solution to *I*:
+- In other words, Instance *Ia* of *A* → *f(Ia) = Ib* Instance of *B* → Algorithm for *B*:
+    - No solution to *Ib = f(Ia)* → no solution to *Ia*
+    - Solution *Sb* to *Ib = f(Ia)* → solution *Sa = h(Sb)* to *Ia* 
+    - ***f*** runs in a polynomial time
+    - ***h*** runs in a polunomial time
+- If *B* is easy (can be solved in polynomial time), then so is *A*
+- If *A* is hard (cannot be solved in polynomial time), then so is *B*
+- **Reductions Compose**: If A → B and B → C, then A → C
+- For more details:
+    - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
+ 
+</details>
+
+<details>
+<summary>NP-Completeness</summary>
+    
+- A search problem is called **NP-complete** if all other search problems reduce to it
+- If *A → B* and *A* is NP-Complete, then so is *B*
+- ***All search problems → SAT problem → 3-SAT problem → Independent set problem (ISP) → vertex cover problem***
 - **SAT problem → ILP**:
     - For each variable xi of F, add 2 inequalities 0 ≤ xi ≤ 1
     - Write each negation, !xi: 1 - xi 
@@ -2425,7 +2431,7 @@
 - **IS Problem → Vertex Cover Problem**:
     - *I* is an independent set of *G(V, E)*, if and only if *V − I* is a vertex cover of *G*
     - `f(G(V, E), b) = (G(V, E), |V| − b)`
-    - `h(S) = V − S`
+    - `h(S) = V − S`:
         - It's the subset output from Vertex cover algorithm
         - If there is no such set, there is no independent set of size at least *b*
     - Time Complexity:
