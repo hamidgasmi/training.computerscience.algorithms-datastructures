@@ -3143,6 +3143,54 @@
 
 ## String Processing and Pattern Matching Algorithms
 
+<details>
+<summary>Suffix Trees</summary>
+
+- Implementation, Time Complexity and Operations:
+    - 
+- Related Problems:
+    - 
+- For more details:
+    - UC San Diego Course:[]()
+
+</details>
+
+<details>
+<summary>Burrows-Wheeler Transform</summary>
+
+- Implementation, Time Complexity and Operations:
+    - 
+- Related Problems:
+    - 
+- For more details:
+    - UC San Diego Course:[]()
+
+</details>
+
+<details>
+<summary>Suffix Arrays</summary>
+
+- Implementation, Time Complexity and Operations:
+    - 
+- Related Problems:
+    - 
+- For more details:
+    - UC San Diego Course:[]()
+
+</details>
+
+<details>
+<summary>Knuth-Morris-Pratt Algorithm</summary>
+
+- Implementation, Time Complexity and Operations:
+    - 
+- Related Problems:
+    - 
+- For more details:
+    - UC San Diego Course:[]()
+
+</details>
+
 ---
 
 ## Dynamic Programming: Applications In Machine Learning and Genomics 
