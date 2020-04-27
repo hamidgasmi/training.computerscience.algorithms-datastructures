@@ -3153,9 +3153,7 @@
 <summary>Suffix Trees</summary>
 
 - Implementation, Time Complexity and Operations:
-    - 
 - Related Problems:
-    - 
 - For more details:
     - UC San Diego Course:[]()
 
@@ -3165,9 +3163,7 @@
 <summary>Burrows-Wheeler Transform</summary>
 
 - Implementation, Time Complexity and Operations:
-    - 
 - Related Problems:
-    - 
 - For more details:
     - UC San Diego Course:[]()
 
@@ -3177,9 +3173,7 @@
 <summary>Suffix Arrays</summary>
 
 - Implementation, Time Complexity and Operations:
-    - 
 - Related Problems:
-    - 
 - For more details:
     - UC San Diego Course:[]()
 
@@ -3189,9 +3183,7 @@
 <summary>Knuth-Morris-Pratt Algorithm</summary>
 
 - Implementation, Time Complexity and Operations:
-    - 
 - Related Problems:
-    - 
 - For more details:
     - UC San Diego Course:[]()
 
