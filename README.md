@@ -3150,12 +3150,88 @@
 ## String Processing and Pattern Matching Algorithms
 
 <details>
-<summary>Suffix Trees</summary>
+<summary>Trie</summary>
 
+- It's also called **prefix tree**
+- It's a kind of search tree where keys are usually strings
+- E.g., the string texts below could be stored in a Trie:
+-           banana, and, antenna, bandana, ananas
+                            Root
+                          /      \
+                         a         b
+                        /           \
+                       n             a
+                     / | \            \
+                    a  d   t           n
+                    |      |          /  \
+                    n      e         a    d
+                    |      |         |    |
+                    a      n         n    a
+                    |      |         |    |
+                    s      n         a    n
+                           |              |
+                           a              a
+- Implementation, Time Complexity and Operations:
+    - Trie Construction:
+        -           TrieConstruction(Texts):
+                        Trie = a graph consisting of a single node root
+                        for text in Texts
+                            currentNode = root
+                            for currentSymbol in text:
+                                if there is an outgoing edge from currentNode with label currentSymbol:
+                                    currentNode = ending node of this edge
+                                else:
+                                    newNode = add a new node to Trie
+                                    add a new edge from CurrentNode to newNode with label currentSymbol
+                                    currentNode = newNode
+                        return Trie
+        - Run time: **O(|*Texts*|)**: the total length of all Texts
+        - Space Complexity: It takes lot of space (Edges # = **O(|*Texts*|)**)
+        - E.g, for human genome, the total length |*Text*| is 10^12 => Space?
+- Use case 1: Multiple Pattern Matching
+    - Where do billions of string patterns (reads) match a string Text (reference genome)?
+    - Input: A set of strings Patterns and a string Text
+    - Output: All positions in Text where a string from Patterns appears as a substring
+    - For simplicity, we assume that no pattern is a substring of another pattern
+    -           TrieMatching(Text, Trie):
+                    While Text isn't empty
+                        PrefixTrieMatching(Text, Trie)
+                        remove 1st symbole from Text
+    -           PrefixTrieMatching(Text, Trie):
+                    Symbol = 1st letter of Text
+                    v = root of Trie
+                    while forever
+                        if v is a leaf in Trie:
+                            return the pattern spelled by the path from the root to v
+                        elif there's an edge (v, w) in Trie labeled by symbol:
+                            symbole = next letter of Text
+                            v = w
+                        else:
+                            output "no matches found"
+                            return
+    - Runtime of TrieMatching: **O(|*Text*| * |*LongestPattern*|)**
+    - Runtime of brute force approach: **O(|*Text*| * |*Patterns*|)**
+- Related Problems:
+    - [Exact Pattern Matching Problem]:
+        - Input: A string Pattern and a string Text
+        - Output: All positions in Text where Pattern appears as a substring
+    - [Approximate Pattern Matching]:
+        - Input: A string Pattern, a string Text, and an integer *d*
+        - Output: All positions in Text where Pattern appears as a substring with at most *d* mismatches
+    - [Multiple Pattern Matching]:
+- For more details:
+    - UC San Diego Course:[Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
+
+</details>
+
+<details>
+<summary>Suffix Tree</summary>
+
+- It's a compressed Trie
 - Implementation, Time Complexity and Operations:
 - Related Problems:
 - For more details:
-    - UC San Diego Course:[]()
+    - UC San Diego Course:[Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
 </details>
 
