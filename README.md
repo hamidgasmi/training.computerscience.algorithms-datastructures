@@ -3234,49 +3234,119 @@
 <summary>Suffix Trie: Multiple Pattern Matching</summary>
 
 - Packing *Text* onto a Trie:
-    - Generate all suffixes of *Text*
+    - Generate all suffixes of *Text$*
+    - For each suffix, add the position of its 1st letter in *Text*
     - Form a trie out of these suffixes (suffix trie)
-    - For each *Pattern*, check if it can be spelled out from the root downward in the suffx trie
-    - E.g. panamabananas$
--                                      Root
-            suffix: panamabananas$                                     /     \ 
-                                    p
-                                   /
-                                  a
-                                 /
-                                n
-                               /
-                              a
-                             /
-                            m
-                           /
-                          a
-                         /
-                        b
-                       /
-                      a
-                     /
-                    n
-                   /
-                  a
-                 /
-                n
-               /
-              a
-             /
-            s
-           /
+    - For each *Pattern*, 
+        - Check if it can be spelled out from the root downward in the suffx trie
+        - When a match is found, we "walk down" to the leaf (or leaves) in order to find the starting position of the match
+- E.g. Text: panamabananas; Patterns: amaba, ana
+-                                     _______Root________
+            suffix: panamabananas$   /  /anamabananas$   \suffix: anamabananas$
+                                    p  a                  n
+                                   /  / \amabananas$       \
+                                  a  n   m                  a
+                                 /  /     \                  \
+                                n  a       a     ...          m
+                               /  /  \    /                    \
+                              a  m    n  b       ...            a
+                             /  /    /  /                        .
+                            m  a    a  a         ...              .
+                           /  /    /  /                            .
+                          a  b    s  n           ...                \
+                         /  /    /  /                                $
+                        b  a    $  a             ...                  2
+                       /  /    7  /
+                      a  n       n
+                     /  /       /
+                    n  a       a
+                   /  /       /
+                  a  n       s
+                 /  /       /
+                n  a       $
+               /  /       3
+              a  s        
+             /  /         
+            s  $          
+           /  1
           $
-                             
-
-
-
+         0
+    - For the pattern "amaba"
+        - We walk down from Root -> a -> m -> a -> b -> a
+        - A match is found
+        - Walk down from -> a -> ... -> $ 3 to find the position: 3
+    - For the pattern "ana"
+        - We walk down from Root -> a -> n -> a
+        - A match is found
+        - Walk down from -> a -> ... -> $ 1 to find the position: 1
+        - Walk down from -> a -> ... -> $ 1 to find the position: 7
+        - Walk down from -> a -> ... -> $ 1 to find the position: 9 (it doesn't appear above)
+        - The pattern "ana" appears 3 times
 - Implementation, Time Complexity and Operations:
-    - Space complexity:
-        - It solves the memory issue of Tries
+    - Time Complexity:
+    - Space Complexity: **|*Text*| * (|*Text*| - 1) / 2**
+        - There're |*Text*|  suffixes
+        - The average length of the suffixes is roughly |*Text*|/2
+        - The total length of all suffixes:  |*Text*| * (|*Text*| - 1)/2
+        - 
+    -           A half of a square of |Text| symboles x |Text| suffixes
+                panamabananas$
+                 anamabananas$
+                  namabananas$
+                   amabananas$
+                    mabananas$
+                     abananas$
+                      bananas$
+                       ananas$
+                        nanas$
+                         anas$
+                          nas$
+                           as$
+                            s$
+                             $
+        - For human genome: |Text| = 3 * 10^9 => It's impratical!!!!!
 - Related Problems:
 - For more details:
     - UC San Diego Course:[Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
+
+</details>
+
+<details>
+<summary>Suffix Tree: Multiple Pattern Matching</summary>
+
+- It's a compression of suffix-trie
+- - E.g. Text: panamabananas; Patterns: amaba, ana
+-                      _______Root________
+                      /
+         panamabananas$   /  /anamabananas$   \suffix: anamabananas$
+                /                /p  a                  n
+               0                    /  / \amabananas$       \
+                                  a  n   m                  a
+                                 /  /     \                  \
+                                n  a       a     ...          m
+                               /  /  \    /                    \
+                              a  m    n  b       ...            a
+                             /  /    /  /                        .
+                            m  a    a  a         ...              .
+                           /  /    /  /                            .
+                          a  b    s  n           ...                \
+                         /  /    /  /                                $
+                        b  a    $  a             ...                  2
+                       /  /    7  /
+                      a  n       n
+                     /  /       /
+                    n  a       a
+                   /  /       /
+                  a  n       s
+                 /  /       /
+                n  a       $
+               /  /       3
+              a  s        
+             /  /         
+            s  $          
+           /  1
+          $
+         0
 
 </details>
 
