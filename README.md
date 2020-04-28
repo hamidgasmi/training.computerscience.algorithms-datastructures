@@ -3150,10 +3150,12 @@
 ## String Processing and Pattern Matching Algorithms
 
 <details>
-<summary>Trie</summary>
+<summary>Trie: Multiple Pattern Matching</summary>
 
-- It's also called **prefix tree**
-- It's a kind of search tree where keys are usually strings
+- Multiple Pattern Matching:
+    - Where do billions of string patterns (reads) match a string Text (reference genome)?
+    - Input: A set of strings Patterns and a string Text
+    - Output: All positions in Text where a string from Patterns appears as a substring
 - Implementation, Time Complexity and Operations:
     - Trie Construction:
     -           TrieConstruction(Texts):
@@ -3168,8 +3170,10 @@
                                 add a new edge from CurrentNode to newNode with label currentSymbol
                                 currentNode = newNode
                     return Trie
-        - Run time: **O(|*Texts*|)**: the total length of all Texts
-        - Space Complexity: It takes lot of space (Edges # = **O(|*Texts*|)**)
+    - Run time: **O(|*Texts*|)**: the total length of all Texts
+    - Space Complexity: 
+        - (Edges # = **O(|*Texts*|)**)
+        - It takes lot of space 
         - E.g, for human genome, the total length |*Text*| is 10^12 => Space?
     - E.g., the string texts below could be stored in a Trie:
     -           banana, and, antenna, bandana, ananas
@@ -3188,10 +3192,12 @@
                     s      n         a    n
                            |              |
                            a              a
-- Use case 1: Multiple Pattern Matching
-    - Where do billions of string patterns (reads) match a string Text (reference genome)?
-    - Input: A set of strings Patterns and a string Text
-    - Output: All positions in Text where a string from Patterns appears as a substring
+- Multiple Pattern Matching:
+    - Input: *Text*, *Patterns*
+    - Generate a Trie from all patterns, *Trie(Patterns)*
+    - Drive *Trie(Patterns)* along *Text* at each position of *Text*:
+        - Walk down *Trie(Patterns)* by spelling symbols of *Text*
+        - A pattern from *Patterns* matches *Text* each time we reach a leaf!
     - For simplicity, we assume that no pattern is a substring of another pattern
     -           TrieMatching(Text, Trie):
                     While Text isn't empty
@@ -3212,23 +3218,62 @@
     - Runtime of TrieMatching: **O(|*Text*| * |*LongestPattern*|)**
     - Runtime of brute force approach: **O(|*Text*| * |*Patterns*|)**
 - Related Problems:
-    - [Exact Pattern Matching Problem]:
+    - [Exact Pattern Matching Problem]():
         - Input: A string Pattern and a string Text
         - Output: All positions in Text where Pattern appears as a substring
-    - [Approximate Pattern Matching]:
+    - [Approximate Pattern Matching]():
         - Input: A string Pattern, a string Text, and an integer *d*
         - Output: All positions in Text where Pattern appears as a substring with at most *d* mismatches
-    - [Multiple Pattern Matching]:
+    - [Multiple Pattern Matching]():
 - For more details:
     - UC San Diego Course:[Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
 </details>
 
 <details>
-<summary>Suffix Tree</summary>
+<summary>Suffix Trie: Multiple Pattern Matching</summary>
 
-- It's a compressed Trie
+- Packing *Text* onto a Trie:
+    - Generate all suffixes of *Text*
+    - Form a trie out of these suffixes (suffix trie)
+    - For each *Pattern*, check if it can be spelled out from the root downward in the suffx trie
+    - E.g. panamabananas$
+-                                      Root
+            suffix: panamabananas$                                     /     \ 
+                                        p
+                                    /
+                                    a
+                                    /
+                                    n
+                                /
+                                a
+                                /
+                                m
+                            /
+                            a
+                            /
+                            b
+                        /
+                        a
+                        /
+                        n
+                    /
+                    a
+                    /
+                    n
+                /
+                a
+               /
+              s
+             /
+            $
+                             
+
+
+
 - Implementation, Time Complexity and Operations:
+    - Space complexity:
+        - It solves the memory issue of Tries
 - Related Problems:
 - For more details:
     - UC San Diego Course:[Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
