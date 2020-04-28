@@ -3176,22 +3176,14 @@
         - It takes lot of space 
         - E.g, for human genome, the total length |*Text*| is 10^12 => Space?
     - E.g., the string texts below could be stored in a Trie:
-    -           banana, and, antenna, bandana, ananas
+    -           aba, aa, baa
                             Root
                           /      \
-                         a         b
-                        /           \
-                       n             a
-                     / | \            \
-                    a  d   t           n
-                    |      |          /  \
-                    n      e         a    d
-                    |      |         |    |
-                    a      n         n    a
-                    |      |         |    |
-                    s      n         a    n
-                           |              |
-                           a              a
+                         a        b
+                        / \        \
+                       b   a        a
+                     /
+                    a
 - Multiple Pattern Matching:
     - Input: *Text*, *Patterns*
     - Generate a Trie from all patterns, *Trie(Patterns)*
@@ -3217,16 +3209,8 @@
                             return
     - Runtime of TrieMatching: **O(|*Text*| * |*LongestPattern*|)**
     - Runtime of brute force approach: **O(|*Text*| * |*Patterns*|)**
-- Related Problems:
-    - [Exact Pattern Matching Problem]():
-        - Input: A string Pattern and a string Text
-        - Output: All positions in Text where Pattern appears as a substring
-    - [Approximate Pattern Matching]():
-        - Input: A string Pattern, a string Text, and an integer *d*
-        - Output: All positions in Text where Pattern appears as a substring with at most *d* mismatches
-    - [Multiple Pattern Matching]():
 - For more details:
-    - UC San Diego Course:[Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
+    - UC San Diego Course:[Tries](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
 </details>
 
@@ -3240,74 +3224,50 @@
     - For each *Pattern*, 
         - Check if it can be spelled out from the root downward in the suffx trie
         - When a match is found, we "walk down" to the leaf (or leaves) in order to find the starting position of the match
-- E.g. Text: panamabananas; Patterns: amaba, ana
--                                     _______Root________
-            suffix: panamabananas$   /  /anamabananas$   \suffix: anamabananas$
-                                    p  a                  n
-                                   /  / \amabananas$       \
-                                  a  n   m                  a
-                                 /  /     \                  \
-                                n  a       a     ...          m
-                               /  /  \    /                    \
-                              a  m    n  b       ...            a
-                             /  /    /  /                        .
-                            m  a    a  a         ...              .
-                           /  /    /  /                            .
-                          a  b    s  n           ...                \
-                         /  /    /  /                                $
-                        b  a    $  a             ...                  2
-                       /  /    7  /
-                      a  n       n
-                     /  /       /
-                    n  a       a
-                   /  /       /
-                  a  n       s
-                 /  /       /
-                n  a       $
-               /  /       3
-              a  s        
-             /  /         
-            s  $          
-           /  1
-          $
-         0
-    - For the pattern "amaba"
-        - We walk down from Root -> a -> m -> a -> b -> a
+- E.g. Text: ababaa; Patterns: aba, baa
+-                                     ___Root___
+                   suffix: ababaa$   /      \   \
+                                    a        b   $
+                                   /\ \     /    6
+                                  b  a $   a
+                                 /   | 5   | \
+                                a    $     b  a
+                               / \   4     |   \ 
+                              b   a        a    a
+                             /   /         |     \
+                            a   $          a      $
+                           /   2           |       3
+                          a                $
+                         /                 1
+                        $
+                        0
+    - For the pattern "baa"
+        - We walk down from Root -> b -> a -> a
         - A match is found
-        - Walk down from -> a -> ... -> $ 3 to find the position: 3
-    - For the pattern "ana"
-        - We walk down from Root -> a -> n -> a
+        - Walk down from -> a -> $ 3 to find the position: 3
+    - For the pattern "aba"
+        - We walk down from Root -> a -> b -> a
         - A match is found
-        - Walk down from -> a -> ... -> $ 1 to find the position: 1
-        - Walk down from -> a -> ... -> $ 1 to find the position: 7
-        - Walk down from -> a -> ... -> $ 1 to find the position: 9 (it doesn't appear above)
-        - The pattern "ana" appears 3 times
+        - Walk down from -> a -> ... -> $ 0 to find the position: 0
+        - Walk down from -> a -> ... -> $ 2 to find the position: 2
+        - The pattern "aba" appears 2 times
 - Implementation, Time Complexity and Operations:
     - Time Complexity:
     - Space Complexity: **|*Text*| * (|*Text*| - 1) / 2**
         - There're |*Text*|  suffixes
         - The average length of the suffixes is roughly |*Text*|/2
         - The total length of all suffixes:  |*Text*| * (|*Text*| - 1)/2
-        - 
     -           A half of a square of |Text| symboles x |Text| suffixes
-                panamabananas$
-                 anamabananas$
-                  namabananas$
-                   amabananas$
-                    mabananas$
-                     abananas$
-                      bananas$
-                       ananas$
-                        nanas$
-                         anas$
-                          nas$
-                           as$
-                            s$
-                             $
-        - For human genome: |Text| = 3 * 10^9 => It's impratical!!!!!
-- Related Problems:
+                ababaa$
+                 babaa$
+                  abaa$
+                   baa$
+                    aa$
+                     a$
+                      $
+        - For human genome: |Text| = 3 * 10^9 => **It's impratical!!!!!**
 - For more details:
-    - UC San Diego Course:[Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
+    - UC San Diego Course:[Suffix-Tries](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
 </details>
 
@@ -3315,38 +3275,24 @@
 <summary>Suffix Tree: Multiple Pattern Matching</summary>
 
 - It's a compression of suffix-trie
-- - E.g. Text: panamabananas; Patterns: amaba, ana
--                      _______Root________
-                      /
-         panamabananas$   /  /anamabananas$   \suffix: anamabananas$
-                /                /p  a                  n
-               0                    /  / \amabananas$       \
-                                  a  n   m                  a
-                                 /  /     \                  \
-                                n  a       a     ...          m
-                               /  /  \    /                    \
-                              a  m    n  b       ...            a
-                             /  /    /  /                        .
-                            m  a    a  a         ...              .
-                           /  /    /  /                            .
-                          a  b    s  n           ...                \
-                         /  /    /  /                                $
-                        b  a    $  a             ...                  2
-                       /  /    7  /
-                      a  n       n
-                     /  /       /
-                    n  a       a
-                   /  /       /
-                  a  n       s
-                 /  /       /
-                n  a       $
-               /  /       3
-              a  s        
-             /  /         
-            s  $          
-           /  1
-          $
-         0
+    - From the suffix-trie above, transform each branch to it word
+    - Each edge, store
+- E.g. Text: panamabananas; Patterns: amaba, ana
+-                   __ Root ___                      _____ Root _______
+                   /     \     \                   0/1        1\2     6\1
+                  a       ba    $               ___O____        _O_     O
+                / | \    /  \   6  =======>   1/2  5|2\ 6\1   3/4  5\1  6
+               ba a$ $ baa$  a$                O    O     O   O      O
+              /  \ 4 5  1    3             3/3  5\2 4     5   1      3
+            baa$ a$                        O     O
+            0    2                         0     2
+- Implementation, Time Complexity and Operations:
+    - Time Complexity:
+    - Space Complexity: **O(|*Text*|)**
+        - Each Suffix adds one leaf and at most 1 internal vertex to the suffix tree
+        - `Vertice # < 2 |Text|`
+- For more details:
+    - UC San Diego Course:[Suffix-Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
 </details>
 
