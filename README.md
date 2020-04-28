@@ -3154,8 +3154,25 @@
 
 - It's also called **prefix tree**
 - It's a kind of search tree where keys are usually strings
-- E.g., the string texts below could be stored in a Trie:
--           banana, and, antenna, bandana, ananas
+- Implementation, Time Complexity and Operations:
+    - Trie Construction:
+    -           TrieConstruction(Texts):
+                    Trie = a graph consisting of a single node root
+                    for text in Texts
+                        currentNode = root
+                        for currentSymbol in text:
+                            if there is an outgoing edge from currentNode with label currentSymbol:
+                                currentNode = ending node of this edge
+                            else:
+                                newNode = add a new node to Trie
+                                add a new edge from CurrentNode to newNode with label currentSymbol
+                                currentNode = newNode
+                    return Trie
+        - Run time: **O(|*Texts*|)**: the total length of all Texts
+        - Space Complexity: It takes lot of space (Edges # = **O(|*Texts*|)**)
+        - E.g, for human genome, the total length |*Text*| is 10^12 => Space?
+    - E.g., the string texts below could be stored in a Trie:
+    -           banana, and, antenna, bandana, ananas
                             Root
                           /      \
                          a         b
@@ -3171,23 +3188,6 @@
                     s      n         a    n
                            |              |
                            a              a
-- Implementation, Time Complexity and Operations:
-    - Trie Construction:
-        -           TrieConstruction(Texts):
-                        Trie = a graph consisting of a single node root
-                        for text in Texts
-                            currentNode = root
-                            for currentSymbol in text:
-                                if there is an outgoing edge from currentNode with label currentSymbol:
-                                    currentNode = ending node of this edge
-                                else:
-                                    newNode = add a new node to Trie
-                                    add a new edge from CurrentNode to newNode with label currentSymbol
-                                    currentNode = newNode
-                        return Trie
-        - Run time: **O(|*Texts*|)**: the total length of all Texts
-        - Space Complexity: It takes lot of space (Edges # = **O(|*Texts*|)**)
-        - E.g, for human genome, the total length |*Text*| is 10^12 => Space?
 - Use case 1: Multiple Pattern Matching
     - Where do billions of string patterns (reads) match a string Text (reference genome)?
     - Input: A set of strings Patterns and a string Text
