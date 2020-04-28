@@ -1,25 +1,16 @@
-# python3
 import sys
+import trie
 
-NA = -1
+if __name__ == "__main__":
 
-class Node:
-	def __init__ (self):
-		self.next = [NA] * 4
+    text = sys.stdin.readline ().strip ()
+    n = int (sys.stdin.readline ().strip ())
+    patterns = []
+    for i in range (n):
+	    patterns += [sys.stdin.readline ().strip ()]
 
-def solve (text, n, patterns):
-	result = []
+    trie = trie.Trie(patterns)
+    ans = trie.multi_pattern_matching(text)
+    #ans = solve (text, n, patterns)
 
-	# write your code here
-
-	return result
-
-text = sys.stdin.readline ().strip ()
-n = int (sys.stdin.readline ().strip ())
-patterns = []
-for i in range (n):
-	patterns += [sys.stdin.readline ().strip ()]
-
-ans = solve (text, n, patterns)
-
-sys.stdout.write (' '.join (map (str, ans)) + '\n')
+    sys.stdout.write (' '.join (map (str, ans)) + '\n')

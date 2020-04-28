@@ -4,12 +4,12 @@ class Trie:
     def __init__(self, patterns):
         self.build_trie(patterns)
 
-    def search_text(self, text):
+    def search_text(self, text, index):
         if len(self.trie) == 0:
             return (False, 0, -1)
 
         node = 0
-        text_index = 0
+        text_index = index
         text_found = False
         while text_index < len(text):
 
@@ -30,7 +30,7 @@ class Trie:
 
     def insert(self, text):
 
-        (text_found, text_index, node) = self.search_text(text)
+        (text_found, text_index, node) = self.search_text(text, 0)
         if text_found:
             return
         
@@ -63,6 +63,22 @@ class Trie:
         for node in self.trie:
             for c in self.trie[node]:
                 print("{}->{}:{}".format(node, self.trie[node][c], c))
+
+    # Time Complexity: O(|text| * |longest pattern|)
+    def multi_pattern_matching(self, text):
+        
+        if len(self.trie) == 0:
+            return []
+
+        maching_position = []
+        for i in range(len(text)):
+            (text_found, text_index, node) = self.search_text(text, i)
+
+            # If the node is a leaf then there is a match
+            if len(self.trie[node]) == 0:
+                maching_position.append(i)
+
+        return maching_position
 
 if __name__ == '__main__':
     patterns = sys.stdin.read().split()[1:]
