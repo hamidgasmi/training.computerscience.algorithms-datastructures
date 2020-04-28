@@ -3152,17 +3152,23 @@
 <details>
 <summary>Trie: Multiple Pattern Matching</summary>
 
-- Multiple Pattern Matching:
+- Multiple Patterns Matching:
     - Where do billions of string patterns (reads) match a string Text (reference genome)?
     - Input: A set of strings Patterns and a string Text
     - Output: All positions in Text where a string from Patterns appears as a substring
 - Implementation, Time Complexity and Operations:
-    - Trie Construction:
-    -           TrieConstruction(Texts):
+    - For a collection of strings *Patterns*, *Trie*(*Patterns*) is defined as follows:
+        - The trie has a single root node with indegree 0
+        - Each edge of *Trie*(*Patterns*) is labeled with a letter of the alphabet
+        - Edges leading out of a given node have distinct labels
+        - Every string in *Patterns* is spelled out by concatenating the letters along some path from the root downward
+        - Every path from the root to a leaf (i.e, node with outdegree 0), spells a string from *Patterns*
+        - Trie Construction:
+    -           TrieConstruction(Patterns):
                     Trie = a graph consisting of a single node root
-                    for text in Texts
+                    for pattern in Patterns
                         currentNode = root
-                        for currentSymbol in text:
+                        for currentSymbol in pattern:
                             if there is an outgoing edge from currentNode with label currentSymbol:
                                 currentNode = ending node of this edge
                             else:
@@ -3170,11 +3176,9 @@
                                 add a new edge from CurrentNode to newNode with label currentSymbol
                                 currentNode = newNode
                     return Trie
-    - Run time: **O(|*Texts*|)**: the total length of all Texts
-    - Space Complexity: 
-        - (Edges # = **O(|*Texts*|)**)
-        - It takes lot of space 
-        - E.g, for human genome, the total length |*Text*| is 10^12 => Space?
+        - Runtime: **O(|*Patterns*|)**: the total length of all Texts
+        - Space Complexity: (Edges # = **O(|*Patterns*|)**): 
+        - It takes lot of space: E.g, for human genome, the total length |*Text*| is 10^12 => Space?
     - E.g., the string texts below could be stored in a Trie:
     -           aba, aa, baa
                             Root
@@ -3184,13 +3188,8 @@
                        b   a        a
                      /
                     a
-- Multiple Pattern Matching:
-    - Input: *Text*, *Patterns*
-    - Generate a Trie from all patterns, *Trie(Patterns)*
-    - Drive *Trie(Patterns)* along *Text* at each position of *Text*:
-        - Walk down *Trie(Patterns)* by spelling symbols of *Text*
-        - A pattern from *Patterns* matches *Text* each time we reach a leaf!
-    - For simplicity, we assume that no pattern is a substring of another pattern
+    - Multiple Pattern Matching:
+        - For simplicity, we assume that no pattern is a substring of another pattern
     -           TrieMatching(Text, Trie):
                     While Text isn't empty
                         PrefixTrieMatching(Text, Trie)
@@ -3207,8 +3206,10 @@
                         else:
                             output "no matches found"
                             return
-    - Runtime of TrieMatching: **O(|*Text*| * |*LongestPattern*|)**
-    - Runtime of brute force approach: **O(|*Text*| * |*Patterns*|)**
+        - Runtime: **O(|*Text*| * |*LongestPattern*|)**
+        - Runtime of brute force approach: **O(|*Text*| * |*Patterns*|)**
+- Related Problems:
+    - [Construct a Trie from a Collection of Patterns](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/154)
 - For more details:
     - UC San Diego Course:[Tries](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
