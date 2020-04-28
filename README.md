@@ -3218,6 +3218,7 @@
 <summary>Suffix Trie: Multiple Pattern Matching</summary>
 
 - Packing *Text* onto a Trie:
+    - Add "$" to *Text*: to make sure that each suffix corresponds to a leaf
     - Generate all suffixes of *Text$*
     - For each suffix, add the position of its 1st letter in *Text*
     - Form a trie out of these suffixes (suffix trie)
@@ -3252,9 +3253,9 @@
         - Walk down from -> a -> ... -> $ 2 to find the position: 2
         - The pattern "aba" appears 2 times
 - Implementation, Time Complexity and Operations:
-    - Time Complexity:
+    - Time Complexity
     - Space Complexity: **|*Text*| * (|*Text*| - 1) / 2**
-        - There're |*Text*|  suffixes
+        - There're |*Text*| suffixes
         - The average length of the suffixes is roughly |*Text*|/2
         - The total length of all suffixes:  |*Text*| * (|*Text*| - 1)/2
     -           A half of a square of |Text| symboles x |Text| suffixes
@@ -3279,18 +3280,34 @@
     - Each edge, store
 - E.g. Text: panamabananas; Patterns: amaba, ana
 -                   __ Root ___                      _____ Root _______
-                   /     \     \                   0/1        1\2     6\1
-                  a       ba    $               ___O____        _O_     O
+                   /     \     \     Edges         0/1        1\2     6\1
+                  a       ba    $   Stores     ___O____        _O_     O
                 / | \    /  \   6  =======>   1/2  5|2\ 6\1   3/4  5\1  6
-               ba a$ $ baa$  a$                O    O     O   O      O
+               ba a$ $ baa$  a$    Pos,Len    O    O     O   O      O
               /  \ 4 5  1    3             3/3  5\2 4     5   1      3
             baa$ a$                        O     O
             0    2                         0     2
 - Implementation, Time Complexity and Operations:
     - Time Complexity:
+        - Naive Approach: **O(|*Text*|^2)** (Quandratic)
+        - **Weiner Algorithm**: **O(|*Text*|)** (Linear)
     - Space Complexity: **O(|*Text*|)**
         - Each Suffix adds one leaf and at most 1 internal vertex to the suffix tree
         - `Vertice # < 2 |Text|`
+        - Instead of storing the whole string as label on an edge, we only store 2 numbers: **(Start Position, Length)**
+        - **It's memory effecient**
+    - **Big-O notation hides constants!**
+        - Suffix tree algorithm has large memory footprint
+        - The best known implementation of suffix tree has large memory footprints of ~20*|Text|
+        - It's a very large memory requirement for long texts like human genomes
+- Exact Pattern Matches:
+    - Time Complexity: **O(|*Text*| + |*Patterns*|)**
+        - 1st we need O(|*Text*|) to build the suffix tree 
+        - 2nd for each pattern *Pattern* in *Patterns* we need additional O(|*Pattern*|) to match this pattern against the Text 
+        - The total time for all the patterns is: O(|*Patterns*|), 
+        - The overall running time: O(|*Text*|+|*Patterns*|)
+    - Space Complexity:
+        - We only need O(|*Text*|) additional memory to store the suffix tree and all the positions where at least 1 of the *Patterns* occurs in the *Text*
 - For more details:
     - UC San Diego Course:[Suffix-Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
