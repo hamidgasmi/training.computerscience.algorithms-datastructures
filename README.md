@@ -3240,33 +3240,33 @@
     - E.g. panamabananas$
 -                                      Root
             suffix: panamabananas$                                     /     \ 
-                                        p
-                                    /
-                                    a
-                                    /
-                                    n
-                                /
-                                a
-                                /
-                                m
-                            /
-                            a
-                            /
-                            b
-                        /
-                        a
-                        /
-                        n
-                    /
-                    a
-                    /
+                                    p
+                                   /
+                                  a
+                                 /
+                                n
+                               /
+                              a
+                             /
+                            m
+                           /
+                          a
+                         /
+                        b
+                       /
+                      a
+                     /
                     n
-                /
-                a
+                   /
+                  a
+                 /
+                n
                /
-              s
+              a
              /
-            $
+            s
+           /
+          $
                              
 
 
