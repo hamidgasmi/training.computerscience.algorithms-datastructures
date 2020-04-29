@@ -3320,6 +3320,9 @@
         - The overall running time: O(|*Text*|+|*Patterns*|)
     - Space Complexity:
         - We only need O(|*Text*|) additional memory to store the suffix tree and all the positions where at least 1 of the *Patterns* occurs in the *Text*
+- Related Problems:
+    - [Construct the Suffix Tree of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/157)
+    - [Find the Shortest Non-Shared Substring of 2 Strings](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/158)
 - For more details:
     - UC San Diego Course:[Suffix-Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
