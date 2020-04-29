@@ -3179,15 +3179,21 @@
         - Runtime: **O(|*Patterns*|)**: the total length of all Texts
         - Space Complexity: (Edges # = **O(|*Patterns*|)**): 
         - It takes lot of space: E.g, for human genome, the total length |*Text*| is 10^12 => Space?
+    - It could be implemented with a **dictionary of dictionaries**:
+        - The key of the external dictionary is the node ID (integer) 
+        - The internal dictionary contains all the trie edges outgoing from the corresponding node
+        - The internal dictionary keys are the letters on those edges
+        - The internal dictionary values are the node IDs to which these edges lead
     - E.g., the string texts below could be stored in a Trie:
     -           aba, aa, baa
-                            Root
-                          /      \
-                         a        b
-                        / \        \
-                       b   a        a
-                     /
-                    a
+                            0          Trie = { 0: { a:1, b:5 }
+                         a/   \b                1: { b:2, a:4}
+                         1     5                2: { a:3 }
+                       b/ \a    \a              3: { }
+                       2   4     6              4: { }
+                     a/                         5: { a:6 }
+                    3                           5: { }
+                                              }
     - Multiple Pattern Matching:
         - For simplicity, we assume that no pattern is a substring of another pattern
     -           TrieMatching(Text, Trie):
@@ -3210,6 +3216,11 @@
         - Runtime of brute force approach: **O(|*Text*| * |*Patterns*|)**
 - Related Problems:
     - [Construct a Trie from a Collection of Patterns](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/154)
+    - [Multiple Pattern Matching](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/155)
+    - [Generalized Multiple Pattern Matching](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/156)
+    - [Implement an autocomplete feature]():
+        - Tries are a common way of storing a dictionary of words and are used, e.g., for implementing an autocomplete feature in text editors
+        - E.g., Code editors, and web search engines like Google or Yandex
 - For more details:
     - UC San Diego Course:[Tries](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
