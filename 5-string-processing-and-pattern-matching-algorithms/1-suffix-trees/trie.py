@@ -1,6 +1,8 @@
 import sys
 
-class Trie:
+# Class to store Trie(Patterns)
+# It assumes that it doesn't exist i, j i != j such that a Pi is a subtext of a pattern Pj
+class Trie_patterns:
     def __init__(self, patterns):
         self.build_trie(patterns)
 
@@ -19,7 +21,7 @@ class Trie:
                 node = self.trie[node][c]
                 text_index += 1
                 if text_index == len(text):
-                    # Problem input: patterns(i) can't be a subtext of patterns(j)
+                    # Problem input: Pi can't be a subtext of Pj for i != j
                     # We don't need to check if text is a subtext of an existing text
                     text_found = True
                 continue
@@ -56,10 +58,10 @@ class Trie:
         self.max_node_no = 0
         for text in texts:
             self.insert(text)
-            
+    
     # Prints the trie in the form of a dictionary of dictionaries
     # E.g. For the following patterns: ["AC", "T"] {0:{'A':1,'T':2},1:{'C':3}}
-    def print(self):
+    def print_tree(self):
         for node in self.trie:
             for c in self.trie[node]:
                 print("{}->{}:{}".format(node, self.trie[node][c], c))
@@ -82,5 +84,5 @@ class Trie:
 
 if __name__ == '__main__':
     patterns = sys.stdin.read().split()[1:]
-    tree = Trie(patterns)
-    tree.print()
+    trie = Trie_patterns(patterns)
+    trie.print_tree()
