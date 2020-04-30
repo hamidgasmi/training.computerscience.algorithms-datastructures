@@ -3229,16 +3229,13 @@
 <details>
 <summary>Suffix Trie: Multiple Pattern Matching</summary>
 
-- Packing *Text* onto a Trie:
-    - Add "$" to *Text*: to make sure that each suffix corresponds to a leaf
-    - Generate all suffixes of *Text$*
-    - For each suffix, add the position of its 1st letter in *Text*
-    - Form a trie out of these suffixes (suffix trie)
-    - For each *Pattern*, 
-        - Check if it can be spelled out from the root downward in the suffx trie
-        - When a match is found, we "walk down" to the leaf (or leaves) in order to find the starting position of the match
-- E.g. Text: ababaa; Patterns: aba, baa
--                                     ___Root___
+- It's denoted ***SuffixTrie(Text)***
+    - It's the trie formed from all suffixes of *Text*
+    - We append "$" to *Text* in order to mark the end of *Text*
+    - Each leaf is labeled with the starting position of the suffix whose path through the trie ends at this leaf
+    - When we arrive at a leaf, we'll immidiately know where this suffix cam from in *Text*
+    - E.g. Text: ababaa; Patterns: aba, baa
+    -                                 ___Root___
                    suffix: ababaa$   /      \   \
                                     a        b   $
                                    /\ \     /    6
@@ -3254,6 +3251,14 @@
                          /                 1
                         $
                         0
+- Implementation, Time Complexity and Operations:
+    - Add "$" to *Text*: to make sure that each suffix corresponds to a leaf
+    - Generate all suffixes of *Text$*
+    - For each suffix, add the position of its 1st letter in *Text*
+    - Form a trie out of these suffixes (suffix trie)
+    - For each *Pattern*, 
+        - Check if it can be spelled out from the root downward in the suffx trie
+        - When a match is found, we "walk down" to the leaf (or leaves) in order to find the starting position of the match
     - For the pattern "baa"
         - We walk down from Root -> b -> a -> a
         - A match is found
@@ -3266,19 +3271,19 @@
         - The pattern "aba" appears 2 times
 - Implementation, Time Complexity and Operations:
     - Time Complexity
-    - Space Complexity: **|*Text*| * (|*Text*| - 1) / 2**
-        - There're |*Text*| suffixes
-        - The average length of the suffixes is roughly |*Text*|/2
-        - The total length of all suffixes:  |*Text*| * (|*Text*| - 1)/2
-    -           A half of a square of |Text| symboles x |Text| suffixes
-                ababaa$
-                 babaa$
-                  abaa$
-                   baa$
-                    aa$
-                     a$
-                      $
-        - For human genome: |Text| = 3 * 10^9 => **It's impratical!!!!!**
+    - Space Complexity: **Θ(|*Text*|^2)**
+        - There're |*Text*| suffixes of *Text*
+        - These suffixes length is from 1 to |*Text*|
+        - The total length of all suffixes: (1 + ... + |*Text*|) = **|*Text*| * (|*Text*| + 1)/2**
+        -           ababaa$
+                     babaa$
+                      abaa$
+                       baa$
+                        aa$
+                         a$
+                          $
+        - For human genome: |*Text*| = 3 * 10^9 
+        - **It's impratical**!!!!!
 - For more details:
     - UC San Diego Course:[Suffix-Tries](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
