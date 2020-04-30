@@ -1,4 +1,3 @@
-# python3
 import sys
 from collections import namedtuple
 
@@ -15,7 +14,7 @@ class Suffix_Tree:
     node_from = node
     node_to = -1
     common_len = 0  
-
+    len_limit = 0
     for child in self.nodes[node]:
 
       edge = self.nodes[node][child]
@@ -31,13 +30,19 @@ class Suffix_Tree:
         break
     
     if common_len > 0 and common_len == len_limit:
-      return self.search_edge_to_break(node_to, suffix_starting_pos + common_len)
+      if self.text_len - suffix_starting_pos <= len_limit:
+        return(node_from, node_to, 0, common_len)
+      else:
+        (node_from, node_to, parent_len, sub_common_len) = self.search_edge_to_break(node_to, suffix_starting_pos + common_len)
+        return(node_from, node_to, parent_len + common_len, sub_common_len)
+
     else:
-      return(node_from, node_to, common_len)
+      
+      return(node_from, node_to, 0, common_len)
 
   def build_suffix_tree(self):
     
-    # List of dictionaries
+    # List of dictionaries:
     # {Node ID, (suffix start position, suffix length)}
     self.nodes = []
     self.nodes.append(dict()) # Node 0
@@ -46,12 +51,13 @@ class Suffix_Tree:
 
       suffix_text_len = self.text_len - i
 
-      (node_from, node_to, common_len) = self.search_edge_to_break(0, i)
+      (node_from, node_to, parent_len, common_len) = self.search_edge_to_break(0, i)
       
       if common_len > 0:
+        
         # Remove the previous edge from the node
         edge_to_break = self.nodes[node_from].pop(node_to)
-      
+
         # Insert the new common edge
         new_common_edge = Edge(edge_to_break.start, common_len)
         new_common_node = len(self.nodes)
@@ -62,9 +68,9 @@ class Suffix_Tree:
         # Modify the existing edge
         existing_edge = Edge(edge_to_break.start + common_len, edge_to_break.len - common_len)
         self.nodes[node_from][node_to] = existing_edge
-      
+
       # Insert new node for the suffix i:
-      new_suffix_edge = Edge(i + common_len, suffix_text_len - common_len)
+      new_suffix_edge = Edge(i + common_len + parent_len, suffix_text_len - common_len - parent_len)
       new_suffix_node = len(self.nodes) 
       self.nodes.append(dict())
       self.nodes[node_from][new_suffix_node] = new_suffix_edge
@@ -82,5 +88,8 @@ class Suffix_Tree:
 
 if __name__ == '__main__':
   text = sys.stdin.readline().strip()
+  
   suffix_tree = Suffix_Tree(text)
+
   print("\n".join(suffix_tree.edges_labels()))
+  
