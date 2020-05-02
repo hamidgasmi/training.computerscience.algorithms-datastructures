@@ -5,57 +5,47 @@ import queue
 from collections import namedtuple
 
 Edge = namedtuple('Edge', ['parent', 'node', 'start', 'len'])
+max_len = 2001
 
 # BFS traversal on the tree
-def non_shared_substring(suffix_tree, len_text):
+def dfs_non_shared_substring(suffix_tree, node):
 
-	fifo = queue.Queue()
-	edge = Edge(-1, 0, 0, 0)
-	fifo.put(edge)
-
-	while not fifo.empty():
-
-		parent_edge = fifo.get()
-		node = parent_edge.node
-		parent = parent_edge.parent
-
-		right_part = False
-		end_left_part = True
-		for child in suffix_tree.nodes[node]:
-
-			child_edge = suffix_tree.nodes[node][child]
-
-			right_part = True if child_edge.start > len_text else right_part
-			end_left_part = end_left_part if child_edge.start == len_text else False
-
-			if child_edge.start >= len_text:
-				continue
-			
-			current_len = 0 if parent == -1 else suffix_tree.nodes[parent][node].len
-			edge = Edge(node, child, parent_edge.start, current_len + parent_edge.len)
-			fifo.put(edge)
-
-		if len(suffix_tree.nodes[node]) == 0:
-			print("Over here 2")
-			edge = Edge(parent, node, parent_edge.start, parent_edge.len + 1)
-			break
-
-		elif (not right_part) and end_left_part:
-			print("Over here 1: ", suffix_tree.nodes[node])
-			edge = Edge(parent, node, parent_edge.start, parent_edge.len)
-			break
-
-	return suffix_tree.text[edge.start:edge.start + edge.len]
+	if len(suffix_tree.nodes[node]) == 0:
+		return (node, 0, False)
 	
+	text_len = (len(suffix_tree.text) - 2) // 2
+	shortest_substr_start = 0
+	shortest_substr_len = max_len
+	right_part = False
+	for child in suffix_tree.nodes[node]:
+		
+		if suffix_tree.nodes[node][child].start >= text_len:
+			right_part = True if suffix_tree.nodes[node][child].start > text_len else right_part
+			continue
+		
+		(substr_start, substr_len, subright_part) = dfs_non_shared_substring(suffix_tree, child)
+		right_part = True if subright_part else right_part
+
+		if shortest_substr_len > suffix_tree.nodes[node][child].len + substr_len:
+			shortest_substr_start = suffix_tree.nodes[node][child].start
+			shortest_substr_len = 1 if substr_len == 0 else suffix_tree.nodes[node][child].len + substr_len
+	
+	if not right_part:
+		shortest_substr_len = 0
+	elif shortest_substr_len == 0:
+		shortest_substr_len = 1
+
+	return (shortest_substr_start, shortest_substr_len, right_part)
+
 def solve (p, q):
 	pq_text = p + "#" + q + "$"
 	
 	suffixTree = suffix_tree.Suffix_Tree(pq_text)
-	print(suffixTree.nodes)
+	#print(suffixTree.nodes)
 
-	result = non_shared_substring(suffixTree, len(p))
+	(shortest_substr_start, shortest_substr_len, right_part) = dfs_non_shared_substring(suffixTree, 0)
 	
-	return result
+	return suffixTree.text[ shortest_substr_start : shortest_substr_start + shortest_substr_len ]
 
 if __name__ == "__main__":
 	p = sys.stdin.readline ().strip ()
