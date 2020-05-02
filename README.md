@@ -3339,7 +3339,7 @@
 - Implementation, Time Complexity and Operations:
 - Related Problems:
 - For more details:
-    - UC San Diego Course:[]()
+    - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
 </details>
 
@@ -3349,7 +3349,7 @@
 - Implementation, Time Complexity and Operations:
 - Related Problems:
 - For more details:
-    - UC San Diego Course:[]()
+    - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
 </details>
 
