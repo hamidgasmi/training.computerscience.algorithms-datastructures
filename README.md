@@ -3448,6 +3448,15 @@
 </details>
 
 <details>
+<summary>Burrows-Wheeler Transform: Pattern Matching</summary>
+
+- Related Problems:
+- For more details:
+    - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
+
+</details>
+
+<details>
 <summary>Suffix Arrays</summary>
 
 - Implementation, Time Complexity and Operations:
