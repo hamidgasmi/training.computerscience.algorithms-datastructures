@@ -3353,10 +3353,11 @@
     - It rearranges a character string into runs of similar characters
     - It's usefull for compression
     - Text <---> BWT-Text = BWT(Text) <---> Compression(BWT-Text)
-- From Text to BWT:
-    - Text ---> BWT-Text ---> Compressed BWT-Text
+- BWT:
+    - From Text to BWT: Text ---> BWT-Text ---> Compressed BWT-Text
     - Forming All Cyclic Rotations of a text ---> Sorting Cyclic Rotations ---> String last column
-    -           E.g.                       v
+    - E.g. AGACATA$:
+    -                                      v
                 AGACATA$            $AGACATA
                 GACATA$A            A$AGACAT
                 ACATA$AG  Sorting   ACATA$AG    BWT:              Compression
@@ -3365,9 +3366,33 @@
                 TA$AGACA            CATA$AGA   last                Encoding
                 A$AGACAT            GACATA$A   column
                 $AGACATA            TA$AGACA
-- From Compressed BWT to the original text:
-    - Compressed(BWT-Text) ---> BWT-Text ---> Text                                       ^
-- Implementation, Time Complexity and Operations:
+                                           ^
+- Inverting BWT (1st version):
+    - From Compressed BWT to the original text
+    - Compressed(BWT-Text) ---> BWT-Text ---> Text
+    - 1st, Decompression of Compressed(BWT-Text)
+    - Let's build the BWT matrix:
+        - Last column is the text-BWT
+        - 1st column could be obtained by sorting text-BWT
+        - Therefore, we know all 2-mers
+        - 2nd. column could be obtained by sorting all 2-mers
+        - 3rd. column could be obtained by sorting all 3-mers
+        - i-th column could be obtained by sorting all i-mers
+    - Symbols in the 1st row (after $) spell the original text: `BWT_Matrix[0][1:]`
+    - E.g. ATG$C3A:
+    -           1. Decompression: ATG$CAAA
+                2. BWT Matrix:
+                $------A          A$          $A         $A-----A          A$A          $AG         $AG----A
+                A------T          TA          A$         A$-----T          TA$          A$A         A$A----T
+                A------G   All    GA  Sorting AC  2nd    AC-----G   All    GAC  Sorting ACA  3rd    ACA----G   All    
+                A------$ -------> $A -------> AG ------> AG-----$ -------> $AG -------> AGA ------> AGA----$ -------> ...
+                A------C  2-mers  CA  2-mers  AT  column AT-----C  3-mers  CAT  3-mers  ATA column  ATA----C  3-mers  
+                C------A          AC          CA         CA-----A          ACA          CAT         CAT----A
+                G------A          AG          GA         GA-----A          AGA          GAC         GAC----A
+                T------A          AT          TA         TA-----A          ATA          TA$         TAA----A
+    - Space Complexity: **O(|Text|^2)**: Memory Issues
+- Inverting BWT (2nd version):
+    - Intuition:
 - Related Problems:
 - For more details:
     - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
