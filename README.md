@@ -3334,8 +3334,39 @@
 </details>
 
 <details>
-<summary>Burrows-Wheeler Transform</summary>
+<summary>Text Compression</summary>
 
+- **Run-Length Encoding**:
+    - It's a text compression
+    - It compresses a run of n identical symbols
+    - E.g. GGGGGGGGGGCCCCCCCCCCCAAAAAAATTTTTTTTTTTTTTTCCCCCG --> 10G11C7A15T5C1G
+- **Move-to-front Transform**:
+- Related Problems:
+- For more details:
+
+</details>
+
+<details>
+<summary>Burrows-Wheeler Transform (BWT)</summary>
+
+- It's also called **block-sorting compression**
+    - It rearranges a character string into runs of similar characters
+    - It's usefull for compression
+    - Text <---> BWT-Text = BWT(Text) <---> Compression(BWT-Text)
+- From Text to BWT:
+    - Text ---> BWT-Text ---> Compressed BWT-Text
+    - Forming All Cyclic Rotations of a text ---> Sorting Cyclic Rotations ---> String last column
+    -           E.g.                       v
+                AGACATA$            $AGACATA
+                GACATA$A            A$AGACAT
+                ACATA$AG  Sorting   ACATA$AG    BWT:              Compression
+                CATA$AGA ---------> AGACATA$ ---------> ATG$CAAA -------------> ATG$C3A
+                ATA$AGAC   $ 1st    ATA$AGAC  Strings              Run-Length
+                TA$AGACA            CATA$AGA   last                Encoding
+                A$AGACAT            GACATA$A   column
+                $AGACATA            TA$AGACA
+- From Compressed BWT to the original text:
+    - Compressed(BWT-Text) ---> BWT-Text ---> Text                                       ^
 - Implementation, Time Complexity and Operations:
 - Related Problems:
 - For more details:
