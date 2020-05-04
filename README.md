@@ -3357,16 +3357,16 @@
     - From Text to BWT: Text ---> BWT-Text ---> Compressed BWT-Text
     - Forming All Cyclic Rotations of a text ---> Sorting Cyclic Rotations ---> String last column
     - E.g. AGACATA$:
-    -                                      v
-                AGACATA$            $AGACATA
-                GACATA$A            A$AGACAT
-                ACATA$AG  Sorting   ACATA$AG    BWT:              Compression
-                CATA$AGA ---------> AGACATA$ ---------> ATG$CAAA -------------> ATG$C3A
-                ATA$AGAC   $ 1st    ATA$AGAC  Strings              Run-Length
-                TA$AGACA            CATA$AGA   last                Encoding
-                A$AGACAT            GACATA$A   column
-                $AGACATA            TA$AGACA
-                                           ^
+    -                                v
+            AGACATA$          $AGACATA
+            GACATA$A          A$AGACAT
+            ACATA$AG Sorting  ACATA$AG    BWT:            Compression
+            CATA$AGA -------> AGACATA$ --------> ATG$CAAA ------------> ATG$C3A
+            ATA$AGAC  $ 1st   ATA$AGAC  Strings            Run-Length
+            TA$AGACA          CATA$AGA   last              Encoding
+            A$AGACAT          GACATA$A   column
+            $AGACATA          TA$AGACA
+                                     ^
 - Inverting BWT (1st version):
     - From Compressed BWT to the original text
     - Compressed(BWT-Text) ---> BWT-Text ---> Text
@@ -3381,15 +3381,15 @@
     - Symbols in the 1st row (after $) spell the original text: `BWT_Matrix[0][1:]`
     - E.g. ATG$C3A:
     -       1. Decompression: ATG$CAAA
-                2. BWT Matrix:
-                $------A          A$          $A         $A-----A          A$A          $AG         $AG----A
-                A------T          TA          A$         A$-----T          TA$          A$A         A$A----T
-                A------G   All    GA  Sorting AC  2nd    AC-----G   All    GAC  Sorting ACA  3rd    ACA----G   All    
-                A------$ -------> $A -------> AG ------> AG-----$ -------> $AG -------> AGA ------> AGA----$ -------> ...
-                A------C  2-mers  CA  2-mers  AT  column AT-----C  3-mers  CAT  3-mers  ATA column  ATA----C  3-mers  
-                C------A          AC          CA         CA-----A          ACA          CAT         CAT----A
-                G------A          AG          GA         GA-----A          AGA          GAC         GAC----A
-                T------A          AT          TA         TA-----A          ATA          TA$         TAA----A
+            2. BWT Matrix:
+            $------A         A$         $A        $A-----A         A$A         $AG        $AG----A
+            A------T         TA         A$        A$-----T         TA$         A$A        A$A----T
+            A------G  All    GA Sort    AC  2nd   AC-----G  All    GAC Sort    ACA 3rd    ACA----G  All    
+            A------$ ------> $A ------> AG -----> AG-----$ ------> $AG ------> AGA -----> AGA----$ -----> ...
+            A------C 2-mers  CA 2-mers  AT  col.  AT-----C 3-mers  CAT 3-mers  ATA col    ATA----C 4-mers  
+            C------A         AC         CA        CA-----A         ACA         CAT        CAT----A
+            G------A         AG         GA        GA-----A         AGA         GAC        GAC----A
+            T------A         AT         TA        TA-----A         ATA         TA$        TAA----A
     - Space Complexity: **O(|Text|^2)**: Memory Issues
 - Inverting BWT (2nd version):
     - Intuition:
