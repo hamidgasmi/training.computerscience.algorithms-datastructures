@@ -3356,7 +3356,7 @@
 - BWT:
     - From Text to BWT: Text ---> BWT-Text ---> Compressed BWT-Text
     - Forming All Cyclic Rotations of a text ---> Sorting Cyclic Rotations ---> String last column
-    - E.g. AGACATA$:
+    - E.g. `AGACATA$`:
     -                                v
             AGACATA$          $AGACATA
             GACATA$A          A$AGACAT
@@ -3379,7 +3379,7 @@
         - 3rd. column could be obtained by sorting all 3-mers
         - i-th column could be obtained by sorting all i-mers
     - Symbols in the 1st row (after $) spell the original text: `BWT_Matrix[0][1:]`
-    - E.g. ATG$C3A:
+    - E.g. `ATG$C3A`:
     -       1. Decompression: ATG$CAAA
             2. BWT Matrix:
             $------A         A$         $A        $A-----A         A$A         $AG        $AG----A
@@ -3390,9 +3390,57 @@
             C------A         AC         CA        CA-----A         ACA         CAT        CAT----A
             G------A         AG         GA        GA-----A         AGA         GAC        GAC----A
             T------A         AT         TA        TA-----A         ATA         TA$        TAA----A
+            3. Return BWT_Matrix[0][1:]
+    - Running Time:
+        - k-mers Sorting: **O(|Text|^3 log(|Text|)**
+        - To sort n objects we need O(n logn) comparisons of these objects 
+        - For strings of length k, the cost of comparing 2 such strings is not O(1), but is O(k) 
+        - Sorting 1-mers is O(|Text| log|Text|), but sorting |Text|-mers is O(|Text|^2 log|Text|), 
+        - When we perform summation over all k from 1 to |Text|: O((1 + 2 ⋯ +|Text|) |Text| log|Text|) = O(1/2|Text|(|Text| + 1)|Text| log|Text|)
     - Space Complexity: **O(|Text|^2)**: Memory Issues
 - Inverting BWT (2nd version):
-    - Intuition:
+    - **First-Last Property**
+        - The k-th occurrence of *symbol* in 1st column and 
+        - The k-th occurrence of *symbol* in Last column 
+        - correspond to appearance of *symbol* at the same position in *Text*
+    -       $AGACATA --> 1st 'A' in last column hides behind 'AGACAT'
+            A$AGACAT --> 1st 'A' in 1st column hides behind 'AGACAT'
+            ACATA$AG --> 2nd 'A' in 1st column hides behind 'AG'
+            AGACATA$ --> 3nd 'A' in 1st column hides behind ''
+            ATA$AGAC
+            CATA$AGA --> 2nd 'A' in last column hides still behind 'AG'
+            GACATA$A --> 3nd 'A' in last column hides behind ''
+            TA$AGACA
+    - E.g. BWT Text: `ATG$CAAA`
+        - We know the 1st and last columns of the BWT matrix
+    -        $------A
+             A------T
+             A------G
+             A------$
+             A------C
+             C------A
+             G------A
+             T------A
+        - Give occurence no to symbols:
+    -        $1------A1
+             A1------T1
+             A2------G1
+             A3------$1
+             A4------C1
+             C1------A2
+             G1------A3
+             T1------A4
+        - Use First-Last Property:
+    -        $1------A1 --> 1st. $1 hides behind A1 (let's go to A1): A$
+             A1------T1 --> 2nd. A1 hides behind `T1` (let's go to T1): TA$
+             A2------G1 --> 6th. A2 hides behind `G1` (let's go to G1): GACATA$
+             A3------$1 --> 8th. A3 hides behind `$1` (let's go to $1): return: AGACATA$
+             A4------C1 --> 4th. A4 hides behind `C1` (let's go to C1): CATA$
+             C1------A2 --> 5th. C1 hides behind `A2` (let's go to A2): ACATA$
+             G1------A3 --> 7th. G1 hides behind `A3` (let's go to A3): AGACATA$
+             T1------A4 --> 3nd. T1 hides behind `A4` (let's go to A4): ATA$
+    - Running Time: **O(|*Text*|)**
+    - Space Complexity: 2 |*Text*) = **O(|*Text*|)**
 - Related Problems:
 - For more details:
     - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
