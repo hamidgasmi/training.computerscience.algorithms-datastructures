@@ -3380,7 +3380,7 @@
         - i-th column could be obtained by sorting all i-mers
     - Symbols in the 1st row (after $) spell the original text: `BWT_Matrix[0][1:]`
     - E.g. ATG$C3A:
-    -           1. Decompression: ATG$CAAA
+    -       1. Decompression: ATG$CAAA
                 2. BWT Matrix:
                 $------A          A$          $A         $A-----A          A$A          $AG         $AG----A
                 A------T          TA          A$         A$-----T          TA$          A$A         A$A----T
