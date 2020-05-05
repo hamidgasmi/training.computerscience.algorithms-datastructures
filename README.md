@@ -3458,15 +3458,15 @@
     - 3rd. Branch to all the rows whom 1st column is one of the `C`s selected above: (`C1`)
     - 3rd. Use the First-Last Property: Select all the `C`s that hide behind `A` (rows whom last column is `A`)
     - 4rd. Branch to all the rows whom 1st column is one of the `A`s selected above: (`C1`)
-    -          1st. Step            2. Step            3. Step            4. Step
-               top -->$1------A1\        $1------A1        $1------A1        $1------A1
-                (0)   A1------T1 \__t -->A1------T1_       A1------T1     t  A1------T1
-                      A2------G1         A2------G1 \      A2------G1   ---> A2------G1
-           1st.       A3------$1    2nd  A3------$1  t     A3------$1  /  b  A3------$1
-                      A4------C1   _b -->A4------C1_  \    A4------C1 /      A4------C1
-                      C1------A2  /      C1------A2 \  |-->C1------A2        C1------A2
-             (7)      G1------A3 /       G1------A3  b/    G1------A3        G1------A3
-            buttom -->T1------A4/        T1------A4        T1------A4        T1------A4
+    -      i     1st. Step              2. Step          3. Step          4. Step       LastToFirst(i)
+           0     top ->$1------A1\      $1------A1       $1------A1       $1------A1          1
+           1     (0)   A1------T1 \_t ->A1------T1_      A1------T1    t  A1------T1          7
+           2           A2------G1       A2------G1 \     A2------G1   --> A2------G1          6
+           3           A3------$1       A3------$1  t    A3------$1  / b  A3------$1          0
+           4           A4------C1   _b->A4------C1   \   A4------C1 /     A4------C1          5
+           5           C1------A2  /    C1------A2 \  |->C1------A2       C1------A2          1
+           6   (7)     G1------A3 /     G1------A3  b/   G1------A3       G1------A3          2
+           7  buttom ->T1------A4/      T1------A4       T1------A4       T1------A4          4
                 top: 1st position of symbol among positions from top to bottom in Last Column
                 buttom: Last position of symbol among positions from top to bottoms in Last Column
 
@@ -3494,20 +3494,24 @@
         - It analyzes every symbol from top to bottom in each step!
         - It's slow!
 - Better BW Matching:
-    - We introduce *Count* array: *Count*(*symbol*, *i*, *LastColumn*)
-    - It contains the # of occurences of symbol in the first *i* positions of *LastColumn*
+    - We need to compute *FirstOccurrence(symbol)* array: 
+        - It contains for each *symbol* in the BWT *LastColumn* what is the 1st position of *symbol* in the *FirstColumn*
+        - (which is all the characters of LastColumn in the ascending order)
+    - We need to compute *Count* array: 
+        - *Count*(*symbol*, *i*, *LastColumn*)
+        - It contains the # of occurences of symbol in the first *i* positions of *LastColumn*
     - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`):
-    -           i   FirstColumn     LastColumn      LastToFirst(i)        Count
-                                                                        $ A C G T
-                0       $1              A1              1               0 0 0 0 0
-                1       A1              T1              7               0 1 0 0 0
-                2       A2              G1              6               0 1 0 0 1
-                3       A3              $1              0               0 1 0 1 1
-                4       A4              C1              5               1 1 0 1 1
-                5       C1              A2              2               1 1 1 1 1
-                6       G1              A3              3               1 2 1 1 1
-                7       T1              A4              4               1 3 1 1 1
-                                                                        1 4 1 1 1
+    -           i   FirstColumn     LastColumn     Count       FirstOccurrence
+                                                  $ A C G T      $ A C G T
+                0       $1              A1        0 0 0 0 0      0 1 5 6 7
+                1       A1              T1        0 1 0 0 0
+                2       A2              G1        0 1 0 0 1
+                3       A3              $1        0 1 0 1 1
+                4       A4              C1        1 1 0 1 1
+                5       C1              A2        1 1 1 1 1
+                6       G1              A3        1 2 1 1 1
+                7       T1              A4        1 3 1 1 1
+                                                  1 4 1 1 1
     -           BetterBWMatching(FirstColumn, LastColumn, Pattern, LastToFirst, Count):
                     top = 0
                     bottom = |LastColumn| - 1
@@ -3520,6 +3524,12 @@
                         else:
                             return bottom - top + 1
     - Running Time: ?
+        - To compute FirstOccurrence(symbol): **O(|*LastColumn*|+|Σ|)**
+            - Let |Σ| be the # of different characters that could occur in the LastColumn
+            - 1st, we need to get the **FirstColumn** by sorting characters of the LastColumn 
+            - We can avoid the logarithm of a standard sorting algorithms (O(|*LastColumn*| log|*LastColumn*|)) by using the **Counting Sort**
+            - Because there are only |Σ| different characters, the running time would be O(|LastColumn|+|Σ|)! 
+            - 2nd, we need only a table of size |Σ| and 1 pass through the *FirstColumn* to find and store the first occurrence of each symbol in the *FirstColumn*: (O(|LastColumn|))
 - Related Problems:
 - For more details:
     - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
@@ -3567,6 +3577,19 @@
     - [Swap 2 numbers without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/147)
     - [Single number withotu extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
     
+</details>
+
+<details>
+<summary>Counting Sort</summary>
+
+- It's an algorithm for sorting a collection of objects according to keys that are small integers
+- Implementation, Time Complexity and Operations:
+    - Time Complexity: O(|Array|)
+- Related Problems:
+    - Better Burrows-Wheeler matching
+- For more details:
+    - [Counting Sort](https://en.wikipedia.org/wiki/Counting_sort)
+
 </details>
 
 ---
