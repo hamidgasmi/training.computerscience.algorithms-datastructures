@@ -3493,6 +3493,33 @@
     - Running Time: ?
         - It analyzes every symbol from top to bottom in each step!
         - It's slow!
+- Better BW Matching:
+    - We introduce *Count* array: *Count*(*symbol*, *i*, *LastColumn*)
+    - It contains the # of occurences of symbol in the first *i* positions of *LastColumn*
+    - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`):
+    -           i   FirstColumn     LastColumn      LastToFirst(i)        Count
+                                                                        $ A C G T
+                0       $1              A1              1               0 0 0 0 0
+                1       A1              T1              7               0 1 0 0 0
+                2       A2              G1              6               0 1 0 0 1
+                3       A3              $1              0               0 1 0 1 1
+                4       A4              C1              5               1 1 0 1 1
+                5       C1              A2              2               1 1 1 1 1
+                6       G1              A3              3               1 2 1 1 1
+                7       T1              A4              4               1 3 1 1 1
+                                                                        1 4 1 1 1
+    -           BetterBWMatching(FirstColumn, LastColumn, Pattern, LastToFirst, Count):
+                    top = 0
+                    bottom = |LastColumn| - 1
+                    while top <= bottom:
+                        if Pattern is nonempty:
+                            symbol = last letter in Pattern
+                            remove last letter from Pattern
+                            top = FirstOccurence(symbol) + Count(symbol, top, LastColumn)
+                            bottom = FirstOccurence(symbol) + Count(symbol, bottom + 1, LastColumn) - 1
+                        else:
+                            return bottom - top + 1
+    - Running Time: ?
 - Related Problems:
 - For more details:
     - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
