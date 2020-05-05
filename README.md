@@ -3315,8 +3315,8 @@
         - **It's memory effecient**
     - **Big-O notation hides constants!**
         - Suffix tree algorithm has large memory footprint
-        - The best known implementation of suffix tree has large memory footprints of ~20*|Text|
-        - It's a very large memory requirement for long texts like human genomes
+        - The best known implementation of suffix tree has **large memory** footprints of **~20 x |*Text*|**
+        - It's a very large memory requirement for long texts like human genomes which **|*Text*| ~ 3x10^9**
 - Exact Pattern Matches:
     - Time Complexity: **O(|*Text*| + |*Patterns*|)**
         - 1st we need O(|*Text*|) to build the suffix tree 
@@ -3450,6 +3450,49 @@
 <details>
 <summary>Burrows-Wheeler Transform: Pattern Matching</summary>
 
+- BW Matching:
+    - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`):
+    - Let's search for `ACA`
+    - 1st. Search for the last `A` in the 1st column (`A1`--`A4`)
+    - 2nd. Use the First-Last Property: Select all the `A`s that hide behind `C` (rows whom last column is `C`)
+    - 3rd. Branch to all the rows whom 1st column is one of the `C`s selected above: (`C1`)
+    - 3rd. Use the First-Last Property: Select all the `C`s that hide behind `A` (rows whom last column is `A`)
+    - 4rd. Branch to all the rows whom 1st column is one of the `A`s selected above: (`C1`)
+    -          1st. Step            2. Step            3. Step            4. Step
+               top -->$1------A1\        $1------A1        $1------A1        $1------A1
+                (0)   A1------T1 \__t -->A1------T1_       A1------T1     t  A1------T1
+                      A2------G1         A2------G1 \      A2------G1   ---> A2------G1
+           1st.       A3------$1    2nd  A3------$1  t     A3------$1  /  b  A3------$1
+                      A4------C1   _b -->A4------C1_  \    A4------C1 /      A4------C1
+                      C1------A2  /      C1------A2 \  |-->C1------A2        C1------A2
+             (7)      G1------A3 /       G1------A3  b/    G1------A3        G1------A3
+            buttom -->T1------A4/        T1------A4        T1------A4        T1------A4
+                top: 1st position of symbol among positions from top to bottom in Last Column
+                buttom: Last position of symbol among positions from top to bottoms in Last Column
+
+    -           BWMatching(FirstColumn, LastColumn, Pattern, LastToFirst):
+                    top = 0
+                    bottom = |LastColumn| - 1
+                    while top <= bottom:
+                        if Pattern is nonempty:
+                            symbol = last letter in Pattern
+                            remove last letter from Pattern
+                            if positions from top to bottom in LastColumn contain symbol:
+                                topIndex = 1st position of symbol among positions from top to bottom in LastColumn
+                                bottomIndex = last position of symbol among positions from top to bottom in LastColumn
+                                top = LastToFirst(topIdex)
+                                bottom = LastToFirst(bottomIndex)
+                            else:
+                                return 0
+                        else:
+                            return bottom - top + 1
+
+                LastToFirst(Index):
+                    Given a symbol at position index in LastColumn,
+                    It defines the position of this symbol in FirstColumn
+    - Running Time: ?
+        - It analyzes every symbol from top to bottom in each step!
+        - It's slow!
 - Related Problems:
 - For more details:
     - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
