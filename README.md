@@ -3355,18 +3355,20 @@
     - *Text* <---> BWT-Text = BWT(*Text*) <---> Compression(*BWT-Text*)
 - BWT:
     - From *Text* to BWT: *Text* ---> *BWT-Text* ---> Compressed *BWT-Text*
-    - Forming All Cyclic Rotations of a text ---> Sorting Cyclic Rotations ---> String last column
+    - 1st. Form all cyclic rotations of a text by chopping off a suffix from the end of *Text* and appending it to the beginning of *Text*
+    - 2nd. Sort all cyclic rotations of *Text* lexicographically to form a |*Text*| x |*Text*| matrix ***M(Text)***
+    - 3rd. Extract the last column from *M(Text)*. It's ***BWT(Text)***
     - E.g. `AGACATA$`:
-    -                                v
-            AGACATA$          $AGACATA
-            GACATA$A          A$AGACAT
-            ACATA$AG Sorting  ACATA$AG    BWT:            Compression
-            CATA$AGA -------> AGACATA$ --------> ATG$CAAA ------------> ATG$C3A
-            ATA$AGAC  $ 1st   ATA$AGAC  Strings            Run-Length
-            TA$AGACA          CATA$AGA   last              Encoding
-            A$AGACAT          GACATA$A   column
-            $AGACATA          TA$AGACA
-                                     ^
+    -       Cyclic Rotations:      M(Text)          BWT(Text)               Compressed BWT(Text):
+                AGACATA$          $AGACATA
+                $AGACATA          A$AGACAT
+                A$AGACAT Sorting  ACATA$AG  Extract            Compression
+                TA$AGACA -------> AGACATA$ --------> ATG$CAAA ------------> ATG$C3A
+                ATA$AGAC  $ 1st   ATA$AGAC   last               Run-Length
+                CATA$AGA          CATA$AGA   column              Encoding
+                ACATA$AG          GACATA$A   
+                GACATA$A          TA$AGACA
+                                         ^
 - Inverting BWT (1st version):
     - From Compressed BWT to the original text
     - Compressed(BWT-Text) ---> BWT-Text ---> Text
