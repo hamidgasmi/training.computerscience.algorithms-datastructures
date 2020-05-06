@@ -3442,6 +3442,8 @@
     - Running Time: **O(|*Text*|)**
     - Space Complexity: 2 |*Text*) = **O(|*Text*|)**
 - Related Problems:
+    - [Construct the Burrows–Wheeler Transform of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/159)
+    - [Reconstruct a String from its Burrows–Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/162)
 - For more details:
     - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
@@ -3458,38 +3460,37 @@
     - 3rd. Branch to all the rows whom 1st column is one of the `C`s selected above: (`C1`)
     - 3rd. Use the First-Last Property: Select all the `C`s that hide behind `A` (rows whom last column is `A`)
     - 4rd. Branch to all the rows whom 1st column is one of the `A`s selected above: (`C1`)
-    -      i     1st. Step              2. Step          3. Step          4. Step       LastToFirst(i)
-           0     top ->$1------A1\      $1------A1       $1------A1       $1------A1          1
-           1     (0)   A1------T1 \_t ->A1------T1_      A1------T1    t  A1------T1          7
-           2           A2------G1       A2------G1 \     A2------G1   --> A2------G1          6
-           3           A3------$1       A3------$1  t    A3------$1  / b  A3------$1          0
-           4           A4------C1   _b->A4------C1   \   A4------C1 /     A4------C1          5
-           5           C1------A2  /    C1------A2 \  |->C1------A2       C1------A2          1
-           6   (7)     G1------A3 /     G1------A3  b/   G1------A3       G1------A3          2
-           7  buttom ->T1------A4/      T1------A4       T1------A4       T1------A4          4
+    -      i   LastToFirst     1st. Step              2. Step          3. Step          4. Step       
+           0       1           top ->$1------A1\      $1------A1       $1------A1       $1------A1
+           1       7                 A1------T1 \_t ->A1------T1_      A1------T1    t  A1------T1
+           2       6                 A2------G1       A2------G1 \     A2------G1   --> A2------G1
+           3       0                 A3------$1       A3------$1  t    A3------$1  / b  A3------$1
+           4       5                 A4------C1   _b->A4------C1   \   A4------C1 /     A4------C1
+           5       1                 C1------A2  /    C1------A2 \  |->C1------A2       C1------A2
+           6       2                 G1------A3 /     G1------A3  b/   G1------A3       G1------A3
+           7       4        buttom ->T1------A4/      T1------A4       T1------A4       T1------A4
                 top: 1st position of symbol among positions from top to bottom in Last Column
                 buttom: Last position of symbol among positions from top to bottoms in Last Column
-
-    -           BWMatching(FirstColumn, LastColumn, Pattern, LastToFirst):
-                    top = 0
-                    bottom = |LastColumn| - 1
-                    while top <= bottom:
-                        if Pattern is nonempty:
-                            symbol = last letter in Pattern
-                            remove last letter from Pattern
-                            if positions from top to bottom in LastColumn contain symbol:
-                                topIndex = 1st position of symbol among positions from top to bottom in LastColumn
-                                bottomIndex = last position of symbol among positions from top to bottom in LastColumn
-                                top = LastToFirst(topIdex)
-                                bottom = LastToFirst(bottomIndex)
-                            else:
-                                return 0
+    -      BWMatching(FirstColumn, LastColumn, Pattern, LastToFirst):
+                top = 0
+                bottom = |LastColumn| - 1
+                while top <= bottom:
+                    if Pattern is nonempty:
+                        symbol = last letter in Pattern
+                        remove last letter from Pattern
+                        if positions from top to bottom in LastColumn contain symbol:
+                            topIndex = 1st position of symbol among positions from top to bottom in LastColumn
+                            bottomIndex = last position of symbol among positions from top to bottom in LastColumn
+                            top = LastToFirst(topIdex)
+                            bottom = LastToFirst(bottomIndex)
                         else:
-                            return bottom - top + 1
+                            return 0
+                    else:
+                        return bottom - top + 1
 
-                LastToFirst(Index):
-                    Given a symbol at position index in LastColumn,
-                    It defines the position of this symbol in FirstColumn
+            LastToFirst(Index):
+                Given a symbol at position index in LastColumn,
+                It defines the position of this symbol in FirstColumn
     - Running Time: ?
         - It analyzes every symbol from top to bottom in each step!
         - It's slow!
@@ -3501,28 +3502,28 @@
         - *Count*(*symbol*, *i*, *LastColumn*)
         - It contains the # of occurences of symbol in the first *i* positions of *LastColumn*
     - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`):
-    -           i   FirstColumn     LastColumn     Count       FirstOccurrence
-                                                  $ A C G T      $ A C G T
-                0       $1              A1        0 0 0 0 0      0 1 5 6 7
-                1       A1              T1        0 1 0 0 0
-                2       A2              G1        0 1 0 0 1
-                3       A3              $1        0 1 0 1 1
-                4       A4              C1        1 1 0 1 1
-                5       C1              A2        1 1 1 1 1
-                6       G1              A3        1 2 1 1 1
-                7       T1              A4        1 3 1 1 1
-                                                  1 4 1 1 1
-    -           BetterBWMatching(FirstColumn, LastColumn, Pattern, LastToFirst, Count):
-                    top = 0
-                    bottom = |LastColumn| - 1
-                    while top <= bottom:
-                        if Pattern is nonempty:
-                            symbol = last letter in Pattern
-                            remove last letter from Pattern
-                            top = FirstOccurence(symbol) + Count(symbol, top, LastColumn)
-                            bottom = FirstOccurence(symbol) + Count(symbol, bottom + 1, LastColumn) - 1
-                        else:
-                            return bottom - top + 1
+    -       i   FirstColumn     LastColumn     Count       FirstOccurrence
+                                              $ A C G T      $ A C G T
+            0       $1              A1        0 0 0 0 0      0 1 5 6 7
+            1       A1              T1        0 1 0 0 0
+            2       A2              G1        0 1 0 0 1
+            3       A3              $1        0 1 0 1 1
+            4       A4              C1        1 1 0 1 1
+            5       C1              A2        1 1 1 1 1
+            6       G1              A3        1 2 1 1 1
+            7       T1              A4        1 3 1 1 1
+                                              1 4 1 1 1
+    -       BetterBWMatching(FirstColumn, LastColumn, Pattern, LastToFirst, Count):
+                top = 0
+                bottom = |LastColumn| - 1
+                while top <= bottom:
+                    if Pattern is nonempty:
+                        symbol = last letter in Pattern
+                        remove last letter from Pattern
+                        top = FirstOccurence(symbol) + Count(symbol, top, LastColumn)
+                        bottom = FirstOccurence(symbol) + Count(symbol, bottom + 1, LastColumn) - 1
+                    else:
+                        return bottom - top + 1
     - Running Time: ?
         - To compute FirstOccurrence(symbol): **O(|*LastColumn*|+|Σ|)**
             - Let |Σ| be the # of different characters that could occur in the LastColumn
@@ -3531,6 +3532,7 @@
             - Because there are only |Σ| different characters, the running time would be O(|LastColumn|+|Σ|)! 
             - 2nd, we need only a table of size |Σ| and 1 pass through the *FirstColumn* to find and store the first occurrence of each symbol in the *FirstColumn*: (O(|LastColumn|))
 - Related Problems:
+    - [Matching Against a Compressed String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/161)
 - For more details:
     - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
