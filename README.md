@@ -3588,6 +3588,30 @@
                  Pos(A3) = Pos($1) + 1 = 8 = 0
                  Pos(G1) = Pos(A3) + 1 = 1
                  Pos(A2) = Pos(G1) + 1 = 2
+        -       SuffixArray_PatternMatching(Text, Pattern, SuffixArray):
+                    minIndex = 0
+                    maxIndex = |Text|
+                    While mindIndex < maxIndex:
+                        midIndex = (minIndex + maxIndex) // 2
+                        if Pattern > Suffix of Text starting at position SuffixArray(midIndex):
+                            minIndex = midIndex + 1
+                        else:
+                            maxIndex = midIndex
+                    start = minIndex
+
+                    maxIndex = |Text|
+                    While mindIndex < maxIndex:
+                        midIndex = (minIndex + maxIndex) // 2
+                        if Pattern < Suffix of Text starting at position SuffixArray(midIndex):
+                            maxIndex = midIndex
+                        else:
+                            minIndex = midIndex + 1
+                    end = maxIndex
+
+                    if start > end:
+                        return "Pattern does not appear in Text"
+                    else:
+                        return (start, end)
         - Space Complexity: ~4/K x |*Text*| space with Manber-Myers algorithm
         - Matching Pattern running Time: 
             - It's multiplied by x *K*
@@ -3602,7 +3626,7 @@
     -                         Mismatch #              Mismatch #              Mismatch #   Array Suffix
                  $1------A1              $1------A1              $1------A1                  7
              t ->A1------T1      1       A1------T1              A1------T1                  6_
-                 A2------G1      1       A2------G1           t->A2------G1      0           2  \
+                 A2------G1      1       A2------G1          t ->A2------G1      0           2  \
                  A3------$1      1       A3------$1              A3------$1      1           0   | Approx. Match
              b ->A4------C1      0       A4------C1          b ->A4------C1      1           4_ /  at {0, 2, 4}
                  C1------A2          t ->C1------A2       0      C1------A2                  3
