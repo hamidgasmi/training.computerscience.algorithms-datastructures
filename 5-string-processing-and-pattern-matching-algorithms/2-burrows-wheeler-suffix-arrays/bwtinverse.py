@@ -1,4 +1,3 @@
-# python3
 import sys
 
 class Burrows_Wheeler_Inverse:
