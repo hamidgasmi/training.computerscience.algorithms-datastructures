@@ -3150,12 +3150,12 @@
 ## String Processing and Pattern Matching Algorithms
 
 <details>
-<summary>Trie: Multiple Pattern Matching</summary>
+<summary>Trie: Multiple Exact Pattern Matching</summary>
 
-- Multiple Patterns Matching:
-    - Where do billions of string patterns (reads) match a string Text (reference genome)?
+- Multiple Exact Patterns Matching:
+    - Where do billions of string patterns (reads) match a string *Text* (reference genome)?
     - Input: A set of strings Patterns and a string Text
-    - Output: All positions in Text where a string from Patterns appears as a substring
+    - Output: All positions in *Text* where a string from *Patterns* appears as a substring
 - Implementation, Time Complexity and Operations:
     - For a collection of strings *Patterns*, *Trie*(*Patterns*) is defined as follows:
         - The trie has a single root node with indegree 0
@@ -3227,7 +3227,7 @@
 </details>
 
 <details>
-<summary>Suffix Trie: Multiple Pattern Matching</summary>
+<summary>Suffix Trie: Multiple Exact Pattern Matching</summary>
 
 - It's denoted ***SuffixTrie(Text)***
     - It's the trie formed from all suffixes of *Text*
@@ -3290,7 +3290,7 @@
 </details>
 
 <details>
-<summary>Suffix Tree: Multiple Pattern Matching</summary>
+<summary>Suffix Tree: Multiple Exact Pattern Matching</summary>
 
 - It's a compression of suffix-trie
     - From the suffix-trie above, transform each branch to it word
@@ -3320,7 +3320,7 @@
 - Exact Pattern Matches:
     - Time Complexity: **O(|*Text*| + |*Patterns*|)**
         - 1st we need O(|*Text*|) to build the suffix tree 
-        - 2nd for each pattern *Pattern* in *Patterns* we need additional O(|*Pattern*|) to match this pattern against the Text 
+        - 2nd for each pattern *Pattern* in *Patterns* we need additional O(|*Pattern*|) to match this pattern against the *Text* 
         - The total time for all the patterns is: O(|*Patterns*|), 
         - The overall running time: O(|*Text*|+|*Patterns*|)
     - Space Complexity:
@@ -3352,9 +3352,9 @@
 - It's also called **block-sorting compression**
     - It rearranges a character string into runs of similar characters
     - It's usefull for compression
-    - Text <---> BWT-Text = BWT(Text) <---> Compression(BWT-Text)
+    - *Text* <---> BWT-Text = BWT(*Text*) <---> Compression(*BWT-Text*)
 - BWT:
-    - From Text to BWT: Text ---> BWT-Text ---> Compressed BWT-Text
+    - From *Text* to BWT: *Text* ---> *BWT-Text* ---> Compressed *BWT-Text*
     - Forming All Cyclic Rotations of a text ---> Sorting Cyclic Rotations ---> String last column
     - E.g. `AGACATA$`:
     -                                v
@@ -3452,6 +3452,7 @@
 <details>
 <summary>Burrows-Wheeler Transform: Pattern Matching</summary>
 
+- It doesn't return the position in *Text* where *Pattern* is matching *Text*
 - BW Matching:
     - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`):
     - Let's search for `ACA`
@@ -3539,10 +3540,76 @@
 </details>
 
 <details>
-<summary>Suffix Arrays</summary>
+<summary>Suffix Arrays: Pattern Matching</summary>
 
-- Implementation, Time Complexity and Operations:
+- **Suffix Arrays**: It holds starting position of each suffix beginning a row
+    - E.g. `AGACATA$`:
+    -       Array Suffix:    BW Matrix:
+                7             $AGACATA
+                6             A$AGACAT
+                2             ACATA$AG
+                0             AGACATA$
+                4             ATA$AGAC
+                3             CATA$AGA
+                1             GACATA$A
+                5             TA$AGACA
+    - Implementation: DFS traversal of the corresponding Suffix Tree 
+    - Space and Time Complexities: 
+        - DFS traversal of a suffix tree: O(|*Text*|) time and ~20 x |*Text*| (see Suffix Tree section, above)
+        - Manber-Myers algorithm (1990): O(|*Text*|) time and ~4 x |*Text*| space
+        - Memory footprint is still large (for human genome, particularly)!
+- Exact Pattern Matching:
+    - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`) and Pattern: `ACA`
+    -       Array Suffix:     
+                 7      top     $1-----A1
+                 6        \     A1-----T1
+                 2          --> A2-----G1
+                 0        /     A3-----$1
+                 4      bott    A4-----C1
+                 3              C1-----A2
+                 1              G1-----A3
+                 5              T1-----A4
+    - To reduce the memory footprint:
+        - 1st. We could keep in the suffix array values that are multiples of some integer *K*
+        - 2nd. Use First-Last Property to find the position of the pattern
+        - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`), Pattern: `ACA`, and `K = 5`
+        -       Suffix Array:     
+                 _     top     $1-----A1 4. Not in Suffix Array but Pos($1) = Pos(A1) + 1
+                 _       \     A1-----T1 5. Not in Suffix Array but Pos(A1) = Pos(T1) + 1
+                 _         --> A2-----G1 1. Not in Suffix Array but we know that Pos(A2) = Pos(G1) + 1
+                 0       /     A3-----$1 3. Not in Suffix Array but Pos(A3) = Pos($1) + 1
+                 _     bott    A4-----C1
+                 _             C1-----A2
+                 _             G1-----A3 2. Not in Suffix Array but Pos(G2) = Pos(A3) + 1
+                 5             T1-----A4 6. Pos(T1) = 5
+                 Pos(T1) = 5
+                 Pos(A1) = Pos(T1) + 1 = 6
+                 Pos($1) = Pos(A1) + 1 = 7
+                 Pos(A3) = Pos($1) + 1 = 8 = 0
+                 Pos(G1) = Pos(A3) + 1 = 1
+                 Pos(A2) = Pos(G1) + 1 = 2
+        - Space Complexity: ~4/K x |*Text*| space with Manber-Myers algorithm
+        - Matching Pattern running Time: 
+            - It's multiplied by x *K*
+            - But since *K* is a constant, the running time unchanged
+- Approximate Pattern Matching:
+    - Input: A string *Pattern*, a string *Text*, and an integer *d*
+    - Output: All positions in *Text* where the string *Pattern* appears as a substring with at most *d* mismatches
+- Multiple Approximate Pattern Matching:
+    - Input: A set of strings *Patterns*, a string *Text*, and an integer *d*
+    - Output: All positions in *Text* where a string from *Patterns* appears as a substring with at most *d* mismatches
+    - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`) and *Pattern*: `ACA` and *d*: 1
+    -                         Mismatch #              Mismatch #              Mismatch #   Array Suffix
+                 $1------A1              $1------A1              $1------A1                  7
+             t ->A1------T1      1       A1------T1              A1------T1                  6_
+                 A2------G1      1       A2------G1           t->A2------G1      0           2  \
+                 A3------$1      1       A3------$1              A3------$1      1           0   | Approx. Match
+             b ->A4------C1      0       A4------C1          b ->A4------C1      1           4_ /  at {0, 2, 4}
+                 C1------A2          t ->C1------A2       0      C1------A2                  3
+                 G1------A3              G1------A3       1      G1------A3                  1
+                 T1------A4          b ->T1------A4       1      T1------A4                  5
 - Related Problems:
+    - [Construct the Suffix Array of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/160)
 - For more details:
     - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
