@@ -3359,7 +3359,7 @@
     - 2nd. Sort all cyclic rotations of *Text* lexicographically to form a |*Text*| x |*Text*| matrix ***M(Text)***
     - 3rd. Extract the last column from *M(Text)*. It's ***BWT(Text)***
     - E.g. `AGACATA$`:
-    -       Cyclic Rotations:      M(Text)          BWT(Text)               Compressed BWT(Text):
+    -       Cyclic Rotations:     M(Text):          BWT(Text):              Compressed BWT(Text):
                 AGACATA$          $AGACATA
                 $AGACATA          A$AGACAT
                 A$AGACAT Sorting  ACATA$AG  Extract            Compression
@@ -3369,6 +3369,8 @@
                 ACATA$AG          GACATA$A   
                 GACATA$A          TA$AGACA
                                          ^
+    - Running Time:
+        - Cycle Rotation: O(|*Text*|^2)
 - Inverting BWT (1st version):
     - From Compressed BWT to the original text
     - Compressed(BWT-Text) ---> BWT-Text ---> Text
