@@ -25,13 +25,16 @@ class Suffix_Tree_Genome:
         while i < len_limit and self.text[edge.start + i] == self.text[suffix_starting_pos + i]:
             common_len += 1
             i += 1
+        
+        if common_len < len_limit or self.text_len - suffix_starting_pos <= len_limit:
 
-        if self.text_len - suffix_starting_pos <= len_limit:
             return(node, child_index, 0, common_len)
 
         else:
+
             (node_parent, child_index, parent_len, child_common_len) = self.search_edge_to_break(edge.child, suffix_starting_pos + common_len)
             return(node_parent, child_index, parent_len + common_len, child_common_len)
+        
 
     def build_suffix_tree(self):
         
@@ -50,7 +53,7 @@ class Suffix_Tree_Genome:
             suffix_text_len = self.text_len - i
 
             (parent, node_index, parent_len, common_len) = self.search_edge_to_break(0, i)
-            #print(parent, node_index, parent_len, common_len, self.nodes)
+
             if common_len > 0:
                 
                 edge_to_break = self.nodes[parent][node_index]
