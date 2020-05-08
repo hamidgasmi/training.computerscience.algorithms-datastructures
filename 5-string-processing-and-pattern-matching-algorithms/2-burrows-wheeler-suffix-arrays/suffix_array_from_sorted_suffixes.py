@@ -2,10 +2,8 @@ import sys
 
 def naive_solution(text):
 
-    suffix_list = []
-    for i in range(len(text)):
-        suffix_list.append(i)
-
+    suffix_list = [i for i in range(len(text))]
+    
     suffix_list.sort(key=lambda i: text[i:])
 
     return suffix_list
