@@ -3711,7 +3711,7 @@
                             ^0
         - In fact, let's suppose *Pattern* occurs in *Text* in position *i* between *k* and start of suffix *w*
         -                   k____________i__Text(k)____________
-        -                   |            | k + |u| - |w|       |
+                            |            | k + |u| - |w|       |
                 Text :   ___|_w_|_____u____|_w_|_______________|
                 Pattern:                 |__v__|____u________|___
                                          0     ^ |u| - i
