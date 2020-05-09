@@ -3651,19 +3651,52 @@
     - Output: All such positions in *Text* where *Pattern* appears as substring
 - It consists of:
     - Sliding *Pattern* down *Text* (naive approach) and
-    - Skipping skipping positions of texts
+    - Skipping skipping positions of *Text*
     - E.g. 1. *Pattern*: abra *Text*: abracadabra
-    -       abracadabra          abracadabra      abracadabra     abracadabra
-            abra        ---+3-->    abra     -+2->     abra  -+2->       abra
-            Match       Skip Pos  No Match          No Match        Match
-                         (1, 2)
+    -       abracadabra
+            abra        Match
+             abra       Sliding by 1 positin doesn't make sense as in the naive approach
+                        It's like comparing the pattern to its substring starting at position 1
+                        We already knew that Pos[1] is different to Pattern[1]
+            The idea is to skip positions
+    -       Shift Text/Pattern   Match  Longest Common Prefix
+                  abracadabra   
+             -    abra            Yes    abra
+             +3      abra         No     a
+             +2        abra       No     a
+             +2          abra     Yes    abra
     - E.g. 2. *Pattern*: abcdabef *Text*: abcdabcdabef
-    -       abcdabcdabef        abcdabcdabef
-            abcdabef    --+4-->     abcdabef
-             No Match             Match
+    -       Shift Text/Pattern   Match  Longest Common Prefix
+    -             abcdabcdabef   
+             -    abcdabef        No     abcdab
+             +4       abcdabef    Yes    abcdabef
     - E.g. 3. *Pattern*: abababef *Text*: abababababef
-    -       abababababef        abababababef       abababababef
-            abababef    --+2-->   abababef  --+2-->    abababef
+    -       Shift Text/Pattern   Match  Longest Common Prefix
+    -             abababababef   
+             -    abababef        No     ababab
+             +2     abababef      No     ababab
+             +2       abababef    Yes    abababef
+- **Border** of string *S* is a **prefix** of *S* which is equal to a **suffix** of *S*, but **not equal** to the whole *S*
+    - E.g. 1. "a" is a border of "arba"
+    - E.g. 2. "ab" is a border of "abcdab"
+    - E.g. 3. "abab" is a border of "ababab"
+    - E.g. 4. "ab" is a border of "ab"
+- Shifting Pattern:
+    - 1st. Find the longest common prefix *u* in *Text* and *Pattern* at a given position i
+    -                   i
+            Text :   ___|_________u________|_______________
+            Pattern:    |_________u________|___
+                        ^0
+    - 2nd. Find the longest border *w* of *u*
+    -                   i
+            Text :   ___|_w_|_____u____|_w_|_______________
+            Pattern:    |_w_|_____u____|_w_|___
+                        ^0
+    - 3rd. Move *Pattern* such that prefix *w* in *Pattern* aligns with suffix *w* of *u* in *Text*
+    -                   i------------->i'
+            Text :   ___|_w_|_____u____|_w_|_______________
+            Pattern:    ^------------->|_w_|_____u____|_w_|___
+                                       ^0
 - Implementation, Time Complexity and Operations:
     - Running Time: 
         - Single pattern matching: O(|*Text*| + |*Pattern*|)
