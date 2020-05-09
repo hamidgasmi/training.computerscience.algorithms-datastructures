@@ -3646,10 +3646,43 @@
 <details>
 <summary>Knuth-Morris-Pratt Algorithm</summary>
 
+- It's an exact pattern matching algorithm:
+    - Input: String *Text* and a pattern *P*
+    - Output: All such positions in *Text* where *Pattern* appears as substring
+- It consists of:
+    - Sliding *Pattern* down *Text* (naive approach) and
+    - Skipping skipping positions of texts
+    - E.g. 1. *Pattern*: abra *Text*: abracadabra
+    -       abracadabra          abracadabra      abracadabra     abracadabra
+            abra        ---+3-->    abra     -+2->     abra  -+2->       abra
+            Match       Skip Pos  No Match          No Match        Match
+                         (1, 2)
+    - E.g. 2. *Pattern*: abcdabef *Text*: abcdabcdabef
+            abcdabcdabef        abcdabcdabef
+            abcdabef    --+4-->     abcdabef
+              No Match             Match
 - Implementation, Time Complexity and Operations:
+    - Running Time: 
+        - Single pattern matching: O(|*Text*| + |*Pattern*|)
+        - For multiple patterns matching: O(# of pattern x |*Text*| + |*Patterns*|): it's not as interesting as BWT approach
 - Related Problems:
 - For more details:
-    - UC San Diego Course:[]()
+    - UC San Diego Course:[Knuth-Morris-Pratt Algorithm](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/3-knuth-morris-pratt-algorithm/03_algorithmic_challenges_1_knuth_morris_pratt.pdf)
+    - Visualization: [Knuth-Morris-Pratt Algorithm](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
+
+</details>
+
+<details>
+<summary>Rabin-Karp's Algorithm Algorithm</summary>
+
+- It's an exact a single pattern matching algorithm:
+    - Input: String *Text* and a pattern *P*
+    - Output: All such positions in *Text* where *Pattern* appears as substring
+- Implementation, Time Complexity and Operations:
+    - Running Time: 
+        - Single pattern matching: O(|*Text*|)
+        - For multiple patterns matching: O(# of pattern x |*Text*|): it's slower than Suffix Tree or BWT approach (O(|*Text*| + |*Patterns*|))
+- See Hashing above
 
 </details>
 
