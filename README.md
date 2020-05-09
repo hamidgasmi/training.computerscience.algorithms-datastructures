@@ -3658,9 +3658,12 @@
             Match       Skip Pos  No Match          No Match        Match
                          (1, 2)
     - E.g. 2. *Pattern*: abcdabef *Text*: abcdabcdabef
-            abcdabcdabef        abcdabcdabef
+    -       abcdabcdabef        abcdabcdabef
             abcdabef    --+4-->     abcdabef
-              No Match             Match
+             No Match             Match
+    - E.g. 3. *Pattern*: abababef *Text*: abababababef
+    -       abababababef        abababababef       abababababef
+            abababef    --+2-->   abababef  --+2-->    abababef
 - Implementation, Time Complexity and Operations:
     - Running Time: 
         - Single pattern matching: O(|*Text*| + |*Pattern*|)
