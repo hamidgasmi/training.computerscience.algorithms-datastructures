@@ -3667,12 +3667,12 @@
              +2          abra     Yes    abra
     - E.g. 2. *Pattern*: abcdabef *Text*: abcdabcdabef
     -       Shift Text/Pattern   Match  Longest Common Prefix
-    -             abcdabcdabef   
+                  abcdabcdabef   
              -    abcdabef        No     abcdab
              +4       abcdabef    Yes    abcdabef
     - E.g. 3. *Pattern*: abababef *Text*: abababababef
     -       Shift Text/Pattern   Match  Longest Common Prefix
-    -             abababababef   
+                  abababababef   
              -    abababef        No     ababab
              +2     abababef      No     ababab
              +2       abababef    Yes    abababef
