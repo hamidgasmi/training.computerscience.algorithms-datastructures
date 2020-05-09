@@ -3697,27 +3697,27 @@
             Text :   ___|_w_|_____u____|_w_|_______________
             Pattern:    ^------------->|_w_|_____u____|_w_|___
                                        ^0
-    - This choice is safe, in fact:
+    - This choice is safe: we'll prove by contradiction:
         - Let's denote *Text(k)* the suffix of string *Text* that is starting at position *k*
             - *Text* = "abcd" => *Text(2)* = "cd"
             - *Text* = "abc" => *Text(0)* = "abc"
             - *Text* = "a" => *Text(1)* = "a"
         - There are no occurrences of *Pattern* in *Text* starting between positions *k* and (*k* + |*u*| − |*w*|)
         - (*k* + |*u*| − |*w*|) is the start of suffix *w* in the prefix *u* of *Text(k)*
-        -               k_______________Text(k)____________
-        -               |              k + |u| - |w|       |
-            Text :   ___|_w_|_____u____|_w_|_______________|
-            Pattern:    |_w_|_____u____|_w_|___
-                        ^0
+        -                   k_______________Text(k)____________
+                            |              k + |u| - |w|       |
+                Text :   ___|_w_|_____u____|_w_|_______________|
+                Pattern:    |_w_|_____u____|_w_|___
+                            ^0
         - In fact, let's suppose *Pattern* occurs in *Text* in position *i* between *k* and start of suffix *w*
-        -               k____________i__Text(k)____________
-        -               |            | k + |u| - |w|       |
-            Text :   ___|_w_|_____u____|_w_|_______________|
-            Pattern:                 |__v__|____u________|___
-                                     0     ^ |u| - i
-                                     v = Text[i:k + |u|] is a suffix of u in Text
-                                     v is longer than w (|v| > |w|)
-                                     v = Pattern[0:|u| - i + 1] is a prefix of Pattern
+        -                   k____________i__Text(k)____________
+        -                   |            | k + |u| - |w|       |
+                Text :   ___|_w_|_____u____|_w_|_______________|
+                Pattern:                 |__v__|____u________|___
+                                         0     ^ |u| - i
+                            v = Text[i:k + |u|] is a suffix of u in Text
+                            v is longer than w (|v| > |w|)
+                            v = Pattern[0:|u| - i + 1] is a prefix of Pattern
         - Then there is prefix *v* of *Pattern* equal to suffix in *u*, and *v* is longer than *w* (see above)                            
         - This is a contradiction: *v* is a border longer than *w*, but *w* is te longest border of *u*
 - Implementation, Time Complexity and Operations:
