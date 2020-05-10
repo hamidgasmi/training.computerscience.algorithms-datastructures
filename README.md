@@ -477,6 +477,7 @@
     - [Money change problem: Greedy vs. Recursive vs. Dynamic Programming](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_1_changeproblem.pdf)
     - [Dynamic Programming](https://www.geeksforgeeks.org/dynamic-programming/) in geeksforgeeks
     - [Dynamic Programming](https://www.radford.edu/~nokie/classes/360/dynprog.html)
+    - Leetcode Post: [Dynamic Programming Patterns](https://en.wikipedia.org/wiki/Counting_sort)
 
 </details>
 
@@ -3725,7 +3726,7 @@
     - It's precalculated in advance and its values *s(i)* are stored in an array *s* of length |*Pattern*|
     - E.g. *Pattern*: abababcaab
     -       Pattern: a b a b a b c a a b
-                      s: 0 0 1 2 3 4 0 1 1 2
+                  s: 0 0 1 2 3 4 0 1 1 2
     - *Pattern*[0 : *i*] has a border of length **s(i + 1) − 1**
     -                    ___w__      ___w___
                         /      \    /       \             
@@ -3762,13 +3763,13 @@
     -       Pattern: |b3|_|b3|_|b3|_|b3|___|b3|_|b3|_|b3|_|b3|
                      \__b2___/ \__b2___/   \                 /
                       \______b1_______/     \______b1_______/
-    - s(0) = 0
-    - if *Pattern*[ *s*(*i*) ] = *Pattern*[ i + 1 ], then *s*(*i* + 1) = *s*(*i*) + 1
+    - `s(0) = 0`
+    - `if Pattern[s(i)] = Pattern[i+1], then s(i+1) = s(i) + 1`
     -                 _s(i)_       _s(i)_   i+1
                      /      \     /      \ /
             Pattern: |______|x____|______|x__
                      \_s(i+1)/    \_s(i+1)/     
-    - if *Pattern*[ *s*(*i*) ] != *Pattern*[ i + 1 ], then *s*(*i* + 1) = |some border of *Pattern*[0 : *s*(*i*) - 1] + 1
+    - `if Pattern[s(i)] != Pattern[i+1], then s(i+1) = |some border of Pattern[0:s(i)-1] + 1`
     -                 _s(i)_       _s(i)_   i+1
                      /      \     /      \ /
             Pattern: |______|y____|______|x__
@@ -3841,6 +3842,14 @@
 
 </details>
 
+<details>
+<summary>Dynamic Programming Patterns</summary>
+
+- For more details:
+    - Leetcode Post: [Dynamic Programming Patterns](https://en.wikipedia.org/wiki/Counting_sort)
+
+</details>
+
 ---
 
 ## References
@@ -3869,6 +3878,7 @@
 <summary>Articles</summary>
 
 - [14 Patterns to Ace Any Coding Interview Question](https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed)
+- Leetcode Post: [Dynamic Programming Patterns](https://en.wikipedia.org/wiki/Counting_sort)
 - [Solving Coding Problems With PEDAC](https://medium.com/launch-school/solving-coding-problems-with-pedac-29141331f93f)
 - [Interview Questions (and answers)](http://readyforsoftwareinterview.blogspot.com/)
 - [How To Approach Any Algorithm Interview Without Panicking](https://www.freecodecamp.org/news/how-to-approach-any-algorithm-interview-without-panicking-b6d7ae5c050/)
