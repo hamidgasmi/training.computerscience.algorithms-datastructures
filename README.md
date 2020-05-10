@@ -3720,6 +3720,66 @@
                             v = Pattern[0:|u| - i + 1] is a prefix of Pattern
         - Then there is prefix *v* of *Pattern* equal to suffix in *u*, and *v* is longer than *w* (see above)                            
         - This is a contradiction: *v* is a border longer than *w*, but *w* is te longest border of *u*
+- **Prefix Function**:
+    - It's a function *s(i)* that for each *i* returns the length of the longest border of the prefix *Pattern*[0 : *i*]
+    - It's precalculated in advance and its values *s(i)* are stored in an array *s* of length |*Pattern*|
+    - E.g. *Pattern*: abababcaab
+    -       Pattern: a b a b a b c a a b
+                      s: 0 0 1 2 3 4 0 1 1 2
+    - *Pattern*[0 : *i*] has a border of length **s(i + 1) − 1**
+    -                    ___w__      ___w___
+                        /      \    /       \             
+            Pattern:    |______|____|___|_|_|___
+                                        i^ ^i+1
+                    If we remove the positions i + 1 and |w| - 1:
+                         _w'_        _w'_
+                        /    \      /    \
+            Pattern:    |____|X|____|___|_|X|___
+                                        i^ ^i+1
+                    We get a border w' that is the longest border for the prefix Pattern[0:i]
+                    Thus, Pattern[0 : i] has a border of length s(i + 1) − 1
+    - ***s*(*i* + 1) <= *s*(*i*) + 1**
+    - If *s*(*i*) > 0, then all borders of *Pattern*[0 : *i*] (but for the longest one) are also borders of P[0 : *s*(*i*) - 1]
+    -                    _s(i)_      _s(i)_
+                        /      \    /      \
+            Pattern:    |______|____|______|___
+                        ^--w --^    ^--w --^
+                    Let u be a border of Pattern[0:i]: |u| < s(i)
+                         _s(i)_      _s(i)_
+                        /      \    /      \
+            Pattern:    |u|____|____|____|u|___
+                              ^-----------^
+                         _s(i)_      _s(i)_
+                        /      \    /      \
+            Pattern:    |u|__|u|____|u|__|u|___
+            Then u is both a prefix and a suffix of Pattern[0 : s(i) - 1]
+    - To enumerate all borders of *Pattern*[0 : *i*]:
+        - All borders of the prefix ending in position *i* can be enumerated by taking the longest border *b1* of *Pattern*[0 : *i*]
+        - then the longest border *b2* of *b1*
+        - then the longest border *b3* of *b2*, ... , and so on
+        - It's a way of enumerating all borders of *Pattern*[0 : *i*] in decreasing length
+        - We can use the prefix function to compute all the borders of the prefix ending in position i
+    -       Pattern: |b3|_|b3|_|b3|_|b3|___|b3|_|b3|_|b3|_|b3|
+                     \__b2___/ \__b2___/   \                 /
+                      \______b1_______/     \______b1_______/
+    - s(0) = 0
+    - if *Pattern*[ *s*(*i*) ] = *Pattern*[ i + 1 ], then *s*(*i* + 1) = *s*(*i*) + 1
+    -                 _s(i)_       _s(i)_   i+1
+                     /      \     /      \ /
+            Pattern: |______|x____|______|x__
+                     \_s(i+1)/    \_s(i+1)/     
+    - if *Pattern*[ *s*(*i*) ] != *Pattern*[ i + 1 ], then *s*(*i* + 1) = |some border of *Pattern*[0 : *s*(*i*) - 1] + 1
+    -                 _s(i)_       _s(i)_   i+1
+                     /      \     /      \ /
+            Pattern: |______|y____|______|x__
+            We want to find a prefix ending by the character x and a suffix that is ending at position i + 1 by the character x
+            We want to find a prefix p followed by x and is also before the 2nd x at position i + 1
+            Pattern: |__|x|_|y____|______|x__
+                     | p|             | p|
+            So, p is a prefix of Pattern[0 : i] and it's also a suffix of Pattern[0 : i]
+            So, p is a border of Pattern[0 : i]
+            In other words, p is a border of Pattern[0 : s(i) - 1] (see properties above)
+            So, we want some border of the longest border of Pattern[0 : i]
 - Implementation, Time Complexity and Operations:
     - Running Time: 
         - Single pattern matching: O(|*Text*| + |*Pattern*|)
