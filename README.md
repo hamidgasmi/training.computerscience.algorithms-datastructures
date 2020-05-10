@@ -3781,10 +3781,81 @@
             So, p is a border of Pattern[0 : i]
             In other words, p is a border of Pattern[0 : s(i) - 1] (see properties above)
             So, we want some border of the longest border of Pattern[0 : i]
+    - E.g. *Pattern* = a b a b a b c a a b
+- Knuth-Morris-Pratt Algorithm:
+    - Create new string *S* = *Pattern* + ’$’ + *Text*
+    - Compute prefix function *s* for string *S*
+    - For all positions `i` such that `i > |Pattern| and s(i) = |Pattern|`, add `i − 2|Pattern|` to the output;
+        - 1st. we need to substract `|Pattern| - 1` to get the position of *Pattern* in *S*
+        - 2nd. we need to substract `-1` of the ’$’
+        - 3rd. we need to substract `|Pattern|` to get the position of *Pattern* in *Text*
+        - In total, we need to substract `2 |Pattern|`
+    - ’$’ must be a special character absent from both *Pattern* and *Text*
+        - We ensure that `For all i, s(i) <= |Pattern|`
+        - If we don't insert a '$' in S between the *Pattern* and *Text*, we get a wrong answer:
+        - E.g. *Pattern* = *AAA* and the *Text* = *A*
+        -       Indices(S): 0 1 2 3 
+                        S : A A A A
+                        s : 0 1 2 3
+                                  ^ i > |Pattern| and s(i) = |Pattern| = 3
+                The algorithm will think there is an occurence of Pattern in Text, although it's wrong!
+    - E.g. *Pattern* = abra and the *Text* = abracadabra
+    -       Indices(Text):           0 1 2 3 4  5  6  7  8  9 10
+               Indices(S): 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+                       S : a b r a $ a b r a c  a  d  a  b  r  a
+                       s : 0 0 0 1 0 1 2 3 4 0  1  0  1  2  3  4
+                                           ^                   ^
+                i - |Pattern| + 1 = 8 - 4 + 1 = 5 is the position of pattern in string S
+                i - 2 |Pattern| = 8 - 8 = 0 is the position of pattern in string Text
+                i - 2 |Pattern| = 15 - 8 = 7 is the position of pattern in string Text
 - Implementation, Time Complexity and Operations:
-    - Running Time: 
-        - Single pattern matching: O(|*Text*| + |*Pattern*|)
-        - For multiple patterns matching: O(# of pattern x |*Text*| + |*Patterns*|): it's not as interesting as BWT approach
+    -       ComputePrefixFunction(Pattern):
+                s = array of integer of length |Pattern|
+                s[0] = 0; boder = 0
+                for i in range(1, |Pattern| - 1):
+                    while (border > 0) and (Pattern[i] != P[border]):
+                        border = s[border - 1]
+                    if Pattern[i] == Pattern[border]:
+                        border += 1
+                    else:
+                        border = 0
+                    s[i] = border
+                return s
+    -       Knuth-Morris-Pratt(Text, Pattern):
+                S = Pattern + ’$’ + T
+                s = ComputePrefixFunction(S)
+                result = empty list
+                for i in range(|P| + 1, |S| − 1, +1):
+                    if s[i] == |P|:
+                        result.Append(i − 2|P|)
+                return result
+    - Running Time:
+        - ComputePrefixFunction: **O(|*Patterns*|)**:
+            - Except the internal *while* loop, everything is O(|*Pattern*|):
+            - O(|*Pattern*|) Initialization + O(|*Pattern*|) of *for* loop iterations + O(1) assignments of each *for* iteration
+            - We need to prove that the total iteration # of the *while* loop across all the iterations of the external *for* loop is **linear**
+        -       s(i)
+                  ^  
+                 4|           x
+                 3|         x         
+                 2|       x           x
+                 1|     x         x x
+                 0 −x−x−−−−−−−−−x−−−−−−−−> i
+                    0 1 2 3 4 5 6 7 8 9 
+                    a b a b a b c a a b
+                border (s(i)) can increase at most by 1 on each iteration of the for loop
+                In total, border is increased O(|P|) times
+                border is decreased at least by 1 on each iteration of the while loop 
+                but since border >= 0 and border < |Pattern| (shorter than the pattern)
+                It can't decrease more than border times
+                In other words, the while loop can't decrease more than the border is previously increased
+                so we could have b1 increases (+1 increase b1 time) + b1 decreases + ... + bn increases + bn decreases
+                b1 + ... + bn <= |Pattern|
+                So, border can increase at most |P| times and can decrease at most |P| times
+                Therefore, b1 increases + b1 decreases + ... + bn increases + bn decreases = O(2 * |Pattern|) = O(|Pattern|)
+        - Knuth-Morris-Pratt: **O(|*Text*| + |*Pattern*|)**
+            - Single pattern matching: O(|*Text*| + |*Pattern*|)
+            - For multiple patterns matching: O(# of pattern x |*Text*| + |*Patterns*|): it's not as interesting as BWT approach
 - Related Problems:
 - For more details:
     - UC San Diego Course:[Knuth-Morris-Pratt Algorithm](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/3-knuth-morris-pratt-algorithm/03_algorithmic_challenges_1_knuth_morris_pratt.pdf)
