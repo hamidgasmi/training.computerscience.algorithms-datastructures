@@ -469,13 +469,14 @@
         - Value per Unit: Item 1: $5; Item2: $4.66; Item3: $4; Item4: $4.5
         - 6 ($30) + 3 ($14) = 9 items ($44)
         - taking an element of maximum value per unit of weight is not safe!
+- Related Problems:
+    - [Cutting a Rod](https://www.geeksforgeeks.org/cutting-a-rod-dp-13/)
 - For more details:
     - [Course material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_2_editdistance.pdf)
     - [Advanced dynamic programming lecture notes]() by Jeff Erickson
     - [How Do We Compare Biological Sequences?](https://www.youtube.com/playlist?list=PLQ-85lQlPqFNmbPEsMoxb5dM5qtRaVShn) by Phillip Compeau and Pavel Pevzner
-- For more details:
-    - [Money change problem: Greedy vs. Recursive vs. Dynamic Programming](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_1_changeproblem.pdf)
-    - [Dynamic Programming](https://www.geeksforgeeks.org/dynamic-programming/) in geeksforgeeks
+    - [Money change problem: Greedy vs. Recursive vs. Dynamic Programming](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/1-algorithm-design-and-techniques/5_dynamic_programming/04_dynamic_programming_1_changeproblem.pdf)
+    - Geeksforgeeks [Dynamic Programming](https://www.geeksforgeeks.org/dynamic-programming/)
     - [Dynamic Programming](https://www.radford.edu/~nokie/classes/360/dynprog.html)
     - Leetcode Post: [Dynamic Programming Patterns](https://en.wikipedia.org/wiki/Counting_sort)
 
