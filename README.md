@@ -3286,6 +3286,8 @@
                           $
         - For human genome: |*Text*| = 3 * 10^9 
         - **It's impratical**!!!!!
+        - E.g. If we need 1B to store 1 character, for a string of length 10^6 we need more than 500GB of memory to store all its suffixes
+        - The total # of characters is: 1+2+3+⋯+1000000=1000000(1000000+1)/2 = 500000500000
 - For more details:
     - UC San Diego Course:[Suffix-Tries](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
