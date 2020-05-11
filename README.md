@@ -3803,7 +3803,7 @@
 - Knuth-Morris-Pratt Algorithm:
     - Create new string *S* = *Pattern* + ’$’ + *Text*
     - Compute prefix function *s* for string *S*
-    - For all positions `i` such that `i > |Pattern| and s(i) = |Pattern|`, add `i − 2|Pattern|` to the output;
+    - For all positions `i` such that `i > |Pattern| and s(i) = |Pattern|`, add `i − 2|Pattern|` to the output:
         - 1st. we need to substract `|Pattern| - 1` to get the position of *Pattern* in *S*
         - 2nd. we need to substract `-1` of the ’$’
         - 3rd. we need to substract `|Pattern|` to get the position of *Pattern* in *Text*
