@@ -3783,23 +3783,23 @@
             In other words, p is a border of Pattern[0 : s(i) - 1] (see properties above)
             So, we want some border of the longest border of Pattern[0 : i]
     - E.g. *Pattern*: a b a b a b c a a b
-    -       Indices: 0 1 2 3 4 5 6 7 8 9
-            Pattern: a b a b a b c a a b
-               s(0): 0 <----------------- Initialization; Current Longest Border (CLB): ""
-               s(1): 0 0<---------------- Previous Longest Border (PLB): "", next char to it (PLB+1): "a" != P[1]; CLB: ""
-               s(2): 0 0 1<-------------- PLB = ""; PLB+1 = P[0] = "a" = P[2] => s(2) = s(1) + 1; CLB = P[0:1]
-               s(3): 0 0 1 2<------------ PLB = P[0:1]; PLB+1 = P[1] = "b" = P[3] => s(3) = s(2) + 1; CLB = P[0:2] = "a"
-               s(4): 0 0 1 2 3<---------- PLB = P[0:2]; PLB+1 = P[2] = "a" = P[4] => s(4) = s(3) + 1; CLB = P[0:3] = "ab"
-               s(5): 0 0 1 2 3 4<-------- PLB = P[0:3]; PLB+1 = P[3] = "b" = P[5] => s(5) = s(4) + 1; CLB = P[0:4] = "abab"
-               s(6): 0 0 1 2 3 4 0<------ PLB = P[0:4]; PLB+1 = P[4] = "a" != P[6] Find Longest Border of the PLB: LB(P[0:4])
-                                          LB(P[0:4]) = P[0:3]; PLB(P[0:4])+1 = P[3] = b != P[6] Find Longest Border of the PLB: LB(P[0:3])
-                                          LB(P[0:3]) = P[0:2]; LB(P[0:3])+1 = "a" != P[6] Find Longest Border of the PLB: LB(P[0:2])
-                                          LB(P[0:2]) = P[0:1]; LB(P[0:2])+1 = "b" != P[6] Find Longest Border of the PLB: LB(P[0:1])
-                                          LB(P[0:1]) = ""; LB("")+1 = "a" != P[6] => s(6) = 0; CLB = P[0:0] = ""
-               s(7): 0 0 1 2 3 4 0 1<---- PLB = P[0:0]; PLB+1 = "a" = P[7] => s(7) = s(0) + 1; CLB = P[0:1] = "a"
-               s(8): 0 0 1 2 3 4 0 1 1<-- PLB = P[0:1]; PLB+1 = P[1] = "b" != P[8] Find Longest Border of the PLB: LB(P[0:1])
-                                          LB(P[0:1]) = LB(P[0:0]); LB(P[0:0])+1 = "a" = P[8] => s(8) = s(0) + 1; CLB = P[0:1] = "a"
-               s(9): 0 0 1 2 3 4 0 1 1 2<-PLB = P[0:1]; PLB+1 = P[1] = "b" = P[9] => s(9) = s(8) + 1
+    -     Indices: 0 1 2 3 4 5 6 7 8 9
+          Pattern: a b a b a b c a a b
+          s(0): 0 <----------------- Initialization; Current Longest Border (CLB): ""
+          s(1): 0 0<---------------- Previous Longest Border (PLB): "", next char to it (PLB+1): "a" != P[1]; CLB: ""
+          s(2): 0 0 1<-------------- PLB = ""; PLB+1 = P[0] = "a" = P[2] => s(2) = s(1) + 1; CLB = P[0:1]
+          s(3): 0 0 1 2<------------ PLB = P[0:1]; PLB+1 = P[1] = "b" = P[3] => s(3) = s(2) + 1; CLB = P[0:2] = "a"
+          s(4): 0 0 1 2 3<---------- PLB = P[0:2]; PLB+1 = P[2] = "a" = P[4] => s(4) = s(3) + 1; CLB = P[0:3] = "ab"
+          s(5): 0 0 1 2 3 4<-------- PLB = P[0:3]; PLB+1 = P[3] = "b" = P[5] => s(5) = s(4) + 1; CLB = P[0:4] = "abab"
+          s(6): 0 0 1 2 3 4 0<------ PLB = P[0:4]; PLB+1 = P[4] = "a" != P[6] Find Longest Border of the PLB: LB(P[0:4])
+                                     LB(P[0:4]) = P[0:3]; PLB(P[0:4])+1 = P[3] = b != P[6] Find Longest Border of the PLB: LB(P[0:3])
+                                     LB(P[0:3]) = P[0:2]; LB(P[0:3])+1 = "a" != P[6] Find Longest Border of the PLB: LB(P[0:2])
+                                     LB(P[0:2]) = P[0:1]; LB(P[0:2])+1 = "b" != P[6] Find Longest Border of the PLB: LB(P[0:1])
+                                     LB(P[0:1]) = ""; LB("")+1 = "a" != P[6] => s(6) = 0; CLB = P[0:0] = ""
+          s(7): 0 0 1 2 3 4 0 1<---- PLB = P[0:0]; PLB+1 = "a" = P[7] => s(7) = s(0) + 1; CLB = P[0:1] = "a"
+          s(8): 0 0 1 2 3 4 0 1 1<-- PLB = P[0:1]; PLB+1 = P[1] = "b" != P[8] Find Longest Border of the PLB: LB(P[0:1])
+                                     LB(P[0:1]) = LB(P[0:0]); LB(P[0:0])+1 = "a" = P[8] => s(8) = s(0) + 1; CLB = P[0:1] = "a"
+          s(9): 0 0 1 2 3 4 0 1 1 2<-PLB = P[0:1]; PLB+1 = P[1] = "b" = P[9] => s(9) = s(8) + 1
 - Knuth-Morris-Pratt Algorithm:
     - Create new string *S* = *Pattern* + ’$’ + *Text*
     - Compute prefix function *s* for string *S*
