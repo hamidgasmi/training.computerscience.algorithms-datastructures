@@ -3406,6 +3406,9 @@
         - Sorting 1-mers is O(|Text| log|Text|), but sorting |Text|-mers is O(|Text|^2 log|Text|), 
         - When we perform summation over all k from 1 to |Text|: O((1 + 2 ⋯ +|Text|) |Text| log|Text|) = O(1/2|Text|(|Text| + 1)|Text| log|Text|)
     - Space Complexity: **O(|Text|^2)**: Memory Issues
+        - E.g. If we need 1B to store 1 character, 
+        - For a string of length 10^6 we need more than 500GB of memory to store all its suffixes
+        - The total # of characters is: 1+2+3+⋯+10^6=10^6 (10^6 + 1)/2 = 500000500000
 - Inverting BWT (2nd version):
     - **First-Last Property**
         - The k-th occurrence of *symbol* in 1st column and 
@@ -3548,9 +3551,48 @@
 </details>
 
 <details>
-<summary>Suffix Arrays: Pattern Matching</summary>
+<summary>Suffix Arrays</summary>
 
-- **Suffix Arrays**: It holds starting position of each suffix beginning a row
+- It's an array that holds starting positions of all suffixes of a string *S* sorted in lexicographic order:
+    - Space complexity: O(|S|)
+    - Store all suffixes is impratical: **O(S^2)**
+        - **It's impratical**
+        - Total length of all suffixes is 1 + 2 + · · · + |S| = Θ(|S|^2)
+        - E.g. If we need 1B to store 1 character, For a string of length 10^6 we need more than 500GB of memory to store all its suffixes
+        - The total # of characters is: 1+2+3+⋯+10^6=10^6 (10^6 + 1)/2 = 500000500000
+    - E.g. `ababaa`
+    -       Suffix Array    Suffixes in lexicographic order:
+            5                a
+            4                aa
+            2                abaa
+            0                ababaa
+            3                baa
+            1                babaa
+- **Lexicographic order**: 
+    - String *S* is lexicographically **smaller** than string *T* if: 
+        - `S != T` and 
+        - There exist such `i` that: `0 ≤ i ≤ |S|: S[0 : i − 1] = T[0 : i − 1]` (assume `S[0 : -1]` is an empty string):
+            - Either `S[i] < T [i]`
+            - Or `i = |S|` (then S is a prefix of T)
+        - E.g. 1. "ab" < "bc" at i = 0
+        - E.g. 2. "abc" < "abd" at i = 2
+        - E.g. 3. "abc" < "abcd" at i = 3 ("abc is a prefix of "abcd)
+    - Avoiding Prefix Rule:
+        - Inconvenient rule: if S is a prefix of T, then S < T
+        - Append special character ‘$’ smaller than all other characters to the end of all strings
+        - **Lexicographic order** definition will be more simple
+        - If *S* is a prefix of *T*, then *S$* differs from *T$* in position `i = |S|`, and `$ < T[|S|]`, so `S$ < T$`
+    -       Suffixes in lexicographic order:
+            S = “ababaa” => S' = “ababaa$”:
+            Suffix Array    Suffixes in lexicographic order:    Suffix Array of Original text:
+            6                $                                     5
+            5                a$                                    4
+            4                aa$                                   2
+            2                abaa$    to get original:             0
+            0                ababaa$ ----------------->            3
+            3                baa$      suffixes Array              1
+            1                babaa$    Remove 1st pos.
+- 1st. Construction: it could be constructed from a suffix tree:
     - E.g. `AGACATA$`:
     -       Array Suffix:    BW Matrix:
                 7             $AGACATA
@@ -3566,6 +3608,120 @@
         - DFS traversal of a suffix tree: O(|*Text*|) time and ~20 x |*Text*| (see Suffix Tree section, above)
         - Manber-Myers algorithm (1990): O(|*Text*|) time and ~4 x |*Text*| space
         - Memory footprint is still large (for human genome, particularly)!
+- 2nd. Construction:
+    - **Sorting Cyclic Shifts**:
+        - After adding to the end of *S* character *$*, **sorting cyclic shifts of *S* and suffixes of *S* is equivalent**
+        - E.g. 1. S = “ababaa$”
+        -       Cyclic Shifts:   Sorting :           All suffixes ordered in lexicographic order
+                ababaa$           $ababaa             $
+                babaa$a           a$ababa  Cut        a$
+                abaa$ab  ------>  aa$abab ----------> aa$
+                baa$aba           abaa$ab  Substring  abaa$
+                aa$abab           ababaa$  Afet $     ababaa$
+                a$ababa           baa$aba             baa$
+                $ababaa           babaa$a             babaa$
+        - E.g. 2. If we don't add a '$', S = "bababaa"
+        -       Cyclic Shifts:   Sorting :           Suffixes aren't ordered in lexicographic order
+                bababaa          aababab             aa<-----
+                ababaab          abaabab   Cut       abaa    | The corresponding cyclic shift "abababa" is > 
+                babaaba  ------> ababaab ----------> ababaa  | The corresponding cyclic shift "aababab"
+                abaabab          abababa   Substring a<------
+                baababa          baababa             baa
+                aababab          babaaba             babaa
+                abababa          bababaa             bababaa
+    - **Partial Cyclic Shifts**:
+        - Substrings of cyclic string *S* are called partial cyclic shifts of *S*
+        - Ci is the partial cyclic shift of length L starting in i
+        - E.g. 1. S = “ababaa$”, Cyclic Shits of length 4
+                Cyclic shifts(S, 4):    Comments
+                abab                    C0: Substring starting at position 0
+                baba                    C1: Substring starting at position 1
+                abaa                    C2: Substring starting at position 2
+                baa$                    C3: Substring starting at position 3
+                aa$a                    C4: Cyclic Substring starting at position 4
+                a$ab                    C5: Cyclic Substring starting at position 5
+                $aba                    C6: Cyclic Substring starting at position 6
+        - - E.g. 1. S = “ababaa$”, Cyclic Shits of length 1
+                Cyclic shifts(S, 1)
+                 _____
+                a     \ 
+                b      |   
+                a      |  They're just single characters of S separately
+                b      |             
+                a      |             
+                a      |             
+                $_____/              
+    - **General Strategy**:
+        - Start with sorting single characters of S
+        - Cyclic shifts of length `L = 1` sorted: Could be done by CountingSort
+        - While `L < |S|`, sort shifts of length `2L`
+        - If `L ≥ |S|`, cyclic shifts of length *L* sort the same way as cyclic shifts of length |*S*|
+        - E.g. S = ababaa$
+        -       CS(1)-Sort    CS(2)-Sort    CS(4)-Sort    CS(8)=CS(7)-Sort      Remove all extra chars after $
+                a  0   $  6    $a   $a 6    $aba  $aba 6  $ababaa   $ababaa 6   $
+                b  1   a  0    ab   a$ 5    a$ab  a$ab 5  a$ababa   a$ababa 5   a$
+                a  2   a  2    ab   aa 4    aa$a  aa$a 4  aa$abab   aa$abab 4   aa$
+                b  3   a  4    aa   ab 0    abab  abaa 2  abaa$ab   abaa$ab 2   abaa$
+                a  4   a  5    a$   ab 2    abaa  abab 0  ababaa$   ababaa$ 0   ababaa$
+                a  5   b  1    ba   ba 1    baba  baa$ 3  baa$aba   baa$aba 3   baa$
+                $  6   b  3    ba   ba 3    baa$  baba 1  babaa$a   babaa$a 1   babaa$
+    -       BuildSuffixArray(S):
+                order = SortCharacters(S)
+                class = ComputeCharClasses(S, order)
+                L = 1
+                while L < |S|:
+                    order = SortDoubled(S, L, order, class)
+                    class = UpdateClasses(order, class, L)
+                    L = 2L
+                return order
+    - Initialization: `SortCharacters`:
+        - Alphabet *Σ* has |*Σ*| different characters
+        - Use counting sort to compute order of characters
+        - After the 1st 2 for loops, for each character, the count contains the position in the sorted array of all the characters of the input string right after the last such character
+        - E.g. *count*[0] = the occurrences # of the smallest character of *Σ* in *S*, and if we sort the characters of *S*, the smallest character will be in positions 0 through *count*[0]−1.
+    -       SortCharacters(S):
+                order = array of size |S|
+                count = zero array of size |Σ|
+                for i from 0 to |S| − 1:
+                    count[S[i]] = count[S[i]] + 1
+                for j from 1 to |Σ| − 1:
+                    count[j] = count[j] + count[j − 1]
+                for i from |S| − 1 down to 0:
+                    c = S[i]
+                    count[c] = count[c] − 1
+                    order [count[c]] = i
+                return order
+        - Running Time: O(|S| + |Σ|)
+        - Space Complexity: O(|S| + |Σ|)
+    - Initialization: `ComputeCharClasses`:
+        - *Ci*: partial cyclic shift of length *L* starting in *i*
+        - *Ci*: can be equal to *Cj*: They are in one equivalence class
+        - Compute class[i]: number of different cyclic shifts of length *L* that are strictly smaller than *Ci*
+        - `Ci == Cj <==> class[i] == class[j]`
+        -       S = ababaa$ order:[6, 0, 2, 4, 5, 1, 3] class:[ , , , , , , ]
+                $  6--> C6: class:[ ,  ,  ,  ,  ,  , 0] because C6 is the smallest partial cyclic shift
+                a  0--> C0: class:[1,  ,  ,  ,  ,  , 0] because C0 ("a") > C6 ("$") in order
+                a  2--> C2: class:[1,  , 1,  ,  ,  , 0] because C2 ("a") == C0 ("a") in order
+                a  4--> C4: class:[1,  , 1,  , 1,  , 0] because C4 ("a") == C2 ("a") in order
+                a  5--> C5: class:[1,  , 1,  , 1, 1, 0] because C5 ("a") == C4 ("a") in order
+                b  1--> C1: class:[1, 2, 1,  , 1, 1, 0] because C1 ("b") > C5 ("a") in order
+                b  3--> C3: class:[1, 2, 1, 2, 1, 1, 0] because C3 ("b") == C5 ("b") in order
+    -       ComputeCharClasses(S, order):
+                class = array of size |S|
+                class[order [0]] = 0
+                for i from 1 to |S| − 1:
+                    if S[order[i]] != S[order[i − 1]]:
+                        class[order[i]] = class[order[i − 1]] + 1
+                    else:
+                        class[order[i]] = class[order[i − 1]]
+                return class
+        - Running Time: O(|S|)
+        - Space Complexity: O(|S|)
+</details>
+
+<details>
+<summary>Suffix Arrays: Pattern Matching</summary>
+
 - Exact Pattern Matching:
     - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`) and Pattern: `ACA`
     -       Array Suffix:     
@@ -3925,11 +4081,30 @@
 
 - It's an algorithm for sorting a collection of objects according to keys that are small integers
 - Implementation, Time Complexity and Operations:
-    - Time Complexity: O(|Array|)
+-       CountSort(A[1...n]):
+            Count[1...M] = [0,..., 0]
+            for i from 1 to n:
+                Count[A[i]] += 1
+            # k appears Count[k] times in A
+            Pos[1...M] = [0,..., 0]
+            Pos[1] = 1
+            for j from 2 to M:
+                Pos[j] = Pos[j - 1] + Count[j - 1]
+            # k will occupy range [Pos[k]...Post[k +1] + 1]
+            for i from 1 to n:
+                A'[Pos[A[i]]] = A[i]
+                Pos[A[i]] += 1
+    - Time Complexity: O(|Array| + |Alphabet|)
+- It's **stable**:
+    - It keeps the order of equal elements
+    - If we sort an array which has equal elements using Counting Sort, and one of the 2 equal elements was before another one initially in the array, it will still go 1st. after sorting 
+    - It's important for for some algorithms that use sorting
+    - ![Example](https://i.stack.imgur.com/hn6Rg.png)
 - Related Problems:
     - Better Burrows-Wheeler matching
 - For more details:
     - [Counting Sort](https://en.wikipedia.org/wiki/Counting_sort)
+    - [Stable vs. non-stable algorithms](https://softwareengineering.stackexchange.com/questions/247440/what-does-it-mean-for-a-sorting-algorithm-to-be-stable)
 
 </details>
 
