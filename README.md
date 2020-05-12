@@ -3715,8 +3715,52 @@
                     else:
                         class[order[i]] = class[order[i − 1]]
                 return class
-        - Running Time: O(|S|)
-        - Space Complexity: O(|S|)
+        - Running Time: O(|*S*|)
+        - Space Complexity: O(|*S*|)
+    - `SortDoubled(S, L, order, class)`:
+        - *Ci*: cyclic shift of length L starting in i
+        - *Ci'*: doubled cyclic shift starting in i
+        - *Ci'* = *Ci* *Ci+L*: The concatenation of strings *Ci* and *Ci+L*
+        -       E.g. S = ababaa$, L = 2, i = 2
+                     Ci = C2 = ab
+                     Ci+L = C2+2 = C4 = aa
+                     Ci' = CiCi+L = C2C2+2 = C2C4 = abaa
+        - To compare *Ci'*with *Cj'*, it’s sufficient to compare *Ci* with *Cj* and *Ci+L* with *Cj+L*
+        - 1st to compare (*Ci*, *Cj*): if different (`class[i] != class[j]`), return comparison (`order[i]`, `order[j]`) (2nd comparison isn't needed)
+        - 2nd. If *Ci* == *Cj* (`class[i] = class[j]`), return comparison of (*Ci+L*, *Cj+L*):(`order[i+L]`, `order[j+L]`)
+        - **Sorting pairs**:
+        - First. sort by second element of pair, 
+        - Then **stable** sort by 1st. element of pair
+        -       E.g. S = ababaa$, L = 2, i = 2
+                Ci+L:     Ci' Sorted by 2nd half    Ci' Sorted by 1nd half
+                C6: $a    C4': aa$a                 C6': $aba
+                C5: a$    C3': baa$   1st. half     C5': a$ab 
+                C4: aa    C2': abaa<--|\Equal___    C4': aa$a   2nd sort must be Stable
+                C0: ab    C5': a$ab   | STABLE  |-->C2': abaa   See C2', C0'
+                C2: ab    C0': abab<--|_Sort____|-->C0': abab   See C3', C1'
+                C1: ba    C6': $aba   To keep       C3': baa$
+                C3: ba    C1': baba   initial Sort  C1': baba
+        - *Ci'* is a pair (*Ci*, *Ci+L*)
+        - *C-order[0]*, *C-order[1]*, ..., *C-order[|S|−1]* are already sorted
+        - Take doubled cyclic shifts starting exactly *L* counter-clockwise (“to the left”)
+        - *C-order[0]−L'*, *C-order[1]−L*, ..., *C-order[|S|−1]−L* are sorted by second element of pair
+        - To use **Counting sort** as a stable sort
+        - We know equivalence classes of single shifts for counting sort
+    -       SortDoubled(S, L, order, class):
+                count = zero array of size |S|
+                newOrder = array of size |S|
+                for i from 0 to |S| − 1:
+                    count[class[i]] = count[class[i]] + 1
+                for j from 1 to |S| − 1:
+                    count[j] -= count[j − 1]
+                for i from |S| − 1 down to 0:
+                    start = (order[i] − L + |S|) mod |S|
+                    cl = class[start]
+                    count[cl] -= 1
+                    newOrder[count[cl]] ← start
+
+                return newOrder
+    - Running Time: O(|S|)
 </details>
 
 <details>
@@ -4100,11 +4144,22 @@
     - If we sort an array which has equal elements using Counting Sort, and one of the 2 equal elements was before another one initially in the array, it will still go 1st. after sorting 
     - It's important for for some algorithms that use sorting
     - ![Example](https://i.stack.imgur.com/hn6Rg.png)
+- We can sort not only integers using Counting Sort: 
+    - We can sort any objects which can be numbered, if there are not many different objects 
+    - E.g. if we want to sort characters, and we know that the characters have integer codes from 0 to 256, 
+        - Such that smaller characters have smaller integer codes, 
+        - Then we can sort them using Counting Sort by sorting the integer codes instead of characters themselves 
+        - The # of possible values for a character is different in different programming languages
 - Related Problems:
     - Better Burrows-Wheeler matching
 - For more details:
     - [Counting Sort](https://en.wikipedia.org/wiki/Counting_sort)
     - [Stable vs. non-stable algorithms](https://softwareengineering.stackexchange.com/questions/247440/what-does-it-mean-for-a-sorting-algorithm-to-be-stable)
+
+</details>
+
+<details>
+<summary>Radix Sort</summary>
 
 </details>
 
