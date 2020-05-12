@@ -3642,7 +3642,7 @@
                 a$ab                    C5: Cyclic Substring starting at position 5
                 $aba                    C6: Cyclic Substring starting at position 6
         - E.g. 1. S = “ababaa$”, Cyclic Shifts of length 1
-                Cyclic shifts(S, 1)
+        -       Cyclic shifts(S, 1)
                  _____
                 a     \ 
                 b      |   
