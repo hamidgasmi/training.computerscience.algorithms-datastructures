@@ -3665,15 +3665,15 @@
                 a  4   a  5    a$   ab 2    abaa  abab 0  ababaa$   ababaa$ 0   ababaa$
                 a  5   b  1    ba   ba 1    baba  baa$ 3  baa$aba   baa$aba 3   baa$
                 $  6   b  3    ba   ba 3    baa$  baba 1  babaa$a   babaa$a 1   babaa$
-    -       BuildSuffixArray(S):
-                order = SortCharacters(S)
-                class = ComputeCharClasses(S, order)
-                L = 1
-                while L < |S|:
-                    order = SortDoubled(S, L, order, class)
-                    class = UpdateClasses(order, class, L)
-                    L = 2L
-                return order
+        -       BuildSuffixArray(S):
+                    order = SortCharacters(S)
+                    class = ComputeCharClasses(S, order)
+                    L = 1
+                    while L < |S|:
+                        order = SortDoubled(S, L, order, class)
+                        class = UpdateClasses(order, class, L)
+                        L = 2L
+                    return order
     - Initialization: `SortCharacters`:
         - Alphabet *Σ* has |*Σ*| different characters
         - Use counting sort to compute order of characters
@@ -3760,7 +3760,7 @@
                     for i from 0 to |S| − 1:
                         count[class[i]] += 1
                     for j from 1 to |S| − 1:
-                        count[j] -= count[j − 1]
+                        count[j] += count[j − 1]
                     for i from |S| − 1 down to 0:
                         start = (order[i] − L + |S|) mod |S| # Cj-L (start of 1st half and doubled partial C-S)
                         cl = class[start] 
@@ -3812,6 +3812,75 @@
         - SortDoubled: O(|*S*|) run log |*S*| times
         - UpdateClasses: O(|*S*|)* run log |*S*| times
         - Space Complexity: O(|*S*|)
+    -       E.g. *S* = AACGATAGCGGTAGA$
+    -       1- Initialization: SortCharacters
+              1st. For loop:
+                    Σ: $ A C G T
+                Count: 1 6 2 5 2
+              2nd. For loop:
+                    Σ: $ A C G  T
+                Count: 1 7 9 14 16
+              3rd. For loop:
+                Indices: 0 |1 |2 |3 |4 |5 |6 |7 |8 |9 |10|11|12|13|14|15|
+                      S: A |A |C |G |A |T |A |G |C |G |G |T |A |G |A |$ |
+                  Order: 15|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | i = 15, Count[$] = 01 - 1 = 0
+                  Order: 15|  |  |  |  |  |14|  |  |  |  |  |  |  |  |  | i = 14, Count[A] = 07 - 1 = 6
+                  Order: 15|  |  |  |  |  |14|  |  |  |  |  |  |13|  |  | i = 13, Count[G] = 14 - 1 = 13
+                  Order: 15|  |  |  |  |12|14|  |  |  |  |  |  |13|  |  | i = 12, Count[A] = 06 - 1 = 5
+                  Order: 15|  |  |  |  |12|14|  |  |  |  |  |  |13|  |11| i = 11, Count[T] = 16 - 1 = 15
+                  Order: 15|  |  |  |  |12|14|  |  |  |  |  |10|13|  |11| i = 10, Count[G] = 13 - 1 = 12
+                  Order: 15|  |  |  |  |12|14|  |  |  |  |09|10|13|  |11| i = 09, Count[G] = 12 - 1 = 11
+                  Order: 15|  |  |  |  |12|14|  |08|  |  |09|10|13|  |11| i = 08, Count[C] = 09 - 1 = 8
+                  Order: 15|  |  |  |  |12|14|  |08|  |07|09|10|13|  |11| i = 07, Count[G] = 11 - 1 = 10
+                  Order: 15|  |  |  |06|12|14|  |08|  |07|09|10|13|  |11| i = 06, Count[A] = 05 - 1 = 4
+                  Order: 15|  |  |  |06|12|14|  |08|  |07|09|10|13|05|11| i = 05, Count[T] = 15 - 1 = 14
+                  Order: 15|  |  |04|06|12|14|  |08|  |07|09|10|13|05|11| i = 04, Count[A] = 04 - 1 = 3
+                  Order: 15|  |  |04|06|12|14|  |08|03|07|09|10|13|05|11| i = 03, Count[G] = 10 - 1 = 9
+                  Order: 15|  |  |04|06|12|14|02|08|03|07|09|10|13|05|11| i = 02, Count[C] = 08 - 1 = 7
+                  Order: 15|  |01|04|06|12|14|02|08|03|07|09|10|13|05|11| i = 01, Count[A] = 03 - 1 = 2
+                  Order: 15|00|01|04|06|12|14|02|08|03|07|09|10|13|05|11| i = 00, Count[A] = 02 - 1 = 1
+    -       2- Initialization: ComputeCharClasses(S, order)
+                  Order  : 15|00|01|04|06|12|14|02|08|03|07|09|10|13|05|11|
+                  Indices: 0 |1 |2 |3 |4 |5 |6 |7 |8 |9 |10|11|12|13|14|15|
+                    Class: 01|01|02|03|01|04|01|03|02|03|03|04|01|03|01|00|
+    -       3- SortDoubled(S, L, order, class): L = 1
+                  1st. For loop:
+                          Indices: 00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|
+                            Class: 01|01|02|03|01|04|01|03|02|03|03|04|01|03|01|00|
+                    Count(i = 00): 00|01|00|00|00|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 1
+                    Count(i = 01): 00|02|00|00|00|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 1
+                    Count(i = 02): 00|02|01|00|00|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 2
+                    Count(i = 03): 00|02|01|01|00|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 3
+                    Count(i = 04): 00|03|01|01|00|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 1
+                    Count(i = 05): 00|03|01|01|01|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 4
+                    Count(i = 06): 00|04|01|01|01|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 1
+                    Count(i = 07): 00|04|01|02|01|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 3
+                    Count(i = 08): 00|04|02|02|01|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 2
+                    Count(i = 09): 00|04|02|03|01|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 3
+                    Count(i = 10): 00|04|02|04|01|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 3
+                    Count(i = 11): 00|04|02|04|02|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 4
+                    Count(i = 12): 00|05|02|04|02|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 1
+                    Count(i = 13): 00|05|02|05|02|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 3
+                    Count(i = 14): 00|06|02|05|02|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 1
+                    Count(i = 15): 01|06|02|05|02|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 0
+                  2nd. For Loop:
+                            Count: 01|07|09|14|16|16|16|16|16|16|16|16|16|16|16|16|
+                  3rd. For Loop:
+                     Indices: 00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|
+                       Class: 01|01|02|03|01|04|01|03|02|03|03|04|01|03|01|00|
+                       Order: 15|00|01|04|06|12|14|02|08|03|07|09|10|13|05|11|
+                       Count: 01|07|09|14|16|16|16|16|16|16|16|16|16|16|16|16|/| i|Order[i]| start| cl |  
+                    NewOrder:   |  |  |  |  |  |  |  |  |  |  |  |  |10|  |  |/|15|  11    | 10   | 03 | Count[03] = 14 - 1 = 13
+                    NewOrder:   |  |  |  |  |  |04|  |  |  |  |  |  |10|  |  |/|14|  05    | 04   | 01 | Count[01] = 07 - 1 = 06
+                    NewOrder:   |  |  |  |  |12|04|  |  |  |  |  |  |10|  |  |/|13|  13    | 12   | 01 | Count[01] = 06 - 1 = 05
+                    
+
+    -       4- UpdateClasses(order, class, L):
+    -       5- 
+
+
+
+
 - Related Problems:
     - [Construct the Suffix Array of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/160)
 - For more details:
