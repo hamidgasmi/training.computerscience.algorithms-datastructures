@@ -3551,6 +3551,339 @@
 </details>
 
 <details>
+<summary>Suffix Arrays: Pattern Matching</summary>
+
+- Exact Pattern Matching:
+    - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`) and Pattern: `ACA`
+    -       Array Suffix:     
+                 7      top     $1-----A1
+                 6        \     A1-----T1
+                 2          --> A2-----G1
+                 0        /     A3-----$1
+                 4      bott    A4-----C1
+                 3              C1-----A2
+                 1              G1-----A3
+                 5              T1-----A4
+    - To reduce the memory footprint:
+        - 1st. We could keep in the suffix array values that are multiples of some integer *K*
+        - 2nd. Use First-Last Property to find the position of the pattern
+        - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`), Pattern: `ACA`, and `K = 5`
+        -       Suffix Array:     
+                 _     top     $1-----A1 4. Not in Suffix Array but Pos($1) = Pos(A1) + 1
+                 _       \     A1-----T1 5. Not in Suffix Array but Pos(A1) = Pos(T1) + 1
+                 _         --> A2-----G1 1. Not in Suffix Array but we know that Pos(A2) = Pos(G1) + 1
+                 0       /     A3-----$1 3. Not in Suffix Array but Pos(A3) = Pos($1) + 1
+                 _     bott    A4-----C1
+                 _             C1-----A2
+                 _             G1-----A3 2. Not in Suffix Array but Pos(G2) = Pos(A3) + 1
+                 5             T1-----A4 6. Pos(T1) = 5
+                 Pos(T1) = 5
+                 Pos(A1) = Pos(T1) + 1 = 6
+                 Pos($1) = Pos(A1) + 1 = 7
+                 Pos(A3) = Pos($1) + 1 = 8 = 0
+                 Pos(G1) = Pos(A3) + 1 = 1
+                 Pos(A2) = Pos(G1) + 1 = 2
+        -       SuffixArray_PatternMatching(Text, Pattern, SuffixArray):
+                    minIndex = 0
+                    maxIndex = |Text|
+                    While mindIndex < maxIndex:
+                        midIndex = (minIndex + maxIndex) // 2
+                        if Pattern > Suffix of Text starting at position SuffixArray(midIndex):
+                            minIndex = midIndex + 1
+                        else:
+                            maxIndex = midIndex
+                    start = minIndex
+
+                    maxIndex = |Text|
+                    While mindIndex < maxIndex:
+                        midIndex = (minIndex + maxIndex) // 2
+                        if Pattern < Suffix of Text starting at position SuffixArray(midIndex):
+                            maxIndex = midIndex
+                        else:
+                            minIndex = midIndex + 1
+                    end = maxIndex
+
+                    if start > end:
+                        return "Pattern does not appear in Text"
+                    else:
+                        return (start, end)
+        - Space Complexity: ~4/K x |*Text*| space with Manber-Myers algorithm
+        - Matching Pattern running Time: 
+            - It's multiplied by x *K*
+            - But since *K* is a constant, the running time unchanged
+- Approximate Pattern Matching:
+    - Input: A string *Pattern*, a string *Text*, and an integer *d*
+    - Output: All positions in *Text* where the string *Pattern* appears as a substring with at most *d* mismatches
+- Multiple Approximate Pattern Matching:
+    - Input: A set of strings *Patterns*, a string *Text*, and an integer *d*
+    - Output: All positions in *Text* where a string from *Patterns* appears as a substring with at most *d* mismatches
+    - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`) and *Pattern*: `ACA` and *d*: 1
+    -                         Mismatch #              Mismatch #              Mismatch #   Array Suffix
+                 $1------A1              $1------A1              $1------A1                  7
+             t ->A1------T1      1       A1------T1              A1------T1                  6_
+                 A2------G1      1       A2------G1          t ->A2------G1      0           2  \
+                 A3------$1      1       A3------$1              A3------$1      1           0   | Approx. Match
+             b ->A4------C1      0       A4------C1          b ->A4------C1      1           4_ /  at {0, 2, 4}
+                 C1------A2          t ->C1------A2       0      C1------A2                  3
+                 G1------A3              G1------A3       1      G1------A3                  1
+                 T1------A4          b ->T1------A4       1      T1------A4                  5
+- Related Problems:
+- For more details:
+    - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
+
+</details>
+
+<details>
+<summary>Knuth-Morris-Pratt Algorithm</summary>
+
+- It's an exact pattern matching algorithm:
+    - Input: String *Text* and a pattern *P*
+    - Output: All such positions in *Text* where *Pattern* appears as substring
+- It consists of:
+    - Sliding *Pattern* down *Text* (naive approach) and
+    - Skipping skipping positions of *Text*
+    - E.g. 1. *Pattern*: abra *Text*: abracadabra
+    -       abracadabra
+            abra        Match
+             abra       Sliding by 1 positin doesn't make sense as in the naive approach
+                        It's like comparing the pattern to its substring starting at position 1
+                        We already knew that Pos[1] is different to Pattern[1]
+            The idea is to skip positions
+    -       Shift Text/Pattern   Match  Longest Common Prefix
+                  abracadabra   
+             -    abra            Yes    abra
+             +3      abra         No     a
+             +2        abra       No     a
+             +2          abra     Yes    abra
+    - E.g. 2. *Pattern*: abcdabef *Text*: abcdabcdabef
+    -       Shift Text/Pattern   Match  Longest Common Prefix
+                  abcdabcdabef   
+             -    abcdabef        No     abcdab
+             +4       abcdabef    Yes    abcdabef
+    - E.g. 3. *Pattern*: abababef *Text*: abababababef
+    -       Shift Text/Pattern   Match  Longest Common Prefix
+                  abababababef   
+             -    abababef        No     ababab
+             +2     abababef      No     ababab
+             +2       abababef    Yes    abababef
+- **Border** of string *S* is a **prefix** of *S* which is equal to a **suffix** of *S*, but **not equal** to the whole *S*
+    - E.g. 1. "a" is a border of "arba"
+    - E.g. 2. "ab" is a border of "abcdab"
+    - E.g. 3. "abab" is a border of "ababab"
+    - E.g. 4. "ab" is a border of "ab"
+- Shifting Pattern:
+    - 1st. Find the longest common prefix *u* in *Text* and *Pattern* at a given position *k*
+    -                   k
+            Text :   ___|_________u________|_______________
+            Pattern:    |_________u________|___
+                        ^0
+    - 2nd. Find the longest border *w* of *u*
+    -                   k
+            Text :   ___|_w_|_____u____|_w_|_______________
+            Pattern:    |_w_|_____u____|_w_|___
+                        ^0
+    - 3rd. Move *Pattern* such that prefix *w* in *Pattern* aligns with suffix *w* of *u* in *Text*
+    -                   k------------->k'
+            Text :   ___|_w_|_____u____|_w_|_______________
+            Pattern:    ^------------->|_w_|_____u____|_w_|___
+                                       ^0
+    - This choice is safe: we'll prove by contradiction:
+        - Let's denote *Text(k)* the suffix of string *Text* that is starting at position *k*
+            - *Text* = "abcd" => *Text(2)* = "cd"
+            - *Text* = "abc" => *Text(0)* = "abc"
+            - *Text* = "a" => *Text(1)* = "a"
+        - There are no occurrences of *Pattern* in *Text* starting between positions *k* and (*k* + |*u*| − |*w*|)
+        - (*k* + |*u*| − |*w*|) is the start of suffix *w* in the prefix *u* of *Text(k)*
+        -                   k_______________Text(k)____________
+                            |              k + |u| - |w|       |
+                Text :   ___|_w_|_____u____|_w_|_______________|
+                Pattern:    |_w_|_____u____|_w_|___
+                            ^0
+        - In fact, let's suppose *Pattern* occurs in *Text* in position *i* between *k* and start of suffix *w*
+        -                   k____________i__Text(k)____________
+                            |            | k + |u| - |w|       |
+                Text :   ___|_w_|_____u____|_w_|_______________|
+                Pattern:                 |__v__|____u________|___
+                                         0     ^ |u| - i
+                            v = Text[i:k + |u|] is a suffix of u in Text
+                            v is longer than w (|v| > |w|)
+                            v = Pattern[0:|u| - i + 1] is a prefix of Pattern
+        - Then there is prefix *v* of *Pattern* equal to suffix in *u*, and *v* is longer than *w* (see above)                            
+        - This is a contradiction: *v* is a border longer than *w*, but *w* is te longest border of *u*
+- **Prefix Function**:
+    - It's a function *s(i)* that for each *i* returns the length of the longest border of the prefix *Pattern*[0 : *i*]
+    - It's precalculated in advance and its values *s(i)* are stored in an array *s* of length |*Pattern*|
+    - E.g. *Pattern*: abababcaab
+    -       Pattern: a b a b a b c a a b
+                  s: 0 0 1 2 3 4 0 1 1 2
+    - *Pattern*[0 : *i*] has a border of length **s(i + 1) − 1**
+    -                    ___w__      ___w___
+                        /      \    /       \             
+            Pattern:    |______|____|___|_|_|___
+                                        i^ ^i+1
+                    If we remove the positions i + 1 and |w| - 1:
+                         _w'_        _w'_
+                        /    \      /    \
+            Pattern:    |____|X|____|___|_|X|___
+                                        i^ ^i+1
+                    We get a border w' that is the longest border for the prefix Pattern[0:i]
+                    Thus, Pattern[0 : i] has a border of length s(i + 1) − 1
+    - ***s*(*i* + 1) <= *s*(*i*) + 1**
+    - If *s*(*i*) > 0, then all borders of *Pattern*[0 : *i*] (but for the longest one) are also borders of P[0 : *s*(*i*) - 1]
+    -                    _s(i)_      _s(i)_
+                        /      \    /      \
+            Pattern:    |______|____|______|___
+                        ^--w --^    ^--w --^
+                    Let u be a border of Pattern[0:i]: |u| < s(i)
+                         _s(i)_      _s(i)_
+                        /      \    /      \
+            Pattern:    |u|____|____|____|u|___
+                              ^-----------^
+                         _s(i)_      _s(i)_
+                        /      \    /      \
+            Pattern:    |u|__|u|____|u|__|u|___
+            Then u is both a prefix and a suffix of Pattern[0 : s(i) - 1]
+    - To enumerate all borders of *Pattern*[0 : *i*]:
+        - All borders of the prefix ending in position *i* can be enumerated by taking the longest border *b1* of *Pattern*[0 : *i*]
+        - then the longest border *b2* of *b1*
+        - then the longest border *b3* of *b2*, ... , and so on
+        - It's a way of enumerating all borders of *Pattern*[0 : *i*] in decreasing length
+        - We can use the prefix function to compute all the borders of the prefix ending in position i
+    -       Pattern: |b3|_|b3|_|b3|_|b3|___|b3|_|b3|_|b3|_|b3|
+                     \__b2___/ \__b2___/   \                 /
+                      \______b1_______/     \______b1_______/
+    - `s(0) = 0`
+    - `if Pattern[s(i)] = Pattern[i+1], then s(i+1) = s(i) + 1`
+    -                 _s(i)_       _s(i)_   i+1
+                     /      \     /      \ /
+            Pattern: |______|x____|______|x__
+                     \_s(i+1)/    \_s(i+1)/     
+    - `if Pattern[s(i)] != Pattern[i+1], then s(i+1) = |some border of Pattern[0:s(i)-1] + 1`
+    -                 _s(i)_       _s(i)_   i+1
+                     /      \     /      \ /
+            Pattern: |______|y____|______|x__
+            We want to find a prefix ending by the character x and a suffix that is ending at position i + 1 by the character x
+            We want to find a prefix p followed by x and is also before the 2nd x at position i + 1
+            Pattern: |__|x|_|y____|______|x__
+                     | p|             | p|
+            So, p is a prefix of Pattern[0 : i] and it's also a suffix of Pattern[0 : i]
+            So, p is a border of Pattern[0 : i]
+            In other words, p is a border of Pattern[0 : s(i) - 1] (see properties above)
+            So, we want some border of the longest border of Pattern[0 : i]
+    - E.g. *Pattern*: a b a b a b c a a b
+    -     Ind.: 0 1 2 3 4 5 6 7 8 9 
+            P : a b a b a b c a a b
+          s(0): 0 <----------------- Initialization; Current Longest Border (CLB): ""
+          s(1): 0 0<---------------- Previous LB (PLB): "", next char to it (PLB+1): "a" != P[1]; CLB: ""
+          s(2): 0 0 1<-------------- PLB: P[0:0]; PLB+1: P[0] = P[2]=> s(2) = s(1) + 1; CLB = P[0:1] = "a"
+          s(3): 0 0 1 2<------------ PLB: P[0:1]; PLB+1: P[1] = P[3]=> s(3) = s(2) + 1; CLB:P[0:2] = "ab"
+          s(4): 0 0 1 2 3<---------- PLB: P[0:2]; PLB+1: P[2] = P[4]=> s(4) = s(3) + 1; CLB:P[0:3] = "abc"
+          s(5): 0 0 1 2 3 4<-------- PLB: P[0:3]; PLB+1: P[3] = P[5]=> s(5) = s(4) + 1; CLB:P[0:4] = "abab"
+          s(6): 0 0 1 2 3 4 0<------ PLB: P[0:4]; PLB+1: P[4] != P[6] Find LB of PLB: LB(P[0:4])
+                                     LB(P[0:4]): P[0:3]; PLB(P[0:4])+1: P[4] != P[6] Find LB of PLB: LB(P[0:3])
+                                     LB(P[0:3]): P[0:2]; LB(P[0:3])+1: P[3] != P[6] Find LB of PLB: LB(P[0:2])
+                                     LB(P[0:2]): P[0:1]; LB(P[0:2])+1: P[2] != P[6] Find LB of PLB: LB(P[0:1])
+                                     LB(P[0:1]): ""; LB("")+1: "a" != P[6]=> s(6) = 0; CLB: P[0:0] = ""
+          s(7): 0 0 1 2 3 4 0 1<---- PLB: P[0:0]; PLB+1: P[0] = P[7]=> s(7) = s(0) + 1; CLB: P[0:1] = "a"
+          s(8): 0 0 1 2 3 4 0 1 1<-- PLB: P[0:1]; PLB+1: P[1] != P[8] Find LB of PLB: LB(P[0:1])
+                                     LB(P[0:1]): P[0:0]; LB(P[0:1]+1: P[0] = P[8]=> s(8) = s(0) + 1; CLB: P[0:1]
+          s(9): 0 0 1 2 3 4 0 1 1 2<-PLB = P[0:1]; PLB+1 = P[1] = P[9]=> s(9) = s(8) + 1
+- Knuth-Morris-Pratt Algorithm:
+    - Create new string *S* = *Pattern* + ’$’ + *Text*
+    - Compute prefix function *s* for string *S*
+    - For all positions `i` such that `i > |Pattern| and s(i) = |Pattern|`, add `i − 2|Pattern|` to the output:
+        - 1st. we need to substract `|Pattern| - 1` to get the position of *Pattern* in *S*
+        - 2nd. we need to substract `-1` of the ’$’
+        - 3rd. we need to substract `|Pattern|` to get the position of *Pattern* in *Text*
+        - In total, we need to substract `2 |Pattern|`
+    - ’$’ must be a special character absent from both *Pattern* and *Text*
+        - We ensure that `For all i, s(i) <= |Pattern|`
+        - If we don't insert a '$' in S between the *Pattern* and *Text*, we get a wrong answer:
+        - E.g. *Pattern* = *AAA* and the *Text* = *A*
+        -       Indices(S): 0 1 2 3 
+                        S : A A A A
+                        s : 0 1 2 3
+                                  ^ i > |Pattern| and s(i) = |Pattern| = 3
+                The algorithm will think there is an occurence of Pattern in Text, although it's wrong!
+    - E.g. *Pattern* = abra and the *Text* = abracadabra
+    -       Indices(Text):           0 1 2 3 4  5  6  7  8  9 10
+               Indices(S): 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+                       S : a b r a $ a b r a c  a  d  a  b  r  a
+                       s : 0 0 0 1 0 1 2 3 4 0  1  0  1  2  3  4
+                                           ^                   ^
+                i - |Pattern| + 1 = 8 - 4 + 1 = 5 is the position of pattern in string S
+                i - 2 |Pattern| = 8 - 8 = 0 is the position of pattern in string Text
+                i - 2 |Pattern| = 15 - 8 = 7 is the position of pattern in string Text
+- Implementation, Time Complexity and Operations:
+    -       ComputePrefixFunction(Pattern):
+                s = array of integer of length |Pattern|
+                s[0] = 0; boder = 0
+                for i in range(1, |Pattern| - 1):
+                    while (border > 0) and (Pattern[i] != P[border]):
+                        border = s[border - 1]
+                    if Pattern[i] == Pattern[border]:
+                        border += 1
+                    else:
+                        border = 0
+                    s[i] = border
+                return s
+    -       Knuth-Morris-Pratt(Text, Pattern):
+                S = Pattern + ’$’ + T
+                s = ComputePrefixFunction(S)
+                result = empty list
+                for i in range(|P| + 1, |S| − 1, +1):
+                    if s[i] == |P|:
+                        result.Append(i − 2|P|)
+                return result
+    - Running Time:
+        - ComputePrefixFunction: **O(|*Patterns*|)**:
+            - Except the internal *while* loop, everything is O(|*Pattern*|):
+            - O(|*Pattern*|) Initialization + O(|*Pattern*|) of *for* loop iterations + O(1) assignments of each *for* iteration
+            - We need to prove that the total iteration # of the *while* loop across all the iterations of the external *for* loop is **linear**
+        -       s(i)
+                  ^  
+                 4|           x
+                 3|         x         
+                 2|       x           x
+                 1|     x         x x
+                 0 −x−x−−−−−−−−−x−−−−−−−−> i
+                    0 1 2 3 4 5 6 7 8 9 
+                    a b a b a b c a a b
+                border (s(i)) can increase at most by 1 on each iteration of the for loop
+                In total, border is increased O(|P|) times
+                border is decreased at least by 1 on each iteration of the while loop 
+                but since border >= 0 and border < |Pattern| (shorter than the pattern)
+                It can't decrease more than border times
+                In other words, the while loop can't decrease more than the border is previously increased
+                so we could have b1 increases (+1 increase b1 time) + b1 decreases + ... + bn increases + bn decreases
+                b1 + ... + bn <= |Pattern|
+                So, border can increase at most |P| times and can decrease at most |P| times
+                Therefore, b1 increases + b1 decreases + ... + bn increases + bn decreases = O(2 * |Pattern|) = O(|Pattern|)
+        - Knuth-Morris-Pratt: **O(|*Text*| + |*Pattern*|)**
+            - Single pattern matching: O(|*Text*| + |*Pattern*|)
+            - For multiple patterns matching: O(# of pattern x |*Text*| + |*Patterns*|): it's not as interesting as BWT approach
+- Related Problems:
+- For more details:
+    - UC San Diego Course:[Knuth-Morris-Pratt Algorithm](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/3-knuth-morris-pratt-algorithm/03_algorithmic_challenges_1_knuth_morris_pratt.pdf)
+    - Visualization: [Knuth-Morris-Pratt Algorithm](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
+
+</details>
+
+<details>
+<summary>Rabin-Karp's Algorithm Algorithm</summary>
+
+- It's an exact a single pattern matching algorithm:
+    - Input: String *Text* and a pattern *P*
+    - Output: All such positions in *Text* where *Pattern* appears as substring
+- Implementation, Time Complexity and Operations:
+    - Running Time: 
+        - Single pattern matching: O(|*Text*|)
+        - For multiple patterns matching: O(# of pattern x |*Text*|): it's slower than Suffix Tree or BWT approach (O(|*Text*| + |*Patterns*|))
+- See Hashing above
+
+</details>
+
+<details>
 <summary>Suffix Arrays</summary>
 
 - It's an array that holds starting positions of all suffixes of a string *S* sorted in lexicographic order:
@@ -3926,351 +4259,31 @@
     - We denote by LCP(*S*, *T*) = |*u*| = The length of the *lcp* of *S* and *T*
     - E.g. 1. LCP(“ababc”, “abc”) = 2
     - E.g. 2. LCP(“a”, “b”) = 0
+- **LCP array** of string *S*:
+    - It's the array *lcp* of size |*S*| − 1 such that for each *i* such that:
+    - `0 ≤ i ≤ |S| − 2, lcp[i] = LCP(A[i], A[i + 1])`
     - E.g. 3. *S* = “ababaa$”
-    -               S-A     LCP(S-A(i), S-A(i-1))        Suffix Tree
-                0   $           -                             X0______
-                1   a$          0 An edge diverge root     $/ a\       \ba
-                2   aa$         1 A common edge (X0, X1)  0     X1     X2____
-                3   abaa$       1                           $/ /a$ \ba  \a$  \baa$
-                4   ababaa$     3                          1  2     X2   5   6
-                5   baa$        0                               a$ / \baa$
-                6   babaa$      2                                 3   4
+    -               S-A     LCP(S-A(i), S-A(i+1))        Suffix Tree
+                0   $           0                            _X0_______
+                1   a$          1 An edge diverge root     $/ a\       \ba
+                2   aa$         1 A common edge (X0, X1)  0   __X1_    X2____
+                3   abaa$       3                           $/ /a$ \ba  \a$  \baa$
+                4   ababaa$     0                          1  2     X2   5   6
+                5   baa$        2                               a$ / \baa$
+                6   babaa$      -                                 3   4
+    - Property: `For any i < j, LCP(A[i], A[j]) ≤ lcp[i] and LCP(A[i], A[j]) ≤ lcp[j − 1]`
+    - Property: `For any i < j, LCP(A[i], A[j]) = min(k=i..j−1) LCP(A[k], A[k+1])`
+    -           If m = min(k=i..j−1) LCP(A[k], A[k+1]), 
+                Then for all k: i ≤ k ≤ j−1, LCP(A[k], A[k+1]) ≥ m, 
+                So there is a prefix of length m common for all suffixes A[i], A[i+1], ..., A[j], 
+                So LCP(A[i], A[j]) ≥ m
+                However, if LCP(A[k], A[k+1]) = m for some k: i ≤ k ≤ j−1, 
+                Then character number m + 1 has changed between k-th and k+1-th suffix and so it cannot be the same in A[i] and A[j], 
+                So LCP(A[i], A[j]) ≤ m 
+                Thus, LCP(A[i], A[j]) = m
 - Related Problems:
 - For more details:
     - UC San Diego Course:[From Suffix Arrays To Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/4-Constructing-Suffix-Arrays-and-Suffix-Trees/04_algorithmic_challenges_3_from_suffix_array_to_suffix_tree.pdf)
-
-</details>
-
-<details>
-<summary>Suffix Arrays: Pattern Matching</summary>
-
-- Exact Pattern Matching:
-    - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`) and Pattern: `ACA`
-    -       Array Suffix:     
-                 7      top     $1-----A1
-                 6        \     A1-----T1
-                 2          --> A2-----G1
-                 0        /     A3-----$1
-                 4      bott    A4-----C1
-                 3              C1-----A2
-                 1              G1-----A3
-                 5              T1-----A4
-    - To reduce the memory footprint:
-        - 1st. We could keep in the suffix array values that are multiples of some integer *K*
-        - 2nd. Use First-Last Property to find the position of the pattern
-        - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`), Pattern: `ACA`, and `K = 5`
-        -       Suffix Array:     
-                 _     top     $1-----A1 4. Not in Suffix Array but Pos($1) = Pos(A1) + 1
-                 _       \     A1-----T1 5. Not in Suffix Array but Pos(A1) = Pos(T1) + 1
-                 _         --> A2-----G1 1. Not in Suffix Array but we know that Pos(A2) = Pos(G1) + 1
-                 0       /     A3-----$1 3. Not in Suffix Array but Pos(A3) = Pos($1) + 1
-                 _     bott    A4-----C1
-                 _             C1-----A2
-                 _             G1-----A3 2. Not in Suffix Array but Pos(G2) = Pos(A3) + 1
-                 5             T1-----A4 6. Pos(T1) = 5
-                 Pos(T1) = 5
-                 Pos(A1) = Pos(T1) + 1 = 6
-                 Pos($1) = Pos(A1) + 1 = 7
-                 Pos(A3) = Pos($1) + 1 = 8 = 0
-                 Pos(G1) = Pos(A3) + 1 = 1
-                 Pos(A2) = Pos(G1) + 1 = 2
-        -       SuffixArray_PatternMatching(Text, Pattern, SuffixArray):
-                    minIndex = 0
-                    maxIndex = |Text|
-                    While mindIndex < maxIndex:
-                        midIndex = (minIndex + maxIndex) // 2
-                        if Pattern > Suffix of Text starting at position SuffixArray(midIndex):
-                            minIndex = midIndex + 1
-                        else:
-                            maxIndex = midIndex
-                    start = minIndex
-
-                    maxIndex = |Text|
-                    While mindIndex < maxIndex:
-                        midIndex = (minIndex + maxIndex) // 2
-                        if Pattern < Suffix of Text starting at position SuffixArray(midIndex):
-                            maxIndex = midIndex
-                        else:
-                            minIndex = midIndex + 1
-                    end = maxIndex
-
-                    if start > end:
-                        return "Pattern does not appear in Text"
-                    else:
-                        return (start, end)
-        - Space Complexity: ~4/K x |*Text*| space with Manber-Myers algorithm
-        - Matching Pattern running Time: 
-            - It's multiplied by x *K*
-            - But since *K* is a constant, the running time unchanged
-- Approximate Pattern Matching:
-    - Input: A string *Pattern*, a string *Text*, and an integer *d*
-    - Output: All positions in *Text* where the string *Pattern* appears as a substring with at most *d* mismatches
-- Multiple Approximate Pattern Matching:
-    - Input: A set of strings *Patterns*, a string *Text*, and an integer *d*
-    - Output: All positions in *Text* where a string from *Patterns* appears as a substring with at most *d* mismatches
-    - E.g. BWT: `ATG$C3A` (original text: `AGACATA$`) and *Pattern*: `ACA` and *d*: 1
-    -                         Mismatch #              Mismatch #              Mismatch #   Array Suffix
-                 $1------A1              $1------A1              $1------A1                  7
-             t ->A1------T1      1       A1------T1              A1------T1                  6_
-                 A2------G1      1       A2------G1          t ->A2------G1      0           2  \
-                 A3------$1      1       A3------$1              A3------$1      1           0   | Approx. Match
-             b ->A4------C1      0       A4------C1          b ->A4------C1      1           4_ /  at {0, 2, 4}
-                 C1------A2          t ->C1------A2       0      C1------A2                  3
-                 G1------A3              G1------A3       1      G1------A3                  1
-                 T1------A4          b ->T1------A4       1      T1------A4                  5
-- Related Problems:
-- For more details:
-    - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
-
-</details>
-
-<details>
-<summary>Knuth-Morris-Pratt Algorithm</summary>
-
-- It's an exact pattern matching algorithm:
-    - Input: String *Text* and a pattern *P*
-    - Output: All such positions in *Text* where *Pattern* appears as substring
-- It consists of:
-    - Sliding *Pattern* down *Text* (naive approach) and
-    - Skipping skipping positions of *Text*
-    - E.g. 1. *Pattern*: abra *Text*: abracadabra
-    -       abracadabra
-            abra        Match
-             abra       Sliding by 1 positin doesn't make sense as in the naive approach
-                        It's like comparing the pattern to its substring starting at position 1
-                        We already knew that Pos[1] is different to Pattern[1]
-            The idea is to skip positions
-    -       Shift Text/Pattern   Match  Longest Common Prefix
-                  abracadabra   
-             -    abra            Yes    abra
-             +3      abra         No     a
-             +2        abra       No     a
-             +2          abra     Yes    abra
-    - E.g. 2. *Pattern*: abcdabef *Text*: abcdabcdabef
-    -       Shift Text/Pattern   Match  Longest Common Prefix
-                  abcdabcdabef   
-             -    abcdabef        No     abcdab
-             +4       abcdabef    Yes    abcdabef
-    - E.g. 3. *Pattern*: abababef *Text*: abababababef
-    -       Shift Text/Pattern   Match  Longest Common Prefix
-                  abababababef   
-             -    abababef        No     ababab
-             +2     abababef      No     ababab
-             +2       abababef    Yes    abababef
-- **Border** of string *S* is a **prefix** of *S* which is equal to a **suffix** of *S*, but **not equal** to the whole *S*
-    - E.g. 1. "a" is a border of "arba"
-    - E.g. 2. "ab" is a border of "abcdab"
-    - E.g. 3. "abab" is a border of "ababab"
-    - E.g. 4. "ab" is a border of "ab"
-- Shifting Pattern:
-    - 1st. Find the longest common prefix *u* in *Text* and *Pattern* at a given position *k*
-    -                   k
-            Text :   ___|_________u________|_______________
-            Pattern:    |_________u________|___
-                        ^0
-    - 2nd. Find the longest border *w* of *u*
-    -                   k
-            Text :   ___|_w_|_____u____|_w_|_______________
-            Pattern:    |_w_|_____u____|_w_|___
-                        ^0
-    - 3rd. Move *Pattern* such that prefix *w* in *Pattern* aligns with suffix *w* of *u* in *Text*
-    -                   k------------->k'
-            Text :   ___|_w_|_____u____|_w_|_______________
-            Pattern:    ^------------->|_w_|_____u____|_w_|___
-                                       ^0
-    - This choice is safe: we'll prove by contradiction:
-        - Let's denote *Text(k)* the suffix of string *Text* that is starting at position *k*
-            - *Text* = "abcd" => *Text(2)* = "cd"
-            - *Text* = "abc" => *Text(0)* = "abc"
-            - *Text* = "a" => *Text(1)* = "a"
-        - There are no occurrences of *Pattern* in *Text* starting between positions *k* and (*k* + |*u*| − |*w*|)
-        - (*k* + |*u*| − |*w*|) is the start of suffix *w* in the prefix *u* of *Text(k)*
-        -                   k_______________Text(k)____________
-                            |              k + |u| - |w|       |
-                Text :   ___|_w_|_____u____|_w_|_______________|
-                Pattern:    |_w_|_____u____|_w_|___
-                            ^0
-        - In fact, let's suppose *Pattern* occurs in *Text* in position *i* between *k* and start of suffix *w*
-        -                   k____________i__Text(k)____________
-                            |            | k + |u| - |w|       |
-                Text :   ___|_w_|_____u____|_w_|_______________|
-                Pattern:                 |__v__|____u________|___
-                                         0     ^ |u| - i
-                            v = Text[i:k + |u|] is a suffix of u in Text
-                            v is longer than w (|v| > |w|)
-                            v = Pattern[0:|u| - i + 1] is a prefix of Pattern
-        - Then there is prefix *v* of *Pattern* equal to suffix in *u*, and *v* is longer than *w* (see above)                            
-        - This is a contradiction: *v* is a border longer than *w*, but *w* is te longest border of *u*
-- **Prefix Function**:
-    - It's a function *s(i)* that for each *i* returns the length of the longest border of the prefix *Pattern*[0 : *i*]
-    - It's precalculated in advance and its values *s(i)* are stored in an array *s* of length |*Pattern*|
-    - E.g. *Pattern*: abababcaab
-    -       Pattern: a b a b a b c a a b
-                  s: 0 0 1 2 3 4 0 1 1 2
-    - *Pattern*[0 : *i*] has a border of length **s(i + 1) − 1**
-    -                    ___w__      ___w___
-                        /      \    /       \             
-            Pattern:    |______|____|___|_|_|___
-                                        i^ ^i+1
-                    If we remove the positions i + 1 and |w| - 1:
-                         _w'_        _w'_
-                        /    \      /    \
-            Pattern:    |____|X|____|___|_|X|___
-                                        i^ ^i+1
-                    We get a border w' that is the longest border for the prefix Pattern[0:i]
-                    Thus, Pattern[0 : i] has a border of length s(i + 1) − 1
-    - ***s*(*i* + 1) <= *s*(*i*) + 1**
-    - If *s*(*i*) > 0, then all borders of *Pattern*[0 : *i*] (but for the longest one) are also borders of P[0 : *s*(*i*) - 1]
-    -                    _s(i)_      _s(i)_
-                        /      \    /      \
-            Pattern:    |______|____|______|___
-                        ^--w --^    ^--w --^
-                    Let u be a border of Pattern[0:i]: |u| < s(i)
-                         _s(i)_      _s(i)_
-                        /      \    /      \
-            Pattern:    |u|____|____|____|u|___
-                              ^-----------^
-                         _s(i)_      _s(i)_
-                        /      \    /      \
-            Pattern:    |u|__|u|____|u|__|u|___
-            Then u is both a prefix and a suffix of Pattern[0 : s(i) - 1]
-    - To enumerate all borders of *Pattern*[0 : *i*]:
-        - All borders of the prefix ending in position *i* can be enumerated by taking the longest border *b1* of *Pattern*[0 : *i*]
-        - then the longest border *b2* of *b1*
-        - then the longest border *b3* of *b2*, ... , and so on
-        - It's a way of enumerating all borders of *Pattern*[0 : *i*] in decreasing length
-        - We can use the prefix function to compute all the borders of the prefix ending in position i
-    -       Pattern: |b3|_|b3|_|b3|_|b3|___|b3|_|b3|_|b3|_|b3|
-                     \__b2___/ \__b2___/   \                 /
-                      \______b1_______/     \______b1_______/
-    - `s(0) = 0`
-    - `if Pattern[s(i)] = Pattern[i+1], then s(i+1) = s(i) + 1`
-    -                 _s(i)_       _s(i)_   i+1
-                     /      \     /      \ /
-            Pattern: |______|x____|______|x__
-                     \_s(i+1)/    \_s(i+1)/     
-    - `if Pattern[s(i)] != Pattern[i+1], then s(i+1) = |some border of Pattern[0:s(i)-1] + 1`
-    -                 _s(i)_       _s(i)_   i+1
-                     /      \     /      \ /
-            Pattern: |______|y____|______|x__
-            We want to find a prefix ending by the character x and a suffix that is ending at position i + 1 by the character x
-            We want to find a prefix p followed by x and is also before the 2nd x at position i + 1
-            Pattern: |__|x|_|y____|______|x__
-                     | p|             | p|
-            So, p is a prefix of Pattern[0 : i] and it's also a suffix of Pattern[0 : i]
-            So, p is a border of Pattern[0 : i]
-            In other words, p is a border of Pattern[0 : s(i) - 1] (see properties above)
-            So, we want some border of the longest border of Pattern[0 : i]
-    - E.g. *Pattern*: a b a b a b c a a b
-    -     Ind.: 0 1 2 3 4 5 6 7 8 9 
-            P : a b a b a b c a a b
-          s(0): 0 <----------------- Initialization; Current Longest Border (CLB): ""
-          s(1): 0 0<---------------- Previous LB (PLB): "", next char to it (PLB+1): "a" != P[1]; CLB: ""
-          s(2): 0 0 1<-------------- PLB: P[0:0]; PLB+1: P[0] = P[2]=> s(2) = s(1) + 1; CLB = P[0:1] = "a"
-          s(3): 0 0 1 2<------------ PLB: P[0:1]; PLB+1: P[1] = P[3]=> s(3) = s(2) + 1; CLB:P[0:2] = "ab"
-          s(4): 0 0 1 2 3<---------- PLB: P[0:2]; PLB+1: P[2] = P[4]=> s(4) = s(3) + 1; CLB:P[0:3] = "abc"
-          s(5): 0 0 1 2 3 4<-------- PLB: P[0:3]; PLB+1: P[3] = P[5]=> s(5) = s(4) + 1; CLB:P[0:4] = "abab"
-          s(6): 0 0 1 2 3 4 0<------ PLB: P[0:4]; PLB+1: P[4] != P[6] Find LB of PLB: LB(P[0:4])
-                                     LB(P[0:4]): P[0:3]; PLB(P[0:4])+1: P[4] != P[6] Find LB of PLB: LB(P[0:3])
-                                     LB(P[0:3]): P[0:2]; LB(P[0:3])+1: P[3] != P[6] Find LB of PLB: LB(P[0:2])
-                                     LB(P[0:2]): P[0:1]; LB(P[0:2])+1: P[2] != P[6] Find LB of PLB: LB(P[0:1])
-                                     LB(P[0:1]): ""; LB("")+1: "a" != P[6]=> s(6) = 0; CLB: P[0:0] = ""
-          s(7): 0 0 1 2 3 4 0 1<---- PLB: P[0:0]; PLB+1: P[0] = P[7]=> s(7) = s(0) + 1; CLB: P[0:1] = "a"
-          s(8): 0 0 1 2 3 4 0 1 1<-- PLB: P[0:1]; PLB+1: P[1] != P[8] Find LB of PLB: LB(P[0:1])
-                                     LB(P[0:1]): P[0:0]; LB(P[0:1]+1: P[0] = P[8]=> s(8) = s(0) + 1; CLB: P[0:1]
-          s(9): 0 0 1 2 3 4 0 1 1 2<-PLB = P[0:1]; PLB+1 = P[1] = P[9]=> s(9) = s(8) + 1
-- Knuth-Morris-Pratt Algorithm:
-    - Create new string *S* = *Pattern* + ’$’ + *Text*
-    - Compute prefix function *s* for string *S*
-    - For all positions `i` such that `i > |Pattern| and s(i) = |Pattern|`, add `i − 2|Pattern|` to the output:
-        - 1st. we need to substract `|Pattern| - 1` to get the position of *Pattern* in *S*
-        - 2nd. we need to substract `-1` of the ’$’
-        - 3rd. we need to substract `|Pattern|` to get the position of *Pattern* in *Text*
-        - In total, we need to substract `2 |Pattern|`
-    - ’$’ must be a special character absent from both *Pattern* and *Text*
-        - We ensure that `For all i, s(i) <= |Pattern|`
-        - If we don't insert a '$' in S between the *Pattern* and *Text*, we get a wrong answer:
-        - E.g. *Pattern* = *AAA* and the *Text* = *A*
-        -       Indices(S): 0 1 2 3 
-                        S : A A A A
-                        s : 0 1 2 3
-                                  ^ i > |Pattern| and s(i) = |Pattern| = 3
-                The algorithm will think there is an occurence of Pattern in Text, although it's wrong!
-    - E.g. *Pattern* = abra and the *Text* = abracadabra
-    -       Indices(Text):           0 1 2 3 4  5  6  7  8  9 10
-               Indices(S): 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-                       S : a b r a $ a b r a c  a  d  a  b  r  a
-                       s : 0 0 0 1 0 1 2 3 4 0  1  0  1  2  3  4
-                                           ^                   ^
-                i - |Pattern| + 1 = 8 - 4 + 1 = 5 is the position of pattern in string S
-                i - 2 |Pattern| = 8 - 8 = 0 is the position of pattern in string Text
-                i - 2 |Pattern| = 15 - 8 = 7 is the position of pattern in string Text
-- Implementation, Time Complexity and Operations:
-    -       ComputePrefixFunction(Pattern):
-                s = array of integer of length |Pattern|
-                s[0] = 0; boder = 0
-                for i in range(1, |Pattern| - 1):
-                    while (border > 0) and (Pattern[i] != P[border]):
-                        border = s[border - 1]
-                    if Pattern[i] == Pattern[border]:
-                        border += 1
-                    else:
-                        border = 0
-                    s[i] = border
-                return s
-    -       Knuth-Morris-Pratt(Text, Pattern):
-                S = Pattern + ’$’ + T
-                s = ComputePrefixFunction(S)
-                result = empty list
-                for i in range(|P| + 1, |S| − 1, +1):
-                    if s[i] == |P|:
-                        result.Append(i − 2|P|)
-                return result
-    - Running Time:
-        - ComputePrefixFunction: **O(|*Patterns*|)**:
-            - Except the internal *while* loop, everything is O(|*Pattern*|):
-            - O(|*Pattern*|) Initialization + O(|*Pattern*|) of *for* loop iterations + O(1) assignments of each *for* iteration
-            - We need to prove that the total iteration # of the *while* loop across all the iterations of the external *for* loop is **linear**
-        -       s(i)
-                  ^  
-                 4|           x
-                 3|         x         
-                 2|       x           x
-                 1|     x         x x
-                 0 −x−x−−−−−−−−−x−−−−−−−−> i
-                    0 1 2 3 4 5 6 7 8 9 
-                    a b a b a b c a a b
-                border (s(i)) can increase at most by 1 on each iteration of the for loop
-                In total, border is increased O(|P|) times
-                border is decreased at least by 1 on each iteration of the while loop 
-                but since border >= 0 and border < |Pattern| (shorter than the pattern)
-                It can't decrease more than border times
-                In other words, the while loop can't decrease more than the border is previously increased
-                so we could have b1 increases (+1 increase b1 time) + b1 decreases + ... + bn increases + bn decreases
-                b1 + ... + bn <= |Pattern|
-                So, border can increase at most |P| times and can decrease at most |P| times
-                Therefore, b1 increases + b1 decreases + ... + bn increases + bn decreases = O(2 * |Pattern|) = O(|Pattern|)
-        - Knuth-Morris-Pratt: **O(|*Text*| + |*Pattern*|)**
-            - Single pattern matching: O(|*Text*| + |*Pattern*|)
-            - For multiple patterns matching: O(# of pattern x |*Text*| + |*Patterns*|): it's not as interesting as BWT approach
-- Related Problems:
-- For more details:
-    - UC San Diego Course:[Knuth-Morris-Pratt Algorithm](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/3-knuth-morris-pratt-algorithm/03_algorithmic_challenges_1_knuth_morris_pratt.pdf)
-    - Visualization: [Knuth-Morris-Pratt Algorithm](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
-
-</details>
-
-<details>
-<summary>Rabin-Karp's Algorithm Algorithm</summary>
-
-- It's an exact a single pattern matching algorithm:
-    - Input: String *Text* and a pattern *P*
-    - Output: All such positions in *Text* where *Pattern* appears as substring
-- Implementation, Time Complexity and Operations:
-    - Running Time: 
-        - Single pattern matching: O(|*Text*|)
-        - For multiple patterns matching: O(# of pattern x |*Text*|): it's slower than Suffix Tree or BWT approach (O(|*Text*| + |*Patterns*|))
-- See Hashing above
 
 </details>
 
