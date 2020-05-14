@@ -3812,7 +3812,7 @@
         - SortDoubled: O(|*S*|) run log |*S*| times
         - UpdateClasses: O(|*S*|)* run log |*S*| times
         - Space Complexity: O(|*S*|)
-    -       E.g. *S* = AACGATAGCGGTAGA$
+    - E.g. `S = AACGATAGCGGTAGA$`
     -       1- Initialization: SortCharacters
               1st. For loop:
                     Σ: $ A C G T
@@ -3839,12 +3839,12 @@
                   Order: 15|  |  |04|06|12|14|02|08|03|07|09|10|13|05|11| i = 02, Count[C] = 08 - 1 = 7
                   Order: 15|  |01|04|06|12|14|02|08|03|07|09|10|13|05|11| i = 01, Count[A] = 03 - 1 = 2
                   Order: 15|00|01|04|06|12|14|02|08|03|07|09|10|13|05|11| i = 00, Count[A] = 02 - 1 = 1
-    -       2- Initialization: ComputeCharClasses(S, order)
+    -   2- Initialization: ComputeCharClasses(S, order)
                   Order  : 15|00|01|04|06|12|14|02|08|03|07|09|10|13|05|11|
                   Indices: 0 |1 |2 |3 |4 |5 |6 |7 |8 |9 |10|11|12|13|14|15|
                     Class: 01|01|02|03|01|04|01|03|02|03|03|04|01|03|01|00|
-    -       3- SortDoubled(S, L, order, class): L = 1
-                  1st. For loop:
+    -   3- SortDoubled(S, L, order, class): L = 1
+            1st. For loop:
                           Indices: 00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|
                             Class: 01|01|02|03|01|04|01|03|02|03|03|04|01|03|01|00|
                     Count(i = 00): 00|01|00|00|00|00|00|00|00|00|00|00|00|00|00|00|  Class[i] = 1
