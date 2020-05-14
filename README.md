@@ -3679,20 +3679,20 @@
         - Use counting sort to compute order of characters
         - After the 1st 2 for loops, for each character, the count contains the position in the sorted array of all the characters of the input string right after the last such character
         - E.g. *count*[0] = the occurrences # of the smallest character of *Σ* in *S*, and if we sort the characters of *S*, the smallest character will be in positions 0 through *count*[0]−1.
-    -       SortCharacters(S):
-                order = array of size |S|
-                count = zero array of size |Σ|
-                for i from 0 to |S| − 1:
-                    count[S[i]] = count[S[i]] + 1
-                for j from 1 to |Σ| − 1:
-                    count[j] = count[j] + count[j − 1]
-                for i from |S| − 1 down to 0:
-                    c = S[i]
-                    count[c] = count[c] − 1
-                    order [count[c]] = i
-                return order
-        - Running Time: O(|S| + |Σ|)
-        - Space Complexity: O(|S| + |Σ|)
+        -       SortCharacters(S):
+                    order = array of size |S|
+                    count = zero array of size |Σ|
+                    for i from 0 to |S| − 1:
+                        count[S[i]] = count[S[i]] + 1
+                    for j from 1 to |Σ| − 1:
+                        count[j] = count[j] + count[j − 1]
+                    for i from |S| − 1 down to 0:
+                        c = S[i]
+                        count[c] = count[c] − 1
+                        order [count[c]] = i
+                    return order
+        - Running Time:  O(|*S*| + |*Σ*|)
+        - Space Complexity:  O(|*S*| + |*Σ*|)
     - Initialization: `ComputeCharClasses`:
         - *Ci*: partial cyclic shift of length *L* starting in *i*
         - *Ci*: can be equal to *Cj*: They are in one equivalence class
@@ -3706,15 +3706,15 @@
                 a  5--> C5: class:[1,  , 1,  , 1, 1, 0] because C5 ("a") == C4 ("a") in order
                 b  1--> C1: class:[1, 2, 1,  , 1, 1, 0] because C1 ("b") > C5 ("a") in order
                 b  3--> C3: class:[1, 2, 1, 2, 1, 1, 0] because C3 ("b") == C5 ("b") in order
-    -       ComputeCharClasses(S, order):
-                class = array of size |S|
-                class[order [0]] = 0
-                for i from 1 to |S| − 1:
-                    if S[order[i]] != S[order[i − 1]]:
-                        class[order[i]] = class[order[i − 1]] + 1
-                    else:
-                        class[order[i]] = class[order[i − 1]]
-                return class
+        -       ComputeCharClasses(S, order):
+                    class = array of size |S|
+                    class[order [0]] = 0
+                    for i from 1 to |S| − 1:
+                        if S[order[i]] != S[order[i − 1]]:
+                            class[order[i]] = class[order[i − 1]] + 1
+                        else:
+                            class[order[i]] = class[order[i − 1]]
+                    return class
         - Running Time: O(|*S*|)
         - Space Complexity: O(|*S*|)
     - `SortDoubled(S, L, order, class)`:
@@ -3789,22 +3789,33 @@
                 C2': ab   2    1     (2, 3)     (1, 2)<--------[3,  , 3,  , 2, 1, 0]: ...
                 C1': ba   1    1     (1, 2)     (2, 1)<--------[3, 4, 3,  , 2, 1, 0]: ...
                 C3': ba   3    0     (3, 4)     (2, 1)<--------[3, 4, 3, 4, 2, 1, 0]: ...
-        -       UpdateClasses(newOrder , class, L):
+        -       UpdateClasses(newOrder, class, L):
                     n = |newOrder|
                     newClass = array of size n
-                    newClass[newOrder [0]] = 0
+                    newClass[ newOrder[0] ] = 0
                     for i from 1 to n − 1:
                         cur = newOrder[i]; mid = (cur + L) (mod n)
                         prev = newOrder[i − 1]; midPrev = (prev + L) (mod n)
                         if class[cur] == class[prev] and class[mid] == class[midPrev]:
-                            newClass[cur ] = newClass[prev]
+                            newClass[cur] = newClass[prev]
                         else:
-                            newClass[cur ] = newClass[prev ] + 1
+                            newClass[cur] = newClass[prev] + 1
                 
                     return newClass
         - Running Time: O(|S|)
         - Space Complexity: O(|S|)
-              
+    - Build Suffix Array Analysis:
+        - Running Time: O(|*S*| log |*S*| + |*Σ*|)
+        - SortCharacter: O(|*S*| + |*Σ*|)
+        - ComputeCharClass: O(|*S*|)
+        - *While* loop iteration is run log |*S*| times because each iteration double *L*
+        - SortDoubled: O(|*S*|) run log |*S*| times
+        - UpdateClasses: O(|*S*|)* run log |*S*| times
+        - Space Complexity: O(|*S*|)
+- Related Problems:
+    - [Construct the Suffix Array of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/160)
+- For more details:
+    - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
 </details>
 
@@ -3886,7 +3897,6 @@
                  G1------A3              G1------A3       1      G1------A3                  1
                  T1------A4          b ->T1------A4       1      T1------A4                  5
 - Related Problems:
-    - [Construct the Suffix Array of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/160)
 - For more details:
     - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
