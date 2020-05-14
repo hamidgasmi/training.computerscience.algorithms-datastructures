@@ -3910,6 +3910,34 @@
     - [Construct the Suffix Array of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/160)
 - For more details:
     - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
+    - UC San Diego Course:[Efficient constuction of Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/4-Constructing-Suffix-Arrays-and-Suffix-Trees/04_algorithmic_challenges_2_suffix_array.pdf)
+
+</details>
+
+<details>
+<summary>From Suffix Arrays To Suffix Trees</summary>
+
+- The idea is to construct a suffix tree from a suffix array by using the suffix array efficient construction above
+    - 1st. Compute suffix array in O(|S| log|S|)
+    - 2nd. Compute additional information in O(|S|)
+    - 3rd. Construct suffix tree from suffix array and additional information in O(|S|)
+- The **Longest Common Prefix** (**LCP**) of 2 strings *S* and *T*:
+    - It's the longest such string *u* that *u* is both a prefix of *S* and *T*
+    - We denote by LCP(*S*, *T*) = |*u*| = The length of the *lcp* of *S* and *T*
+    - E.g. 1. LCP(“ababc”, “abc”) = 2
+    - E.g. 2. LCP(“a”, “b”) = 0
+    - E.g. 3. *S* = “ababaa$”
+    -               S-A     LCP(S-A(i), S-A(i-1))        Suffix Tree
+                0   $           -                             X0______
+                1   a$          0 An edge diverge root     $/ a\       \ba
+                2   aa$         1 A common edge (X0, X1)  0     X1     X2____
+                3   abaa$       1                           $/ /a$ \ba  \a$  \baa$
+                4   ababaa$     3                          1  2     X2   5   6
+                5   baa$        0                               a$ / \baa$
+                6   babaa$      2                                 3   4
+- Related Problems:
+- For more details:
+    - UC San Diego Course:[From Suffix Arrays To Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/4-Constructing-Suffix-Arrays-and-Suffix-Trees/04_algorithmic_challenges_3_from_suffix_array_to_suffix_tree.pdf)
 
 </details>
 
