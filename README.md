@@ -3725,42 +3725,87 @@
                      Ci = C2 = ab
                      Ci+L = C2+2 = C4 = aa
                      Ci' = CiCi+L = C2C2+2 = C2C4 = abaa
-        - To compare *Ci'*with *Cj'*, it’s sufficient to compare *Ci* with *Cj* and *Ci+L* with *Cj+L*
-        - 1st to compare (*Ci*, *Cj*): if different (`class[i] != class[j]`), return comparison (`order[i]`, `order[j]`) (2nd comparison isn't needed)
-        - 2nd. If *Ci* == *Cj* (`class[i] = class[j]`), return comparison of (*Ci+L*, *Cj+L*):(`order[i+L]`, `order[j+L]`)
-        - **Sorting pairs**:
-        - First. sort by second element of pair, 
-        - Then **stable** sort by 1st. element of pair
+        - To compare *Ci'* with *Cj'*, it’s sufficient to compare *Ci* with *Cj* and *Ci+L* with *Cj+L*
+        - To sort *Ci'*, the idea is to **sort pairs**: 
+        - 1st. To sort by 2nd. element of pair: (*Ci+L*, *Cj+L*)
+        - To consider the partial C-S of length L (`class`, `order`) as the right half of the doubled partial C-S: Ci+L
+        - Ci+L is already sorted
+        - To find the doubled partial C-S of length 2L that is corresponding: *Cj* (second half) ---> *Ci'* `i = j - L` of length *2L*
+        - 2nd. To sort *Ci'* by 1st. element of pair: (*Ci*, *Cj*)
+        - The 2nd Sort must be **stable**
         -       E.g. S = ababaa$, L = 2, i = 2
-                Ci+L:     Ci' Sorted by 2nd half    Ci' Sorted by 1nd half
-                C6: $a    C4': aa$a                 C6': $aba
-                C5: a$    C3': baa$   1st. half     C5': a$ab 
-                C4: aa    C2': abaa<--|\Equal___    C4': aa$a   2nd sort must be Stable
-                C0: ab    C5': a$ab   | STABLE  |-->C2': abaa   See C2', C0'
-                C2: ab    C0': abab<--|_Sort____|-->C0': abab   See C3', C1'
-                C1: ba    C6': $aba   To keep       C3': baa$
-                C3: ba    C1': baba   initial Sort  C1': baba
+                Cj = Ci+L  Order   Class    Ci' = Cj-2     Ci' Sorted by 1nd half
+                C6: $a     6       3        C4': aa$a                 C6': $aba
+                C5: a$     5       4        C3': baa$   1st. half     C5': a$ab 
+                C4: aa     4       3        C2': abaa<--|\Equal___    C4': aa$a   2nd sort must be Stable
+                C0: ab     0       4        C5': a$ab   | STABLE  |-->C2': abaa   See C2', C0'
+                C2: ab     2       2        C0': abab<--|_Sort____|-->C0': abab   See C3', C1'
+                C1: ba     1       1        C6': $aba   To keep       C3': baa$
+                C3: ba     3       0        C1': baba   initial Sort  C1': baba
         - *Ci'* is a pair (*Ci*, *Ci+L*)
-        - *C-order[0]*, *C-order[1]*, ..., *C-order[|S|−1]* are already sorted
+        - *C-order[0]*, *C-order[1]*, ..., *C-order[|S|−1]* are already sorted: To consider as 2nd. part
         - Take doubled cyclic shifts starting exactly *L* counter-clockwise (“to the left”)
-        - *C-order[0]−L'*, *C-order[1]−L*, ..., *C-order[|S|−1]−L* are sorted by second element of pair
-        - To use **Counting sort** as a stable sort
-        - We know equivalence classes of single shifts for counting sort
-    -       SortDoubled(S, L, order, class):
-                count = zero array of size |S|
-                newOrder = array of size |S|
-                for i from 0 to |S| − 1:
-                    count[class[i]] = count[class[i]] + 1
-                for j from 1 to |S| − 1:
-                    count[j] -= count[j − 1]
-                for i from |S| − 1 down to 0:
-                    start = (order[i] − L + |S|) mod |S|
-                    cl = class[start]
-                    count[cl] -= 1
-                    newOrder[count[cl]] ← start
+        - *C-order[0]−L'*, *C-order[1]−L*, ..., *C-order[|S|−1]−L* are sorted by 2nd. element of pair
+        - To use **Counting sort** as a stable sort and we will use `class` to count their occurences:
+        -       Since: 
+                    1. Ci = Cj <==> class[i] = class[j]
+                    2. Ci < Cj <==> class[i] < class[j]
+                    3. 0 <= class-# <= max-class-#
+                Class object is a standard object that could be used for Counting Sort
 
-                return newOrder
-    - Running Time: O(|S|)
+                Since 2nd. halves are already sorted, to sort the 1st. halves only is needed
+        -       SortDoubled(S, L, order, class):
+                    count = zero array of size |S|
+                    newOrder = array of size |S|
+                    for i from 0 to |S| − 1:
+                        count[class[i]] += 1
+                    for j from 1 to |S| − 1:
+                        count[j] -= count[j − 1]
+                    for i from |S| − 1 down to 0:
+                        start = (order[i] − L + |S|) mod |S| # Cj-L (start of 1st half and doubled partial C-S)
+                        cl = class[start] 
+                        count[cl] -= 1
+                        newOrder[count[cl]] = start
+
+                    return newOrder
+        - Running Time: O(|S|)
+        - Space Complexity: O(|S|)
+    - `UpdateClasses`:
+        - At this point, Pairs are sorted (`Order = newOrder`) but their class isn't yet updated
+        -       Go through sorted Pairs (through newOrder):
+                    start from 0: class[ newOrder[0] ] = 0
+                    if a pair (P1, P2) is equal to previous pair (Q1, Q2):
+                        (P1, P2) = (Q1, Q2) <==> (P1 = Q2) and (P2, Q2)
+                        then class of the pair is equal to the class of the previous one
+                    Otherwise:
+                        then class of the pair is equal to the class of the previous one + 1
+        -       E.g. S = ababaa$, L = 2, i = 2
+                Ci'     Order Class  Pairs    Pairs Class      Class
+                (L=2)   (L=2) (L=1) (P1, P2)  (c[P1], c[P2])   (L=2)
+                C6': $a   6    1     (6, 0)     (0, 1)<--------[ ,  ,  ,  ,  ,  , 0]: 1st position, smallest pair
+                C5': a$   5    2     (5, 6)     (1, 0)<--------[ ,  ,  ,  ,  , 1, 0]: OldClass[(5,6)] != OldClass[(0,1)]
+                C4': aa   4    1     (4, 5)     (1, 1)<--------[ ,  ,  ,  , 2, 1, 0]: ...
+                C0': ab   0    2     (0, 1)     (1, 2)<--------[3,  ,  ,  , 2, 1, 0]: ...
+                C2': ab   2    1     (2, 3)     (1, 2)<--------[3,  , 3,  , 2, 1, 0]: ...
+                C1': ba   1    1     (1, 2)     (2, 1)<--------[3, 4, 3,  , 2, 1, 0]: ...
+                C3': ba   3    0     (3, 4)     (2, 1)<--------[3, 4, 3, 4, 2, 1, 0]: ...
+        -       UpdateClasses(newOrder , class, L):
+                    n = |newOrder|
+                    newClass = array of size n
+                    newClass[newOrder [0]] = 0
+                    for i from 1 to n − 1:
+                        cur = newOrder[i]; mid = (cur + L) (mod n)
+                        prev = newOrder[i − 1]; midPrev = (prev + L) (mod n)
+                        if class[cur] == class[prev] and class[mid] == class[midPrev]:
+                            newClass[cur ] = newClass[prev]
+                        else:
+                            newClass[cur ] = newClass[prev ] + 1
+                
+                    return newClass
+        - Running Time: O(|S|)
+        - Space Complexity: O(|S|)
+              
+
 </details>
 
 <details>
