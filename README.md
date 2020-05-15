@@ -4259,7 +4259,7 @@
     - We denote by LCP(*S*, *T*) = |*u*| = The length of the *lcp* of *S* and *T*
     - E.g. 1. LCP(“ababc”, “abc”) = 2
     - E.g. 2. LCP(“a”, “b”) = 0
-- **LCP array** of string *S*:
+- **lcp array** of string *S*:
     - It's the array *lcp* of size |*S*| − 1 such that for each *i* such that:
     - `0 ≤ i ≤ |S| − 2, lcp[i] = LCP(A[i], A[i + 1])`
     - E.g. 3. *S* = “ababaa$”
@@ -4281,6 +4281,111 @@
                 Then character number m + 1 has changed between k-th and k+1-th suffix and so it cannot be the same in A[i] and A[j], 
                 So LCP(A[i], A[j]) ≤ m 
                 Thus, LCP(A[i], A[j]) = m
+    - Let *Sa(i)* be the next suffix after *Si* in the suffix array of string *S*
+        -       E.g. S = abracadabra$
+                S9 = ra$, Sa(9) = S2 = racadabra$
+                S10 = a$, Sa(10) = S7 = abra$
+        - Property: `LCP(Si+1, Sa(i+1)) ≥ LCP(Si, Sa(i)) − 1`
+        -       E.g. S = abracadabra$
+                 i. in A|A[i]: ind in S |  Suffixes    |        | LCP
+                 0      |               | $            |        |
+                 1      | > 10 = i+1    | a$           | Si+1   | 1
+                 2      |^  7  = i+2    | abra$        | Sa(i+1)|
+                 ...    |^  ...         | ...          |        |
+                 4      |^  3 = j + 1<  | acadabra$    |        |
+                 ...    |^   ...      ^ |     ...      |        |
+                 10     |^<9 = i      ^ | ra$          | Si     | 2 = h 
+                 11     |  2 = j>>>>>>> | racadabra$   | Sa(i)  |
+                A[i] < A[j] <==> A[i+1] < A[j+1]
+                LCP(A[i+1], A[j+1]) <= LCP(A[i+1], A[i+2])
+                LCP(A[i+1], A[j+1]) <= lcp(i+1) (property above)
+- Implementation, Time Complexity and Operations:
+    - We start with the smallest suffix, *Sk*
+    - Compute LCP(*Sk*, *Sa(k)*) directly, save result as *lcp*
+    - Then compute LCP(*Sk+1*, *Sa(k+1)*) directly, but start comparisons from position *lcp* − 1, as the 1st. *lcp* characters are definitely equal
+    - Save the result as *lcp*
+    - Repeat with *LCP(Sk+2 , Sa(k+2))* and so on until all *LCP* values are computed
+    - LCPOfSuffixes:
+        -           LCPOfSuffixes(S, i, j, equal):
+                        lcp = max(0, equal)
+                        while i + lcp < |S| and j + lcp < |S|:
+                            if S[i + lcp] == S[j + lcp]:
+                                lcp = lcp + 1
+                            else:
+                                break
+                        return lcp
+    - InvertSuffixArray(order):
+        -           InvertSuffixArray(order):
+                        pos = array of size |order |
+                        for i from 0 to |pos| − 1:
+                            pos[order [i]] = i
+                        
+                        return pos
+    - ComputeLCPArray(S, order):
+        -           ComputeLCPArray(S, order):
+                        lcpArray = array of size |S| − 1
+                        lcp = 0
+                        posInOrder = InvertSuffixArray(order )
+                        suffix = order[0]
+                        for i from 0 to |S| − 1:
+                            orderIndex = posInOrder[suffix]
+                            if orderIndex == |S| − 1:
+                                lcp = 0
+                                suffix = (suffix + 1) mod |S|
+                                continue
+                            nextSuffix = order [orderIndex + 1]
+                            lcp = LCPOfSuffixes(S, suffix, nextSuffix, lcp − 1)
+                            lcpArray [orderIndex] = lcp
+                            suffix = (suffix + 1) mod |S|
+                        return lcpArray
+    - Running Time: O(|*S*|)
+    - Building suffix tree:
+        - Build suffix array and LCP array
+        - Start from only root vertex
+        - Grow first edge for the first suffix
+        - For each next suffix, go up from the leaf until LCP with previous is below
+        - Build a new edge for the new suffix
+        -           class SuffixTreeNode:
+                        SuffixTreeNode parent
+                        Map<char, SuffixTreeNode> children
+                        integer stringDepth
+                        integer edgeStart
+                        integer edgeEnd
+        -           STFromSA(S, order, lcpArray):
+                        root ← new SuffixTreeNode(children={}, parent=nil, stringDepth = 0, edgeStart = −1, edgeEnd = −1)
+                        lcpPrev ← 0
+                        curNode ← root
+                        for i from 0 to |S| − 1:
+                            suffix ← order [i]
+                            while curNode.stringDepth > lcpPrev :
+                                curNode ← curNode.parent
+                            if curNode.stringDepth == lcpPrev :
+                                curNode ← CreateNewLeaf(curNode, S, suffix)
+                            else:
+                                edgeStart ← order [i − 1] + curNode.stringDepth
+                                offset ← lcpPrev − curNode.stringDepth
+                                midNode ← BreakEdge(curNode, S, edgeStart, offset)
+                                curNode ← CreateNewLeaf(midNode, S, suffix)
+                            if i < |S| − 1:
+                                lcpPrev ← lcpArray [i]
+                        return root
+        -           CreateNewLeaf(node, S, suffix):
+                        leaf = new SuffixTreeNode(children = {}, parent = node, stringDepth = |S| − suffix, edgeStart = suffix + node.stringDepth,
+                                                  edgeEnd = |S| − 1)
+                        node.children[S[leaf .edgeStart]] = leaf
+                        return leaf
+        -           BreakEdge(node, S, start, offset):
+                        startChar = S[start]
+                        midChar ← S[start + offset]
+                        midNode ← new SuffixTreeNode(children = {}, parent = node, stringDepth = node.stringDepth + offset, edgeStart = start,
+                                                     edgeEnd = start + offset − 1)
+                        midNode.children[midChar] = node.children[startChar ]
+                        node.children[startChar].parent = midNode
+                        node.children[startChar].edgeStart+ = offset
+                        node.children[startChar] = midNode
+                        
+                        return midNode
+        - Running Time: O(|S|)
 - Related Problems:
 - For more details:
     - UC San Diego Course:[From Suffix Arrays To Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/4-Constructing-Suffix-Arrays-and-Suffix-Trees/04_algorithmic_challenges_3_from_suffix_array_to_suffix_tree.pdf)
