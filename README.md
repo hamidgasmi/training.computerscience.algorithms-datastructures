@@ -3628,6 +3628,7 @@
                  G1------A3              G1------A3       1      G1------A3                  1
                  T1------A4          b ->T1------A4       1      T1------A4                  5
 - Related Problems:
+    - [Pattern Matching with the Suffix Array](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/165)
 - For more details:
     - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
@@ -3863,6 +3864,7 @@
             - Single pattern matching: O(|*Text*| + |*Pattern*|)
             - For multiple patterns matching: O(# of pattern x |*Text*| + |*Patterns*|): it's not as interesting as BWT approach
 - Related Problems:
+    - [Find All Occurrences of a Pattern in a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/163)
 - For more details:
     - UC San Diego Course:[Knuth-Morris-Pratt Algorithm](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/3-knuth-morris-pratt-algorithm/03_algorithmic_challenges_1_knuth_morris_pratt.pdf)
     - Visualization: [Knuth-Morris-Pratt Algorithm](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
@@ -4241,6 +4243,7 @@
                NewClass: 02|03|06|07|05|11|04|08|06|09|10|11|04|07|01|00|/|15|(11,12) |(04,01) = PrevClass(P1,P2)
 - Related Problems:
     - [Construct the Suffix Array of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/160)
+    - [Construct the Suffix Array of a Long String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/164)
 - For more details:
     - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
     - UC San Diego Course:[Efficient constuction of Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/4-Constructing-Suffix-Arrays-and-Suffix-Trees/04_algorithmic_challenges_2_suffix_array.pdf)
@@ -4352,22 +4355,22 @@
                         integer edgeStart
                         integer edgeEnd
         -           STFromSA(S, order, lcpArray):
-                        root ← new SuffixTreeNode(children={}, parent=nil, stringDepth = 0, edgeStart = −1, edgeEnd = −1)
-                        lcpPrev ← 0
-                        curNode ← root
+                        root = new SuffixTreeNode(children={}, parent=nil, stringDepth = 0, edgeStart = −1, edgeEnd = −1)
+                        lcpPrev = 0
+                        curNode = root
                         for i from 0 to |S| − 1:
-                            suffix ← order [i]
+                            suffix = order [i]
                             while curNode.stringDepth > lcpPrev :
-                                curNode ← curNode.parent
+                                curNode = curNode.parent
                             if curNode.stringDepth == lcpPrev :
-                                curNode ← CreateNewLeaf(curNode, S, suffix)
+                                curNode = CreateNewLeaf(curNode, S, suffix)
                             else:
-                                edgeStart ← order [i − 1] + curNode.stringDepth
-                                offset ← lcpPrev − curNode.stringDepth
-                                midNode ← BreakEdge(curNode, S, edgeStart, offset)
-                                curNode ← CreateNewLeaf(midNode, S, suffix)
+                                edgeStart = order [i − 1] + curNode.stringDepth
+                                offset = lcpPrev − curNode.stringDepth
+                                midNode = BreakEdge(curNode, S, edgeStart, offset)
+                                curNode = CreateNewLeaf(midNode, S, suffix)
                             if i < |S| − 1:
-                                lcpPrev ← lcpArray [i]
+                                lcpPrev = lcpArray [i]
                         return root
         -           CreateNewLeaf(node, S, suffix):
                         leaf = new SuffixTreeNode(children = {}, parent = node, stringDepth = |S| − suffix, edgeStart = suffix + node.stringDepth,
@@ -4376,8 +4379,8 @@
                         return leaf
         -           BreakEdge(node, S, start, offset):
                         startChar = S[start]
-                        midChar ← S[start + offset]
-                        midNode ← new SuffixTreeNode(children = {}, parent = node, stringDepth = node.stringDepth + offset, edgeStart = start,
+                        midChar = S[start + offset]
+                        midNode = new SuffixTreeNode(children = {}, parent = node, stringDepth = node.stringDepth + offset, edgeStart = start,
                                                      edgeEnd = start + offset − 1)
                         midNode.children[midChar] = node.children[startChar ]
                         node.children[startChar].parent = midNode
@@ -4387,6 +4390,7 @@
                         return midNode
         - Running Time: O(|S|)
 - Related Problems:
+    - [Construct the Suffix Tree from the Suffix Array](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/166)
 - For more details:
     - UC San Diego Course:[From Suffix Arrays To Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/4-Constructing-Suffix-Arrays-and-Suffix-Trees/04_algorithmic_challenges_3_from_suffix_array_to_suffix_tree.pdf)
 
