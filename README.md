@@ -470,7 +470,16 @@
         - 6 ($30) + 3 ($14) = 9 items ($44)
         - taking an element of maximum value per unit of weight is not safe!
 - Related Problems:
+    - [Money Change II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/13)
+    - [Primitive Calculator](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/14)
+    - [Computing the Edit Distance Between 2 Strings](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/15)
+    - [Longest Common Subsequence of 2 Sequences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/16)
+    - [Longest Common Subsequence of 3 Sequences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/17)
+    - [Manhattan Tourist Problem - Length of a Longest Path in a Grid](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/167)
+    - [Maximum Amount of Gold](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/18)
     - [Cutting a Rod](https://www.geeksforgeeks.org/cutting-a-rod-dp-13/)
+    - [Partitioning Souvenirs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/19)
+    - [Maximizing the Value of an Arithmetic Expression](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/20)
 - For more details:
     - [Course material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_2_editdistance.pdf)
     - [Advanced dynamic programming lecture notes]() by Jeff Erickson
