@@ -1,4 +1,3 @@
-#python3
 import sys
 
 # 1. Express a solution mathematically: Change(M) = min{ Change(M - Coin[i]) } + 1 for all i between 0 and |Coins| - 1
@@ -53,4 +52,5 @@ if __name__ == "__main__":
     coins = list(map(int, sys.stdin.readline().strip().split(',')))
     
     coinchanger = CoinChanger(coins)
+    
     print(coinchanger.make_change(money))
