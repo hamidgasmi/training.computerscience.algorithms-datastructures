@@ -471,6 +471,7 @@
         - taking an element of maximum value per unit of weight is not safe!
 - Related Problems:
     - [Money Change II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/13)
+    - [Money Change III](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/168)
     - [Primitive Calculator](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/14)
     - [Computing the Edit Distance Between 2 Strings](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/15)
     - [Longest Common Subsequence of 2 Sequences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/16)
@@ -4476,6 +4477,41 @@
 
 - For more details:
     - Leetcode Post: [Dynamic Programming Patterns](https://en.wikipedia.org/wiki/Counting_sort)
+
+</details>
+
+<details>
+<summary>Longest Common substring between 2 Strings</summary>
+
+- It's the matches in the alignment of 2 strings
+- It's equivalent to the [Manhattan Tourist Problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/167)
+    - Every column of the alignment matrix, it's code with an arrow
+    -       A T - G T T A T A
+            A T C G T - C - C
+            ↘ ↘ → ↘ ↘ ↓ ↘ ↓ ↘
+
+                A   T   C   G   T   C   C
+              x---x---x---x---x---x---x---x
+            A | ↘
+              x---x---x---x---x---x---x---x
+            T |     ↘
+              x---x---x → x---x---x---x---x
+            G |             ↘
+              x---x---x---x---x---x---x---x
+            T |                 ↘
+              x---x---x---x---x---x---x---x
+            T |                   ↓
+              x---x---x---x---x---x---x---x
+            A |                     ↘  
+              x---x---x---x---x---x---x---x
+            T |                       ↓ 
+              x---x---x---x---x---x---x---x
+            A |                         ↘
+              x---x---x---x---x---x---x---x
+    - We need to travel optimal ways in the graph
+    - ↘ = 1 if its corresponding symbols match
+    - ↘ = 0 if its corresponding symbols don't match
+- It's also equivalent to
 
 </details>
 
