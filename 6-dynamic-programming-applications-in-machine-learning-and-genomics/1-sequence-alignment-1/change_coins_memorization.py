@@ -11,38 +11,46 @@ import sys
 # 3. Solutions: we can solve this problem in 2 ways:
 #    1. Bottom up solution
 #    2. Recursive + Memorization solution
+class CoinChanger:
+    def __init__(self, coins):
+        self.coins = coins.copy()
+        self.coins.sort()
 
-def find_change_memorized(m, coins, changes):
-    if changes[m] != sys.maxsize:
-        return changes[m]
-    
-    for coin in coins:
-        if changes[m] == -1 or m < coin:
-            continue
+    # Solution: top down
+    # Running Time: O(monney * |coins|): 2 for loops: monney * |coins|
+    # Space Complexity: O(monney)
+    def make_change(self, monney):
+
+        changes = [sys.maxsize for i in range(money + 1)]
+        changes[0] = 0
+        for coin in coins:
+            if money >= coin:
+                changes[coin] = 1
         
-        candidate_change = find_change_memorized(m - coin, coins, changes)
-        if candidate_change == -1:
-            continue
+        return self.make_change_memorized(monney, coins, changes)
 
-        changes[m] = min(changes[m], candidate_change + 1)
+    def make_change_memorized(self, m, coins, changes):
+        if changes[m] != sys.maxsize:
+            return changes[m]
+        
+        for coin in coins:
+            if changes[m] == -1 or m < coin:
+                continue
+            
+            candidate_change = self.make_change_memorized(m - coin, coins, changes)
+            if candidate_change == -1:
+                continue
 
-    if changes[m] == sys.maxsize:
-        changes[m] = -1
-    
-    return changes[m]
+            changes[m] = min(changes[m], candidate_change + 1)
 
-def find_change(monney, coins):
-    
-    changes = [sys.maxsize for i in range(money + 1)]
-    changes[0] = 0
-    for coin in coins:
-        if money >= coin:
-            changes[coin] = 1
-
-    return(find_change_memorized(monney, coins, changes))
+        if changes[m] == sys.maxsize:
+            changes[m] = -1
+        
+        return changes[m]
 
 if __name__ == "__main__":
     money = int(sys.stdin.readline().strip())
     coins = list(map(int, sys.stdin.readline().strip().split(',')))
     
-    print(find_change(money, coins))
+    coinchanger = CoinChanger(coins)
+    print(coinchanger.make_change(money))

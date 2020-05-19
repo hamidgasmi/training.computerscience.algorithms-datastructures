@@ -1,4 +1,3 @@
-#python3
 import sys
 
 # 1. Express a solution mathematically: Change(M) = min{ Change(M - Coin[i]) } + 1 for all i between 0 and |Coins| - 1
@@ -12,29 +11,35 @@ import sys
 #    1. Bottom up solution
 #    2. Recursive + Memorization solution
 
-# Running Time: O(monney * |coins|)
-#   1. Coins array could be sorted by Counting Sort algorithm
-#   2. 2 for loops: monney * |coins|
-# Space Complexity: O(monney)
-def find_change_buttom_up(monney, coins):
-    
-    changes = [0]
-    coins.sort()
+class CoinChanger:
+    def __init__(self, coins):
+        self.coins = coins.copy()
+        self.coins.sort()
 
-    for m in range(1, monney + 1, 1):
-        changes.append(sys.maxsize)
-        for coin in coins:
-            if m >= coin:
+    # Solution: buttom up solution
+    # Running Time: O(monney * |coins|): 2 for loops: monney * |coins|
+    # Space Complexity: O(monney)
+    def make_change(self, money):
+
+        changes = [0]
+        
+        for m in range(1, money + 1, 1):
+            changes.append(sys.maxsize)
+            for coin in self.coins:
+                if coin > m:
+                    continue
+                
                 candidate_change = changes[ m - coin ] + 1
                 changes[m] = min(changes[m], candidate_change)
-            else:
-                break
-        
-    return changes[monney]
+            
+        return changes[money]
 
 if __name__ == "__main__":
     money = int(sys.stdin.readline().strip())
-    coins = list(map(int, sys.stdin.readline().strip().split(',')))
     
-    print(find_change_buttom_up(money, coins))
+    coins = list(map(int, sys.stdin.readline().strip().split(',')))
+
+    coinchanger = CoinChanger(coins)    
+
+    print(coinchanger.make_change(money))
 
