@@ -354,7 +354,6 @@
 <details>
 <summary>Dynamic Programming</summary>
 
-- It's a general algorithmic design technique: Approach can be used to solve many kinds of problems
 - It's Frequently used for optimization problems: finding best way to do something
 - It's typically used when brute-force solution is to enumerate all possibilities:
     - May not know which subproblems to solve, so we solve many or all!
@@ -444,7 +443,7 @@
     - ***D(i,j) = MIN(D(i,j-1) + 1, D(i-1,j) + 1, D(i-1,j-1)) if A[i] = B[j]***
 - **Reconstructing an **Optimal Alignment**:
     - It could be done by backtracking pointers that are stored in the edit distance computation matrix
-- E.g., Discrete Knapsack problem
+- **Discrete Knapsack problem**:
     - N items with total weight Wi (Kg) and total value Vi ($)
     - A Backpack with a capacity W
     - Each item is either taken or not
@@ -469,7 +468,28 @@
         - Value per Unit: Item 1: $5; Item2: $4.66; Item3: $4; Item4: $4.5
         - 6 ($30) + 3 ($14) = 9 items ($44)
         - taking an element of maximum value per unit of weight is not safe!
+    - Running time: O(nW)
+        - It's called pseudo polynomial, but not just polynomial 
+        - The catch is that the input size is proportional to log⁡W, rather than W
+        - To further illustrate this, consider the following two scenarios:
+        -       1. The input consists of m objects (say, integers)
+                2. The input is an integer m
+                
+                They look similar, but there is a dramatic difference. 
+                Assume that we have an algorithm that loops for m iterations. Then, in the 1st. case it is a polynomial time algorithm (in fact, even linear time), whereas in the 2nd. case it's an exponential time algorithm. 
+                This is because we always measure the running time in terms of the input size. In the 1st. case the input size is proportional to m, but in the 2nd. case it's proportional to log⁡m. 
+                Indeed, a file containing just a number “100000” occupies about 7 bytes on your disc while a file containing a sequence of 100000 zeroes (separated by spaces) occupies about 200000 bytes (or 200 KB). Hence, in the 1st. case the running time of the algorithm is O(size), whereas in the 2nd. case the running time is O(2size).
+        -Let’s also consider the same issue from a slightly different angle:
+        -       Assume that we have a file containing a single integer 74145970345617824751. 
+                If we treat it as a sequence of m=20 digits, then an algorithm working in time O(m) will be extremely fast in practice. 
+                If, on the other hand, we treat it as an integer m=74145970345617824751, then an algorithm making m iterations will work for:
+                        74145970345617824751109/(10^9 * 60 * 60 * 24 * 365) ≈ 2351 years
+                assuming that the underlying machine performs 10^9 operations per second
 - Related Problems:
+    - Interactive Puzzle: [Number of Paths](http://dm.compsciclub.ru/app/quiz-number-of-paths)
+    - Interactive Puzzle: [Two Rocks Game](http://dm.compsciclub.ru/app/quiz-take-the-last-stone)
+    - Interactive Puzzle: [Three Rocks Game](http://dm.compsciclub.ru/app/quiz-three-rocks-game)
+    - Interactive Puzzle: [Primitive Calculator](http://dm.compsciclub.ru/app/quiz-three-rocks-game)
     - [Money Change II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/13)
     - [Money Change III](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/168)
     - [Primitive Calculator](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/14)
@@ -489,6 +509,12 @@
     - Geeksforgeeks [Dynamic Programming](https://www.geeksforgeeks.org/dynamic-programming/)
     - [Dynamic Programming](https://www.radford.edu/~nokie/classes/360/dynprog.html)
     - Leetcode Post: [Dynamic Programming Patterns](https://en.wikipedia.org/wiki/Counting_sort)
+- For more details:
+    - Visualization: [DP Making Change](https://www.cs.usfca.edu/~galles/visualization/DPChange.html)
+    - Visualization: [Edit Distance calculator](http://www.let.rug.nl/kleiweg/lev/)
+    - Visualization: [DP Longest Common Subsequence](https://www.cs.usfca.edu/~galles/visualization/DPLCS.html)
+    - [DP for competitive Programmer's Core Skills](https://www.dropbox.com/s/qxzh146jd72188d/dynprog.pdf?dl=0)
+    - [Why is the knapsack problem pseudo-polynomial?](https://stackoverflow.com/questions/4538581/why-is-the-knapsack-problem-pseudo-polynomial#answer-4538668)
 
 </details>
 
