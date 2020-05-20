@@ -11,8 +11,7 @@ class Directed_Acyclic_Graph:
         self.is_valid_dag = True
         
         self.build_adjacency_list(edges)
-        self.check_dag_dfs()
-
+        
         #print(self.adjacency_list)
         #print("self.is_valid_source: ", self.is_valid_source)
         #print("self.is_valid_sink: ", self.is_valid_sink)
@@ -34,8 +33,6 @@ class Directed_Acyclic_Graph:
             self.is_valid_source &= (v != 0)
             self.is_valid_sink |= (v == self.vertices_count - 1)
             
-            #print(self.adjacency_list)
-        
         self.is_valid_source &= (len(self.adjacency_list[0]) > 0)
         self.is_valid_sink &= len(self.adjacency_list[self.vertices_count - 1]) == 0
         
@@ -74,11 +71,17 @@ class Directed_Acyclic_Graph:
         self.longest_path_len = 0
         self.longest_path = []
 
+        if not (self.is_valid_source and self.is_valid_sink):
+            return
+
+        self.check_dag_dfs()
         if not self.is_valid_dag:
             return
+
+        longest_paths = [0 for _ in range(self.vertices_count)]
+        #compute_longest_paths()
         
-        # TODO: your code here
-        return ""
+
 
     def longest_path_to_str(self):
 
@@ -94,4 +97,4 @@ if __name__ == "__main__":
     dag.compute_longest_path(source, sink)
 
     print(dag.longest_path_len)
-    #print(dag.longest_path_to_str)
+    print(dag.longest_path_to_str())
