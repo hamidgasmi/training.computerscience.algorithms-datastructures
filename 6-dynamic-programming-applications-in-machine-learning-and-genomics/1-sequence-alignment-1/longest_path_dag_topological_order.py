@@ -2,7 +2,7 @@ import sys
 from collections import namedtuple
 
 Edge = namedtuple('Edge', ['v_no', 'w'])
-Vertice_Dist = namedtuple('Vertice_Dist', ['prev', 'dist'])
+Vertex_Distance = namedtuple('Vertex_Distance', ['predecessor', 'dist'])
 
 class Directed_Acyclic_Graph:
     def __init__(self, source, sink, edges):
@@ -20,7 +20,7 @@ class Directed_Acyclic_Graph:
         self.adjacency_list = [[] for _ in range(self.vertices_count)]
 
         self.is_valid_source = True
-        self.is_valid_sink = False
+        self.is_valid_sink = True
         for edge in edges:
             u = int(edge.split("->")[0]) + self.v_no_label_gap
             v = int(edge.split("->")[1].split(":")[0]) + self.v_no_label_gap
@@ -29,11 +29,10 @@ class Directed_Acyclic_Graph:
             self.adjacency_list[u].append(Edge(v, w))
             
             self.is_valid_source &= (v != 0)
-            self.is_valid_sink |= (v == self.vertices_count - 1)
-            
-        self.is_valid_source &= (len(self.adjacency_list[0]) > 0)
-        self.is_valid_sink &= len(self.adjacency_list[self.vertices_count - 1]) == 0
-
+        
+        self.is_valid_source &= (len(edges) == 0 or len(self.adjacency_list[0]) > 0)
+        self.is_valid_sink = len(self.adjacency_list[self.vertices_count - 1]) == 0
+        
     def check_cycke_vertex(self, u, visited, cycle):
         
         visited[u] = True
@@ -89,7 +88,7 @@ class Directed_Acyclic_Graph:
         longest_path = []     
         while u != -1:
             longest_path.append(str(u - self.v_no_label_gap))
-            u = max_distance[u].prev
+            u = max_distance[u].predecessor
         
         return longest_path[::-1]
 
@@ -105,8 +104,8 @@ class Directed_Acyclic_Graph:
         if not self.is_valid_dag:
             return
 
-        max_distance = [Vertice_Dist(-1, - sys.maxsize - 1) for _ in range(self.vertices_count)]
-        max_distance[0] = Vertice_Dist(-1, 0)
+        max_distance = [Vertex_Distance(-1, - sys.maxsize - 1) for _ in range(self.vertices_count)]
+        max_distance[0] = Vertex_Distance(-1, 0)
 
         topo_sort = self.sort_topologically_dfs()
         for u in topo_sort:
@@ -114,7 +113,7 @@ class Directed_Acyclic_Graph:
                 v = e.v_no
                 candidate_distance = max_distance[u].dist + e.w
                 if max_distance[v].dist < candidate_distance:
-                    max_distance[v] = Vertice_Dist(u, candidate_distance)
+                    max_distance[v] = Vertex_Distance(u, candidate_distance)
         
         sink_vertex = self.vertices_count - 1
         self.longest_path_len = max_distance[sink_vertex].dist
