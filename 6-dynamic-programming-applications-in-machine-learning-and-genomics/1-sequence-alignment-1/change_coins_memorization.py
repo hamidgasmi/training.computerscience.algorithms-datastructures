@@ -10,6 +10,51 @@ import sys
 # 3. Solutions: we can solve this problem in 2 ways:
 #    1. Bottom up solution
 #    2. Recursive + Memorization solution
+class Queue_Circular_Array:
+    def __init__(self, capacity, default_value):
+        
+        # The array will contain size + 1 elements
+        self.capacity = capacity + 1
+        self.array = [default_value for i in range(self.size + 1)]
+        
+        self.read_index = 0
+        self.write_index = 0
+    
+    def empty(self):
+        return self.read_index == self.write_index
+
+    def full(self):
+        return self.read_index == self.write_index + 1
+
+    def next(self, index):
+        return 0 if index == self.capacity else index + 1
+    
+    def enqueu(self, value):
+
+        if self.full():
+            return
+
+        self.array[self.write_index] = value
+        self.write_index = self.next(self.write_index)
+
+    def dequeue(self):
+        
+        if self.empty():
+            return None
+        
+        value = self.array[self.read_index]
+        self.read_index = self.next(self.read_index)
+        
+        return value
+        
+    def get(self, index):
+        
+        index = (self.read_index + index) % self.capacity
+        if index >= self.read_index:
+            return None
+
+        return self.array[index]
+
 class CoinChanger:
     def __init__(self, coins):
         self.coins = coins.copy()
@@ -17,10 +62,15 @@ class CoinChanger:
 
     # Solution: top down
     # Running Time: O(monney * |coins|): 2 for loops: monney * |coins|
-    # Space Complexity: O(monney)
+    # Space Complexity: O(max_coin)
     def make_change(self, monney):
+        
+        max_coin = max(coins)
 
-        changes = [sys.maxsize for i in range(money + 1)]
+        # Circular array:
+        # It will allow O(1) for deletions/insertions
+        # The 1st. position will contain the index of the 1st.
+        changes = [sys.maxsize for i in range(max_coin + 2)]
         changes[0] = 0
         for coin in coins:
             if money >= coin:
@@ -31,7 +81,7 @@ class CoinChanger:
     def make_change_memorized(self, m, coins, changes):
         if changes[m] != sys.maxsize:
             return changes[m]
-        
+
         for coin in coins:
             if changes[m] == -1 or m < coin:
                 continue
