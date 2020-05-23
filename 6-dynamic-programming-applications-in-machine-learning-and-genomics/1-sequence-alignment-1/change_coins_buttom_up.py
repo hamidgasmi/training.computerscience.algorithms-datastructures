@@ -1,4 +1,5 @@
 import sys
+import math
 
 # 1. Express a solution mathematically: Change(M) = min{ Change(M - Coin[i]) } + 1 for all i between 0 and |Coins| - 1
 # 2. Proof: Let's assume we came up with an optimal solution by using a subsolution j where Changes(j) > min{ change(j - Coin[i]) } + 1
@@ -14,25 +15,24 @@ import sys
 class CoinChanger:
     def __init__(self, coins):
         self.coins = coins.copy()
-        self.coins.sort()
 
     # Solution: buttom up solution
     # Running Time: O(monney * |coins|): 2 for loops: monney * |coins|
-    # Space Complexity: O(monney)
+    # Space Complexity: O(money)
     def make_change(self, money):
 
         changes = [0]
-        
+
         for m in range(1, money + 1, 1):
-            changes.append(sys.maxsize)
-            for coin in self.coins:
+            changes.append(math.inf)
+            for coin in coins:
                 if coin > m:
                     continue
                 
                 candidate_change = changes[ m - coin ] + 1
                 changes[m] = min(changes[m], candidate_change)
-            
-        return changes[money]
+                
+        return -1 if changes[money] == math.inf else changes[money]
 
 if __name__ == "__main__":
     money = int(sys.stdin.readline().strip())
@@ -42,4 +42,3 @@ if __name__ == "__main__":
     coinchanger = CoinChanger(coins)    
 
     print(coinchanger.make_change(money))
-
