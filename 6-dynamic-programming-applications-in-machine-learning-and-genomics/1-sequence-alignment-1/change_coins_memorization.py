@@ -1,6 +1,5 @@
 import sys
-import queue_circular_array
-
+import math
 # 1. Express a solution mathematically: Change(M) = min{ Change(M - Coin[i]) } + 1 for all i between 0 and |Coins| - 1
 # 2. Proof: Let's assume we came up with an optimal solution by using a subsolution j where Changes(j) > min{ change(j - Coin[i]) } + 1
 #           Change(M, j) = Change(j) + ...
@@ -19,37 +18,30 @@ class CoinChanger:
     # Solution: top down
     # Running Time: O(monney * |coins|): 2 for loops: monney * |coins|
     # Space Complexity: O(max_coin)
-    def make_change(self, monney):
+    def make_change(self, money):
         
-        max_coin = max(coins)
-
-        # Circular array:
-        # It will allow O(1) for deletions/insertions and reads
-        changes = queue_circular_array.Queue_Circular_Array(max_coin, sys.maxsize)
-                
-        return self.make_change_memorized(monney, coins, changes)
+        changes = [math.inf for _ in range(money + 1)]
+        changes[0] = 0
+        
+        money_change = self.make_change_memorized(money, coins, changes)
+        return -1 if money_change == math.inf else money_change
 
     def make_change_memorized(self, m, coins, changes):
-        if changes[m] != sys.maxsize:
+        if changes[m] != math.inf:
             return changes[m]
-
+        
         for coin in coins:
-            if money >= coin:
-                changes[coin] = 1
-
-        for coin in coins:
-            if changes[m] == -1 or m < coin:
+            if m < coin:
                 continue
-            
+
             candidate_change = self.make_change_memorized(m - coin, coins, changes)
             if candidate_change == -1:
                 continue
-
             changes[m] = min(changes[m], candidate_change + 1)
 
-        if changes[m] == sys.maxsize:
+        if changes[m] == math.inf:
             changes[m] = -1
-        
+
         return changes[m]
 
 if __name__ == "__main__":
