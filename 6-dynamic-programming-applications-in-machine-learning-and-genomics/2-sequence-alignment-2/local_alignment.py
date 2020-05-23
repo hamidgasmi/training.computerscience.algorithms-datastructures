@@ -10,7 +10,7 @@ import sys
 # 3. Implementation: buttom up solution
 #    Running time: O(nm)
 #    Space Complexity: O(nm)
-class Global_Alignment:
+class Local_Alignment:
     def __init__(self, s, t, match, mu, sigma):
         self.rows_count = len(t) + 1
         self.columns_count = len(s) + 1
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     m,mu,sigma = map(int,sys.stdin.readline().strip().split())
     s,t = [sys.stdin.readline().strip() for _ in range(2)]
 
-    alignment = Global_Alignment(s, t, m, mu, sigma)
+    alignment = Local_Alignment(s, t, m, mu, sigma)
     
     print(alignment.global_alignment_score)
     print(alignment.aligned_seq_1)
