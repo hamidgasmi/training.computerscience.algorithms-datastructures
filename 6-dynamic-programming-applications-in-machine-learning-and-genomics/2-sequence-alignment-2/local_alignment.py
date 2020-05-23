@@ -3,9 +3,9 @@ import sys
 # 1. Express a solution mathematically:
 #       Let's A be a matrix of alignments of (|s| + 1) x (|t| + 1)
 #       A[0,0] = 0
-#       A[0,c] = c * sigma for 1 <= c <= |s|
-#       A[r,0] = r * sigma for 1 <= r <= |t|
-#       A[r,c] = max(A[r-1,c-1] + match if s[c] = t[r] else mu, A[r-1,c] + sigma, A[r,c-1] + sigma) for 1 <= c <= |s| and 1 <= r <= |t|
+#       A[0,c] = 0 for 1 <= c <= |s|
+#       A[r,0] = 0 for 1 <= r <= |t|
+#       A[r,c] = max(0, A[r-1,c-1] + match if s[c] = t[r] else mu, A[r-1,c] + sigma, A[r,c-1] + sigma) for 1 <= c <= |s| and 1 <= r <= |t|
 # 2. Proof:
 # 3. Implementation: buttom up solution
 #    Running time: O(nm)
@@ -19,15 +19,14 @@ class Global_Alignment:
         self.sigma = sigma * (-1)
         self.global_alignment_score = 0
 
-        A = self.built_alignment_matrix(s, t)
-        self.aligned_seq_1, self.aligned_seq_2 = self.get_alignment_backtrack(A)
+        A, max_alignment_r, max_alignment_c = self.built_alignment_matrix(s, t)
+        self.aligned_seq_1, self.aligned_seq_2 = self.get_alignment_backtrack(A, max_alignment_r, max_alignment_c)
 
     def built_alignment_matrix(self, s, t):
-        A = []
-        A.append([c * self.sigma for c in range(self.columns_count)])
-        for r in range(1, self.rows_count, 1):
-            A.append([(r * self.sigma if c == 0 else 0) for c in range(self.columns_count)])
+        A = [ [0 for _ in range(self.columns_count)] for _ in range(self.rows_count) ]
         
+        max_alignment_r = 0
+        max_alignment_c = 0
         for r in range(1, self.rows_count, 1):
             for c in range(1, self.columns_count, 1):
                 
@@ -36,26 +35,33 @@ class Global_Alignment:
                 insert_score = A[r-1][c] + self.sigma
                 A[r][c] = max(0, alignment_score, delete_score, insert_score)
 
-        for r in range(0, self.rows_count, 1):
-            print(A[r])
-        return A
+                if A[r][c] > A[max_alignment_r][max_alignment_c]:
+                    max_alignment_r = r
+                    max_alignment_c = c
+        
+        return A, max_alignment_r, max_alignment_c
 
-    def get_alignment_backtrack(self, A):
+    def get_alignment_backtrack(self, A, max_alignment_r, max_alignment_c):
         aligned_seq_1_inverse = []
         aligned_seq_2_inverse = []
 
-        r = self.rows_count - 1
-        c = self.columns_count - 1
-        
+        r = max_alignment_r
+        c = max_alignment_c
         while r > 0 and c > 0:
             
-            #if A[][]
-            if (A[r][c] == A[r - 1][c - 1] + self.match and s[c - 1] == t[r - 1]) or (A[r][c] == A[r - 1][c - 1] + self.mu and s[c - 1] != t[r - 1]):
+            if (A[r][c] == A[r - 1][c - 1] + self.match and s[c - 1] == t[r - 1]):
                 aligned_seq_1_inverse.append(s[c - 1])
                 aligned_seq_2_inverse.append(t[r - 1])
                 c -= 1
                 r -= 1
-
+            elif A[r][c] == 0:
+                c = 0
+                r = 0
+            elif A[r][c] == A[r - 1][c - 1] + self.mu and s[c - 1] != t[r - 1]:
+                aligned_seq_1_inverse.append(s[c - 1])
+                aligned_seq_2_inverse.append(t[r - 1])
+                c -= 1
+                r -= 1
             elif A[r][c] == A[r][c - 1] + self.sigma:
                 aligned_seq_1_inverse.append(s[c - 1])
                 aligned_seq_2_inverse.append('-')
@@ -68,17 +74,7 @@ class Global_Alignment:
                 
                 r -= 1
         
-        while c > 0:
-            aligned_seq_1_inverse.append(s[c - 1])
-            aligned_seq_2_inverse.append('-')
-            c -= 1
-
-        while r > 0:
-            aligned_seq_1_inverse.append('-')
-            aligned_seq_2_inverse.append(t[r - 1])
-            r -= 1
-        
-        self.global_alignment_score = A[self.rows_count - 1][self.columns_count - 1]
+        self.global_alignment_score = A[max_alignment_r][max_alignment_c]
         return ''.join(aligned_seq_1_inverse[::-1]), ''.join(aligned_seq_2_inverse[::-1])
 
 if __name__ == "__main__":
