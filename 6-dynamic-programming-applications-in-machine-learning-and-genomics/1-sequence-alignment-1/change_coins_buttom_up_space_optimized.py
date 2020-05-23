@@ -26,7 +26,7 @@ class CoinChanger:
         
         for m in range(1, money + 1, 1):
             
-            money_change = math.inf #sys.maxsize
+            money_change = math.inf
             for coin in self.coins:
                 if coin > m:
                     continue
