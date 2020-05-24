@@ -2,13 +2,15 @@ import sys
 import math
 
 # 1. Express a solution mathematically:
+#       It's equivalent to a The Alignment problem (which is equivalent to the Manhattan Tourist Problem):
+#           We just need to add an edge between the start vertice (0,0) to all vertices of matrix(1, c)
+#           So that we take into account substrings of S
 #       Let's A be a matrix of alignments of (|s| + 1) x (|t| + 1)
 #       A[0,0] = 0
 #       A[0,c] = c * sigma for 1 <= c <= |s|
 #       A[r,0] = r * sigma for 1 <= r <= |t|
 #       A[1,c] = max(A[0,0] + match if s[c] = t[r] else mu, A[r-1,c-1] + match if s[c] = t[r] else mu, A[r-1,c] + sigma, A[r,c-1] + sigma) for 1 <= c <= |s| and r = 1
 #       A[r,c] = max(A[r-1,c-1] + match if s[c] = t[r] else mu, A[r-1,c] + sigma, A[r,c-1] + sigma) for 1 <= c <= |s| and 1 <= r <= |t|
-# 2. Proof:
 # 3. Implementation: buttom up solution
 #    Running time: O(nm)
 #    Space Complexity: O(nm)
@@ -21,14 +23,14 @@ class Alignment:
         self.fitting_alignment_score = 0
 
     def global_alignment(self, s, t):
-
+        
         A, max_alignment_r, max_alignment_c = self.built_fitting_alignment_matrix(s, t)
         self.aligned_seq_1, self.aligned_seq_2 = self.get_fitting_alignment_backtrack(A, max_alignment_r, max_alignment_c)
-
+        
         return self.fitting_alignment_score, self.aligned_seq_1, self.aligned_seq_2
 
     def built_fitting_alignment_matrix(self, s, t):
-
+        
         rows_count = len(t) + 1
         columns_count = len(s) + 1
 
@@ -52,10 +54,7 @@ class Alignment:
                     max_alignment_c = c
 
         self.fitting_alignment_score = A[max_alignment_r][max_alignment_c]
-        #print(self.fitting_alignment_score)
-        #for r in range(rows_count):
-        #    print(A[r])
-
+        
         return A, max_alignment_r, max_alignment_c
 
     def get_fitting_alignment_backtrack(self, A, max_alignment_r, max_alignment_c):
