@@ -28,11 +28,7 @@ class Local_Alignment:
         
         rows_count = len(t) + 1
         columns_count = len(s) + 1
-        
-        A = []
-        A.append([c * self.sigma for c in range(columns_count)])
-        for r in range(1, rows_count, 1):
-            A.append([(r * self.sigma if c == 0 else 0) for c in range(columns_count)])
+        A = [ [0 for _ in range(columns_count)] for _ in range(rows_count) ]
         
         max_alignment_r = 0
         max_alignment_c = 0
@@ -60,32 +56,26 @@ class Local_Alignment:
         c = max_alignment_c
         while r > 0 and c > 0:
             
-            if (A[r][c] == A[r - 1][c - 1] + self.match and s[c - 1] == t[r - 1]):
+            if A[r][c] == A[r - 1][c - 1] + (self.match if s[c - 1] == t[r - 1] else self.mu):
                 aligned_seq_1_inverse.append(s[c - 1])
                 aligned_seq_2_inverse.append(t[r - 1])
                 c -= 1
                 r -= 1
+            
             elif A[r][c] == 0:
                 c = 0
                 r = 0
-            elif A[r][c] == A[r - 1][c - 1] + self.mu and s[c - 1] != t[r - 1]:
-                aligned_seq_1_inverse.append(s[c - 1])
-                aligned_seq_2_inverse.append(t[r - 1])
-                c -= 1
-                r -= 1
+            
             elif A[r][c] == A[r][c - 1] + self.sigma:
                 aligned_seq_1_inverse.append(s[c - 1])
                 aligned_seq_2_inverse.append('-')
-              
                 c -= 1
 
             elif A[r][c] == A[r - 1][c] + self.sigma:
                 aligned_seq_1_inverse.append('-')
                 aligned_seq_2_inverse.append(t[r - 1])
-                
                 r -= 1
         
-        self.global_alignment_score = A[max_alignment_r][max_alignment_c]
         return ''.join(aligned_seq_1_inverse[::-1]), ''.join(aligned_seq_2_inverse[::-1])
 
 if __name__ == "__main__":
