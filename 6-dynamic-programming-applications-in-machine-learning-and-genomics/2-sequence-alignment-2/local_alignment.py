@@ -11,24 +11,33 @@ import sys
 #    Running time: O(nm)
 #    Space Complexity: O(nm)
 class Local_Alignment:
-    def __init__(self, s, t, match, mu, sigma):
-        self.rows_count = len(t) + 1
-        self.columns_count = len(s) + 1
+    def __init__(self, match, mu, sigma):
         self.match = match
         self.mu = mu * (-1)
         self.sigma = sigma * (-1)
-        self.global_alignment_score = 0
+        self.local_alignment_score = 0
+    
+    def local_alignment(self, s, t):
 
-        A, max_alignment_r, max_alignment_c = self.built_alignment_matrix(s, t)
-        self.aligned_seq_1, self.aligned_seq_2 = self.get_alignment_backtrack(A, max_alignment_r, max_alignment_c)
+        A, max_alignment_r, max_alignment_c = self.built_local_alignment_matrix(s, t)
+        self.aligned_seq_1, self.aligned_seq_2 = self.get_local_alignment_backtrack(A, max_alignment_r, max_alignment_c)
 
-    def built_alignment_matrix(self, s, t):
-        A = [ [0 for _ in range(self.columns_count)] for _ in range(self.rows_count) ]
+        return self.local_alignment_score, self.aligned_seq_1, self.aligned_seq_2
+
+    def built_local_alignment_matrix(self, s, t):
+        
+        rows_count = len(t) + 1
+        columns_count = len(s) + 1
+        
+        A = []
+        A.append([c * self.sigma for c in range(columns_count)])
+        for r in range(1, rows_count, 1):
+            A.append([(r * self.sigma if c == 0 else 0) for c in range(columns_count)])
         
         max_alignment_r = 0
         max_alignment_c = 0
-        for r in range(1, self.rows_count, 1):
-            for c in range(1, self.columns_count, 1):
+        for r in range(1, rows_count, 1):
+            for c in range(1, columns_count, 1):
                 
                 alignment_score = A[r - 1][c - 1] + (self.match if s[c - 1] == t[r - 1] else self.mu)
                 delete_score = A[r][c-1] + self.sigma
@@ -39,9 +48,11 @@ class Local_Alignment:
                     max_alignment_r = r
                     max_alignment_c = c
         
+        self.local_alignment_score = A[max_alignment_r][max_alignment_c]
+
         return A, max_alignment_r, max_alignment_c
 
-    def get_alignment_backtrack(self, A, max_alignment_r, max_alignment_c):
+    def get_local_alignment_backtrack(self, A, max_alignment_r, max_alignment_c):
         aligned_seq_1_inverse = []
         aligned_seq_2_inverse = []
 
@@ -81,8 +92,9 @@ if __name__ == "__main__":
     m,mu,sigma = map(int,sys.stdin.readline().strip().split())
     s,t = [sys.stdin.readline().strip() for _ in range(2)]
 
-    alignment = Local_Alignment(s, t, m, mu, sigma)
+    alignment = Local_Alignment(m, mu, sigma)
+    alignment.local_alignment(s, t)
     
-    print(alignment.global_alignment_score)
+    print(alignment.local_alignment_score)
     print(alignment.aligned_seq_1)
     print(alignment.aligned_seq_2)
