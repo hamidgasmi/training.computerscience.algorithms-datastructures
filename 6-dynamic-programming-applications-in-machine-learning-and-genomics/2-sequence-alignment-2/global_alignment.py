@@ -56,7 +56,7 @@ class Alignment:
         c = len(s)
         while r > 0 and c > 0:
             
-            if (A[r][c] == A[r - 1][c - 1] + self.match and s[c - 1] == t[r - 1]) or (A[r][c] == A[r - 1][c - 1] + self.mu and s[c - 1] != t[r - 1]):
+            if A[r][c] == A[r - 1][c - 1] + (self.match if s[c - 1] == t[r - 1] else self.mu):
                 aligned_seq_1_inverse.append(s[c - 1])
                 aligned_seq_2_inverse.append(t[r - 1])
                 c -= 1
