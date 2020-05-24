@@ -22,7 +22,7 @@ class Alignment:
         self.sigma = sigma * (-1)
         self.fitting_alignment_score = 0
 
-    def global_alignment(self, s, t):
+    def fitting_alignment(self, s, t):
         
         A, max_alignment_r, max_alignment_c = self.built_fitting_alignment_matrix(s, t)
         self.aligned_seq_1, self.aligned_seq_2 = self.get_fitting_alignment_backtrack(A, max_alignment_r, max_alignment_c)
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     s,t = [sys.stdin.readline().strip() for _ in range(2)]
 
     alignment = Alignment(m, mu, sigma)
-    alignment.global_alignment(s, t)
+    alignment.fitting_alignment(s, t)
     
     print(alignment.fitting_alignment_score)
     print(alignment.aligned_seq_1)
