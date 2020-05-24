@@ -10,40 +10,50 @@ import sys
 # 3. Implementation: buttom up solution
 #    Running time: O(nm)
 #    Space Complexity: O(nm)
-class Global_Alignment:
-    def __init__(self, s, t, match, mu, sigma):
-        self.rows_count = len(t) + 1
-        self.columns_count = len(s) + 1
+class Alignment:
+    def __init__(self, match, mu, sigma):
+        
         self.match = match
         self.mu = mu * (-1)
         self.sigma = sigma * (-1)
         self.global_alignment_score = 0
 
-        A = self.built_alignment_matrix(s, t)
-        self.aligned_seq_1, self.aligned_seq_2 = self.get_alignment_backtrack(A)
+    def global_alignment(self, s, t):
 
-    def built_alignment_matrix(self, s, t):
+        A = self.built_global_alignment_matrix(s, t)
+        self.aligned_seq_1, self.aligned_seq_2 = self.get_alignment_backtrack(s, t, A)
+
+        return self.global_alignment_score, self.aligned_seq_1, self.aligned_seq_2
+
+    def built_global_alignment_matrix(self, s, t):
+
+        rows_count = len(t) + 1
+        columns_count = len(s) + 1
+
         A = []
-        A.append([c * self.sigma for c in range(self.columns_count)])
-        for r in range(1, self.rows_count, 1):
-            A.append([(r * self.sigma if c == 0 else 0) for c in range(self.columns_count)])
+        A.append([c * self.sigma for c in range(columns_count)])
+        for r in range(1, rows_count, 1):
+            A.append([(r * self.sigma if c == 0 else 0) for c in range(columns_count)])
         
-        for r in range(1, self.rows_count, 1):
-            for c in range(1, self.columns_count, 1):
+        for r in range(1, rows_count, 1):
+            for c in range(1, columns_count, 1):
                 
                 alignment_score = A[r - 1][c - 1] + (self.match if s[c - 1] == t[r - 1] else self.mu)
                 delete_score = A[r][c-1] + self.sigma
                 insert_score = A[r-1][c] + self.sigma
                 A[r][c] = max(alignment_score, delete_score, insert_score)
-        
+
+        self.global_alignment_score = A[rows_count - 1][columns_count - 1]
+
         return A
 
-    def get_alignment_backtrack(self, A):
+    def get_alignment_backtrack(self, s, t, A):
+
         aligned_seq_1_inverse = []
         aligned_seq_2_inverse = []
 
-        r = self.rows_count - 1
-        c = self.columns_count - 1
+        r = len(t)
+        c = len(s)
         while r > 0 and c > 0:
             
             if (A[r][c] == A[r - 1][c - 1] + self.match and s[c - 1] == t[r - 1]) or (A[r][c] == A[r - 1][c - 1] + self.mu and s[c - 1] != t[r - 1]):
@@ -74,14 +84,14 @@ class Global_Alignment:
             aligned_seq_2_inverse.append(t[r - 1])
             r -= 1
         
-        self.global_alignment_score = A[self.rows_count - 1][self.columns_count - 1]
         return ''.join(aligned_seq_1_inverse[::-1]), ''.join(aligned_seq_2_inverse[::-1])
 
 if __name__ == "__main__":
     m,mu,sigma = map(int,sys.stdin.readline().strip().split())
     s,t = [sys.stdin.readline().strip() for _ in range(2)]
 
-    alignment = Global_Alignment(s, t, m, mu, sigma)
+    alignment = Alignment(m, mu, sigma)
+    alignment.global_alignment(s, t)
     
     print(alignment.global_alignment_score)
     print(alignment.aligned_seq_1)
