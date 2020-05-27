@@ -64,12 +64,12 @@ class Alignment:
         to_sink, next_to_sink = self.to_sink(s, t, 0, middle, len(t), len(s))
         
         max_path_r = 0
-        max_path_len = from_source[0] + to_sink[0]
+        self.global_alignment_score = from_source[0] + to_sink[0]
         for r in range(1, len(t) + 1, 1):
             path_r_len = from_source[r] + to_sink[r]
-            if max_path_len < path_r_len:
+            if self.global_alignment_score < path_r_len:
                 max_path_r = r
-                max_path_len = path_r_len
+                self.global_alignment_score = path_r_len
         
         middle_edge = []
         middle_edge.append('(')
@@ -116,4 +116,3 @@ if __name__ == "__main__":
     alignment.find_middle_edge(s, t)
     
     print(alignment.middle_edge)
-    
