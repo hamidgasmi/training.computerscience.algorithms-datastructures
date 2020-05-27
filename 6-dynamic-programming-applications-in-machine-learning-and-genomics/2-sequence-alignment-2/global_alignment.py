@@ -45,6 +45,9 @@ class Alignment:
 
         self.global_alignment_score = A[rows_count - 1][columns_count - 1]
 
+        for r in range(rows_count):
+            print(A[r])
+            
         return A
 
     def get_alignment_backtrack(self, s, t, A):
