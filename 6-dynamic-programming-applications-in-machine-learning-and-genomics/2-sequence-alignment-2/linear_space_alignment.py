@@ -1,4 +1,7 @@
 import sys
+from collections import namedtuple
+
+Vertex = namedtuple("Vertex", ["row", "col"])
 
 # 1. Analysis:
 #    Let FromSource(i) denote the length of the longest path from the source ending at (i, middle) and 
@@ -15,12 +18,13 @@ class Alignment:
         self.mu = mu * (-1)
         self.sigma = sigma * (-1)
         self.global_alignment_score = 0
-        self.middle_edge = ""
+        self.aligned_seq_1 = ""
+        self.aligned_seq_2 = ""
 
-    def from_source(self, s, t, start_r, start_c, end_r, end_c):
+    def from_source(self, s, t, v_start, v_end):
         
-        rows_count = end_r - start_r + 1
-        columns_count = end_c - start_c + 1
+        rows_count = v_end.row - v_start.row + 1
+        columns_count = v_end.col - v_start.col + 1
 
         prev_from_source = [r * self.sigma for r in range(rows_count)]
         curr_from_source = [self.sigma if r == 0 else 0 for r in range(rows_count)]
@@ -38,17 +42,17 @@ class Alignment:
         
         return prev_from_source
 
-    def to_sink(self, s, t, start_r, start_c, end_r, end_c):
-
-        next_to_sink = [(end_r - r) * self.sigma for r in range(end_r - start_r + 1)]
-        curr_to_sink = [self.sigma if r == end_r else 0 for r in range(end_r - start_r + 1)]
-        for c in range(end_c - 1, start_c - 1, -1):
-            curr_to_sink[end_r - start_r] = next_to_sink[end_r - start_r] + self.sigma
-            for r in range(end_r - 1, start_r - 1, -1):
-                diagonal_edge = next_to_sink[r - start_r + 1] + (self.match if s[c] == t[r] else self.mu)
-                horizontal_edge = next_to_sink[r - start_r] + self.sigma
-                vertical_edge = curr_to_sink[r - start_r + 1] + self.sigma
-                curr_to_sink[r - start_r] = max(diagonal_edge, horizontal_edge, vertical_edge)
+    def to_sink(self, s, t, v_start, v_end):
+        
+        next_to_sink = [(v_end.row - r) * self.sigma for r in range(v_end.row - v_start.row + 1)]
+        curr_to_sink = [self.sigma if r == v_end.row else 0 for r in range(v_end.row - v_start.row + 1)]
+        for c in range(v_end.col - 1, v_start.col - 1, -1):
+            curr_to_sink[v_end.row - v_start.row] = next_to_sink[v_end.row - v_start.row] + self.sigma
+            for r in range(v_end.row - 1, v_start.row - 1, -1):
+                diagonal_edge = next_to_sink[r - v_start.row + 1] + (self.match if s[c] == t[r] else self.mu)
+                horizontal_edge = next_to_sink[r - v_start.row] + self.sigma
+                vertical_edge = curr_to_sink[r - v_start.row + 1] + self.sigma
+                curr_to_sink[r - v_start.row] = max(diagonal_edge, horizontal_edge, vertical_edge)
             
             tmp = next_to_sink
             next_to_sink = curr_to_sink
@@ -56,62 +60,99 @@ class Alignment:
 
         return next_to_sink, curr_to_sink
 
-    def find_middle_edge(self, s, t):
+    def find_middle_node(self, s, t, v_start, v_end):
         
-        middle = (len(s)) // 2
+        middle_node_c = (v_end.col - v_start.col) // 2
         
-        from_source = self.from_source(s, t, 0, 0, len(t), middle)
-        to_sink, next_to_sink = self.to_sink(s, t, 0, middle, len(t), len(s))
-        
-        max_path_r = 0
-        self.global_alignment_score = from_source[0] + to_sink[0]
+        from_source = self.from_source(s, t, Vertex(v_start.row, v_start.col), Vertex(v_end.row, middle_node_c))
+        to_sink, next_to_sink = self.to_sink(s, t, Vertex(v_start.row, middle_node_c), Vertex(v_end.row, v_end.col))
+         
+        middle_node_r = 0
+        alignment_score = from_source[0] + to_sink[0]
         for r in range(1, len(t) + 1, 1):
-            path_r_len = from_source[r] + to_sink[r]
-            if self.global_alignment_score < path_r_len:
-                max_path_r = r
-                self.global_alignment_score = path_r_len
+            path_len = from_source[r] + to_sink[r]
+            if alignment_score < path_len:
+                middle_node_r = r
+                alignment_score = path_len
+
+        middle_node = Vertex(middle_node_r, middle_node_c)
+        aligned_seq_1 = ''
+        aligned_seq_2 = ''
+
+        if middle_node_r == len(t):
+            aligned_seq_1 = s[middle_node_c]
+            aligned_seq_2 = '-'
         
-        middle_edge = []
-        middle_edge.append('(')
-        middle_edge.append(str(max_path_r))
-        middle_edge.append(',')
-        middle_edge.append(' ')
-        middle_edge.append(str(middle))
-        middle_edge.append(')')
-        middle_edge.append(' ')
-        middle_edge.append('(')
+        elif to_sink[middle_node_r] == next_to_sink[middle_node_r] + self.sigma:
+            aligned_seq_1 = '-'
+            aligned_seq_2 = t[middle_node_r]
+        
+        elif to_sink[middle_node_r] == to_sink[middle_node_r + 1] + self.sigma:
+            aligned_seq_1 = s[middle_node_c]
+            aligned_seq_2 = '-'
+        
+        elif to_sink[middle_node_r] == next_to_sink[middle_node_r + 1] + (self.match if t[middle_node_r] == s[middle_node_c] else self.mu):
+            aligned_seq_1 = s[middle_node_c]
+            aligned_seq_2 = t[middle_node_r]
 
-        if max_path_r == len(t):
-            middle_edge.append(str(max_path_r))
-            middle_edge.append(',')
-            middle_edge.append(' ')
-            middle_edge.append(str(middle + 1))
+        return alignment_score, middle_node, aligned_seq_1, aligned_seq_2
 
-        elif to_sink[max_path_r] == next_to_sink[max_path_r] + self.sigma:
-            middle_edge.append(str(max_path_r))
-            middle_edge.append(',')
-            middle_edge.append(' ')
-            middle_edge.append(str(middle + 1))
+    def _global_alignment(self, s, t, source_node, sink_node):
+        
+        aligned_seq_1 = []
+        aligned_seq_2 = []
+        score_alignment = 0
+        if sink_node.row == source_node.row and sink_node.col ==  source_node.col:
+            score_alignment = max(self.match if t[sink_node.row] == s[sink_node.col] else self.mu, self.sigma)
+            if score_alignment == self.match if t[sink_node.row] == s[sink_node.col] else self.mu:
+                aligned_seq_1.append(s[sink_node.col])
+                aligned_seq_2.append(s[sink_node.row])
+            else:
+                aligned_seq_1.append(s[sink_node.col])
+                aligned_seq_2.append('-')
+            
+            return score_alignment, aligned_seq_1, aligned_seq_2
 
-        elif to_sink[max_path_r] == to_sink[max_path_r + 1] + self.sigma:
-            middle_edge.append(str(max_path_r + 1))
-            middle_edge.append(',')
-            middle_edge.append(' ')
-            middle_edge.append(str(middle))
+        elif sink_node.row == source_node.row:
+            for c in range(sink_node.col, source_node.col, -1):
+                aligned_seq_1.append(s[c])
+                aligned_seq_2.append('-')
+                score_alignment -= self.sigma
 
-        elif to_sink[max_path_r] == next_to_sink[max_path_r + 1] + (self.match if t[max_path_r] == s[middle] else self.mu):
-            middle_edge.append(str(max_path_r + 1))
-            middle_edge.append(',')
-            middle_edge.append(' ')
-            middle_edge.append(str(middle + 1))
-        middle_edge.append(')')
+            return score_alignment, aligned_seq_1, aligned_seq_2
 
-        self.middle_edge = ''.join(middle_edge)
+        elif sink_node.col ==  source_node.col:
+            for r in range(sink_node.row, source_node.row, -1):
+                aligned_seq_1.append(s[r])
+                aligned_seq_2.append('-')
+                score_alignment -= self.sigma
+            
+            return score_alignment, aligned_seq_1, aligned_seq_2
 
+        score_alignment, middle_node, middle_seq1, middle_seq2 = self.find_middle_node(s, t, source_node, sink_node)
+
+        _, aligned_seq1_upper, aligned_seq2_upper = self._global_alignment(s, t, source_node, middle_node)
+        _, aligned_seq1_lower, aligned_seq2_lower = self._global_alignment(s, t, middle_node, sink_node)
+
+        aligned_seq_1.extend(aligned_seq1_upper)
+        aligned_seq_1.append(middle_seq1)
+        aligned_seq_1.extend(aligned_seq1_lower)
+
+        aligned_seq_2.extend(aligned_seq2_upper)
+        aligned_seq_2.append(middle_seq2)
+        aligned_seq_2.extend(aligned_seq2_lower)
+
+        return score_alignment, aligned_seq_1, aligned_seq_2
+        
     def global_alignment(self, s, t):
+
+        self.global_alignment_score = self._global_alignment(s, t, Vertex(0, 0), Vertex(len(t), len(s)))
         
-        self.find_middle_edge(s, t)
-    
+        #if (source_node.row, source_node.col, sink_node.row, sink_node.col) == (0, 0, len(t), len(s)):
+        # self.global_alignment_score = score_alignment        
+
+        
+                    
 if __name__ == "__main__":
     m,mu,sigma = map(int,sys.stdin.readline().strip().split())
     s,t = [sys.stdin.readline().strip() for _ in range(2)]
@@ -120,6 +161,6 @@ if __name__ == "__main__":
     alignment.global_alignment(s, t)
     
     print(alignment.global_alignment_score)
-    #print(alignment.aligned_seq_1)
-    #print(alignment.aligned_seq_2)
+    print(alignment.aligned_seq_1)
+    print(alignment.aligned_seq_2)
     
