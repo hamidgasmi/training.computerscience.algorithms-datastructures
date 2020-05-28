@@ -68,8 +68,9 @@ class Alignment:
         to_sink, next_to_sink = self.to_sink(s, t, Vertex(v_start.row, middle_node_c), Vertex(v_end.row, v_end.col))
          
         middle_node_r = 0
+        rows_count = v_end.row - v_start.row + 1
         alignment_score = from_source[0] + to_sink[0]
-        for r in range(1, len(t) + 1, 1):
+        for r in range(1, rows_count, 1):
             path_len = from_source[r] + to_sink[r]
             if alignment_score < path_len:
                 middle_node_r = r
@@ -95,6 +96,7 @@ class Alignment:
             aligned_seq_1 = s[middle_node_c]
             aligned_seq_2 = t[middle_node_r]
 
+        #print("000: v_start, v_end, middle_node: ", v_start, v_end, middle_node)
         return alignment_score, middle_node, aligned_seq_1, aligned_seq_2
 
     def _global_alignment(self, s, t, source_node, sink_node):
@@ -102,16 +104,21 @@ class Alignment:
         aligned_seq_1 = []
         aligned_seq_2 = []
         score_alignment = 0
-        if sink_node.row == source_node.row and sink_node.col ==  source_node.col:
-            score_alignment = max(self.match if t[sink_node.row] == s[sink_node.col] else self.mu, self.sigma)
-            if score_alignment == self.match if t[sink_node.row] == s[sink_node.col] else self.mu:
-                aligned_seq_1.append(s[sink_node.col])
-                aligned_seq_2.append(s[sink_node.row])
-            else:
-                aligned_seq_1.append(s[sink_node.col])
-                aligned_seq_2.append('-')
+        if sink_node.row < source_node.row or sink_node.col <=  source_node.col:
+            return 0, aligned_seq_1, aligned_seq_2
+
+        elif sink_node.row == source_node.row and sink_node.col ==  source_node.col:
+            #score_alignment = max(self.match if t[sink_node.row] == s[sink_node.col] else self.mu, self.sigma)
+            #if score_alignment == self.match if t[sink_node.row] == s[sink_node.col] else self.mu:
+            #    aligned_seq_1.append(s[sink_node.col])
+            #    aligned_seq_2.append(s[sink_node.row])
+            #else:
+            #    aligned_seq_1.append(s[sink_node.col])
+            #    aligned_seq_2.append('-')
             
-            return score_alignment, aligned_seq_1, aligned_seq_2
+            #return score_alignment, aligned_seq_1, aligned_seq_2
+            #print("here")
+            return 0, aligned_seq_1, aligned_seq_2
 
         elif sink_node.row == source_node.row:
             for c in range(sink_node.col, source_node.col, -1):
@@ -128,26 +135,36 @@ class Alignment:
                 score_alignment -= self.sigma
             
             return score_alignment, aligned_seq_1, aligned_seq_2
-
+        print("1: ", source_node, sink_node)
         score_alignment, middle_node, middle_seq1, middle_seq2 = self.find_middle_node(s, t, source_node, sink_node)
-
-        _, aligned_seq1_upper, aligned_seq2_upper = self._global_alignment(s, t, source_node, middle_node)
-        _, aligned_seq1_lower, aligned_seq2_lower = self._global_alignment(s, t, middle_node, sink_node)
-
-        aligned_seq_1.extend(aligned_seq1_upper)
+        #print("middle_node, middle_seq1, middle_seq2: ", middle_node, middle_seq1, middle_seq2)
+        print("2: ", source_node, middle_node)
+        aligned_seq1_part2, aligned_seq2_part2 = [], []
+        if sink_node.row != middle_node.row and sink_node.col != middle_node.col:
+            _, aligned_seq1_part1, aligned_seq2_part1 = self._global_alignment(s, t, source_node, middle_node)
+        print("3: ", middle_node, sink_node)
+        aligned_seq1_part2, aligned_seq2_part2 = [], []
+        if middle_node.row != source_node.row and middle_node.col != source_node.col:
+            _, aligned_seq1_part2, aligned_seq2_part2 = self._global_alignment(s, t, middle_node, sink_node)
+        
+        aligned_seq_1.extend(aligned_seq1_part1)
         aligned_seq_1.append(middle_seq1)
-        aligned_seq_1.extend(aligned_seq1_lower)
+        aligned_seq_1.extend(aligned_seq1_part2)
 
-        aligned_seq_2.extend(aligned_seq2_upper)
+        aligned_seq_2.extend(aligned_seq2_part1)
         aligned_seq_2.append(middle_seq2)
-        aligned_seq_2.extend(aligned_seq2_lower)
+        aligned_seq_2.extend(aligned_seq2_part2)
 
         return score_alignment, aligned_seq_1, aligned_seq_2
         
     def global_alignment(self, s, t):
 
-        self.global_alignment_score = self._global_alignment(s, t, Vertex(0, 0), Vertex(len(t), len(s)))
+        self.global_alignment_score, aligned_seq_1, aligned_seq_2 = self._global_alignment(s, t, Vertex(0, 0), Vertex(len(t), len(s)))
+        #self.global_alignment_score, aligned_seq_1, aligned_seq_2 = self._global_alignment(s, t, Vertex(0, 0), Vertex(2, 2))
         
+        self.aligned_seq_1 = ''.join(aligned_seq_1)
+        self.aligned_seq_2 = ''.join(aligned_seq_2)
+
         #if (source_node.row, source_node.col, sink_node.row, sink_node.col) == (0, 0, len(t), len(s)):
         # self.global_alignment_score = score_alignment        
 
