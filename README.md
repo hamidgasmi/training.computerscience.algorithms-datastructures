@@ -4439,6 +4439,16 @@
 
 ## Dynamic Programming: Applications In Machine Learning and Genomics 
 
+<details>
+<summary>Hidden Markow Models (HMM)</summary>
+
+- Related Problems:
+    - [Probability of a Path in an HMM](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/181)
+- For more details:
+    - UC San Diego Course:[]()
+
+</details>
+
 ---
 
 ## Graph Algorithms in Genome Sequencing
