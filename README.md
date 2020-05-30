@@ -4444,6 +4444,7 @@
 
 - Related Problems:
     - [Probability of a Path in an HMM](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/181)
+    - [Probability of an Outcome Given a Hidden Path](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/182)
 - For more details:
     - UC San Diego Course:[]()
 
