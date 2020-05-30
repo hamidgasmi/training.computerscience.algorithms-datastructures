@@ -1,21 +1,14 @@
 import sys
 
 def path_probability(pi, states, transition):
-    """Computes probability of a path pi through a given HMM.
+    if len(pi) == 0:
+        return 0.0
 
-    Make sure that your output is to at least three significant figures.
+    probability = 1/len(states)
+    for p in range(1, len(pi)):
+        probability *= transition[pi[p - 1]][ pi[p] ]
 
-    Args:
-        pi: A string containg the path.
-        states: A list of strings containing all possible states
-        transition: A 2D dictionary s.t. transition[x][y] is the
-            probability of transitioning from state x to state y.
-
-    Returns:
-        A float with the probability to at least three significant figures.
-    """
-    # TODO: your code here
-    return 0.0
+    return probability
 
 if __name__ == "__main__":
     pi = sys.stdin.readline().strip()
