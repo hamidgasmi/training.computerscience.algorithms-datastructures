@@ -52,7 +52,7 @@ class Overlap_Graph:
         
         return node_id, is_new_node     
     
-    def print_adjacency_list(self):
+    def str_adjacency_list(self):
         
         result_list = []
         for node in range(len(self.nodes)):
@@ -75,4 +75,4 @@ if __name__ == "__main__":
     
     overlap_graph = Overlap_Graph(patterns)
 
-    print(overlap_graph.print_adjacency_list())
+    print(overlap_graph.str_adjacency_list())
