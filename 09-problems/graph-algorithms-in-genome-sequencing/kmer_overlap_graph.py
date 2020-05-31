@@ -40,7 +40,7 @@ class Overlap_Graph:
     def get_node_id(self, pattern):
 
         is_new_node = False
-        if pattern in self.nodes:
+        if pattern in self.nodes_ids:
             node_id = self.nodes_ids[pattern]
             is_new_node = False
         else:
