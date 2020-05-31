@@ -20,7 +20,6 @@ class Overlap_Graph:
             node_id, is_new_node = self.get_node_id(pattern)
             prefix = pattern[:self._pattern_size - 1]
             suffix = pattern[1:]
-            #print("pattern, prefix, suffix: ", pattern, prefix, suffix)
             if is_new_node:
                 if not prefix in prefixes:
                     prefixes[prefix] = []
@@ -28,16 +27,15 @@ class Overlap_Graph:
 
                 if not suffix in suffixes:
                     suffixes[suffix] = []
-                suffixes[suffix].append(node_id)
+                if prefix != suffix:
+                    suffixes[suffix].append(node_id)
 
                 if suffix in prefixes: 
                     self.adjacency_list[node_id].extend(prefixes[suffix])
                 if prefix in suffixes:
                     for predec_node in suffixes[prefix]:
                         self.adjacency_list[predec_node].append(node_id)
-
-        for a in self.adjacency_list:
-            print(a)
+                
 
     def get_node_id(self, pattern):
 
@@ -57,12 +55,10 @@ class Overlap_Graph:
     def print_adjacency_list(self):
         
         result_list = []
-        print(self.nodes)
         for node in range(len(self.nodes)):
             if len(self.adjacency_list[node]) == 0:
                 continue
-            print(self.nodes[node])
-
+            
             node_adjacents = [ self.nodes[node] ]
             node_adjacents.append('->')
             for a in range(len(self.adjacency_list[node])):
