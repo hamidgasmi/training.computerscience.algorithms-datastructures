@@ -1,0 +1,5 @@
+GAG -> AGG
+CAG -> AGG,AGG
+GGG -> GGG,GGA
+AGG -> GGG
+GGA -> GAG
