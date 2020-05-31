@@ -4445,6 +4445,9 @@
 - Related Problems:
     - [Probability of a Path in an HMM](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/181)
     - [Probability of an Outcome Given a Hidden Path](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/182)
+    - [Finding an Optimal Hidden Path](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/183)
+    - [Likelihood of an Outcome](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/184)
+
 - For more details:
     - UC San Diego Course:[]()
 
@@ -4554,6 +4557,13 @@
 - It's also equivalent to
 
 </details>
+
+<details>
+<summary>Max Product of terms</summary>
+
+- When we need to compute the max of product of terms: `M = max(term_i0 * term_i1 * ...)`
+- To avoid any **stackoverflow** error due to the product operation, it's better to compute the logarithm of M:
+- `max(term_i0 * term_i1 * ...)` is then equivalent to `max(log(term_i0) + log(term_i1) + ...)`
 
 ---
 
