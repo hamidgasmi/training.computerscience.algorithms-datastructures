@@ -25,7 +25,7 @@ class Eulerian_Graph:
 
             for a in self.adjacency_list[start_vertex_no]:
                  self.reversed_adjacency_list[a].append(start_vertex_no)
-    
+
     def _get_node_no(self, label, node_label_dict):
         
         if label in node_label_dict:
@@ -70,6 +70,7 @@ class Eulerian_Graph:
         postOrderVisits.append(v)
 
     def dfs(self, adj, postOrderVisits):
+
         self.visited = [ False for _ in range(len(self.nodes)) ]
         for v in range(len(adj)):
             if not self.visited[v]:
@@ -99,22 +100,23 @@ class Eulerian_Graph:
     def _is_eulerian_graph(self):
         
         # 1. Is balanced
-        assert(self._is_balanced())
+        #assert(self._is_balanced())
 
         # 2. Is strongly connected
-        assert(self._is_strongly_connected())
+        #assert(self._is_strongly_connected())
+
+        return True
 
     def form_cycle(self, start, cycle, visited_edge_indexes, unvisited_edge_node_dict):
         
         node = start
-
         while visited_edge_indexes[node] + 1 < len(self.adjacency_list[node]):
             
             cycle.append(node)
 
             # Save this node, if there are 2 or more unvisited edges
-            if visited_edge_indexes[node] + 2 < len(self.adjacency_list[node]):
-                unvisited_edge_node_dict[node] = len(cycle) - 1
+            if (visited_edge_indexes[node] + 2) < len(self.adjacency_list[node]):
+                unvisited_edge_node_dict[node] = (len(cycle) - 1)
 
             elif node in unvisited_edge_node_dict:
                 unvisited_edge_node_dict.pop(node)
@@ -123,9 +125,9 @@ class Eulerian_Graph:
             node = self.adjacency_list[node][ visited_edge_indexes[node] ]
             
         cycle.append(node)
-        
-        return -1 if len(unvisited_edge_node_dict) == 0 else unvisited_edge_node_dict.popitem()[1]
-
+                
+        return -1 if len(unvisited_edge_node_dict) == 0 else next(iter(unvisited_edge_node_dict.values()))
+    
     def eulerian_cycle(self):
         
         cycle = []
@@ -133,16 +135,21 @@ class Eulerian_Graph:
 
         # nodes with unvisited edges: {node, position in cycle}
         unvisited_edge_node_dict = dict()
-
+        
         new_start_pos_in_cycle = self.form_cycle(0, cycle, visited_edge_indexes, unvisited_edge_node_dict)
 
         while new_start_pos_in_cycle != -1:
-
+            
+            new_start = cycle[new_start_pos_in_cycle]
             new_cycle = cycle[new_start_pos_in_cycle:]
             new_cycle.extend(cycle[1:new_start_pos_in_cycle])
             cycle = new_cycle
-            
-            new_start = cycle[0]
+            for node in unvisited_edge_node_dict:
+                if unvisited_edge_node_dict[node] >= new_start_pos_in_cycle:
+                    unvisited_edge_node_dict[node] -= new_start_pos_in_cycle
+                else:
+                    unvisited_edge_node_dict[node] += (len(cycle) - new_start_pos_in_cycle)
+
             new_start_pos_in_cycle = self.form_cycle(new_start, cycle, visited_edge_indexes, unvisited_edge_node_dict)
         
         return '->'.join([ self.nodes[node] for node in cycle])
