@@ -1,27 +1,26 @@
 import sys
+from collections import namedtuple
 
-class Eulerian_Graph:
+Node_Degree = namedtuple('Node_Degree', ['vertex_no', 'in_degree', 'out_degree'])
+
+class Graph:
     def __init__(self, edges):
         
         self._build_graph(edges)
-        
-        self._is_eulerian_graph()
     
     def _build_graph(self, edges):
         
         self.nodes = []
         self.adjacency_list = []
         self.reversed_adjacency_list = []
-        self.edges_counts = 0
-        node_label_dict = dict()
 
+        node_label_dict = dict()
         for edge in edges:    
             (start_vertex_label, end_vertices_labels) = edge.split(' -> ')
             
             start_vertex_no = self._get_node_no(start_vertex_label, node_label_dict)
 
             self.adjacency_list[start_vertex_no] = [self._get_node_no(label, node_label_dict) for label in end_vertices_labels.split(',')]
-            self.edges_counts += len(self.adjacency_list[start_vertex_no])
 
             for a in self.adjacency_list[start_vertex_no]:
                  self.reversed_adjacency_list[a].append(start_vertex_no)
@@ -40,7 +39,7 @@ class Eulerian_Graph:
 
         return node_no
 
-    def _is_balanced(self):
+    def find_unbalanced_vertices(self):
 
         # 1. Compute in_degree for each vertex
         in_degree = [0 for _ in range(len(self.adjacency_list))]
@@ -49,18 +48,16 @@ class Eulerian_Graph:
                 in_degree[v] += 1
 
         # 2. Compare in_degree vs. out_degree of each vertex
-        balanced = True
         u = 0
-        self.balanced = ""
+        self.unbalanced_vertices = []
         while u < len(self.adjacency_list):
             if in_degree[u] != len(self.adjacency_list[u]):
-                balanced = False
-                break
+                self.unbalanced_vertices.append(Node_Degree(u, in_degree[u], len(self.adjacency_list[u])))
         
             u += 1
-        
-        return balanced
 
+        return self.unbalanced_vertices
+    
     def explore(self, v, adj, postOrderVisits):
         self.visited[v] = True
         for a in adj[v]:
@@ -76,34 +73,30 @@ class Eulerian_Graph:
             if not self.visited[v]:
                 self.explore(v, adj, postOrderVisits)
 
-    def strongly_connected_components_number(self):
+    def find_strongly_connected_components(self):
         
         postOrderVisits = []
         self.dfs(self.reversed_adjacency_list, postOrderVisits)
         self.visited = [ False for _ in range(len(self.nodes)) ]
-        aSCCList = []
+        self.strongly_connected_components = []
         for i in range(len(postOrderVisits) - 1, -1, -1):
             v = postOrderVisits[i]
             if not self.visited[v]:
                 aSCC = []
                 self.explore(v, self.adjacency_list, aSCC)
-                aSCCList.append(aSCC)
+                self.strongly_connected_components.append(aSCC)
 
-        return aSCCList
-
-    def _is_strongly_connected(self):
-        
-        aSCCList = self.strongly_connected_components_number()
-        
-        return len(aSCCList) == 1
+        return self.strongly_connected_components
 
     def _is_eulerian_graph(self):
         
         # 1. Is balanced
-        #assert(self._is_balanced())
+        self.find_unbalanced_vertices()
+        assert(len(self.unbalanced_vertices) == 0)
 
         # 2. Is strongly connected
-        #assert(self._is_strongly_connected())
+        self.find_strongly_connected_components()
+        assert(len(self.strongly_connected_components) == 1)
 
         return True
 
@@ -129,6 +122,8 @@ class Eulerian_Graph:
         return -1 if len(unvisited_edge_node_dict) == 0 else next(iter(unvisited_edge_node_dict.values()))
     
     def eulerian_cycle(self):
+
+        assert(self._is_eulerian_graph())
         
         cycle = []
         visited_edge_indexes = [-1 for _ in range(len(self.nodes))]
@@ -152,11 +147,11 @@ class Eulerian_Graph:
 
             new_start_pos_in_cycle = self.form_cycle(new_start, cycle, visited_edge_indexes, unvisited_edge_node_dict)
         
-        return '->'.join([ self.nodes[node] for node in cycle])
+        return cycle
 
 if __name__ == "__main__":
     edges = sys.stdin.read().strip().splitlines()
     
-    eulerian_graph = Eulerian_Graph(edges)
+    eulerian_graph = Graph(edges)
 
-    print(eulerian_graph.eulerian_cycle())
+    print('->'.join( [ eulerian_graph.nodes[node] for node in eulerian_graph.eulerian_cycle() ] ))
