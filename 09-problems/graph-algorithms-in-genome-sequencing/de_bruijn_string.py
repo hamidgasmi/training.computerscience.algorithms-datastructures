@@ -15,21 +15,21 @@ class De_Bruijn_Graph:
         node_kmer_no_dict = dict()
         for i in range(len(text) - k + 1):
 
-            prefix_node_no = self.get_node_no(text[0:k-1], node_kmer_no_dict) if i == 0 else suffix_node_no
-            suffix_node_no = self.get_node_no(text[i+1:i+k], node_kmer_no_dict)
+            prefix_node_no = self._get_node_no(text[0:k-1], node_kmer_no_dict) if i == 0 else suffix_node_no
+            suffix_node_no = self._get_node_no(text[i+1:i+k], node_kmer_no_dict)
 
             self.adjacency_list[prefix_node_no].append(suffix_node_no)
             
-    def get_node_no(self, kmer, node_kmer_no_dict):
+    def _get_node_no(self, label, node_label_no_dict):
         
-        if kmer in node_kmer_no_dict:
-            node_no = node_kmer_no_dict[kmer]
+        if label in node_label_no_dict:
+            node_no = node_label_no_dict[label]
 
         else:
             node_no = len(self.nodes)
-            self.nodes.append(kmer)
+            self.nodes.append(label)
             self.adjacency_list.append([])
-            node_kmer_no_dict[kmer] = node_no
+            node_label_no_dict[label] = node_no
 
         return node_no
 

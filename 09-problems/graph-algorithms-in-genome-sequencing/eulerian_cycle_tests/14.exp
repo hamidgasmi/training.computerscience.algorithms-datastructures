@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "eulerian_cycle.py", line 153, in <module>
+    eulerian_graph = Eulerian_Graph(edges)
+  File "eulerian_cycle.py", line 8, in __init__
+    self._is_eulerian_graph()
+  File "eulerian_cycle.py", line 105, in _is_eulerian_graph
+    assert(self._is_strongly_connected())
+AssertionError
