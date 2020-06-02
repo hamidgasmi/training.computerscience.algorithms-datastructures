@@ -1,7 +1,6 @@
 import sys
 import eulerian_cycle
 
-
 def eulerian_path(edges):
 
     graph = eulerian_cycle.Graph(edges)
