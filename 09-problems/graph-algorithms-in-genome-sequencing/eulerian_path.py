@@ -9,7 +9,7 @@ def eulerian_path(edges):
 
     path = []
     if len(graph.unbalanced_vertices) == 0:
-        # The graph is balanced: let's try to find an Eurelian Cycle
+        # The graph is balanced: let's try to find an Eurelian Cycle (it must be strongly connected)
         path = graph.eulerian_cycle()
 
     elif len(graph.unbalanced_vertices) == 2:
@@ -33,7 +33,7 @@ def eulerian_path(edges):
 
             graph.adjacency_list[add_edge_start]. append(add_edge_end)
             
-            # Find an Eulerian Cycle with the additional edge
+            # Find an Eulerian Cycle with the additional edge (it must be strongly connected)
             cycle = graph.eulerian_cycle()
 
             # Remove the additional edge from the cycle
