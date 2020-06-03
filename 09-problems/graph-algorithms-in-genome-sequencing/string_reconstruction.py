@@ -24,7 +24,7 @@ class De_Bruijn_Graph:
             suffix_node_no = self.get_node_no(pattern[1:self._pattern_size], node_kmer_no_dict)
 
             self.adjacency_list[prefix_node_no].append(suffix_node_no)
-
+    
     def get_node_no(self, kmer, node_kmer_no_dict):
         
         if kmer in node_kmer_no_dict:
