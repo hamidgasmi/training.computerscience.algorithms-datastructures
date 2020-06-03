@@ -1,18 +1,22 @@
 import sys
 
+# Running Time: O(|paired_comp|)
 def reconstruct(k, d, paired_comp):
-    """Reconsructs a string from its gapped genome path
+    prefixes, suffixes = [], []
 
-    Args:
-        k:              length of the k-mers in each (k,d)-mer
-        d:              length of the gap
-        paired_comp:    (k,d)-mers that make up the target string
+    for pair in paired_comp:
+        prefix, suffix = pair.split('|')
+        if len(prefixes) == 0:
+            prefixes.append(prefix)
+        elif (len(prefixes) - 1) < d: 
+            prefixes.append(prefix[k - 1])
 
-    Returns:
-        a string that matches the gapped genome path
-    """
-    # TODO: your code here
-    return ""
+        if len(suffixes) == 0:
+            suffixes.append(suffix)
+        else:
+            suffixes.append(suffix[k - 1])
+        
+    return ''.join(prefixes + suffixes)
 
 if __name__ == "__main__":
     k, d = map(int, sys.stdin.readline().strip().split())
