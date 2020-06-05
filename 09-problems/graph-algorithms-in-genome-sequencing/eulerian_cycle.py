@@ -2,6 +2,7 @@ import sys
 from collections import namedtuple
 
 Node_Degree = namedtuple('Node_Degree', ['vertex_no', 'in_degree', 'out_degree'])
+Cycle =  namedtuple('Cycle', ['cycle_no', 'cycle_vertex_pos'])
 
 class Graph:
     def __init__(self, edges):
@@ -100,7 +101,7 @@ class Graph:
 
         return True
 
-    def form_cycle(self, start, cycle, visited_edge_indexes, unvisited_edge_node_dict):
+    def form_cycle_naive(self, start, cycle, visited_edge_indexes, unvisited_edge_node_dict):
         
         node = start
         while visited_edge_indexes[node] + 1 < len(self.adjacency_list[node]):
@@ -121,7 +122,7 @@ class Graph:
                 
         return -1 if len(unvisited_edge_node_dict) == 0 else next(iter(unvisited_edge_node_dict.values()))
     
-    def eulerian_cycle(self):
+    def eulerian_cycle_naive(self):
 
         assert(self._is_eulerian_graph())
         
@@ -131,7 +132,7 @@ class Graph:
         # nodes with unvisited edges: {node, position in cycle}
         unvisited_edge_node_dict = dict()
         
-        new_start_pos_in_cycle = self.form_cycle(0, cycle, visited_edge_indexes, unvisited_edge_node_dict)
+        new_start_pos_in_cycle = self.form_cycle_naive(0, cycle, visited_edge_indexes, unvisited_edge_node_dict)
 
         while new_start_pos_in_cycle != -1:
             
@@ -145,8 +146,80 @@ class Graph:
                 else:
                     unvisited_edge_node_dict[node] += (len(cycle) - new_start_pos_in_cycle)
 
-            new_start_pos_in_cycle = self.form_cycle(new_start, cycle, visited_edge_indexes, unvisited_edge_node_dict)
+            new_start_pos_in_cycle = self.form_cycle_naive(new_start, cycle, visited_edge_indexes, unvisited_edge_node_dict)
         
+        return cycle
+
+    def form_cycle(self, start, visited_edge_indexes, unvisited_edge_node_set):
+        
+        node = start
+        cycle = []
+        while visited_edge_indexes[node] + 1 < len(self.adjacency_list[node]):
+            
+            cycle.append(node)
+
+            # Save this node, if there are 2 or more unvisited edges
+            if (visited_edge_indexes[node] + 2) < len(self.adjacency_list[node]):
+                if not node in unvisited_edge_node_set:
+                    unvisited_edge_node_set.add(node)
+
+            elif node in unvisited_edge_node_set:
+                unvisited_edge_node_set.remove(node)
+            
+            visited_edge_indexes[node] += 1
+            node = self.adjacency_list[node][ visited_edge_indexes[node] ]
+            
+        cycle.append(node)
+                
+        return cycle, -1 if len(unvisited_edge_node_set) == 0 else next(iter(unvisited_edge_node_set))
+
+    # Running Time: O(|E|)
+    def eulerian_cycle(self):
+
+        assert(self._is_eulerian_graph())
+        
+        visited_edge_indexes = [-1 for _ in range(len(self.nodes))]
+
+        # nodes with unvisited edges: {node, position in cycle}
+        unvisited_edge_node_set = set()
+        
+        # {node_no, cycle_no []}: will contain all cycle no starting from aach node
+        node_cycles_dict = dict()
+
+        # 1. Find all cycles
+        cycles = []
+        start_node = 0
+        while start_node != -1:
+            
+            cycle, start_node = self.form_cycle(start_node, visited_edge_indexes, unvisited_edge_node_set)
+
+            cycles.append(cycle)
+            
+            if cycle[0] in node_cycles_dict:
+                node_cycles_dict[ cycle[0] ].append(len(cycles) - 1)
+            else:
+                node_cycles_dict[ cycle[0] ] = [ len(cycles) - 1 ]
+        
+        # 2. Build Eulerian Cycle:
+        cycle = []
+        cycle_queue = [ Cycle(0, 0) ]
+        while len(cycle_queue) != 0:
+            
+            (cycle_no, cycle_vertex_pos) = cycle_queue.pop()
+            vertex_no = cycles[cycle_no][cycle_vertex_pos]
+            
+            cycle.append(vertex_no)
+            cycle_vertex_pos += 1
+            if cycle_vertex_pos < len(cycles[cycle_no]):
+                cycle_queue.append((cycle_no, cycle_vertex_pos))
+
+            if vertex_no in node_cycles_dict:
+                for new_cycle_no in node_cycles_dict[vertex_no]:
+                    if new_cycle_no != cycle_no:
+                        cycle_queue.append((new_cycle_no, 1))
+
+                node_cycles_dict.pop(vertex_no)
+
         return cycle
 
 if __name__ == "__main__":
@@ -154,4 +227,5 @@ if __name__ == "__main__":
     
     eulerian_graph = Graph(edges)
 
-    print('->'.join( [ eulerian_graph.nodes[node] for node in eulerian_graph.eulerian_cycle() ] ))
+    print("Naive    : ", '->'.join( [ eulerian_graph.nodes[node] for node in eulerian_graph.eulerian_cycle_naive() ] ))
+    print("Efficient: ", '->'.join( [ eulerian_graph.nodes[node] for node in eulerian_graph.eulerian_cycle() ] ))
