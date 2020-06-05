@@ -3,6 +3,8 @@ from collections import namedtuple
 
 Node_Degree = namedtuple('Node_Degree', ['vertex_no', 'in_degree', 'out_degree'])
 
+Cycle =  namedtuple('Cycle', ['cycle_no', 'cycle_vertex_pos'])
+
 class De_Bruijn_Graph:
     def __init__(self, k, patterns):
         
@@ -57,51 +59,74 @@ class De_Bruijn_Graph:
 
         return self.unbalanced_vertices
 
-    def form_cycle(self, start, cycle, visited_edge_indexes, unvisited_edge_node_dict):
+    def form_cycle(self, start, visited_edge_indexes, unvisited_edge_node_set):
         
         node = start
+        cycle = []
         while visited_edge_indexes[node] + 1 < len(self.adjacency_list[node]):
             
             cycle.append(node)
 
             # Save this node, if there are 2 or more unvisited edges
             if (visited_edge_indexes[node] + 2) < len(self.adjacency_list[node]):
-                unvisited_edge_node_dict[node] = (len(cycle) - 1)
+                if not node in unvisited_edge_node_set:
+                    unvisited_edge_node_set.add(node)
 
-            elif node in unvisited_edge_node_dict:
-                unvisited_edge_node_dict.pop(node)
+            elif node in unvisited_edge_node_set:
+                unvisited_edge_node_set.remove(node)
             
             visited_edge_indexes[node] += 1
             node = self.adjacency_list[node][ visited_edge_indexes[node] ]
             
         cycle.append(node)
                 
-        return -1 if len(unvisited_edge_node_dict) == 0 else next(iter(unvisited_edge_node_dict.values()))
-    
+        return cycle, -1 if len(unvisited_edge_node_set) == 0 else next(iter(unvisited_edge_node_set))
+
+    # Running Time: O(|E|)
     def eulerian_cycle(self):
-                
-        cycle = []
+
         visited_edge_indexes = [-1 for _ in range(len(self.nodes))]
 
         # nodes with unvisited edges: {node, position in cycle}
-        unvisited_edge_node_dict = dict()
+        unvisited_edge_node_set = set()
         
-        new_start_pos_in_cycle = self.form_cycle(0, cycle, visited_edge_indexes, unvisited_edge_node_dict)
+        # {node_no, cycle_no []}: will contain all cycle no starting from aach node
+        node_cycles_dict = dict()
 
-        while new_start_pos_in_cycle != -1:
+        # 1. Find all cycles
+        cycles = []
+        start_node = 0
+        while start_node != -1:
             
-            new_start = cycle[new_start_pos_in_cycle]
-            new_cycle = cycle[new_start_pos_in_cycle:]
-            new_cycle.extend(cycle[1:new_start_pos_in_cycle])
-            cycle = new_cycle
-            for node in unvisited_edge_node_dict:
-                if unvisited_edge_node_dict[node] >= new_start_pos_in_cycle:
-                    unvisited_edge_node_dict[node] -= new_start_pos_in_cycle
-                else:
-                    unvisited_edge_node_dict[node] += (len(cycle) - new_start_pos_in_cycle)
+            cycle, start_node = self.form_cycle(start_node, visited_edge_indexes, unvisited_edge_node_set)
 
-            new_start_pos_in_cycle = self.form_cycle(new_start, cycle, visited_edge_indexes, unvisited_edge_node_dict)
+            cycles.append(cycle)
+            
+            if cycle[0] in node_cycles_dict:
+                node_cycles_dict[ cycle[0] ].append(len(cycles) - 1)
+            else:
+                node_cycles_dict[ cycle[0] ] = [ len(cycles) - 1 ]
         
+        # 2. Build Eulerian Cycle:
+        cycle = []
+        cycle_queue = [ Cycle(0, 0) ]
+        while len(cycle_queue) != 0:
+            
+            (cycle_no, cycle_vertex_pos) = cycle_queue.pop()
+            vertex_no = cycles[cycle_no][cycle_vertex_pos]
+            
+            cycle.append(vertex_no)
+            cycle_vertex_pos += 1
+            if cycle_vertex_pos < len(cycles[cycle_no]):
+                cycle_queue.append((cycle_no, cycle_vertex_pos))
+
+            if vertex_no in node_cycles_dict:
+                for new_cycle_no in node_cycles_dict[vertex_no]:
+                    if new_cycle_no != cycle_no:
+                        cycle_queue.append((new_cycle_no, 1))
+
+                node_cycles_dict.pop(vertex_no)
+
         return cycle
 
     def eulerian_path(self, unbalanced_vertices):
