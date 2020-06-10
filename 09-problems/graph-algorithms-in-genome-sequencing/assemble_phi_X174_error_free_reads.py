@@ -41,92 +41,15 @@ class Knuth_Morris_Pratt:
     
     return(prefix[len(prefix) - 1])
 
-# Class to store Trie(Patterns)
-# It handles all cases particularly the case where a pattern Pi is a subtext of a pattern Pj for i != j
-class Trie_Patterns:
-    def __init__(self, patterns, start, end):
-        self.build_trie(patterns, start, end)
-
-    # The trie will be a dictionary of dictionaries where:
-    # ... The key of the external dictionary is the node ID (integer), 
-    # ... The internal dictionary:
-    # ...... It contains all the trie edges outgoing from the corresponding node
-    # ...... Its keys are the letters on those edges
-    # ...... Its values are the node IDs to which these edges lead
-    # Time Complexity: O(|patterns|)
-    # Space Complexity: O(|patterns|)
-    def build_trie(self, patterns, start, end):
-                
-        self.trie = dict()
-        self.trie[0] = dict()
-        self.node_patterns_mapping = dict()
-        self.max_node_no = 0
-        for i in range(len(patterns)):
-            self.insert(patterns[i] + '$', i, start, end + 1) # to handle the case where Pi is a substring of Pj for i != j
-
-    def insert(self, pattern, pattern_no, start, end):
-
-        (index, node) = self.search_text(pattern, start, end)
-                
-        for i in range(index, end + 1):
-            c = pattern[i]
-            self.max_node_no += 1
-            self.trie[node][c] = self.max_node_no
-            self.trie[self.max_node_no] = dict()
-            node = self.max_node_no
-        
-        if not node in self.node_patterns_mapping:
-            self.node_patterns_mapping[node] = []
-        self.node_patterns_mapping[node].append(pattern_no)
-
-    def search_text(self, pattern, start, end):
-        if len(self.trie) == 0:
-            return (0, -1)
-
-        node = 0
-        i = start
-        while i <= end:
-
-            c = pattern[i]
-
-            if pattern[i] in self.trie[node]:
-                node = self.trie[node][c]
-                i += 1
-                continue
-
-            else:
-                break
-        
-        return (i, node)
-
-    # Prints the trie in the form of a dictionary of dictionaries
-    # E.g. For the following patterns: ["AC", "T"] {0:{'A':1,'T':2},1:{'C':3}}
-    def print_tree(self):
-        for node in self.trie:
-            for c in self.trie[node]:
-                print("{}->{}:{}".format(node, self.trie[node][c], c))
-        #print(self.node_patterns_mapping)
-
-    # Time Complexity: O(|text| * |longest pattern|)
-    def multi_pattern_matching(self, text, start, end):
-        
-        if len(self.trie) == 0:
-            return []
-        
-        (i, node) = self.search_text(text[start : end + 1] + '$', start, end + 1)
-        
-        #print("Yes", text[start:end + 1], start, end, node, self.node_patterns_mapping[node])
-        
-        return self.node_patterns_mapping[node] if node in self.node_patterns_mapping else []
-
 class Overlap_Graph:
 
     def __init__(self, reads):
         
+        self._nodes_count = 0
         self._read_size = len(reads[0])
 
         self._build_nodes(reads)
-        self._build_adjacency_list_trie_kmp(reads)
+        self._build_adjacency_list_trie_kmp()
 
     def _build_nodes(self, reads):
         self.nodes = []
@@ -140,41 +63,48 @@ class Overlap_Graph:
             self.nodes.append(read)
             self.adjacency_list.append([])
 
-    def _build_adjacency_list_trie_kmp(self, reads):
+        self._nodes_count = len(self.nodes)
+
+    def _build_adjacency_list_trie_kmp(self):
         
         # Build adjacency list: 2 reads are joined by a directed edge of weight = to the length of the max overlap of these 2 reads
         sharing_kmer_size = 12 if self._read_size > 12 else 0
-
         kmp = Knuth_Morris_Pratt()
 
-        trie = Trie_Patterns(self.nodes, self._read_size - sharing_kmer_size, self._read_size - 1)
-        
-        for u in range(len(self.nodes)):
+        for u in range(self._nodes_count):
             
-            sharing_kmer_reads = trie.multi_pattern_matching(self.nodes[u], 0, sharing_kmer_size - 1)
-            #print("1st step: ", self.nodes[u], sharing_kmer_reads)
-            
-            for v in sharing_kmer_reads:
-
+            sharing_kmer_reads = []
+            for v in range(self._nodes_count):
                 if u == v:
                     continue
+                
+                if self.nodes[u][self._read_size - sharing_kmer_size:self._read_size - 1] in self.nodes[v]:
+                    sharing_kmer_reads.append(v)
 
-                overlap = kmp.max_overlap(self.nodes[v], self.nodes[u])
-                if overlap > 0:
-                    self.adjacency_list[v].append(Edge(u, overlap))
-           
-        for u in range(len(self.nodes)):
-            self.adjacency_list[u].sort(key=lambda e: e.weight, reverse=True)
+            max_overlap_nodes = []
+            max_overlap = 1 # this will prevent adding an edge with 0 weight (if max_overlap(u->v) == 0, then adjacents[u] will be empty)
+            for v in sharing_kmer_reads:
+                
+                overlap = kmp.max_overlap(self.nodes[u], self.nodes[v])        
+                if overlap > max_overlap:
+                    max_overlap_nodes = [v]
+                    max_overlap = overlap
+
+                elif overlap == max_overlap:
+                    max_overlap_nodes.append(v)
             
+            for v in max_overlap_nodes:
+                self.adjacency_list[u].append(Edge(v, max_overlap))
+    
     def str_adjacency_list(self):
         
         result_list = []
-        for node in range(len(self.nodes)):
-            if len(self.adjacency_list[node]) == 0:
-                continue
-            
-            node_adjacents = [ self.nodes[node] ]
-            node_adjacents.append('->')
+        for node in range(self._nodes_count):
+            node_adjacents = [self.nodes[node]]
+            node_adjacents.append('(')
+            node_adjacents.append(str(node))
+            node_adjacents.append(')->')
+
             for a in range(len(self.adjacency_list[node])):
                 node_adjacents.append('(' + self.nodes[self.adjacency_list[node][a].sink] + ', ' + str(self.adjacency_list[node][a].weight) + ')')
                 if a < len(self.adjacency_list[node]) - 1:
@@ -182,78 +112,106 @@ class Overlap_Graph:
             result_list.append(''.join(node_adjacents))
 
         return '\n'.join(result_list)
+    
+    def _get_unvisited_adjacent(self, curr_node, curr_adjacent_index, unvisited_nodes_set):
+
+        next_ajacent_index = -1
+        more_unvisited_adjacents = False
+        for i in range(curr_adjacent_index + 1, len(self.adjacency_list[curr_node])):
+            
+            if next_ajacent_index == -1 and self.adjacency_list[curr_node][i].sink in unvisited_nodes_set:
+                next_ajacent_index = i
+
+            elif self.adjacency_list[curr_node][i].sink in unvisited_nodes_set:
+                more_unvisited_adjacents = True
+                break
+        
+        return  next_ajacent_index, more_unvisited_adjacents
 
     def hamiltonian_path(self):
 
         path = []
-        visited = [False for _ in range(len(self.nodes))]
-
-        nodes_unvisited_edges_stack = [Latest_Visited_Node(0, -1, 0)]
-        visited[0] = True
-        path = [Edge(0, 0)]
+        unvisited_nodes_set = { i for i in range(self._nodes_count)}
+        
+        first_node = 0
+        nodes_unvisited_edges_stack = [Latest_Visited_Node(first_node, -1, 0)]
+        unvisited_nodes_set.remove(0)
+        
+        path = [Edge(first_node, 0)]
         while len(nodes_unvisited_edges_stack) != 0:
-
-            latest_visited_node = nodes_unvisited_edges_stack.pop(len(nodes_unvisited_edges_stack) - 1)
-
+            
             # The path build so far isn't hamiltonian: we need to go back to the latest node with unvisited edges
-            for i in range(len(path) - 1, latest_visited_node.path_index, -1):
-                
-                visited[ path[i].sink ] = False
-                path.pop(i)
-            
-            node = self.adjacency_list[latest_visited_node.node][latest_visited_node.adjacent_index + 1].sink
-            edge_node_weight = self.adjacency_list[latest_visited_node.node][latest_visited_node.adjacent_index + 1].weight
-            if (latest_visited_node.adjacent_index + 1) < (len(self.adjacency_list[latest_visited_node.node]) - 1):
-                #print("Yes: ", len(self.adjacency_list[latest_visited_node.node]), latest_visited_node)
-                nodes_unvisited_edges_stack.append(Latest_Visited_Node(latest_visited_node.node, latest_visited_node.adjacent_index + 1, latest_visited_node.path_index))
-            #print("node, next node: ", latest_visited_node.node, self.nodes[latest_visited_node.node], self.nodes[node], node, nodes_unvisited_edges_stack, path)
-            
-            while not visited[node]:
-                path.append(Edge(node, edge_node_weight))
-                visited[node] = True
-                
-                if len(self.adjacency_list[node]) > 1:
-                    nodes_unvisited_edges_stack.append(Latest_Visited_Node(node, 0, len(path) - 1))
-                
-                if len(self.adjacency_list[node]) == 0:
-                    continue
-                
-                edge_node_weight = self.adjacency_list[node][0].weight
-                node = self.adjacency_list[node][0].sink
+            latest_visited_node = nodes_unvisited_edges_stack.pop()
+            curr_node = latest_visited_node.node
+            curr_adjacent_index = latest_visited_node.adjacent_index
 
-            if len(path) == len(self.nodes):
-                # if there is a cycle, then we'll need to remove few characters
-                if node == path[0].sink:
-                    path[0] = Edge(path[0].sink, edge_node_weight)
+            for i in range(len(path) - 1, latest_visited_node.path_index, -1):
+                unvisited_nodes_set.add(path[i].sink)
+                path.pop()
+            
+            (next_ajacent_index, more_unvisited_adjacents) = self._get_unvisited_adjacent(curr_node, curr_adjacent_index, unvisited_nodes_set)
+            if next_ajacent_index == -1:
+                next_node = next(iter(unvisited_nodes_set))
+                weight = 0
+            
+            else:                
+                next_node = self.adjacency_list[curr_node][next_ajacent_index].sink
+                weight = self.adjacency_list[curr_node][next_ajacent_index].weight
+
+                if more_unvisited_adjacents:
+                    nodes_unvisited_edges_stack.append(Latest_Visited_Node(curr_node, next_ajacent_index, latest_visited_node.path_index))
+
+            curr_node = next_node
+            while curr_node in unvisited_nodes_set:
+                path.append(Edge(curr_node, weight))
+                unvisited_nodes_set.remove(curr_node)
+                
+                (next_ajacent_index, more_unvisited_adjacents) = self._get_unvisited_adjacent(curr_node, -1, unvisited_nodes_set)
+
+                next_node = curr_node
+                if next_ajacent_index != -1:
+                    
+                    next_node = self.adjacency_list[curr_node][next_ajacent_index].sink
+                    weight = self.adjacency_list[curr_node][next_ajacent_index].weight
+
+                    if more_unvisited_adjacents:
+                        nodes_unvisited_edges_stack.append(Latest_Visited_Node(curr_node, next_ajacent_index, len(path) - 1))
+                
+                elif len(nodes_unvisited_edges_stack) == 0 and len(unvisited_nodes_set) != 0:
+                    # When the stack is empty (there not any other unvisited path) but there're unvisited nodes
+                    next_node = next(iter(unvisited_nodes_set))
+                    weight = 0
+
+                curr_node = next_node
+            
+            if len(path) == self._nodes_count:
                 break
         
+        return self._extract_genome_from_path(path)
+    
+    def _extract_genome_from_path(self, path):
+
         node = path[0].sink
         genome_list = [self.nodes[node]]
-        for i in range(1, len(path)):
-            
-            node = path[i].sink
-            overlap = path[i].weight
-            genome_list.append(self.nodes[node][overlap:])
-        #print(genome_list)
-        len_to_remove = path[0].weight
-        #len_to_remove = 0
-        while len_to_remove > 0:
-            last_element = genome_list.pop()
-
-            if len_to_remove < len(last_element):
-                genome_list.append(last_element[0:len(last_element) - len_to_remove + 1])
-
-            len_to_remove -= len(last_element)
+        for edge in range(1, len(path)):
+            node = path[edge].sink
+            overlap = path[edge].weight
+            if overlap == 0:
+                genome_list.append(self.nodes[node])
+            else:
+                genome_list.append(self.nodes[node][ overlap:])
         
-        return ''.join(genome_list)        
+        genome = ''.join(genome_list)
+
+        # Compute the overlap between the path's start and end
+        kmp = Knuth_Morris_Pratt()
+        overlap = kmp.max_overlap(genome[1:], genome[:len(genome) - 1])
+        
+        return genome[: len(genome) - overlap]
 
 if __name__ == '__main__':
-  #_ = int(sys.stdin.readline().strip())
   reads = sys.stdin.read().strip().splitlines()
 
   overlap_graph = Overlap_Graph(reads)
 
-  #print(overlap_graph.str_adjacency_list())
-
   print(overlap_graph.hamiltonian_path())
-
