@@ -74,15 +74,16 @@ class Overlap_Graph:
         for u in range(self._nodes_count):
             
             sharing_kmer_reads = []
+            suffix_u = self.nodes[u][self._read_size - sharing_kmer_size:self._read_size - 1]
             for v in range(self._nodes_count):
                 if u == v:
                     continue
                 
-                if self.nodes[u][self._read_size - sharing_kmer_size:self._read_size - 1] in self.nodes[v]:
+                if suffix_u in self.nodes[v]:
                     sharing_kmer_reads.append(v)
-
+            
             max_overlap_nodes = []
-            max_overlap = 1 # this will prevent adding an edge with 0 weight (if max_overlap(u->v) == 0, then adjacents[u] will be empty)
+            max_overlap = 1 # this will prevent adding edges of a nul weight (if max_overlap(u->v) == 0, then adjacents[u] will be empty)
             for v in sharing_kmer_reads:
                 
                 overlap = kmp.max_overlap(self.nodes[u], self.nodes[v])        
