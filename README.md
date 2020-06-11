@@ -2329,6 +2329,11 @@
 - Special Cases:
     - Find a Hamiltonian Graph in Complete Graph
     - See below approximation Algorithm TSP
+- Related Problems:
+    - [Assembling phi X174 with Overlap Graphs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/199)
+    - [Find an Eulerian Cycle in a Graph](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/188)
+    - [Find an Eulerian Path in a Graph](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/189)
+    - [Find a k-Universal Circular String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/191)
 - For more details:
     - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
