@@ -40,7 +40,7 @@
 <details>
 <summary>Logarithms</summary>
 
-- See [this](https://www.khanalscademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms)
+- See [this](https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/a/intro-to-logarithms)
 
 </details>
 
@@ -119,6 +119,9 @@
     - Biased/Degenerate tests: a tree which consists of a linked list, binary trees, stars
 - When dealing with **Graphs**:
     - Biased/Degenerate tests: a graph which consists of a linked list, a tree, a disconnected graph, a complete graph, a bipartite graph
+    - It contains loops (it's not a simple graph)
+    - It contains parallel edges (multiple edges between same vertices)
+    - It's a directed or undirected graph
 
 </details>
 
@@ -326,6 +329,23 @@
         - Look at the **recursion tree**
         - For Linear Search T(n) = T(n - 1) + c = T(n - 2) + 2 * c = n * c = T(n) = Θ(n)
         - For Binary Search T(n) = T(n/2) + c = T(n/2^2) + 2 * c = T(n/2^3) + 3 * c = Θ(log2 n) = Θ(log n)
+    - We could use the **Master Theorem** for divide-and-conquer recurrences
+    - We could also compute it as below: 
+        - Let's take the example of a binary search in an sorted array:
+        -        level  |  Recursion Tree     | # Problems    |  Level_Work = #_Problem * Level_T(n)
+                  0     |          n          |   1           |  1 * O(c) is the running time for the comparison array[mid] == our_value
+                  1     |         n/2         |   1           |  1 * O(c)
+                  2     |         n/4         |   1           |  1 * O(c)
+                  ...   |        ...          |   ...         |  ...
+                  i     |       n/2**i        |   1           |  1 * O(c)
+                  ...   |        ...          |   ...         |  ...
+                log_2_n |         1           |   1           |  1 * O(c)
+            Level: level in the recursion tree
+            #Problems: the number of problems at a given recursion level
+            Work: the running time at each level
+            T(n) = Sum of all Works(i = 0 .. log n) = log_2_n * O(c) = O(c * log_2_n)
+            For integers, T(n) = O(log_2_n) since the running time to compare 2 integers is O(1)
+            For strings, T(n) = O(|S| log_2_n) |S| is the length of the string that we're searching
 - Optionally, create iterative solution
     - It allows to save space
 - For more details:
@@ -347,7 +367,6 @@
             - If the recursion depth exceeds a certain threshold ***c log n***, the algorithm switches to heap sort
             - It's a simple but heuristic approach:: it's not guaranteed to be optimal
             - The time complexity is: O(n log n) in the worst case
-    - [Counting Sort](https://www.geeksforgeeks.org/counting-sort/)
 
 </details>
 
@@ -506,7 +525,7 @@
     - [Longest Path in a DAG](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/170)
 - For more details:
     - [Course material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_2_editdistance.pdf)
-    - [Advanced dynamic programming lecture notes]() by Jeff Erickson
+    - [Advanced dynamic programming lecture notes](https://jeffe.cs.illinois.edu/teaching/algorithms/notes/D-faster-dynprog.pdf) by Jeff Erickson
     - [How Do We Compare Biological Sequences?](https://www.youtube.com/playlist?list=PLQ-85lQlPqFNmbPEsMoxb5dM5qtRaVShn) by Phillip Compeau and Pavel Pevzner
     - [Money change problem: Greedy vs. Recursive vs. Dynamic Programming](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/1-algorithm-design-and-techniques/5_dynamic_programming/04_dynamic_programming_1_changeproblem.pdf)
     - Geeksforgeeks [Dynamic Programming](https://www.geeksforgeeks.org/dynamic-programming/)
@@ -4474,7 +4493,29 @@
 - Related problems:
     - [Swap 2 numbers without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/147)
     - [Single number withotu extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
+    - [Find the inserted char](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/203)
     
+</details>
+
+<details>
+<summary>Sliding Window Pattern</summary>
+
+- Related problems:
+    - 
+
+</details>
+
+<details>
+<summary>2 Pointers Pattern</summary>
+
+- Related problems:
+    - [Reverse vowels in an input string](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/202)
+
+</details>
+
+<details>
+<summary>Slow and Fast Pointers Pattern</summary>
+
 </details>
 
 <details>
