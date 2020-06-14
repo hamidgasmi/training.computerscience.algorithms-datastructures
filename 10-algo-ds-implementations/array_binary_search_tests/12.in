@@ -1,0 +1,4 @@
+# Test Case: List of ints with odd size + searched value is the 1st item of the list
+2
+int 0
+int 0 2 5 7 9 11

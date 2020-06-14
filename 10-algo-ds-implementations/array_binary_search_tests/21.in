@@ -1,0 +1,4 @@
+# Test Case: List of ints with 1 item + searched value doesn't exist in list
+2
+int 15
+int 8

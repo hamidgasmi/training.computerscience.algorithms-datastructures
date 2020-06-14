@@ -1,0 +1,4 @@
+# Test Case: List of ints with odd size + searched value doesn't exist in list + it should be in 1st half
+2
+int 1
+int 0 2 5 7 9

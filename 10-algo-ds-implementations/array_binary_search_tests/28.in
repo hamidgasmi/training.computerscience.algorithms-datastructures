@@ -1,0 +1,4 @@
+# Test Case: List of floats + value doesn't exit in the list
+2
+float 9.25
+float 0 2.5 5.1 7.02 9.26 11.44

@@ -1,0 +1,4 @@
+# Test Case: List of ints with odd size + searched value smaller to all list values
+2
+int -1
+int 0 2 5 7 9 11
