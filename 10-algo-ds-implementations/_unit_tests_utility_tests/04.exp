@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "_unit_tests_utility.py", line 90, in <module>
+    unit_tests.get_inputs()
+  File "_unit_tests_utility.py", line 34, in get_inputs
+    assert(input_line[0].isnumeric())
+AssertionError

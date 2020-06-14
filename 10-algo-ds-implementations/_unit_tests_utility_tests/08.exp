@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "_unit_tests_utility.py", line 90, in <module>
+    unit_tests.get_inputs()
+  File "_unit_tests_utility.py", line 67, in get_inputs
+    assert(comment_start > 1 and input_start != -1) # Make sure that there is at least 1 input
+AssertionError

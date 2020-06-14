@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "_unit_tests_utility.py", line 90, in <module>
+    unit_tests.get_inputs()
+  File "_unit_tests_utility.py", line 37, in get_inputs
+    assert(input_line[i] == '' or input_line[i][0] == '#')
+AssertionError
