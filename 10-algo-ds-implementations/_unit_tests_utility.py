@@ -48,7 +48,7 @@ class Unit_Tests_Utility:
             assert(len(input_line) > 1)
             assert(input_line[0] in ('int', 'float', 'str'))
 
-            # Find the start position of line comment:
+            # Find the start positions of inputs and comment:
             input_start = -1
             comment_start = 1
             while comment_start < len(input_line):
@@ -59,24 +59,26 @@ class Unit_Tests_Utility:
 
                     elif input_start == -1 and len(input_line[comment_start]) != 0:
                         input_start = comment_start
-                        
                 
                 comment_start += 1
             
-            #print("Error: ", comment_start, len(input_line), input_line)
-            assert(comment_start > 1 and input_start != -1) # Make sure that there is at least 1 input
+            assert(comment_start > input_start) # Make sure that the comment is after the input
 
             if comment_start < len(input_line):
                 self.comments.append(' '.join(input_line[comment_start:]))
             
-            if input_line[0] == 'int':
-                self.inputs.append([int(input_line[i]) for i in range(1, comment_start)])
+            if input_start == -1:
+                self.inputs.append([])
+                
+            else:
+                if input_line[0] == 'int':
+                    self.inputs.append([int(input_line[i]) for i in range(1, comment_start)])
 
-            elif  input_line[0] == 'float':
-                self.inputs.append([float(input_line[i]) for i in range(1, comment_start)])
+                elif  input_line[0] == 'float':
+                    self.inputs.append([float(input_line[i]) for i in range(1, comment_start)])
 
-            elif  input_line[0] == 'str':
-                self.inputs.append(input_line[1:comment_start])
+                elif  input_line[0] == 'str':
+                    self.inputs.append(input_line[1:comment_start])
 
 def print_list(list, list_name):
 
