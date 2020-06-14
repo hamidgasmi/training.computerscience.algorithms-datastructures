@@ -26,13 +26,12 @@ def binary_search_recursive(a, val, left, right):
     if a[mid] == val:
         return mid
 
-    result = 0
-    if a[mid] > val:
+    if val < a[mid]:
         result = binary_search_recursive(a, val, left, mid - 1)
-        
+
     else:
         result = binary_search_recursive(a, val, mid + 1, right)
-    
+
     return result
 
 def binary_search_iterative(a, val):
@@ -48,9 +47,9 @@ def binary_search_iterative(a, val):
             result = mid
             break
 
-        if a[mid] > val:
+        if val < a[mid]:
             right = mid - 1
-
+            
         else:
             left = mid + 1    
         
