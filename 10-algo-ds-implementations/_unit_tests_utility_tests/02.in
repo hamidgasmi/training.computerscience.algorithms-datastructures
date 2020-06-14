@@ -1,0 +1,4 @@
+3                   # This is a test case without a description
+int 1 2 3 4 # This is a 1st line
+float 1.2 3.4 # This is a 2nd line
+str azul hey salut hola # This is a 3rd line

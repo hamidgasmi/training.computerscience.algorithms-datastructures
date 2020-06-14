@@ -1,0 +1,6 @@
+# Test case: This is "happy" test case
+4                   #This is the number of line in my test case multiple spaces before # + 0 space after #
+int 6 7 8 9
+int 1 2 3 4 5 # This is int inputs + 1 space after #
+float 1.5 2.3 4.5 #  This is float inputs + 2 spaces after #
+str azul hey salut hola #   This is string inputs + 3 spaces after #
