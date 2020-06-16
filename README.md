@@ -351,18 +351,19 @@
 - For more details:
     - [Binary Search](https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search)
     - **Merge Sort**
-        - [Course Material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week4_divide_and_conquer/03_divide_and_conquer_4_sorting.pdf)
+        - [Course Material](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/01-algorithm-design-and-techniques/4_divide_and_conquer/03_divide_and_conquer_4_sorting.pdf)
         - [Merge Sort on khanacademy](https://www.khanacademy.org/computing/computer-science/algorithms#merge-sort)
     - **Quick Sort**
         - It's more efficient in practice than Merge Sort
         - Average Time Complexity: O(n log n)
         - Time Complexity in the worst case: O(n^2)
-        - [Course Material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week4_divide_and_conquer/03_divide_and_conquer_5_quicksort.pdf)
+        - [Course Material](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/01-algorithm-design-and-techniques/4_divide_and_conquer/03_divide_and_conquer_5_quicksort.pdf)
         - [Quick Sort on khanacademy](https://www.khanacademy.org/computing/computer-science/algorithms#quick-sort)
         - [Deterministic and Randomized Quicksort](http://faculty.cs.tamu.edu/klappi/csce411-f12/csce411-set13.pdf)
         - [3 way partition Quick Sort](https://www.geeksforgeeks.org/3-way-quicksort-dutch-national-flag/)
-        - [Quick Sort Recursive Tail Elimination](https://www.geeksforgeeks.org/quicksort-tail-call-optimization-reducing-worst-case-space-log-n/)
-        - [Quick Sort wth deterministic pivot selection heuristic]:
+        - [Quick Sort Tail Recursion](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/01-algorithm-design-and-techniques/4_divide_and_conquer/quick_sort_tail_recursion.pdf)
+        - Geeks of Geeks [Quick Sort Recursive Tail Elimination](https://www.geeksforgeeks.org/quicksort-tail-call-optimization-reducing-worst-case-space-log-n/)
+        - [Quick Sort with deterministic pivot selection heuristic]:
             - The pivot could be the median of the 1st, middle, and last element
             - If the recursion depth exceeds a certain threshold ***c log n***, the algorithm switches to heap sort
             - It's a simple but heuristic approach:: it's not guaranteed to be optimal
@@ -524,10 +525,10 @@
     - [Maximizing the Value of an Arithmetic Expression](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/20)
     - [Longest Path in a DAG](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/170)
 - For more details:
-    - [Course material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/1_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_2_editdistance.pdf)
+    - [Course material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/01_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_2_editdistance.pdf)
     - [Advanced dynamic programming lecture notes](https://jeffe.cs.illinois.edu/teaching/algorithms/notes/D-faster-dynprog.pdf) by Jeff Erickson
     - [How Do We Compare Biological Sequences?](https://www.youtube.com/playlist?list=PLQ-85lQlPqFNmbPEsMoxb5dM5qtRaVShn) by Phillip Compeau and Pavel Pevzner
-    - [Money change problem: Greedy vs. Recursive vs. Dynamic Programming](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/1-algorithm-design-and-techniques/5_dynamic_programming/04_dynamic_programming_1_changeproblem.pdf)
+    - [Money change problem: Greedy vs. Recursive vs. Dynamic Programming](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/01-algorithm-design-and-techniques/5_dynamic_programming/04_dynamic_programming_1_changeproblem.pdf)
     - Geeksforgeeks [Dynamic Programming](https://www.geeksforgeeks.org/dynamic-programming/)
     - [Dynamic Programming](https://www.radford.edu/~nokie/classes/360/dynprog.html)
     - Leetcode Post: [Dynamic Programming Patterns](https://en.wikipedia.org/wiki/Counting_sort)
@@ -567,7 +568,7 @@
 - Programming Languages:
     - Python: there is no static array data structure
 - For more details:
-    - [Arrays and Lists Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_1_arrays_and_lists.pdf)
+    - [Arrays and Lists Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/1_basic_data_structures/01_1_arrays_and_lists.pdf)
 
 </details>
 
@@ -604,7 +605,7 @@
 - Programming Languages:
     - Python:
 - For more details:
-    - [Arrays and Lists Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_1_arrays_and_lists.pdf)
+    - [Arrays and Lists Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/1_basic_data_structures/01_1_arrays_and_lists.pdf)
 
 </details>
 
@@ -647,7 +648,7 @@
 - Related Problems:
     - [Balanced Brackets](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/21)
 - For more details:
-    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
+    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
     - Visualization: [Implementation with an Array](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
     - Visualization: [Implementation with a Linked List](https://www.cs.usfca.edu/~galles/visualization/StackLL.html)
 
@@ -2204,7 +2205,7 @@
         - It would require an exponential time just to write down a solution for the instance *I*
     - We say that *S* is a solution to *I* ***iff C(S, I) = true***
 - For more details:
-    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2247,7 +2248,7 @@
           Let assume x=1  (by F3.4: z ∨ !x)-> z=1 (by F3.3)-> y=1 (by F3.5)-> F3.5 is falsified -> Initial assumption is wrong
           Therefore, F3 is unsatifiable
 - For more details:
-    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2315,7 +2316,7 @@
             - *G* weights satisfy the triangle inequality: for all `u, v, w ∈ V, d(u, v) + d(v, w) ≥ d(u, w)`
         - Output: A cycle of minimum total length visiting each vertex exactly once
 - For more details:
-    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
     - Developers Google: [solving a TSP with OR-Tools](https://developers.google.com/optimization/routing/tsp)
     - Wikipedia: [Travelling salesman problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem)
 
@@ -2354,7 +2355,7 @@
     - [Find an Eulerian Path in a Graph](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/189)
     - [Find a k-Universal Circular String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/191)
 - For more details:
-    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2370,7 +2371,7 @@
     - It can be solved efficiently with a Bellman-Ford's algorithm, if the graph is weighted and weights could be positive and negative
     - Longest path Problem doesn't have a know polynomial algorithm
 - For more details:
-    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2386,7 +2387,7 @@
     - It can be also solved by using **interior point** method: it has a polynomial upperbound running time
     - ILP problem doesn't have a know polynomial algorithm
 - For more details:
-    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2410,7 +2411,7 @@
     - Input: A tree with weights on vertices
     - Output: An independent set of maximum total weight
 - For more details:
-    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Search Problems](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
     
 </details>
 
@@ -2454,7 +2455,7 @@
     - If P = NP, the all search problems can be solved in polynomial time
     - If  != NP, then there exist search problems that cannot be solved in polynomial time
 - For more details:
-    - UC San Diego Course: [Class P and NP](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
+    - UC San Diego Course: [Class P and NP](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_1_search_problems.pdf)
 
 </details>
 
@@ -2475,7 +2476,7 @@
 - If *A* is hard (cannot be solved in polynomial time), then so is *B*
 - **Reductions Compose**: If A → B and B → C, then A → C
 - For more details:
-    - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
+    - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
  
 </details>
 
@@ -2643,7 +2644,7 @@
         - Use a Circuit-SAT algorithm for this circuit to find a solution (if exists)
 - **All of NP → Circuit SAT → SAT → 3-SAT → ISP → Vertex Cover Problem**
 - For more details:
-    - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
+    - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
 
 </details>
 
@@ -2683,7 +2684,7 @@
     - Integer Linear Programming problem: [Advertisement Budget Allocation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/140)
     - [Solve Sudoku Puzzle](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/141)
 - For more details:
-    - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
+    - UC San Diego Course: [Reductions](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/1-np_complete_problems/17_np_complete_problems_2_reductions.pdf)
     - [Mini-Sat Solver](https://msoos.github.io/cryptominisat_web/)
 
 </details>
@@ -3287,7 +3288,7 @@
         - Tries are a common way of storing a dictionary of words and are used, e.g., for implementing an autocomplete feature in text editors
         - E.g., Code editors, and web search engines like Google or Yandex
 - For more details:
-    - UC San Diego Course:[Tries](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
+    - UC San Diego Course:[Tries](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/05-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
 </details>
 
@@ -3352,7 +3353,7 @@
         - E.g. If we need 1B to store 1 character, for a string of length 10^6 we need more than 500GB of memory to store all its suffixes
         - The total # of characters is: 1+2+3+⋯+1000000=1000000(1000000+1)/2 = 500000500000
 - For more details:
-    - UC San Diego Course:[Suffix-Tries](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
+    - UC San Diego Course:[Suffix-Tries](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/05-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
 </details>
 
@@ -3396,7 +3397,7 @@
     - [Construct the Suffix Tree of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/157)
     - [Find the Shortest Non-Shared Substring of 2 Strings](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/158)
 - For more details:
-    - UC San Diego Course:[Suffix-Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
+    - UC San Diego Course:[Suffix-Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/05-string-processing-and-pattern-matching-algorithms/1-suffix-trees/01_suffix_trees.pdf)
 
 </details>
 
