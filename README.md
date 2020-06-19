@@ -64,7 +64,11 @@
 <summary>Recursion</summary>
 
 - To [Get Started](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion)
-- Stack optimization and Tail Recursion
+- Stack optimization and Tail Recursion:
+    - [Tail Recursion](http://wiki.c2.com/?TailRecursion)
+    - Geeks of Geeks [Tail Recursion](https://www.geeksforgeeks.org/tail-recursion/)
+    - Geeks of Geeks [Tail Recursion Elimination](https://www.geeksforgeeks.org/tail-call-elimination/)
+    - Python [Tail Recusion](https://chrispenner.ca/posts/python-tail-recursion)
 
 </details>
 
@@ -692,7 +696,7 @@
         - [More details](https://www.geeksforgeeks.org/queue-in-python/)
 - Related Problems:
 - For more details:
-    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
+    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/1_basic_data_structures/01_2_stacks_and_queues.pdf)
     - Visualization: [Implementation with an Array](https://www.cs.usfca.edu/~galles/visualization/QueueArray.html)
     - Visualization: [Implementation with a Linked List](https://www.cs.usfca.edu/~galles/visualization/QueueLL.html)
 
@@ -737,7 +741,7 @@
         - Its height is Low: it's equal to **log n**
         - It could be stored effeciently as an array
 - For more details:
-    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/1_basic_data_structures/01_3_trees.pdf)
+    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/1_basic_data_structures/01_3_trees.pdf)
 
 </details>
 
@@ -778,7 +782,7 @@
     - It requires to know its size at runtime
     - Problem: we might not know max size when allocating an array
 - More details:
-    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
+    - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
 
 </details>
 
@@ -847,7 +851,7 @@
     - [Dynamic Array with a PopMany Operation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/27)
 - More details:
     - [Amortized Analysis](https://youtu.be/U5XKyIVy2Vc) 
-    - [UC San Diego](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
+    - [UC San Diego](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/2_dynamic_arrays_and_amortized_complexity/02_1_dynamic_arrays_and_amortized_analysis.pdf)
 
 </details>
 
@@ -881,8 +885,8 @@
     - C++:
     - Java:
 - For more details:
-    - UC San Diego Course: [Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
-    - UC San Diego Course: [Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
+    - UC San Diego Course: [Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
+    - UC San Diego Course: [Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
 
 </details>
 
@@ -954,8 +958,8 @@
             - It takes a linear time
             - if n = 1024 = 2^10 then k = 2^10 / log 2^10 = 1024 / 10 = 102
 - For more details:
-    - UC San Diego Course: [Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
-    - UC San Diego Course: [Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
+    - UC San Diego Course: [Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
+    - UC San Diego Course: [Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
 
 </details>
 
@@ -1057,8 +1061,8 @@
     - [Tiptoe through the tulips](https://github.com/hamidgasmi/algorithms-datastructures/issues/39)
     - [Ada Farm](https://github.com/hamidgasmi/algorithms-datastructures/issues/34)
 - For more details:
-    - UC San Diego Course: [Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/tree/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets)
-    - UC San Diego Course: [Efficient Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/2-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_4_disjoint_sets_efficient.pdf)
+    - UC San Diego Course: [Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/tree/master/02-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets)
+    - UC San Diego Course: [Efficient Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_4_disjoint_sets_efficient.pdf)
     - [Tutorial](https://www.topcoder.com/community/competitive-programming/tutorials/disjoint-set-data-structures/)
 
 </details>
@@ -1129,8 +1133,8 @@
 - **Open Addressing**:
     - It's an implementation technique used to solve collisions issue
 - For more details:
-    - UC San Diego Course: [Introduction to Hashing](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_1_hashing_intro.pdf)
-    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Introduction to Hashing](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/4_hashing/04_1_hashing_intro.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
     - Geeks for Geeks: [Hashing: Introduction](https://www.geeksforgeeks.org/hashing-set-1-introduction/)
     - Geeks for Geeks: [Direct Address Table](https://www.geeksforgeeks.org/direct-address-table/)
     - Geeks for Geeks: [Hashing: Chaining](https://www.geeksforgeeks.org/hashing-set-2-separate-chaining/)
@@ -1165,7 +1169,7 @@
     - To Use **O(m) = O(n/α) = O(n)** memory to store n keys
     - Operations will run in time O(1 + α) = **O(1) on average**
 - For more details:
-    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1190,7 +1194,7 @@
         - Single rehashing takes **O(n)** time, 
         - Amortized running time of each operation with hash table is: **O(1)** on average, because rehashing will be rare
 - For more details:
-    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1220,7 +1224,7 @@
         - Choose random a ∈ [1, p − 1]
         - Choose random b ∈ [0, p − 1]
 - For more details:
-    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1284,7 +1288,7 @@
         - It uses x = 31
         - It avoids the (mod *p*) operator for technical reasons
 - For more details:
-    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1322,7 +1326,7 @@
     - C++: **unordered_map**
     - Java: **HashMap**
 - For more details:
-    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1349,7 +1353,7 @@
     - C++: **unordered_set**
     - Java: **HashSet**
 - For more details:
-    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
+    - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
 
 </details>
 
@@ -1382,8 +1386,8 @@
     - Insertion and deletion operations can destroy balance
     - Insertion and deletion operations need to rebalance
 - For more details:
-    - UC San Diego Course: [BST Basic Operations](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_3_binary_search_trees_basic_operations.pdf)
-    - UC San Diego Course: [Balance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_1_4_binary_search_trees_balance.pdf)
+    - UC San Diego Course: [BST Basic Operations](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/5_binary_search_trees/05_1_3_binary_search_trees_basic_operations.pdf)
+    - UC San Diego Course: [Balance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/5_binary_search_trees/05_1_4_binary_search_trees_balance.pdf)
 
 </details>
 
@@ -1516,9 +1520,9 @@
 - Related Problems:
 - Use Cases:
 - For more details:
-    - UC San Diego Course: [AVL tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_1_binary_search_trees_avl_trees.pdf)
-    - UC San Diego Course: [AVL Tree implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_2_binary_search_trees_avl_tree_implementation.pdf)
-    - UC San Diego Course: [Split and Merge](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/05_2_3_binary_search_trees_split_merge.pdf) operations
+    - UC San Diego Course: [AVL tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/5_binary_search_trees/05_2_1_binary_search_trees_avl_trees.pdf)
+    - UC San Diego Course: [AVL Tree implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/5_binary_search_trees/05_2_2_binary_search_trees_avl_tree_implementation.pdf)
+    - UC San Diego Course: [Split and Merge](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/5_binary_search_trees/05_2_3_binary_search_trees_split_merge.pdf) operations
     - Geeks for Geeks: [AVL tree insertion](https://www.geeksforgeeks.org/avl-tree-set-1-insertion/)
     - Geeks for Geeks: [AVL tree deletion](https://www.geeksforgeeks.org/avl-tree-set-2-deletion/)
     - Visualization: [AVL Tree](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html)
@@ -1530,9 +1534,9 @@
 
 - 
 - For more details:
-    - UC San Diego Course: [Splay Trees Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_1_binary_search_trees_splay_trees_introduction.pdf)
-    - UC San Diego Course: [Splay Tree Implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_2_binary_search_trees_splay_tree_implementation.pdf)
-    - UC San Diego Course: [Splay Tree Analysis](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/2-data-sructures-fundamentals/5_binary_search_trees/06_2_3_binary_search_trees_splay_tree_analysis.pdf)
+    - UC San Diego Course: [Splay Trees Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/5_binary_search_trees/06_2_1_binary_search_trees_splay_trees_introduction.pdf)
+    - UC San Diego Course: [Splay Tree Implementation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/5_binary_search_trees/06_2_2_binary_search_trees_splay_tree_implementation.pdf)
+    - UC San Diego Course: [Splay Tree Analysis](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/5_binary_search_trees/06_2_3_binary_search_trees_splay_tree_analysis.pdf)
     - Visualization: [Splay Tree](https://www.cs.usfca.edu/~galles/visualization/SplayTree.html)
 
 </details>
@@ -1613,8 +1617,8 @@
         - Followers on social network
         - Dependencies between tasks
 - For more details:
-    - UC San Diego Course: [Basics](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_1_basics.pdf)
-    - UC San Diego Course: [Representation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_2_representations.pdf)
+    - UC San Diego Course: [Basics](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/1_graph_decomposition/09_graph_decomposition_1_basics.pdf)
+    - UC San Diego Course: [Representation](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/1_graph_decomposition/09_graph_decomposition_2_representations.pdf)
     - Khanacademy [Introduction to Graphs](https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/describing-graphs)
 
 </details>
@@ -1682,7 +1686,7 @@
     - Detect there is a cycle in a graph:
         - [Checking Consistency of CS Curriculum](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/95)
 - For more details:
-    - UC San Diego Course: [Exploring Graphs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_3_explore.pdf)
+    - UC San Diego Course: [Exploring Graphs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/1_graph_decomposition/09_graph_decomposition_3_explore.pdf)
     - Visualization: [DFS](https://www.cs.usfca.edu/~galles/visualization/DFS.html)
 
 </details>
@@ -1704,8 +1708,8 @@
 - Related problems:
     - [Determining an Order of Courses](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/96)
 - For more details:
-    - UC San Diego Course: [DAGs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_6_dags.pdf)
-    - UC San Diego Course: [Topological Sort](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_7_topological-sort.pdf)
+    - UC San Diego Course: [DAGs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/1_graph_decomposition/09_graph_decomposition_6_dags.pdf)
+    - UC San Diego Course: [Topological Sort](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/1_graph_decomposition/09_graph_decomposition_7_topological-sort.pdf)
     - Geeks for Geeks: [topological sort with In-degree](https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/)
     - Visualization: [Topological Sort using DFS](https://www.cs.usfca.edu/~galles/visualization/TopoSortDFS.html)
     - Visualization: [Topological sort using indegree array](https://www.cs.usfca.edu/~galles/visualization/TopoSortIndegree.html)
@@ -1747,8 +1751,8 @@
 - Related Problems:
     - [Checking Whether Any Intersection in a City is Reachable from Any Other](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/97)
 - For more details:
-    - UC San Diego Course: [Strongly Connected Components I](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_8_strongly-connected-components.pdf)
-    - UC San Diego Course: [Strongly Connected Components II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/1_graph_decomposition/09_graph_decomposition_9_computing-sccs.pdf)
+    - UC San Diego Course: [Strongly Connected Components I](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/1_graph_decomposition/09_graph_decomposition_8_strongly-connected-components.pdf)
+    - UC San Diego Course: [Strongly Connected Components II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/1_graph_decomposition/09_graph_decomposition_9_computing-sccs.pdf)
     - Visualization: [Strongly connected components](https://www.cs.usfca.edu/~galles/visualization/ConnectedComponent.html)
 
 </details>
@@ -1802,7 +1806,7 @@
                      ↓
                 3    A
 - For more details:
-    - UC San Diego Course: [Path and Distance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
+    - UC San Diego Course: [Path and Distance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
 
 </details>
 
@@ -1843,7 +1847,7 @@
             - Such that the endpoints of each edge have different colors
         - Problem: [Check if a graph is bipartite](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/132)
 - For more details:
-    - UC San Diego Course: [BFS](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
+    - UC San Diego Course: [BFS](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
     - Khanacademy [BFS](https://www.khanacademy.org/computing/computer-science/algorithms/breadth-first-search/a/breadth-first-search-and-its-uses)
     - Visualization: [BFS](https://www.cs.usfca.edu/~galles/visualization/BFS.html)
 
@@ -1900,7 +1904,7 @@
                     return Reverse(result)
 - Related Problems:
 - For more details:
-     - UC San Diego Course: [Shortest Path Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
+     - UC San Diego Course: [Shortest Path Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/10_shortest_paths_in_graphs_1_bfs.pdf)
 
 </details>
 
@@ -2053,7 +2057,7 @@
     - [Detecting Anomalies in Currency Exchange Rates](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/134)
     - [Exchanging Money Optimally](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/135)
 - For more details:
-    - UC San Diego Course: [Bellman-Ford algorithm](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/2_paths_in_graphs/10_paths_in_graphs_3_bellman_ford.pdf)
+    - UC San Diego Course: [Bellman-Ford algorithm](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/2_paths_in_graphs/10_paths_in_graphs_3_bellman_ford.pdf)
 
 </details>
 
@@ -2074,7 +2078,7 @@
 - Any connected undirected graph *G(V, E)* with *|E| = |V| - 1* is a tree
 - An undirected graph is a tree if there is a unique path between any pair of its vertices
 - For more details:
-    - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
+    - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
 
 </details>
 
@@ -2124,7 +2128,7 @@
     - [Building Roads to Connect Cities](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/136)
     - [Clustering](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/137)
 - For more details:
-    - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
+    - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
     - Visualization: [Kruskal MST](https://www.cs.usfca.edu/~galles/visualization/Kruskal.html)
 
 </details>
@@ -2164,7 +2168,7 @@
     - Building a network
     - [Building Roads to Connect Cities](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/136)
 - For more details:
-    - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/3-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
+    - UC San Diego Course: [MST](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/03-graph-algorithms/3_spanning_trees/11_minimum_spanning_trees.pdf)
     - Visualization: [Prim’s MST](https://www.cs.usfca.edu/~galles/visualization/Prim.html)
 
 </details>
@@ -2704,7 +2708,7 @@
             Spacial Cases Algorithms:       Yes            Yes         No
             Approximation Algorithms:       Yes            No          Yes
                      Exact Algorithm:       No             Yes         Yes
-- UC San Diego Course: [Coping with NP-completness: Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_1_introduction.pdf)
+- UC San Diego Course: [Coping with NP-completness: Introduction](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_1_introduction.pdf)
 
 </details>
 
@@ -2827,7 +2831,7 @@
         - We're organizing a company party again
         - However this time, instead of maximizing the number of attendees, 
         - We would like to maximize the total fun factor
-- UC San Diego Course: [Coping with NP-completness: Special Cases](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_2_special_cases.pdf)
+- UC San Diego Course: [Coping with NP-completness: Special Cases](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_2_special_cases.pdf)
 - [Kőnig's theorem](https://en.wikipedia.org/wiki/K%C5%91nig%27s_theorem_(graph_theory))
 
 </details>
@@ -3089,7 +3093,7 @@
 - Related Problems:
     - Create a SAT-solvers
     - [School Bus](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/150)
-- UC San Diego Course: [Coping with NP-completness: Exact Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_3_exact_algorithms.pdf)
+- UC San Diego Course: [Coping with NP-completness: Exact Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_3_exact_algorithms.pdf)
 
 </details>
 
@@ -3207,7 +3211,7 @@
         - Restart from some completely different points (selected at random or not) and then save these found solutions
         - Finally, return the best solution among all found solutions
 - For more details:
-    - UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/4-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
+    - UC San Diego Course: [Coping with NP-completness: Approximation Algorithms](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/04-np-complete-problems/2-coping_with_np_completeness/18_coping_with_np_completeness_4_approximation_algorithms.pdf)
 
 </details>
 
@@ -3520,7 +3524,7 @@
     - [Construct the Burrows–Wheeler Transform of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/159)
     - [Reconstruct a String from its Burrows–Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/162)
 - For more details:
-    - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
+    - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/05-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
 </details>
 
@@ -3610,7 +3614,7 @@
 - Related Problems:
     - [Matching Against a Compressed String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/161)
 - For more details:
-    - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
+    - UC San Diego Course:[Burrows-Wheeler Transform](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/05-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
 </details>
 
@@ -3694,7 +3698,7 @@
 - Related Problems:
     - [Pattern Matching with the Suffix Array](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/165)
 - For more details:
-    - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
+    - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/05-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
 
 </details>
 
@@ -3930,7 +3934,7 @@
 - Related Problems:
     - [Find All Occurrences of a Pattern in a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/163)
 - For more details:
-    - UC San Diego Course:[Knuth-Morris-Pratt Algorithm](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/3-knuth-morris-pratt-algorithm/03_algorithmic_challenges_1_knuth_morris_pratt.pdf)
+    - UC San Diego Course:[Knuth-Morris-Pratt Algorithm](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/05-string-processing-and-pattern-matching-algorithms/3-knuth-morris-pratt-algorithm/03_algorithmic_challenges_1_knuth_morris_pratt.pdf)
     - Visualization: [Knuth-Morris-Pratt Algorithm](https://www.cs.usfca.edu/~galles/visualization/StackArray.html)
 
 </details>
@@ -4309,8 +4313,8 @@
     - [Construct the Suffix Array of a String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/160)
     - [Construct the Suffix Array of a Long String](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/164)
 - For more details:
-    - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
-    - UC San Diego Course:[Efficient constuction of Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/4-Constructing-Suffix-Arrays-and-Suffix-Trees/04_algorithmic_challenges_2_suffix_array.pdf)
+    - UC San Diego Course:[Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/05-string-processing-and-pattern-matching-algorithms/2-burrows-wheeler-suffix-arrays/02_bwt_suffix_arrays.pdf)
+    - UC San Diego Course:[Efficient constuction of Suffix Arrays](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/05-string-processing-and-pattern-matching-algorithms/4-Constructing-Suffix-Arrays-and-Suffix-Trees/04_algorithmic_challenges_2_suffix_array.pdf)
 
 </details>
 
@@ -4456,7 +4460,7 @@
 - Related Problems:
     - [Construct the Suffix Tree from the Suffix Array](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/166)
 - For more details:
-    - UC San Diego Course:[From Suffix Arrays To Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/5-string-processing-and-pattern-matching-algorithms/4-Constructing-Suffix-Arrays-and-Suffix-Trees/04_algorithmic_challenges_3_from_suffix_array_to_suffix_tree.pdf)
+    - UC San Diego Course:[From Suffix Arrays To Suffix Trees](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/05-string-processing-and-pattern-matching-algorithms/4-Constructing-Suffix-Arrays-and-Suffix-Trees/04_algorithmic_challenges_3_from_suffix_array_to_suffix_tree.pdf)
 
 </details>
 
