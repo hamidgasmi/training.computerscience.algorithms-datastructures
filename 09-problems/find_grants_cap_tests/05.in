@@ -1,0 +1,4 @@
+# Test Case: unsorted array + some budgets are smaller than new cap value
+2
+float 140.0
+float 21.0 100.0 50.0 120.0 130.0 110.0
