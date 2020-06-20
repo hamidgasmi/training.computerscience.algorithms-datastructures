@@ -1,2 +1,77 @@
+- Pre-requisites:
+    - 
+- Algorithm Techniques and Design:
+    - 
+- Algorithms and Data Structures:
+    - Arrays & Dynamic Arrays:
+        - Binary Search
+        - Merge Sort
+        - Counting Sort
+        - Radix Sort (Bucket Sort)
+        - Quick Sort
+        - Random Quick Sort
+        - 3 ways partition Quick Sort
+        - Quick Sort recursive and Tail elimination
+    - Linked Lists
+        - Simple Linked List w/out tail
+        - Double Linked List w/out tail
+        - Merge Sort on Linked List
+    - Stack and Queue:
+        - Queue implemented with a cyclic array
+        - Queue implemented with 2 stacs
+    - Trees:
+        - DFS: In-Order, Pre-Order, Post-Order traversals
+        - BFS
+        - Binary Tree
+        - BST
+        - AVL Tree
+        - Splay Tree
+    - Priority Queue:
+        - Min/Max Queue
+        - D-Ary Queue
+        - Heap Sort
+        - Quick Sort and Deterministic pivot selection heuristic
+    - Disjoint-Set:
+    - Graphs:
+        - DFS
+        - Toplogical Sort
+        - Strongly Connected Components
+        - BFS
+        - Shortest Path Tree
+        - Fastest Route in weighted Graphs: Dijkstra's algorithm
+        - Fastest Route in weighted Graphs: Bellman-Ford algorithm
+        - Minimum Spanning Trees (MST): Kruskal's algorithm
+        - Minimum Spanning Trees (MST): Prim’s algorithm
+        - Eulrian Graph, Cycle and Path
+        - Hamiltonian Cycle
+        - Traveling Salesman Problem (TSP)
+        - Longest path Problem
+        - Vertex Cover problem
+        - Independent Set Problem (ISP)
+- Hashing:
+    - Maps/Set
+    - Universal Family for integer
+    - Polynomial Hashing for String
+- Strings:
+    - Trie Patterns
+    - Suffix Trie
+    - Suffix Tree
+    - Burrows-Wheeler Transform (BWT)
+    - Suffix Arrays
+    - Knuth-Morris-Pratt Algorithm
+    - Rabin-Karp's Algorithm
+
+System Design:
+Use it to share thoughts and resources, such as:
+- Features scope
+- API design
+- Pseudo code for specific components
+- Data model/schema
+- Back-of-the-envelope calculations
+- Reference links
+- Link to whiteboard or diagram such as https://sketchboard.me/new
+
+Python:
+assert users == ['kevin', 'melody', 'alice'], f"Expected `users` to be ['kevin', 'melody', 'alice'] but got: {repr(users)}"
 - How can I write test cases with Python
 - Implement max pairwise product with Tournament approach
