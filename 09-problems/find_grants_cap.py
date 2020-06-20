@@ -1,3 +1,4 @@
+import utility_devel
 
 # Analysis: Greedy
 # 0. Initialization:
@@ -14,7 +15,7 @@
 #      1   47    47
 #      ...  
 
-# Time Analysis: O(|grantsArray| log |grantsArray|)
+# Time Analysis: O(|grants_array| log |grants_array|)
 # Space Analysis: O(1)
 def find_grants_cap(grants_array, new_budget):
     
@@ -34,4 +35,14 @@ def find_grants_cap(grants_array, new_budget):
             break
         
     return cap
+
+if __name__ == "__main__":
+
+    unit_test = utility_devel.Unit_Tests_Utility()
+    unit_test.get_inputs()
+
+    new_budget = unit_test.inputs[0]
+    grants_array = unit_test.inputs[1]
+
+    print(find_grants_cap(grants_array, new_budget))
 
