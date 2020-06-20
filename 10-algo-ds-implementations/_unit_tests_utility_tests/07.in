@@ -1,4 +1,0 @@
-# Test case: Empty Input + Comment
-2
-int # This input is empty
-int 1 2 3 4 5
