@@ -1,4 +1,4 @@
-import _unit_tests_utility
+import utility_devel
 
 # Time Complexity: O(|str1| * |str2|)
 # Space Complexity: O(min(|str1|, |str2|))
@@ -35,7 +35,7 @@ def deletion_distance(str1, str2):
   return curr_distances[cols_count - 1]
 
 if __name__ == "__main__":
-    unit_test = _unit_tests_utility.Unit_Tests_Utility()
+    unit_test = utility_devel.Unit_Tests_Utility()
     unit_test.get_inputs()
 
     str1 = unit_test.inputs[0]
