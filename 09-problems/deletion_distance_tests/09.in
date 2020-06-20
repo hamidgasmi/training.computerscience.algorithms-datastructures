@@ -1,0 +1,4 @@
+# Test Case: string shares the same letters but in different order
+2
+str ab
+str ab

@@ -1,0 +1,4 @@
+# Test Case: string beginning + end are equal
+2
+str abc
+str adbc
