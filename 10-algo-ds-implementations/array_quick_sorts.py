@@ -1,5 +1,5 @@
 import random
-#import utility_devel
+import utility_devel
 
 # It's solved with a divide-and-conquer approach
 # It is implemented 4 different way:
@@ -34,34 +34,32 @@ import random
 #      Space Complexity: O(log |a|) for all cases
 
 class Quick_Sorts:
-    
-    def basic_quick_sort(self, a):
-
-        self._basic_quick_sort(a, 0, len(a) - 1)
-    
-    def _basic_quick_sort(self, a, left, right):
+        
+    def basic_quick_sort(self, a, left=0, right=None):
+        if right is None:
+            right = len(a) - 1
+        
         if left >= right:
             return
 
         piv_pos = right
         pivot = self._two_partition(a, left, right, piv_pos)
         
-        self._basic_quick_sort(a, left, pivot - 1)
-        self._basic_quick_sort(a, pivot + 1, right)
-
-    def random_quick_sort(self, a):
-
-        self._random_quick_sort(a, 0, len(a) - 1)
-
-    def _random_quick_sort(self, a, left, right):
+        self.basic_quick_sort(a, left, pivot - 1)
+        self.basic_quick_sort(a, pivot + 1, right)
+    
+    def random_quick_sort(self, a, left=0, right=None):
+        if right is None:
+            right = len(a) - 1
+        
         if left >= right:
             return
         
         piv_pos = random.randint(left, right)
         pivot = self._two_partition(a, left, right, piv_pos)
 
-        self._basic_quick_sort(a, left, pivot - 1)
-        self._basic_quick_sort(a, pivot + 1, right)
+        self.random_quick_sort(a, left, pivot - 1)
+        self.random_quick_sort(a, pivot + 1, right)
 
     def _two_partition(self, a, left, right, piv_pos):
         assert(right < len(a))
@@ -80,30 +78,26 @@ class Quick_Sorts:
 
         return pivot
 
-    def recursive_tail_eliminated_quick_sort(self, a):
-
-        self._recursive_tail_eliminated_quick_sort(a, 0, len(a) - 1)
-
-    def _recursive_tail_eliminated_quick_sort(self, a, left, right):
-
+    def recursive_tail_eliminated_quick_sort(self, a, left=0, right=None):
+        if right is None:
+            right = len(a) - 1
+        
         while left < right:
             
             piv_pos = random.randint(left, right)
             (left_piv, right_piv) = self._three_partitions(a, left, right, piv_pos)
 
             if (left_piv - left) < (right - right_piv):
-                self._recursive_tail_eliminated_quick_sort(a, left, left_piv - 1)
+                self.recursive_tail_eliminated_quick_sort(a, left, left_piv - 1)
                 left = right_piv + 1
 
             else:
-                self._recursive_tail_eliminated_quick_sort(a, right_piv + 1, right)
+                self.recursive_tail_eliminated_quick_sort(a, right_piv + 1, right)
                 right = left_piv - 1
-    
-    def three_ways_quick_sort(self, a):
 
-        self._three_ways_quick_sort(a, 0, len(a) - 1)
-
-    def _three_ways_quick_sort(self, a, left, right):
+    def three_ways_quick_sort(self, a, left=0, right=None):
+        if right is None:
+            right = len(a) - 1
         
         if left >= right:
             return
@@ -111,8 +105,8 @@ class Quick_Sorts:
         piv_pos = random.randint(left, right)
         (pivot_left, pivot_right) = self._three_partitions(a, left, right, piv_pos)
         
-        self._three_ways_quick_sort(a, left, pivot_left - 1)
-        self._three_ways_quick_sort(a, pivot_right + 1, right)
+        self.three_ways_quick_sort(a, left, pivot_left - 1)
+        self.three_ways_quick_sort(a, pivot_right + 1, right)
         
     def _three_partitions(self, a, left, right, piv_pos):
         assert(right < len(a))
@@ -180,11 +174,12 @@ class Quick_Sorts:
 
 if __name__ == "__main__":
     
-    unit_test = utility_devel.Unit_Tests_Utility()
-    unit_test.get_inputs()
-    unsorted_list = unit_test.inputs[0]
+    #unit_test = utility_devel.Unit_Tests_Utility()
+    #unit_test.get_inputs()
+    #unsorted_list = unit_test.inputs[0]
+    unsorted_list = [6, 8, 2]
     print("Input: ", unsorted_list)
-    
+
     quick_sort = Quick_Sorts()
 
     sorted_list = unsorted_list.copy()
