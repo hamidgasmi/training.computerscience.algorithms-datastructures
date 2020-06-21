@@ -1,5 +1,5 @@
 import random
-import _unit_tests_utility
+#import utility_devel
 
 # It's solved with a divide-and-conquer approach
 # It is implemented 4 different way:
@@ -35,75 +35,91 @@ import _unit_tests_utility
 
 class Quick_Sorts:
     
-    def basic_quick_sort(self, a, left, right):
+    def basic_quick_sort(self, a):
+
+        self._basic_quick_sort(a, 0, len(a) - 1)
+    
+    def _basic_quick_sort(self, a, left, right):
         if left >= right:
             return
 
         piv_pos = right
-        pivot = self.two_partition(a, left, right, piv_pos)
+        pivot = self._two_partition(a, left, right, piv_pos)
         
-        self.basic_quick_sort(a, left, pivot - 1)
-        self.basic_quick_sort(a, pivot + 1, right)
+        self._basic_quick_sort(a, left, pivot - 1)
+        self._basic_quick_sort(a, pivot + 1, right)
 
-    def random_quick_sort(self, a, left, right):
+    def random_quick_sort(self, a):
+
+        self._random_quick_sort(a, 0, len(a) - 1)
+
+    def _random_quick_sort(self, a, left, right):
         if left >= right:
             return
         
         piv_pos = random.randint(left, right)
-        pivot = self.two_partition(a, left, right, piv_pos)
+        pivot = self._two_partition(a, left, right, piv_pos)
 
-        self.basic_quick_sort(a, left, pivot - 1)
-        self.basic_quick_sort(a, pivot + 1, right)
+        self._basic_quick_sort(a, left, pivot - 1)
+        self._basic_quick_sort(a, pivot + 1, right)
 
-    def two_partition(self, a, left, right, piv_pos):
+    def _two_partition(self, a, left, right, piv_pos):
         assert(right < len(a))
         assert(left >= 0)
         assert(left <= piv_pos <= right)
 
-        self.swap(a, piv_pos, right)
+        self._swap(a, piv_pos, right)
 
         pivot = left - 1
         for i in range(left, right):
             if a[i] <= a[right]:
                 pivot += 1
-                self.swap(a, pivot, i)
+                self._swap(a, pivot, i)
         pivot += 1
-        self.swap(a, pivot, right)
+        self._swap(a, pivot, right)
 
         return pivot
 
-    def recursive_tail_eliminated_quick_sort(self, a, left, right):
+    def recursive_tail_eliminated_quick_sort(self, a):
+
+        self._recursive_tail_eliminated_quick_sort(a, 0, len(a) - 1)
+
+    def _recursive_tail_eliminated_quick_sort(self, a, left, right):
 
         while left < right:
             
             piv_pos = random.randint(left, right)
-            (left_piv, right_piv) = self.three_partitions(a, left, right, piv_pos)
+            (left_piv, right_piv) = self._three_partitions(a, left, right, piv_pos)
 
             if (left_piv - left) < (right - right_piv):
-                self.recursive_tail_eliminated_quick_sort(a, left, left_piv - 1)
+                self._recursive_tail_eliminated_quick_sort(a, left, left_piv - 1)
                 left = right_piv + 1
 
             else:
-                self.recursive_tail_eliminated_quick_sort(a, right_piv + 1, right)
+                self._recursive_tail_eliminated_quick_sort(a, right_piv + 1, right)
                 right = left_piv - 1
     
-    def three_ways_quick_sort(self, a, left, right):
+    def three_ways_quick_sort(self, a):
+
+        self._three_ways_quick_sort(a, 0, len(a) - 1)
+
+    def _three_ways_quick_sort(self, a, left, right):
         
         if left >= right:
             return
         
         piv_pos = random.randint(left, right)
-        (pivot_left, pivot_right) = self.three_partitions(a, left, right, piv_pos)
+        (pivot_left, pivot_right) = self._three_partitions(a, left, right, piv_pos)
         
-        self.three_ways_quick_sort(a, left, pivot_left - 1)
-        self.three_ways_quick_sort(a, pivot_right + 1, right)
+        self._three_ways_quick_sort(a, left, pivot_left - 1)
+        self._three_ways_quick_sort(a, pivot_right + 1, right)
         
-    def three_partitions(self, a, left, right, piv_pos):
+    def _three_partitions(self, a, left, right, piv_pos):
         assert(right < len(a))
         assert(left >= 0)
         assert(left <= piv_pos <= right)
 
-        self.swap(a, piv_pos, right)
+        self._swap(a, piv_pos, right)
         
         left_piv = left - 1
         right_piv = right
@@ -113,31 +129,31 @@ class Quick_Sorts:
             
             if a[i] < a[right]:
                 left_piv += 1
-                self.swap(a, left_piv, i)
+                self._swap(a, left_piv, i)
 
             if a[i] == a[right]:
                 # I should move to the end of the list: I shouldn't increment i in this case
                 right_piv -= 1
-                self.swap(a, i, right_piv)
+                self._swap(a, i, right_piv)
 
             else:
                 i += 1
         
         # Move pivot range to the middle of the list
         left_piv += 1
-        self.swap(a, left_piv, right_piv)
+        self._swap(a, left_piv, right_piv)
         
         i = right_piv
         right_piv = left_piv
         while i < right:
             right_piv += 1
             i += 1
-            self.swap(a, right_piv, i)
+            self._swap(a, right_piv, i)
             
         
         return (left_piv, right_piv)
     
-    def swap(self, a, i, j):
+    def _swap(self, a, i, j):
         assert(i < len(a))
         assert(j < len(a))
 
@@ -151,7 +167,7 @@ class Quick_Sorts:
     # Time Complexity: O(1)
     # Space Complexity: O(1) (In place)
     # It doesn't work with floats nor strings
-    def swap_xor(self, a, i, j):
+    def _swap_xor(self, a, i, j):
         assert(i < len(a))
         assert(j < len(a))
 
@@ -164,26 +180,26 @@ class Quick_Sorts:
 
 if __name__ == "__main__":
     
-    unit_test = _unit_tests_utility.Unit_Tests_Utility()
+    unit_test = utility_devel.Unit_Tests_Utility()
     unit_test.get_inputs()
     unsorted_list = unit_test.inputs[0]
     print("Input: ", unsorted_list)
-
+    
     quick_sort = Quick_Sorts()
 
     sorted_list = unsorted_list.copy()
-    quick_sort.basic_quick_sort(sorted_list, 0, len(sorted_list) - 1)
+    quick_sort.basic_quick_sort(sorted_list)
     print("Basic Quick Sort Output:", sorted_list)
 
     sorted_list = unsorted_list.copy()
-    quick_sort.random_quick_sort(sorted_list, 0, len(sorted_list) - 1)
+    quick_sort.random_quick_sort(sorted_list)
     print("Random Quick Sort Output:", sorted_list)
 
     sorted_list = unsorted_list.copy()
-    quick_sort.three_ways_quick_sort(sorted_list, 0, len(sorted_list) - 1)
+    quick_sort.three_ways_quick_sort(sorted_list)
     print("3 Ways Quick Sort Output:", sorted_list)
 
     sorted_list = unsorted_list.copy()
-    quick_sort.recursive_tail_eliminated_quick_sort(sorted_list, 0, len(sorted_list) - 1)
+    quick_sort.recursive_tail_eliminated_quick_sort(sorted_list)
     print("Recursive Tail eliminated Quick Sort Output:", sorted_list)
     
