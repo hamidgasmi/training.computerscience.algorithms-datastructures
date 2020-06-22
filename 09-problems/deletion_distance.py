@@ -44,3 +44,41 @@ if __name__ == "__main__":
     print(str1, str2)
 
     print(deletion_distance(str1, str2))
+
+
+#Base case:
+#    "HEAT", ""
+#    In this case the deletion distance is simply the length of the other string
+
+#Simple case: when a string is containing the other string
+#    "HEAT", "HEA"
+#    _  _  H  E  A  T
+#    _  0  1  2  3  4
+#    H  1  0  1  2  3 
+#    E  2  1  0  1  2
+#    A  3  2  1  0  1
+
+#Order:
+#    ab, ba
+
+#Recursive relation:
+#    Do you see a recursive relation between the deletionDistance(str1, str2), and the deletionDistance for some prefixes of str1 and str2
+#    HEAT, HEA
+#    dist(i, j) = min{dist(i-1, j-1) + 0 if str1[i-1] = str2[j] else 2, dist(i-1, j)+1, dist(i, j-1) + 1}
+#    _  _  H  E  A  T
+#    _  0  1  2  3  4
+#    E  1  2  1  2  3
+#    A  2  3  2  1  2
+#    T  3  4  3  2  1
+
+#    _  _  H  E  A  T
+#    _  0  1  2  3  4
+#    H  1  0  1  2  3
+#    E  2  1  0  1  2
+#    A  3  2  1  0  1
+#    P  4  3  2  1  2
+
+#Dynamic Programmning:
+
+#Time Complexity
+#Space Complexity
