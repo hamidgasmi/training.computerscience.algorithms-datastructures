@@ -1,0 +1,4 @@
+# Test Case: Linked List with repeated values + Cycle that starts at position: 1
+2
+int 3
+int 3 2 0 -4 2

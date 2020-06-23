@@ -1,0 +1,4 @@
+# Test Case: Linked List with repeated values + no cycle
+2
+int -1
+int 3 2 0 -4 2

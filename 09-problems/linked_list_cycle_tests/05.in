@@ -1,0 +1,4 @@
+# Test Case: Linked List with repeated values + Cycle that include all nodes
+2
+int 0
+int 3 2 0 -4 2
