@@ -12,11 +12,7 @@ class Happy_Number:
             slow_n = self._get_next(slow_n)
             fast_n = self._get_next(self._get_next(fast_n))
 
-        if slow_n == 1:
-            return True
-        
-        else:
-            return False
+        return True if slow_n == 1 else False
 
     def _get_next(self, n: int) -> int:
         
@@ -34,18 +30,15 @@ class Happy_Number:
         
         cycle = set()
         
-        new_n = n
-        while new_n != 1:
+        next_n = n
+        while not next_n in cycle:
             
-            n = new_n
+            n = next_n
             cycle.add(n)
 
-            new_n = self._get_next(n)
+            next_n = self._get_next(n)
             
-            if new_n in cycle:
-                return False
-        
-        return True
+        return True if next_n == 1 else False
 
 if __name__ == '__main__':
 
