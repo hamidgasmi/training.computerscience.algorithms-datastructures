@@ -1,0 +1,4 @@
+Test Case: 
+2
+str "push" "push" "push" "getMin" "pop" "top" "getMin"
+int -2,0,-3,,,,,

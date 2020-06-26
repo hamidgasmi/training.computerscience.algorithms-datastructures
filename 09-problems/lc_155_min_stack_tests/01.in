@@ -1,0 +1,4 @@
+Test Case: 
+2
+str "push" "pop" "push" "top" "getMin"
+int 2147483646,,2147483647,,,
