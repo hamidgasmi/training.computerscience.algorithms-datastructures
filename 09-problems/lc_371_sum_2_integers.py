@@ -44,6 +44,8 @@
 
 class Solution:
     
+    # Time Complexity: O(32) = O(1)
+    # Space Complexity: O(1)
     def get_sum(self, a: int, b: int) -> int:
                 
         mask = 0x0ffffffff
