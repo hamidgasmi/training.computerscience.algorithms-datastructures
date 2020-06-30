@@ -510,6 +510,7 @@
                         74145970345617824751109/(10^9 * 60 * 60 * 24 * 365) ≈ 2351 years
                 assuming that the underlying machine performs 10^9 operations per second
 - Related Problems:
+    - [House Robber](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/219)
     - Interactive Puzzle: [Number of Paths](http://dm.compsciclub.ru/app/quiz-number-of-paths)
     - Interactive Puzzle: [Two Rocks Game](http://dm.compsciclub.ru/app/quiz-take-the-last-stone)
     - Interactive Puzzle: [Three Rocks Game](http://dm.compsciclub.ru/app/quiz-three-rocks-game)
@@ -4493,12 +4494,17 @@
 <details>
 <summary>Bitwise Pattern</summary>
 
-- It's particularly related XOR operation
-- a XOR a = 0
+- XOR operation when a problem is related with unicity: `a XOR a = 0`
+- Complement 2 of a number, a:
+    - General: `~a + 1`
+    - Python `~(a ^ 0xffffffff)`: 
+        - Python doesn't limit the size of a number
+        - E.g. Python Integers size: 32 bits (max positive integer is: 0x7fffffff = +2147483647) but +2147483647 + 1 = 2147483648
 - Related problems:
     - [Swap 2 numbers without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/147)
-    - [Single number withotu extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
+    - [Single number without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
     - [Find the inserted char](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/203)
+    - [Sum of Two Integers](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/220)
     
 </details>
 
