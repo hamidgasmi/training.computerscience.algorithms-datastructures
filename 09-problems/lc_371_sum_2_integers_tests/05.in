@@ -1,0 +1,4 @@
+# Case 5: 2 numbers different signs: a > 0 and (|a| > |b|)
+2
+int 3
+int -1

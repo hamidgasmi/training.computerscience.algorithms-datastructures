@@ -1,0 +1,4 @@
+# Case 9: a < 0 and b = 0
+2
+int -3
+int 0
