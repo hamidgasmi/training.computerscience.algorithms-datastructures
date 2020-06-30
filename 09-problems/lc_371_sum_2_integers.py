@@ -55,5 +55,5 @@ class Solution:
             if b == 0:
                 break
         
-        return a if a < 0x7FFFFFFF else ~(a ^ mask)
+        return a if a <= 0x7fffffff else ~(a ^ mask)
         
