@@ -11,8 +11,7 @@ class Solution:
     
     # Time Complexity: O(|V|) (number of nodes)
     # Space Complexity: 
-    #   By including the output: O(|V|)
-    #   By excluding the output: O(log|V|) (the number of nodes in the last level)
+    #   By including the output: O(|V| / 2) = O(|V|) (last level nodes = |V| // 2 + 1)
     def level_order_bottom_1(self, root: Tree_Node) -> List[List[int]]:
 
         level_order_top = []
@@ -70,5 +69,3 @@ class Solution:
                 depth_q.put(depth + 1)                
         
         return level_order_top[::-1]
-    
-            
