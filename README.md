@@ -13,7 +13,6 @@
 - [NP-Complete Problem](#np-complete-problem)
 - [String Processing and Pattern Matching Algorithms](#string-processing-and-pattern-matching-algorithms)
 - [Dynamic Programming: Applications In Machine Learning and Genomics](#dynamic-programming-applications-in-machine-learning-and-genomics)
-- [Graph Algorithms in Genome Sequencing ](#graph-algorithms-in-genome-sequencing)
 - [Problem Solving Patterns](#problem-solving-patterns)
 - [References](#references)
 
@@ -741,6 +740,10 @@
         - It's a tree in which every node other than the leaves has 2 children
         - Its height is Low: it's equal to **log n**
         - It could be stored effeciently as an array
+- Related Problems:
+    - [LC-107. Binary Tree Level Order Traversal II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/222)
+    - [LC-314. Binary Tree Vertical Order Traversal](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/223)
+    - [LC-103. Binary Tree Zigzag Level Order Traversal](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/224)
 - For more details:
     - [UC San Diego Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/1_basic_data_structures/01_3_trees.pdf)
 
@@ -4485,10 +4488,6 @@
 
 ---
 
-## Graph Algorithms in Genome Sequencing
-
----
-
 ## Problem Solving Patterns:
 
 <details>
@@ -4622,7 +4621,65 @@
 - To avoid any **stackoverflow** error due to the product operation, it's better to compute the logarithm of M:
 - `max(term_i0 * term_i1 * ...)` is then equivalent to `max(log(term_i0) + log(term_i1) + ...)`
 
+</details>
+
 ---
+
+## Interviews Process:
+
+<details>
+<summary>Summary of the Problem</summary>
+
+- Rewrite the problem with your own words (especially when the problem isn't written anywhere)
+
+</details>
+
+<details>
+<summary>Ask Questions to avoid any assumptions</summary>
+
+- General:
+    - What is the size of the input? It's figure out if the input could be loaded to the memory
+    - Where the data is stored? It's related to the previous question
+- Types:
+    - What is the type of the input?
+    - What is its range size of the input?
+- Arrays:
+    - What is the type of the array values?
+    - What is size? 
+- Sorted Arrays:
+    - Is there duplicates?
+- Strings:
+    - How it's encoded? ASCII, Unicode?
+- Trees:
+    - Depth definition: depth(root) = 0 or depth(root) = 1
+- BST:
+    - Are there duplicates values in the BST?
+        - If yes, where a duplicate value? left or right child?
+        - Usually, a duplicate value is inserted as the left child
+
+</details>
+
+<details>
+<summary>Build your intuition</summary>
+
+</details>
+
+<details>
+<summary>Tests</summary>
+
+- Tree:
+    - Null tree
+    - 1 node
+    - Tree as a linked list
+    - Tree with leafs in different levels
+    - Tree with some nodes have only a left child and other nodes have only a right child
+
+</details>
+
+<details>
+<summary>Time and Space Analysis</summary>
+
+</details>
 
 ## References
 
