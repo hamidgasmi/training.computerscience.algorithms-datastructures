@@ -71,7 +71,7 @@ class SolutionHeapQ:
     #   T(n) < Sum(i in [1:n]) 4 log2i
     #   T(n) < 4 log(2 * 4 * ... * 2i * ... 2n) < 4 log(2**n * 1 * 2 * ... * i * ... * n)
     #   T(n) < 4n + 4 logn!
-    #   T(n) = O(n + logn!)
+    #   T(n) = O(n + logn!) = O(nlogn)
     # Space Complexity: S(n) = (3 - 1) + (3 - 1) + ... + (3 - 1) = O(n)
     #   At each iteration, we push 3 items and we pop 1 item.
     def nth_ugly_number(self, n: int) -> int:
