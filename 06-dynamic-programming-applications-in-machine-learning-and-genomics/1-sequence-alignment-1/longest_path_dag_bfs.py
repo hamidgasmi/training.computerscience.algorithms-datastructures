@@ -101,10 +101,10 @@ class Directed_Acyclic_Graph:
         self.longest_path_len = max_distance[sink_vertex].dist
         self.longest_path = self.longest_path_backtrack(sink_vertex, max_distance)
 
-    def longest_path_to_str(self):
+    def __repr__(self):
 
-        return '->'.join(self.longest_path)
-
+        return f"{self.longest_path_len} \n" + '->'.join(self.longest_path)
+    
 if __name__ == "__main__":
 
     source = int(sys.stdin.readline().strip())
@@ -113,6 +113,6 @@ if __name__ == "__main__":
 
     dag = Directed_Acyclic_Graph(source, sink, edges)
     dag.longest_path_bfs(source, sink)
+    
+    print(dag)
 
-    print(dag.longest_path_len)
-    print(dag.longest_path_to_str())
