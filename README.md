@@ -606,8 +606,8 @@
                Boolean Empty():               O(1)                                 
           AddBefore(Node, Key):               O(1)
            AddAfter(Node, Key):               O(1)
-- Programming Languages:
-    - Python:
+- Related Problems:
+    - [Plus One Linked List](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/230)
 - For more details:
     - [Arrays and Lists Course](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/1_basic_data_structures/01_1_arrays_and_lists.pdf)
 
@@ -1389,6 +1389,8 @@
     - Each subtree is half the size of its parent
     - Insertion and deletion operations can destroy balance
     - Insertion and deletion operations need to rebalance
+- Related problems:
+    - [Trim a Binary Search Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/221)
 - For more details:
     - UC San Diego Course: [BST Basic Operations](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/5_binary_search_trees/05_1_3_binary_search_trees_basic_operations.pdf)
     - UC San Diego Course: [Balance](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/5_binary_search_trees/05_1_4_binary_search_trees_balance.pdf)
@@ -4644,6 +4646,10 @@
 - Types:
     - What is the type of the input?
     - What is its range size of the input?
+    - When dealing with numbers (integers), ask a clarification if it references mathematical integers or machine Integers?
+        - Integers could be confusing 
+        - They could reference mathimatical integers which could be infinite
+        - They could reference to machines Integers which usually are in 32 bits
 - Arrays:
     - What is the type of the array values?
     - What is size? 
@@ -4663,10 +4669,38 @@
 <details>
 <summary>Build your intuition</summary>
 
+- Take an example
+- Test your idea with your example
+- Ask more questions if necessary
+
 </details>
 
 <details>
-<summary>Tests</summary>
+<summary>Implement your solution</summary>
+
+- **FIRST** Solve the heart of the problem
+- **Question** Ask what should be done 1st, if necessary
+- Leave the Utility functions to the end:
+    - Write functions signature
+    - Make them return the expected value of your example
+    - **Test** your code is working for your example
+
+</details>
+
+<details>
+<summary>Arrays</summary>
+
+- Empty array: []
+- Array with 1 item: []
+- Array with 1 item which value is the minimum: [-0x]
+- Array with multiple equal items 
+- Unsorted Arrays:
+- Sorted Arrays:
+
+</details>
+
+<details>
+<summary>Trees</summary>
 
 - Tree:
     - Null tree
@@ -4674,6 +4708,15 @@
     - Tree as a linked list
     - Tree with leafs in different levels
     - Tree with some nodes have only a left child and other nodes have only a right child
+- BST:
+    - A value exists multiple times as a left child
+    -               5
+                   / \
+                  5   R
+                 /
+                5
+               /
+              L
 
 </details>
 
