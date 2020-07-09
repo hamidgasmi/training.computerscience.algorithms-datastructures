@@ -1,23 +1,15 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+# Definition for a binary tree node:
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+         self.val = val
+         self.left = left
+         self.right = right
 
 class Solution_2:
     """
     This solution uses a BFS traversal
     The BFS queue is a queue of tuples of (nodes, none nodes count at the end of the node)
-    On each tree level, it computes the next level width:
-
+    On each tree level, it computes the next level width
     """
     
     # Time Complexity: O(|V|)
@@ -39,7 +31,7 @@ class Solution_2:
             next_level_width = 0
             next_level_none_nodes_count = 0
             
-            next_level_nodes = []            
+            next_level_nodes = []
             for (node, left_none_node_count) in curr_level_nodes:
                 
                 if len(next_level_nodes) == 0 and (node is None or (node.left is None and node.right is None)):
