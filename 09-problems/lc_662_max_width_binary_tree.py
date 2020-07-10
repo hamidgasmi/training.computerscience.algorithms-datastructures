@@ -5,6 +5,50 @@ class TreeNode:
          self.left = left
          self.right = right
 
+class Solution_3:
+    """
+    This solution uses a BFS traversal
+    The BFS queue is a queue of tuples of (nodes, node index in its corresponding level)
+    The node index is a 0 based index
+    A level width is idx of lastest visited node in the level - idx of the 1st visited node in the level + 1
+    
+    """
+
+    # Time Complexity: O(|V|)
+    # Space Complexity: O(|V|)
+    def width_binary_tree(self, root: TreeNode) -> int:
+        
+        if root is None:
+            return 0
+        
+        max_width = 0
+                
+        curr_level_nodes = [(root, 0)]
+        while curr_level_nodes:
+            
+            max_width = max(max_width, curr_level_nodes[len(curr_level_nodes) - 1][1] - curr_level_nodes[0][1] + 1)
+
+            prev_node_idx = -1            
+            next_level_node_idx = 0
+            
+            next_level_nodes = []
+            for (node, node_idx) in curr_level_nodes:
+                
+                next_level_node_idx += 2 * (node_idx - prev_node_idx - 1)
+                prev_node_idx = node_idx
+                
+                if node.left is not None:
+                    next_level_nodes.append((node.left, next_level_node_idx))
+                next_level_node_idx += 0 if len(next_level_nodes) == 0 else 1
+                    
+                if node.right is not None:
+                    next_level_nodes.append((node.right, next_level_node_idx))
+                next_level_node_idx += 0 if len(next_level_nodes) == 0 else 1
+            
+            curr_level_nodes = next_level_nodes
+            
+        return max_width
+
 class Solution_2:
     """
     This solution uses a BFS traversal
@@ -14,7 +58,7 @@ class Solution_2:
     
     # Time Complexity: O(|V|)
     # Space Complexity: O(|V|)
-    def widthOfBinaryTree(self, root: TreeNode) -> int:
+    def width_binary_tree(self, root: TreeNode) -> int:
         
         if root is None:
             return 0
@@ -23,42 +67,37 @@ class Solution_2:
         curr_level_width = 1
         
         curr_level_nodes = [(root, 0)]
-        
         while curr_level_nodes:
             
             max_width = max(max_width, curr_level_width)
-            
             next_level_width = 0
-            next_level_none_nodes_count = 0
+            
+            none_nodes_count = 0
             
             next_level_nodes = []
-            for (node, left_none_node_count) in curr_level_nodes:
+            for (node, prev_level_none_node_count) in curr_level_nodes:
                 
-                if len(next_level_nodes) == 0 and (node is None or (node.left is None and node.right is None)):
+                if len(next_level_nodes) == 0 and node.left is None and node.right is None:
                     continue
                 
                 if len(next_level_nodes) != 0:
-                    next_level_none_nodes_count += 2 * left_none_node_count
-                
-                if node is None:
-                    next_level_none_nodes_count += 2
-                    continue
+                    none_nodes_count += 2 * prev_level_none_node_count
                 
                 if node.left is None and len(next_level_nodes) != 0:
-                    next_level_none_nodes_count += 1
+                    none_nodes_count += 1
                     
                 elif node.left is not None:
-                    next_level_nodes.append((node.left, next_level_none_nodes_count))
-                    next_level_width += next_level_none_nodes_count + 1
+                    next_level_nodes.append((node.left, none_nodes_count))
+                    next_level_width += none_nodes_count + 1
                     none_nodes_count = 0
                     
                 if node.right is None and len(next_level_nodes) != 0:
-                    next_level_none_nodes_count += 1
+                    none_nodes_count += 1
                     
                 else:
-                    next_level_nodes.append((node.right, next_level_none_nodes_count))
-                    next_level_width += next_level_none_nodes_count + 1
-                    next_level_none_nodes_count = 0
+                    next_level_nodes.append((node.right, none_nodes_count))
+                    next_level_width += none_nodes_count + 1
+                    none_nodes_count = 0
             
             curr_level_nodes = next_level_nodes
             curr_level_width = next_level_width
@@ -79,7 +118,7 @@ class Solution_1:
     
     # Time complexity: O(2**depth)
     # Space Complexity: O(2**depth-1)
-    def widthOfBinaryTree(self, root: TreeNode) -> int:
+    def width_binary_tree(self, root: TreeNode) -> int:
         
         if root is None:
             return 0
