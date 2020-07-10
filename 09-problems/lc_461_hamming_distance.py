@@ -1,6 +1,7 @@
 class Solution_3:
     """
         It optimized the previous solution
+        It uses the trick:
     """
     
     def hammingDistance(self, x: int, y: int) -> int:
