@@ -32,7 +32,7 @@ class Solution:
     
     """
 
-    def maxArea(self, height: List[int]) -> int:
+    def max_area(self, height: List[int]) -> int:
         
         n = len(height)
         
@@ -61,7 +61,7 @@ class Solution:
     
     # Time Complexity: O(|height|**2)
     # Space Complexity: O(1)
-    def _maxArea_naive(self, height: List[int]) -> int:
+    def _max_area_naive(self, height: List[int]) -> int:
         
         n = len(height)
         
