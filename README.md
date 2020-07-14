@@ -4523,6 +4523,7 @@
 
 - Related problems:
     - [Reverse vowels in an input string](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/202)
+    - [Container With Most Water](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/234)
 
 </details>
 
