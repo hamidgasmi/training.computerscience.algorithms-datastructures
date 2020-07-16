@@ -475,17 +475,60 @@
         - Input: Weights (W1,..., Wn) and values (V1,..., Vn) of n items; total weight W (Vi’s, Wi’s, and W are non-negative integers)
         - Output: The maximum value of items whose weight doesn't exceed W 
         - Each item can be used any number of times
-        - Item 1 (6, $30), Item 2 (3, $14), Item 3 (4, $16), Item 4 (2, $9)
-        - Knapsack capacity: 10
-        - Solution: 6 ($30) + 2 ($9) + 2 ($9) = $48
-        - Greedy Algorithm doesn't work: 6 ($30) + 
-    - Discrete Knapsack without one of each repetitions item:
+        - Recursive Relation: max-value(w) = max { val(w - wi) + vi} i: wi < w
+        -       E.g. Item 1 (6, $30), Item 2 (3, $14), Item 3 (4, $16), Item 4 (2, $9)
+                Knapsack capacity: 10
+                Solution: 6 ($30) + 2 ($9) + 2 ($9) = $48
+                    W        :  0   1   2   3   4   5   6   7   8   9   10
+                    max value:  0   0   9   14  18  23  30  32  39  44  48
+                    max-val(W = 2) = val(2) + max-val(0) = 9
+                    max-val(W = 3) = max(val(3) + max-val(0), val(2) + max-val(1)) = 14
+                    max-val(W = 4) = max(val(3) + max-val(1), val(4) + max-val(0), val(2) + max-val(2)) = 14
+                    max-val(W = 5) = max(val(3) + max-val(2), val(4) + max-val(1), val(2) + max-val(3)) = 23
+                    max-val(W = 6) = max(val(6) + max-val(0), val(3) + max-val(3), val(4) + max-val(2), val(2) + max-val(4)) = 30
+                    max-val(W = 7) = max(val(6) + max-val(1), val(3) + max-val(4), val(4) + max-val(2), val(2) + max-val(4)) = 32
+                    max-val(W = 8) = max(val(6) + max-val(2), val(3) + max-val(5), val(4) + max-val(4), val(2) + max-val(6)) = 39
+                    max-val(W = 9) = max(val(6) + max-val(3), val(3) + max-val(6), val(4) + max-val(5), val(2) + max-val(7)) = 44
+                    max-val(W = 10) = max(val(6) + max-val(4), val(3) + max-val(7), val(4) + max-val(6), val(2) + max-val(8)) = 48
+
+                    Greedy Algorithm doesn't work: 6 ($30) +
+        -       Knapsack(W):
+                    max_value(0) = 0
+                    for w in range(1, W):
+                        max_value(w) = 0
+                        for i in range(len(Weights) - 1):
+                            if wi ≤ w:
+                                candidate_max_val = max_value(w − wi) + vi
+                                if candidate_max_val > max_value(w):
+                                    value(w ) = candidate_max_val
+
+                    return value(W)
+
+    - Discrete Knapsack without repititions (one of each item):
         - Input: Weights (W1,..., Wn) and values (V1,..., Vn) of n items; total weight W (Vi’s, Wi’s, and W are non-negative integers)
         - Output: The maximum value of items whose weight doesn't exceed W 
         - Each item can be used at most once
-        - Item 1 (6, $30), Item 2 (3, $14), Item 3 (4, $16), Item 4 (2, $9)
-        - Knapsack capacity: 10
-        - Solution: 6 ($30) + 4 ($16) = $46
+        - Recursive Relation: max_value (w, i) = max{ max_value(w - wi, i - 1) + vi, max_value(w, i - 1)}
+        -       E.g. Item 1 (6, $30), Item 2 (3, $14), Item 3 (4, $16), Item 4 (2, $9)
+                Knapsack capacity: 10
+                Solution: 6 ($30) + 4 ($16) = $46
+                i/W:    0   1   2   3   4   5   6   7   8   9   10
+                 0      0   0   0   0   0   0   0   0   0   0   0
+                 1(6)   0   0   0   0   0   0   30  30  30  30  30
+                 2(3)   0   0   0   14  14  14  30  30  30  44  44
+                 3(4)   0   0   0   14  16  16  30  30  30  44  46
+                 4(2)   0   0   9   14  16  23  30  30  39  44  46
+        -       Discret_Knapsack_Without_Repition(W)
+                    initialize all value(0, j) = 0
+                    initialize all value(w , 0) = 0
+                    for i from 1 to n:
+                        for w from 1 to W :
+                            value(w , i) = value(w , i − 1)
+                            if wi ≤ w:
+                                val = value(w - wi, i - 1) + vi
+                                if value(w, i) < val:
+                                    value(w , i) = val
+                    return value(W , n)
     - Greedy Algorithm fails:
         - Item1 (6, $30), Item2 (3, $14), Item3 (4, $16), Item4 (2, $9)
         - Value per Unit: Item 1: $5; Item2: $4.66; Item3: $4; Item4: $4.5
