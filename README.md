@@ -492,7 +492,7 @@
                     max-val(W = 10) = max(val(6) + max-val(4), val(3) + max-val(7), val(4) + max-val(6), val(2) + max-val(8)) = 48
 
                     Greedy Algorithm doesn't work: 6 ($30) +
-        -       Knapsack(W):
+        -       Discret_Knapsack_With_Repitions(W):
                     max_value(0) = 0
                     for w in range(1, W):
                         max_value(w) = 0
@@ -518,7 +518,7 @@
                  2(3)   0   0   0   14  14  14  30  30  30  44  44
                  3(4)   0   0   0   14  16  16  30  30  30  44  46
                  4(2)   0   0   9   14  16  23  30  30  39  44  46
-        -       Discret_Knapsack_Without_Repition(W)
+        -       Discret_Knapsack_Without_Repitions(W)
                     initialize all value(0, j) = 0
                     initialize all value(w , 0) = 0
                     for i from 1 to n:
@@ -961,17 +961,17 @@
                 for i from ⌊n/2⌋ downto 1:
                     SiftDown(i)
         - Space Complexity: O(1) (In place algorithm)
-        - Time Complexity:
-                Height          Nodes #    T(SiftDown)       T(BuildHeap)
-                log_2(n)          1         log_2(n)          1 * log_2(n) 
-                log_2(n) - 1      2         log_2(n) - 1      2 * [ log_2(n) - 1]
-                  ...            ...         ...                 ...
-                   2            ≤ n/4        2                n/4 * 2
-                   1            ≤ n/2        1                n/2 * 1
-                T(BuildHeap) = n/2 * 1 + n/4 * 2 + ... + 1 * log_2(n) 
-                             = n/2 * 1 + n/4 * 2 + ... + n / 2^log_2(n) * log_2(n)
-                             = n [1/2 + 2/4 + 2/8 + ... log_2(n)/2^log_2(n)] < n * 2
-                             = **O(n)**
+        - Time Complexity: **O(n)**
+        -   Height          Nodes #    T(SiftDown)       T(BuildHeap)
+            log_2(n)          1         log_2(n)          1 * log_2(n) 
+            log_2(n) - 1      2         log_2(n) - 1      2 * [ log_2(n) - 1]
+               ...            ...         ...                 ...
+                2            ≤ n/4        2                n/4 * 2
+                1            ≤ n/2        1                n/2 * 1
+            T(BuildHeap) = n/2 * 1 + n/4 * 2 + ... + 1 * log_2(n) 
+                         = n/2 * 1 + n/4 * 2 + ... + n / 2^log_2(n) * log_2(n)
+                         = n [1/2 + 2/4 + 2/8 + ... log_2(n)/2^log_2(n)] < n * 2
+                         = O(n)
     - Step 2: Sort the Heap
     -       HeapSort(A[1 . . . n])
                 BuildHeap(A)
