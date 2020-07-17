@@ -962,16 +962,16 @@
                     SiftDown(i)
         - Space Complexity: O(1) (In place algorithm)
         - Time Complexity: **O(n)**
-        -   Height          Nodes #    T(SiftDown)       T(BuildHeap)
-            log_2(n)          1         log_2(n)          1 * log_2(n) 
-            log_2(n) - 1      2         log_2(n) - 1      2 * [ log_2(n) - 1]
-               ...            ...         ...                 ...
-                2            ≤ n/4        2                n/4 * 2
-                1            ≤ n/2        1                n/2 * 1
-            T(BuildHeap) = n/2 * 1 + n/4 * 2 + ... + 1 * log_2(n) 
-                         = n/2 * 1 + n/4 * 2 + ... + n / 2^log_2(n) * log_2(n)
-                         = n [1/2 + 2/4 + 2/8 + ... log_2(n)/2^log_2(n)] < n * 2
-                         = O(n)
+        -       Height          Nodes #    T(SiftDown)       T(BuildHeap)
+                log_2(n)          1         log_2(n)          1 * log_2(n) 
+                log_2(n) - 1      2         log_2(n) - 1      2 * [ log_2(n) - 1]
+                  ...            ...         ...                 ...
+                   2            ≤ n/4        2                n/4 * 2
+                   1            ≤ n/2        1                n/2 * 1
+                T(BuildHeap) = n/2 * 1 + n/4 * 2 + ... + 1 * log_2(n) 
+                             = n/2 * 1 + n/4 * 2 + ... + n / 2^log_2(n) * log_2(n)
+                             = n [1/2 + 2/4 + 2/8 + ... log_2(n)/2^log_2(n)] < n * 2
+                             = O(n)
     - Step 2: Sort the Heap
     -       HeapSort(A[1 . . . n])
                 BuildHeap(A)
