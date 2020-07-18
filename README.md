@@ -4581,6 +4581,12 @@
     - Quadratic in the worst case (its probability is negligible)
 - Related problems:
     - [LC-347. Top K Frequent Elements](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/239/)
+    - [LC-215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+
+</details>
+
+<details>
+<summary>Combination</summary>
 
 </details>
 
@@ -4716,6 +4722,8 @@
     - Are there duplicates values in the BST?
         - If yes, where a duplicate value? left or right child?
         - Usually, a duplicate value is inserted as the left child
+- Graph:
+    - Are there cycles in the graphs
 
 </details>
 
@@ -4770,6 +4778,16 @@
                 5
                /
               L
+
+</details>
+
+<details>
+<summary>Graphs</summary>
+
+- Specific Graphs: Linked-List, Trees
+- Cyclic Graphs/Acyclic Graphs
+- Bipartite Graphs
+- Graphs with multiple Strongly Connected Component (SCC)
 
 </details>
 
