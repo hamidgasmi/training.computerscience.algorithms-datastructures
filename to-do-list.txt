@@ -75,3 +75,45 @@ Python:
 assert users == ['kevin', 'melody', 'alice'], f"Expected `users` to be ['kevin', 'melody', 'alice'] but got: {repr(users)}"
 - How can I write test cases with Python
 - Implement max pairwise product with Tournament approach
+
+
+How to improve:
+- Learn patterns 
+    - top k means at least consider a heap. 
+    - "Find the order of these relationships": consider topological sort.
+- Solve problems on paper:
+- Talk out loud a lot. Nobody loses points for thinking.
+- As soon as you understand the question, 
+    - propose new inputs as for TDD
+    - For example if your question is remove invalid parens, suggest one or two inputs and example outputs. 
+    - This gives you test cases AND shows you're thinking
+- Immediately propose naive solution 
+    - Eg if you have Range Sum immediately just note 
+    - "The obvious solution is n^2 runtime without using space, but I think we can do better." 
+    - Show your work, as professors like to say.
+- Pseudocode a solution ASAP to get interviewer buy in.
+- Once you get to a working solution, go back to your test cases and manually walk through the code 
+    - Open a block comment and write line by line the data transformations
+
+- The product design interview is HARD. 
+- Do a ton of these on paper for anything you can imagine. 
+    - Online ordering at Walmart, 
+    - pretend the deli counter at your grocery store needs to scale to your entire state, whatever you see. 
+    - Just practice.
+- Come up with a script for design interviews: I use the acronym README Bottlenecks:
+    - requirements, 
+    - estimations, 
+    - API, 
+    - data model, 
+    - main system, 
+    - extended system (extended means load balancing, caching, etc).
+    - Bottlenecks (Identify and resolve bottlenecks). 
+
+- Write a spreadsheet for your behavioral interview. 
+    - You can make one story about three different questions. 
+    - For example, "I was the lead of this feature" can be about technical challenges, how did you give feedback, how do you prioritize. 
+    - Just find 4-5 anecdotes that can scale to various possible questions.
+
+- Buy a whiteboard. Google drawing and bluejeans whiteboard aren't as good.
+
+- Trello board. Use spaced repetition. I'll add a pic of mine below
