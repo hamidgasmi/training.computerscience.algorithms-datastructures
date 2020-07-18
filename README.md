@@ -940,17 +940,9 @@
 <details>
 <summary>Priority Queues: Heap Sort</summary>
 
-- Not-In place algorithm to sort an Array (A) with a Heap Sort:
-    -       Create an empty priority queue MaxHeap
-            for i from 1 to n:
-                MaxHeap.Insert(A[i])
-            for i from n downto 1:
-                A[i] = MaxHeap.ExtractMax()
-    - Time Complexity:  O(n log n)
-    - **Space Complexity: O(n)** (It's not an in place algorithm)
-    - It's a natural generalization of selection sort:
-        - Instead of simply scanning the rest of the array to find the maximum value,
-        - It uses a smart data structure
+- It's an improvement of selection sort:
+    - Instead of simply scanning the rest of the array to find the maximum value
+    - It uses the heap data structure
 - In place algorithm to sort an array (A) with a Heap Sort:
     - Step 1: Turn the array A[] into a heap by permuting its elements
         - We repair the heap property going from bottom to top
@@ -962,16 +954,16 @@
                     SiftDown(i)
         - Space Complexity: O(1) (In place algorithm)
         - Time Complexity: **O(n)**
-        -       Height          Nodes #    T(SiftDown)       T(BuildHeap)
-                log_2(n)          1         log_2(n)          1 * log_2(n) 
-                log_2(n) - 1      2         log_2(n) - 1      2 * [ log_2(n) - 1]
-                  ...            ...         ...                 ...
-                   2            ≤ n/4        2                n/4 * 2
-                   1            ≤ n/2        1                n/2 * 1
-                T(BuildHeap) = n/2 * 1 + n/4 * 2 + ... + 1 * log_2(n) 
-                             = n/2 * 1 + n/4 * 2 + ... + n / 2^log_2(n) * log_2(n)
-                             = n [1/2 + 2/4 + 2/8 + ... log_2(n)/2^log_2(n)] < n * 2
-                             = O(n)
+        -       Height        Nodes #  T(SiftDown)    T(BuildHeap)
+                  1            1       log(n)          1 * log(n) 
+                  2            2       log(n) - 1      2 * [log(n) - 1]
+                 ...          ...       ...              ...
+                log(n) - 2    ≤ n/8      3             n/8 * 3
+                log(n) - 1    ≤ n/4      2             n/4 * 2
+                log(n)        ≤ n/2      1             n/2 * 1
+                T(BuildHeap) = n/2 * 1 + n/4 * 2 + n/8 * 3 + ... + 1 * log(n)
+                             = n [1/2 + 2/4 + 2/8 + ... + log(n)/2^log(n)] <  n Σ i/2^i (i goes to the infinity) = n * 2
+                             = O(n)                                            i=1
     - Step 2: Sort the Heap
     -       HeapSort(A[1 . . . n])
                 BuildHeap(A)
@@ -1004,6 +996,8 @@
         - E.g. Printing the last 102 elements of a sorted version of an array of 1024 elements:
             - It takes a linear time
             - if n = 1024 = 2^10 then k = 2^10 / log 2^10 = 1024 / 10 = 102
+- Related problems:
+    - [LC-347. Top K Frequent Elements](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/239/)
 - For more details:
     - UC San Diego Course: [Overview & Naive Implementations](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_1_priority_queues_intro.pdf)
     - UC San Diego Course: [Binary Heaps](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/02-data-sructures-fundamentals/3_priority_queues_and_disjoint_sets/03_2_priority_queues_heaps.pdf)
@@ -4572,6 +4566,21 @@
 
 <details>
 <summary>Slow and Fast Pointers Pattern</summary>
+
+</details>
+
+<details>
+<summary>Find K largest/smallest items Pattern</summary>
+
+- Use a heap:
+    - Time Complexity will be in order of O(n + klogn)
+    - Linear if k = O(n/logn)
+- Use Quick Select:
+    - Time Complexity is O(n) in average
+    - Linear in average
+    - Quadratic in the worst case (its probability is negligible)
+- Related problems:
+    - [LC-347. Top K Frequent Elements](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/239/)
 
 </details>
 
