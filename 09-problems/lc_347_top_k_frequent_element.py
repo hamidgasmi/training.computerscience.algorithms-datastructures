@@ -1,10 +1,9 @@
 import random
-import heapq
 
 class SolutionQuickSelect:
     
     # Time Complexity: O(n) on average
-    # Space Complexity: O(1)
+    # Space Complexity: O(n) due to the dict
     def top_k_frequent(self, nums: List[int], k: int) -> List[int]:
         
         occur_dict = dict()
@@ -51,10 +50,12 @@ class SolutionQuickSelect:
         
         return pivot    
 
+import heapq
+
 class SolutionHeap:
 
-    # Time Complexity: # O(n + k + (n-k)logk)
-    # Space Complexity: (O(n + k))
+    # Time Complexity: O(n + k + (n-k)logk) = O(n + (n-k)logk)
+    # Space Complexity: O(n + k) = O(n)
     def top_k_frequent(self, nums: List[int], k: int) -> List[int]:
         # O(n)  
         occur_dict = dict()
