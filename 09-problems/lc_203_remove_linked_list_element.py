@@ -35,7 +35,7 @@
         3. Return pseudo head next node: 1
 
     3. Implementation
-    4. Tests: Use the examples of step 1.
+    4. Tests: Use the examples of step 1 (TDD).
     5. Analysis:
        Time Complexity: O(|ListNode|)
        Space Compexity: O(1)
@@ -69,9 +69,3 @@ class Solution:
 
         # 3. Return pseudo head next node
         return head.next
-          
-        
-            
-        
-            
-        
