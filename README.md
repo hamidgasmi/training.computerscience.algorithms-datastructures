@@ -4570,6 +4570,18 @@
 </details>
 
 <details>
+<summary>Sentinel Node Pattern</summary>
+
+- It's widely used in trees and linked lists as pseudo-heads, pseudo-tails, markers of level end, etc. 
+- Its main purpose is to standardize the situation, for example, make linked list to be never empty and never headless and hence simplify insert and delete
+- Related problems:
+    - [LC-203. Remove Linked List Elements](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/242): Sentinel node is used as a pseudo-head
+    - [LC-1161. Maximum Level Sum of a Binary Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/240): sentinel nodes are used to mark level end
+    - [LC-146. LRU Cache](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/241): Sentinel nodes are used as pseudo-head and pseudo-tail
+
+</details>
+
+<details>
 <summary>Find K largest/smallest items Pattern</summary>
 
 - Use a heap:
@@ -4586,7 +4598,7 @@
 </details>
 
 <details>
-<summary>Combination</summary>
+<summary>Combination (subsets) Pattern</summary>
 
 </details>
 
