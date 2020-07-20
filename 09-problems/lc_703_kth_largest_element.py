@@ -4,18 +4,16 @@ class KthLargest_Python_Heap:
         Analysis:
     """
     
-    # Time Complexity: O(nlogn + klogk) = O(nlogn)
+    # Time Complexity: O(n + klogn + k) = O(n + klogn)
     # Space Complexity: O(n)
     def __init__(self, k: int, nums: List[int]):
         self.k = k
         self.max_heap = [(-1) * num for num in nums]
         heapq.heapify(self.max_heap)
         
-        self.min_heap = []
-        for i in range(self.k - 1):
-            heapq.heappush(self.min_heap, (-1) * heapq.heappop(self.max_heap))
-            
-            
+        self.min_heap = [(-1) * heapq.heappop(self.max_heap) for _ in range(self.k - 1)]
+        heapq.heapify(self.min_heap)
+    
     # Time Complexity: O(logn) for 1 operation
     # Amortized Running Time for p operations (1 initialization + p - 1 add operations)
     #     T = [nlogn + log(n + 1) + ... + log(n + p - 1)]/p
