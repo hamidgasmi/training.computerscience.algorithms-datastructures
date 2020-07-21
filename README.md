@@ -4598,9 +4598,27 @@
 </details>
 
 <details>
+<summary>Two heaps Patterns</summary>
+
+- Related problems:
+    - [LC-703. Kth Largest Element in a Stream](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/226)
+
+</details>
+
+<details>
 <summary>Combination (subsets) Pattern</summary>
 
 </details>
+
+<details>
+<summary>Topological-Sort Pattern</summary>
+
+- Related problems:
+    - [Determining an Order of Courses](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/96)
+
+</details>
+
+
 
 <details>
 <summary>Counting Sort</summary>
