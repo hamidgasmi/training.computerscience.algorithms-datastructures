@@ -56,7 +56,7 @@ class Solution:
         start = 1 if num_str[0] in '-+' else 0
         
         num = 0
-        int_boundary =  2147483648 if sign == -1 else 2147483647
+        int_boundary =  0x80000000 if sign == -1 else 0x7fffffff # 2147483648 or 2147483647
         
         for i in range(start, len(num_str)):
             
