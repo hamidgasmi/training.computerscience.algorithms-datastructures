@@ -66,7 +66,6 @@ class Solution:
             
             num *= 10
             num += ord_digit - 48
-            
             if num >= int_boundary:
                 num = int_boundary
                 break
