@@ -76,6 +76,15 @@ assert users == ['kevin', 'melody', 'alice'], f"Expected `users` to be ['kevin',
 - How can I write test cases with Python
 - Implement max pairwise product with Tournament approach
 
+Problems:
+- Amazon:
+    - Convert.a read/write system call that takes 512 byte aligned offset/size and reads from a block device that can read/write 4k aligned
+    - Design dropbox
+- Google:
+    - Design a URL phishing verifier
+    - DP problem about finding optimal VM allocation of a physical machine
+- Facebook:
+    - Design web crawler
 
 How to improve:
 - Learn patterns 
