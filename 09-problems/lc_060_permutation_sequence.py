@@ -23,12 +23,12 @@ class Solution:
         
         permutation = []
         len_permutation = n
-                
+        fact_n_minus_1 = math.factorial(n)
         while len(permutation) != len_permutation:
             
             # 1. Find the position of the digit
             pos = 1
-            fact_n_minus_1 = math.factorial(n - 1)
+            fact_n_minus_1 //= n
             while k > fact_n_minus_1 and pos <= fact_n_minus_1:
                 k -= fact_n_minus_1
                 pos += 1
