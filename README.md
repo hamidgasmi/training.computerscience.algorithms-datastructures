@@ -4606,7 +4606,14 @@
 </details>
 
 <details>
-<summary>Combination (subsets) Pattern</summary>
+<summary>Backtracking Pattern</summary>
+
+- It's usefull for problems requiring to explore all possible solutions: Subsets, Combinations, Permutations
+- It requires a backtracking solution
+- It's a methodology where we mark the current path of exploration, if the path does not lead to a solution, we then revert the change and try another path
+- Related problems:
+    - [LC-79. Word Search](https://leetcode.com/problems/word-search/)
+    - [LC-46. Permutations](https://leetcode.com/problems/permutations/)
 
 </details>
 
@@ -4618,7 +4625,22 @@
 
 </details>
 
+<details>
+<summary>Merge Intervals Pattern</summary>
 
+- Related problems:
+    - [LC-252. Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)
+    - [LC-253. Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)
+    - [LC-56. Merge Intervals](https://leetcode.com/problems/merge-intervals/)
+    - [LC-986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/)
+    - [LC-435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
+    - [LC-616. Add Bold Tag in String](https://leetcode.com/problems/add-bold-tag-in-string/)
+    - [LC-763. Partition Labels](https://leetcode.com/problems/partition-labels/)
+    - [LC-57. Insert Interval](https://leetcode.com/problems/insert-interval/)
+    - [LC-715. Range Module](https://leetcode.com/problems/range-module/)
+    - [LC-759. Employee Free Time](https://leetcode.com/problems/employee-free-time/)
+
+</details>
 
 <details>
 <summary>Counting Sort</summary>
@@ -4710,7 +4732,7 @@
 <summary>Max Product of terms</summary>
 
 - When we need to compute the max of product of terms: `M = max(term_i0 * term_i1 * ...)`
-- To avoid any **stackoverflow** error due to the product operation, it's better to compute the logarithm of M:
+- To avoid any **overflow** error due to the product operation, it's better to compute the logarithm of M:
 - `max(term_i0 * term_i1 * ...)` is then equivalent to `max(log(term_i0) + log(term_i1) + ...)`
 
 </details>
@@ -4746,6 +4768,7 @@
     - Is there duplicates?
 - Strings:
     - How it's encoded? ASCII, Unicode?
+    - If it's a string of digits, how should we manage overflow cases?
 - Trees:
     - Depth definition: depth(root) = 0 or depth(root) = 1
 - BST:
