@@ -4598,7 +4598,7 @@
 </details>
 
 <details>
-<summary>Two heaps Patterns</summary>
+<summary>Two heaps Pattern</summary>
 
 - Related problems:
     - [LC-703. Kth Largest Element in a Stream](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/226)
