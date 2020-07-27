@@ -4532,18 +4532,63 @@
 <details>
 <summary>Bitwise Pattern</summary>
 
-- XOR operation when a problem is related with unicity: `a XOR a = 0`
+- Some useful Properties of Binary Numbers:
+    - If LO bit = 1 in a binary (integer) => odd
+    - If LO bit = 0 in a binary (integer) => even
+    - If the n LO bits of a binary number all contain 0 => the number is evenly divisible by 2^n
+        - 00011000 (+24) => it's divisible by 2^3 (+8)
+        - 00101000 (+40) => it's divisible by 2^3 (+8)
+        - 10101000 (-88) => it's divisible by 2^3 (+8)
+    - If a binary value contains a 1 in bit position p and 0s everywhere else => it’s equal to 2^p
+        - 00001000 (p: 3) is equal to 2^3 (+8)
+        - 01000000 (p: 7) is equal to 2^7 (+128)
+    - If a binary value contains all 1s from Bit 0 to bit p - 1 and 0 elsewhere => it’s equal to 2^p - 1
+        - 00001111 (p: 4) is equal to 2^4 - 1 (+15)
+        - 01111111 (p: 7) is equal to 2^7 - 1 (+127)
+    - Shifting all bits in a number to the left by 1 position multiplies the binary value by 2
+        - Shift(00001110, -1):(14*2) 00011100 (1C:28)
+        - What about signed binary numbers?
+    - Shifting all bits of an unsigned binary number to the right by 1 position divides the number by 2
+        - Shift(00001110, +1) (14/2) 00000111 (+7)
+        - Shift(00000111, +1) (7/2) 00000011 (+3)
+    - Multiplying 2 n-bit binary values together may require as many as 2*n bits to hold the result
+    - Adding or substracting 2 n-bit binary values never requires more than n+1 bits to hold the result    
+    - Incrementing (adding 1 to) the largest unsigned binary value for a given number of bits always produces a value of 0
+    - Decrementing (substracting 1 from) zero always produces the largest unsigned binary value for a given number of bits
+    - An n-bit value provides 2^n unique combinations of those bits
+    - The value 2^n - 1 contains n bits, each containing the value 1
 - Complement 2 of a number, a:
-    - General: `~a + 1`
+    - Inverting all bits in a binary number is the same as changing the sign and then substracting 1 from the result
+    - `~a = -a - 1` or `-a = ~a + 1`
+    - The rightmost bit set to 1: `rightmost_bit_1 = a & -a`
+    -       Let's have a = x-10000000...0
+                      -a = ~a + 1 = ~x-01111111...1 + 1 = ~x-10000000...0
+                      a & -a:
+                           x-10000000...0
+                        & ~x-10000000...0
+                        -----------------------
+                           0-10000000...0
     - Python `~(a ^ 0xffffffff)`: 
         - Python doesn't limit the size of a number
         - E.g. Python Integers size: 32 bits (max positive integer is: 0x7fffffff = +2147483647) but +2147483647 + 1 = 2147483648
+- XOR operation:
+    - It only returns 1 if exactly one bit is set to 1 out of the two bits in comparison
+    - `a ^ a = 0`
+    - `a ^ 0 = a`
+    - `a ^ 1s = ~a`
+    - XOR is Associative: `(a ^ b) ^ c = a ^ (b ^ c) = a ^ b ^ c`
+    - Xor is Commutative: `a ^ b = b ^ a`
+- Python:
+    - Get the # of bits necessary to represent an integer in binary, **excluding the sign and leading zeros**: `n.bit_length()`
+        - For positive integers: it returns
 - Related problems:
     - [Swap 2 numbers without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/147)
     - [Single number without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
     - [Find the inserted char](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/203)
     - [Sum of Two Integers](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/220)
     - [Prison Cells After N Days](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/225)
+    - [LC-137. Single Number II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/246)
+    - [LC-260. Single Number III](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/247)
 
 </details>
 
@@ -4551,7 +4596,11 @@
 <summary>Sliding Window Pattern</summary>
 
 - Related problems:
-    - 
+    - [LC-209. Minimum Size Subarray Sum](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/249)
+    - [LC-159. Longest Substring with At Most Two Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/)
+    - [LC-340. Longest Substring with At Most K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
+    - [LC-904. Fruits into Baskets](https://leetcode.com/problems/fruit-into-baskets/)
+    - [LC-3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 
 </details>
 
@@ -4761,6 +4810,7 @@
         - Integers could be confusing 
         - They could reference mathimatical integers which could be infinite
         - They could reference to machines Integers which usually are in 32 bits
+        - They could be large
 - Arrays:
     - What is the type of the array values?
     - What is size? 
@@ -4798,6 +4848,14 @@
     - Write functions signature
     - Make them return the expected value of your example
     - **Test** your code is working for your example
+
+</details>
+
+<details>
+<summary>Numbers</summary>
+
+- Test with nul, positive and negative integers
+- Test with large positive / negative integers
 
 </details>
 
