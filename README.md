@@ -571,6 +571,7 @@
     - [Partitioning Souvenirs](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/19)
     - [Maximizing the Value of an Arithmetic Expression](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/20)
     - [Longest Path in a DAG](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/170)
+    - [LC-309. Best Time to Buy and Sell Stock with Cooldown](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/252)
 - For more details:
     - [Course material](https://github.com/hamidgasmi/algorithms-datastructures/blob/master/01_algorithm_design_and_techniques/week5_and_6_dynamic_programming/04_dynamic_programming_2_editdistance.pdf)
     - [Advanced dynamic programming lecture notes](https://jeffe.cs.illinois.edu/teaching/algorithms/notes/D-faster-dynprog.pdf) by Jeff Erickson
@@ -4599,8 +4600,16 @@
     - [LC-209. Minimum Size Subarray Sum](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/249)
     - [LC-159. Longest Substring with At Most Two Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/)
     - [LC-340. Longest Substring with At Most K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
+    - [LC-3. Longest Substring Without Repeating Characters]()
+    - [LC-424. Longest Repeating Character Replacement]()
+    - [LC-1493. Longest Subarray of 1's After Deleting One Element]()
     - [LC-904. Fruits into Baskets](https://leetcode.com/problems/fruit-into-baskets/)
     - [LC-3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+    - [LC-438. Find All Anagrams in a String]()
+    - [LC-567. Permutation in String]()
+    - [LC-340. Longest Substring with At Most K Distinct Characters]()
+    - [LC-76. Minimum Window Substring]()
+    - [LC-30. Substring with Concatenation of All Words]()    
 
 </details>
 
