@@ -4618,7 +4618,13 @@
 
 - Related problems:
     - [Reverse vowels in an input string](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/202)
-    - [Container With Most Water](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/234)
+    - [LC-26. Remove Duplicates from Sorted Array]()
+    - [LC-27. Remove Element]()
+    - [LC-283. Move Zeroes]()
+    - [LC-83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
+    - [LC-82. Remove Duplicates from Sorted List II](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/)
+    - [LC-11. Container With Most Water](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/234)
+    - []
 
 </details>
 
@@ -4861,29 +4867,20 @@
 </details>
 
 <details>
-<summary>Numbers</summary>
+<summary>Test your solution</summary>
 
-- Test with nul, positive and negative integers
-- Test with large positive / negative integers
-
-</details>
-
-<details>
-<summary>Arrays</summary>
-
-- Empty array: []
-- Array with 1 item: []
-- Array with 1 item which value is the minimum: [-0x]
-- Array with multiple equal items 
-- Unsorted Arrays:
-- Sorted Arrays:
-
-</details>
-
-<details>
-<summary>Trees</summary>
-
-- Tree:
+- Test Coverage: Include test cases to cover all your code branches
+- Number:
+    - Test with nul, positive and negative integers
+    - Test with large positive / negative integers
+- Arrays:
+    - Empty array: []
+    - Array with 1 item: [1]
+    - Array with 1 item which value is the minimum/maximum: [-2147483648], [2147483647]
+    - Array with multiple equal items: [1, 1, 1, 1...] or [-2147483648, -2147483648, -2147483648...], [2147483647, 2147483647, 2147483647...]
+    - Unsorted Arrays:
+    - Sorted Arrays (Increasing order and Decreasing Order)
+- Trees:
     - Null tree
     - 1 node
     - Tree as a linked list
@@ -4898,16 +4895,13 @@
                 5
                /
               L
-
-</details>
-
-<details>
-<summary>Graphs</summary>
-
-- Specific Graphs: Linked-List, Trees
-- Cyclic Graphs/Acyclic Graphs
-- Bipartite Graphs
-- Graphs with multiple Strongly Connected Component (SCC)
+    - Unbalanced BST
+    - Balanced BST
+- Graphs:
+    - Specific Graphs: Linked-List, Trees
+    - Cyclic Graphs/Acyclic Graphs
+    - Bipartite Graphs
+    - Graphs with multiple Strongly Connected Component (SCC)
 
 </details>
 
