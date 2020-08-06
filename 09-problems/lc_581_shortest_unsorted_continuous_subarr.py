@@ -1,23 +1,22 @@
 """
     1. Problem Summary / Clarifications / TDD:
-        [2, 6, 4, 8, 10, 9, 15]
-            ^            ^
-            
         [2, 6, 10, 4, 5, 5, 8]
-        
-        [2, 6, 7, 7, 4, 5, 5, 8]
-            ^              ^
+        [2, 6, 4, 8, 10, 9, 15]
         [2, 3, 4, 7, 5, 8, 9, 10]
-                  ^     ^
-        
-        left_max = 7 (4)
-        right_min = 4 (4)
-        
         [2, 4, 5, 5, 6, 7, 8, 10]
-         
+
 """
 class Solution_Two_Pointers:
-    
+    """    
+        2. Intuition:
+            [2, 6, 4, 8, 10, 9, 15]
+                ^            ^
+
+        3. Complexity Analysis:
+            Time Complexity: O(|nums|)
+            Space Complexity: O(1)
+                 
+    """
     def find_unsorted_subarray(self, nums: List[int]) -> int:
         
         nums_len = len(nums)
@@ -46,7 +45,13 @@ class Solution_Two_Pointers:
         return r - l + 1
 
 class Solution_Sorting:
+    """
 
+    3. Complexity Analysis:
+            Time Complexity: O(nlogn): n = |nums|
+            Space Complexity: O(1) or O(n) in the worst case (according to python built-in sort function documentation)
+
+    """
     def find_unsorted_subarray(self, nums: List[int]) -> int:
         
         sorted_nums = nums.copy()
@@ -65,4 +70,4 @@ class Solution_Sorting:
                 break
                 
         return r - l + 1
-        
+    
