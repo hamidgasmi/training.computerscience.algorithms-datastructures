@@ -4583,13 +4583,15 @@
     - Get the # of bits necessary to represent an integer in binary, **excluding the sign and leading zeros**: `n.bit_length()`
         - For positive integers: it returns
 - Related problems:
-    - [Swap 2 numbers without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/147)
-    - [Single number without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
-    - [Find the inserted char](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/203)
-    - [Sum of Two Integers](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/220)
-    - [Prison Cells After N Days](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/225)
-    - [LC-137. Single Number II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/246)
-    - [LC-260. Single Number III](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/247)
+    - Easy:
+        - [Swap 2 numbers without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/147)
+        - [Find the inserted char](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/203)
+        - [136. Single Number without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
+    - Medium:
+        - [LC-371. Sum of Two Integers](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/220)
+        - [LC-957. Prison Cells After N Days](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/225)
+        - [LC-137. Single Number II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/246)
+        - [LC-260. Single Number III](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/247)
 
 </details>
 
@@ -4597,19 +4599,24 @@
 <summary>Sliding Window Pattern</summary>
 
 - Related problems:
-    - [LC-209. Minimum Size Subarray Sum](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/249)
-    - [LC-159. Longest Substring with At Most Two Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/)
-    - [LC-340. Longest Substring with At Most K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
-    - [LC-3. Longest Substring Without Repeating Characters]()
-    - [LC-424. Longest Repeating Character Replacement]()
-    - [LC-1493. Longest Subarray of 1's After Deleting One Element]()
-    - [LC-904. Fruits into Baskets](https://leetcode.com/problems/fruit-into-baskets/)
-    - [LC-3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
-    - [LC-438. Find All Anagrams in a String]()
-    - [LC-567. Permutation in String]()
-    - [LC-340. Longest Substring with At Most K Distinct Characters]()
-    - [LC-76. Minimum Window Substring]()
-    - [LC-30. Substring with Concatenation of All Words]()    
+    - Easy:
+    - Medium:
+        - [LC-3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+        - [LC-159. Longest Substring with At Most Two Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/)
+        - [LC-209. Minimum Size Subarray Sum](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/249)
+        - [LC-424. Longest Repeating Character Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/)
+        - [LC-438. Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/)
+        - [LC-567. Permutation in String](https://leetcode.com/problems/permutation-in-string/)
+        - [LC-904. Fruits into Baskets](https://leetcode.com/problems/fruit-into-baskets/)
+        - [LC-1493. Longest Subarray of 1's After Deleting One Element](https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/)
+    - Hard:
+        - [LC-30. Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/)
+        - [LC-76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
+        - [LC-340. Longest Substring with At Most K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
+    
+    
+    
+    
 
 </details>
 
@@ -4617,14 +4624,30 @@
 <summary>2 Pointers Pattern</summary>
 
 - Related problems:
-    - [Reverse vowels in an input string](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/202)
-    - [LC-26. Remove Duplicates from Sorted Array]()
-    - [LC-27. Remove Element]()
-    - [LC-283. Move Zeroes]()
-    - [LC-83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
-    - [LC-82. Remove Duplicates from Sorted List II](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/)
-    - [LC-11. Container With Most Water](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/234)
-    - []
+    - Easy:
+        - [Reverse vowels in an input string](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/202)
+        - [1. Two Sum](https://leetcode.com/problems/two-sum/)
+        - [LC-125. Valid Palindrome:]()
+        - [LC-26. Remove Duplicates from Sorted Array]()
+        - [LC-27. Remove Element]()
+        - [LC-283. Move Zeroes]()
+        - [LC-977. Squares of a Sorted Array:]()
+        - [LC-844. Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/)
+        - [LC-581. Shortest Unsorted Continuous Subarray]()
+        - [LC-83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
+    - Medium:
+        - [LC-82. Remove Duplicates from Sorted List II](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/)
+        - [LC-11. Container With Most Water](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/234)
+        - [LC-713. Subarray Product Less Than K]()
+        - [Dutch national flag problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/258)
+        - [LC-15. 3Sum]()
+        - [LC-16. 3Sum Closest]()
+        - [LC-259. 3Sum Smaller]()
+        - [LC-18. 4Sum](https://leetcode.com/problems/4sum/)
+        - []()
+    - Hard:
+        - [LC-30. Substring with Concatenation of All Words]()
+        - [LC-76. Minimum Window Substring]()
 
 </details>
 
@@ -4639,9 +4662,11 @@
 - It's widely used in trees and linked lists as pseudo-heads, pseudo-tails, markers of level end, etc. 
 - Its main purpose is to standardize the situation, for example, make linked list to be never empty and never headless and hence simplify insert and delete
 - Related problems:
-    - [LC-203. Remove Linked List Elements](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/242): Sentinel node is used as a pseudo-head
-    - [LC-1161. Maximum Level Sum of a Binary Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/240): sentinel nodes are used to mark level end
-    - [LC-146. LRU Cache](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/241): Sentinel nodes are used as pseudo-head and pseudo-tail
+    - Easy:
+        - [LC-203. Remove Linked List Elements](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/242): Sentinel node is used as a pseudo-head
+    - Medium:
+        - [LC-1161. Maximum Level Sum of a Binary Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/240): sentinel nodes are used to mark level end
+        - [LC-146. LRU Cache](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/241): Sentinel nodes are used as pseudo-head and pseudo-tail
 
 </details>
 
@@ -4656,8 +4681,10 @@
     - Linear in average
     - Quadratic in the worst case (its probability is negligible)
 - Related problems:
-    - [LC-347. Top K Frequent Elements](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/239/)
-    - [LC-215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+    - Easy:
+    - Medium:
+        - [LC-215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+        - [LC-347. Top K Frequent Elements](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/239/)
 
 </details>
 
@@ -4665,7 +4692,8 @@
 <summary>Two heaps Pattern</summary>
 
 - Related problems:
-    - [LC-703. Kth Largest Element in a Stream](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/226)
+    - Easy:
+        - [LC-703. Kth Largest Element in a Stream](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/226)
 
 </details>
 
@@ -4676,8 +4704,10 @@
 - It requires a backtracking solution
 - It's a methodology where we mark the current path of exploration, if the path does not lead to a solution, we then revert the change and try another path
 - Related problems:
-    - [LC-79. Word Search](https://leetcode.com/problems/word-search/)
-    - [LC-46. Permutations](https://leetcode.com/problems/permutations/)
+    - Easy:
+    - Medium:
+        - [LC-46. Permutations](https://leetcode.com/problems/permutations/)
+        - [LC-79. Word Search](https://leetcode.com/problems/word-search/)
 
 </details>
 
@@ -4685,7 +4715,8 @@
 <summary>Topological-Sort Pattern</summary>
 
 - Related problems:
-    - [Determining an Order of Courses](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/96)
+    - Easy:
+        - [Determining an Order of Courses](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/96)
 
 </details>
 
@@ -4693,16 +4724,33 @@
 <summary>Merge Intervals Pattern</summary>
 
 - Related problems:
-    - [LC-252. Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)
-    - [LC-253. Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)
-    - [LC-56. Merge Intervals](https://leetcode.com/problems/merge-intervals/)
-    - [LC-986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/)
-    - [LC-435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
-    - [LC-616. Add Bold Tag in String](https://leetcode.com/problems/add-bold-tag-in-string/)
-    - [LC-763. Partition Labels](https://leetcode.com/problems/partition-labels/)
-    - [LC-57. Insert Interval](https://leetcode.com/problems/insert-interval/)
-    - [LC-715. Range Module](https://leetcode.com/problems/range-module/)
-    - [LC-759. Employee Free Time](https://leetcode.com/problems/employee-free-time/)
+    - Easy:
+        - [LC-252. Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)
+    - Medium:
+        - [LC-253. Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)
+        - [LC-56. Merge Intervals](https://leetcode.com/problems/merge-intervals/)
+        - [LC-435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
+        - [LC-616. Add Bold Tag in String](https://leetcode.com/problems/add-bold-tag-in-string/)
+        - [LC-763. Partition Labels](https://leetcode.com/problems/partition-labels/)
+        - [LC-986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/)
+    - Hard:
+        - [LC-57. Insert Interval](https://leetcode.com/problems/insert-interval/)
+        - [LC-715. Range Module](https://leetcode.com/problems/range-module/)
+        - [LC-759. Employee Free Time](https://leetcode.com/problems/employee-free-time/)
+
+</details>
+
+<details>
+<summary>Trie Pattern</summary>
+
+- Related problems:
+    - Medium:
+        - [LC-208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
+        - [LC-421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/)
+        - [LC-211. Add and Search Word](https://leetcode.com/problems/add-and-search-word-data-structure-design/)
+    - Hard:
+        - [LC-212. Word Search II](https://leetcode.com/problems/word-search-ii/)
+        - [LC-642. Design Search Autocomplete System](https://leetcode.com/problems/design-search-autocomplete-system/)
 
 </details>
 
