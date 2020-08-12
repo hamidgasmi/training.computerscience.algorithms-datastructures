@@ -4613,10 +4613,6 @@
         - [LC-30. Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/)
         - [LC-76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
         - [LC-340. Longest Substring with At Most K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
-    
-    
-    
-    
 
 </details>
 
@@ -4644,7 +4640,6 @@
         - [LC-16. 3Sum Closest]()
         - [LC-259. 3Sum Smaller]()
         - [LC-18. 4Sum](https://leetcode.com/problems/4sum/)
-        - []()
     - Hard:
         - [LC-30. Substring with Concatenation of All Words]()
         - [LC-76. Minimum Window Substring]()
@@ -4652,21 +4647,37 @@
 </details>
 
 <details>
-<summary>Slow and Fast Pointers Pattern</summary>
+<summary>Sentinel Node Pattern</summary>
+
+- It's widely used in trees and linked lists as pseudo-heads, pseudo-tails, markers of level end, etc.
+- Its main purpose is to standardize the situation, for example, make linked list to be never empty and never headless and hence simplify insert and delete
+- Related problems:
+    - Easy:
+        - [LC-21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+        - [LC-203. Remove Linked List Elements](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/242)
+    - Medium:
+        - [LC-86. Partition List](https://leetcode.com/problems/partition-list/)
+        - [LC-138. Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/)
+        - [LC-146. LRU Cache](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/241): Sentinel nodes are used as pseudo-head and pseudo-tail
+        - [LC-1161. Maximum Level Sum of a Binary Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/240)
 
 </details>
 
 <details>
-<summary>Sentinel Node Pattern</summary>
+<summary>Fast & Slow Pointers Pattern</summary>
 
-- It's widely used in trees and linked lists as pseudo-heads, pseudo-tails, markers of level end, etc. 
-- Its main purpose is to standardize the situation, for example, make linked list to be never empty and never headless and hence simplify insert and delete
-- Related problems:
-    - Easy:
-        - [LC-203. Remove Linked List Elements](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/242): Sentinel node is used as a pseudo-head
-    - Medium:
-        - [LC-1161. Maximum Level Sum of a Binary Tree](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/240): sentinel nodes are used to mark level end
-        - [LC-146. LRU Cache](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/241): Sentinel nodes are used as pseudo-head and pseudo-tail
+- Easy:
+    - [LC-141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
+    - [LC-202. Happy Number](https://leetcode.com/problems/happy-number/)
+    - [LC-234. Palindrome Linked List](https://leetcode.com/problems/palindrome-linked-list/)
+    - [LC-876. Middle of the Linked List](https://leetcode.com/problems/middle-of-the-linked-list/)
+- Medium:
+    - [LC-142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
+    - [LC-143. Reorder List](https://leetcode.com/problems/reorder-list/)
+    - [LC-148. Sort List](https://leetcode.com/problems/sort-list/)
+    - [LC-287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
+    - [LC-457. Circular Array Loop](https://leetcode.com/problems/circular-array-loop/)
+    
 
 </details>
 
