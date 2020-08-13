@@ -4682,7 +4682,146 @@
 </details>
 
 <details>
-<summary>Find K largest/smallest items Pattern</summary>
+<summary>Cyclic Sort Pattern</summary>
+
+- Example: You are given an unsorted array containing numbers taken from the range 1 to ‘n’. The array can have duplicates, which means that some numbers will be missing. Find all the missing numbers.
+- Related problems:
+    - Easy:
+        - [LC-268. Missing Number](https://leetcode.com/problems/missing-number/)
+        - [LC-448. Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
+
+        ?
+        - [LC-1539. Kth Missing Positive Number](https://leetcode.com/problems/kth-missing-positive-number/)
+    - Medium:
+        - [LC-287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
+        - [LC-442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/)
+
+        ?
+        - [LC-136. Single Number](https://leetcode.com/problems/single-number/)
+        - [LC-137. Single Number II](https://leetcode.com/problems/single-number-ii/)
+        - [LC-260. Single Number III](https://leetcode.com/problems/single-number-iii/)
+        - [LC-1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/)
+    - Hard:
+        - [LC-41. First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
+
+
+        ?
+        - [LC-765. Couples Holding Hands](https://leetcode.com/problems/couples-holding-hands/)
+</details>
+
+<details>
+<summary>Merge Intervals Pattern</summary>
+
+- There are 6 different ways that 2 intervals can relate to each other:
+    - Let `a` and `b` to different intervalls:
+    - 1. `a` and `b` aren't overlapping and `a.end < b.start`:
+        -       |---a---|   |--b--|
+    - 2. `a` and `b` are partially overlapping in the right side of a:
+        -           |---a---|
+                          |--b--|
+    - 3. `a` and `b` are fully overlapping and |a| >= |b|:
+        -           |---a---|
+                     |--b--|
+    - 4. `a` and `b` are fully overlapping and |a| < |b|:
+        -            |--a--|
+                    |---b---|
+    - 5. `a` and `b` are partially overlapping in the left side of a:
+        -           |---a---|
+                |--b--|
+    - 6. `a` and `b` aren't overlapping and `a.start > b.end`:
+        -       |--b--|    |---a---|
+- Related problems:
+    - Easy:
+        - [LC-252. Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)
+    - Medium:
+        - [LC-253. Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)
+        - [LC-56. Merge Intervals](https://leetcode.com/problems/merge-intervals/)
+        - [LC-435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
+        - [LC-616. Add Bold Tag in String](https://leetcode.com/problems/add-bold-tag-in-string/)
+        - [LC-763. Partition Labels](https://leetcode.com/problems/partition-labels/)
+        - [LC-986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/)
+    - Hard:
+        - [LC-57. Insert Interval](https://leetcode.com/problems/insert-interval/)
+        - [LC-715. Range Module](https://leetcode.com/problems/range-module/)
+        - [LC-759. Employee Free Time](https://leetcode.com/problems/employee-free-time/)
+
+</details>
+
+<details>
+<summary>In-place Reversal of a Linked-List Pattern</summary>
+
+- Related problems:
+    - Easy:
+        - [LC-206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
+    - Medium:
+        - [LC-24. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/)
+        - [LC-92. Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii/)
+        - [LC-61. Rotate List](https://leetcode.com/problems/rotate-list/)
+    - Hard:
+        - [LC-25. Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/)
+        - [EDU. Reverse alternating k-Group](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/267)
+
+</details>
+
+<details>
+<summary>Tree BFS Pattern</summary>
+
+- Related problems:
+    - Easy:
+    - Medium:
+    - Hard:
+
+</details>
+
+<details>
+<summary>Tree DFS Pattern</summary>
+
+- Related problems:
+    - Easy:
+    - Medium:
+    - Hard:
+
+</details>
+
+<details>
+<summary>Two heaps Pattern</summary>
+
+- Related problems:
+    - Easy:
+        - [LC-703. Kth Largest Element in a Stream](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/226)
+
+</details>
+
+<details>
+<summary>Subsets Pattern (Backtracking)</summary>
+
+- It's usefull for problems requiring to explore all possible solutions: Subsets, Combinations, Permutations
+- It requires a backtracking solution
+- It's a methodology where we mark the current path of exploration, if the path does not lead to a solution, we then revert the change and try another path
+- Related problems:
+    - Easy:
+    - Medium:
+        - [LC-46. Permutations](https://leetcode.com/problems/permutations/)
+        - [LC-79. Word Search](https://leetcode.com/problems/word-search/)
+- Related problems:
+    - Easy:
+    - Medium:
+    - Hard:
+
+</details>
+
+<details>
+<summary>Modified Binary Search Pattern</summary>
+
+- Related problems:
+    - Easy:
+    - Medium:
+    - Hard:
+
+</details>
+
+<details>
+<summary>Top K Items Pattern</summary>
 
 - Use a heap:
     - Time Complexity will be in order of O(n + klogn)
@@ -4700,25 +4839,22 @@
 </details>
 
 <details>
-<summary>Two heaps Pattern</summary>
+<summary>K-way Merge Pattern</summary>
 
 - Related problems:
     - Easy:
-        - [LC-703. Kth Largest Element in a Stream](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/226)
+    - Medium:
+    - Hard:
 
 </details>
 
 <details>
-<summary>Backtracking Pattern</summary>
+<summary>DP-Knapsack Pattern</summary>
 
-- It's usefull for problems requiring to explore all possible solutions: Subsets, Combinations, Permutations
-- It requires a backtracking solution
-- It's a methodology where we mark the current path of exploration, if the path does not lead to a solution, we then revert the change and try another path
 - Related problems:
     - Easy:
     - Medium:
-        - [LC-46. Permutations](https://leetcode.com/problems/permutations/)
-        - [LC-79. Word Search](https://leetcode.com/problems/word-search/)
+    - Hard:
 
 </details>
 
@@ -4728,26 +4864,6 @@
 - Related problems:
     - Easy:
         - [Determining an Order of Courses](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/96)
-
-</details>
-
-<details>
-<summary>Merge Intervals Pattern</summary>
-
-- Related problems:
-    - Easy:
-        - [LC-252. Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)
-    - Medium:
-        - [LC-253. Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)
-        - [LC-56. Merge Intervals](https://leetcode.com/problems/merge-intervals/)
-        - [LC-435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)
-        - [LC-616. Add Bold Tag in String](https://leetcode.com/problems/add-bold-tag-in-string/)
-        - [LC-763. Partition Labels](https://leetcode.com/problems/partition-labels/)
-        - [LC-986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/)
-    - Hard:
-        - [LC-57. Insert Interval](https://leetcode.com/problems/insert-interval/)
-        - [LC-715. Range Module](https://leetcode.com/problems/range-module/)
-        - [LC-759. Employee Free Time](https://leetcode.com/problems/employee-free-time/)
 
 </details>
 
