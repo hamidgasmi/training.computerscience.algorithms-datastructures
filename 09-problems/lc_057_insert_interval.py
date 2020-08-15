@@ -33,15 +33,15 @@ class BinarySearchSolutions:
             - Let's m be the length of the output list
             - Solution 1:
                 - The input is modified and returned
-                - Space Complexity: O(1): in Place
+                - Space Complexity: O(1): in place
                 - Time Complexity: O(n)
-                - It requires to delete fromintervalsall overlapping intervals
+                - It requires to delete from intervals all overlapping intervals
             - Solution 2:
                 - A new list is returned
                 - Space Complexity:O(m)
-                - Time Complexity:Θ(max(logn, m)) = O(n)(here n is an upper-bound only)
+                - Time Complexity:Θ(max(logn, m)) = O(n)
                 - The worst case time complexity is O(n): when for example new_interval doesn't overlap with any interval in intervals
-                - The best case time complexity is O(logn): when new_interval overlaps whith the majority of intervals, more than: n - logn
+                - The best case time complexity is O(logn): when new_interval overlaps whith more than: (n - logn) intervals
                 - In practice, this solution is faster than solution 1
 
     """
@@ -113,10 +113,24 @@ class BinarySearchSolutions:
 
 class Solution3:
     """
-    2. Intuition: Merge Interval technique
+    2. Intuition: Use Merge-Interval technique
+        - Create new list for merged intervals
         - Insert all interval which interval.start < new_interval.start
-        - Insert or Merge new Intervals
-        - Insert or Merge all following intervals interval.start > new_interval.start
+        - Insert or Merge new_interval
+        - Insert or Merge all following intervals: interval.start > new_interval.start
+
+        Case 1: Insert only (No merge):
+                    |--a--|   |--b--|
+            result: |--a--|   |--b--|
+        Case 2: Merge only
+                    |--a--|   
+                     |-b-|
+            result: |--a--|
+        Case 3: Merge only
+                    |--a--|   
+                       |--b--|
+            result: |--a-----|
+
     
     4. Complexity Analysis:
         - Time Complexity: O(n)
@@ -135,21 +149,21 @@ class Solution3:
         
         i = 0
         while i < intervals_count and intervals[i][self._start] <= new_interval[self._start]:
-            new_intervals.append(intervals[i])
+            merged_intervals.append(intervals[i])
             i += 1
         
-        if not new_intervals or new_intervals[-1][self._end] < new_interval[self._start]:
-            new_intervals.append(new_interval)
+        if not merged_intervals or merged_intervals[-1][self._end] < new_interval[self._start]:
+            merged_intervals.append(new_interval)
                 
         else:
-            new_intervals[-1][self._end] = max(new_intervals[-1][self._end], new_interval[self._end])
+            merged_intervals[-1][self._end] = max(merged_intervals[-1][self._end], new_interval[self._end])
         
         for j in range(i, intervals_count):
-            if new_intervals[-1][self._end] < intervals[j][self._start]:
-                new_intervals.append(intervals[j])
+            if merged_intervals[-1][self._end] < intervals[j][self._start]:
+                merged_intervals.append(intervals[j])
                 
             else:
-                new_intervals[-1][self._end] = max(new_intervals[-1][self._end], intervals[j][self._end])
+                merged_intervals[-1][self._end] = max(merged_intervals[-1][self._end], intervals[j][self._end])
         
-        return new_intervals
+        return merged_intervals
         
