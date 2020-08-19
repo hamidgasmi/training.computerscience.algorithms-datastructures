@@ -4623,26 +4623,27 @@
     - Easy:
         - [Reverse vowels in an input string](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/202)
         - [1. Two Sum](https://leetcode.com/problems/two-sum/)
-        - [LC-125. Valid Palindrome:]()
-        - [LC-26. Remove Duplicates from Sorted Array]()
-        - [LC-27. Remove Element]()
-        - [LC-283. Move Zeroes]()
-        - [LC-977. Squares of a Sorted Array:]()
+        - [LC-125. Valid Palindrome:](https://leetcode.com/problems/valid-palindrome/)
+        - [LC-26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+        - [LC-27. Remove Element](https://leetcode.com/problems/remove-element/)
+        - [LC-283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
+        - [LC-977. Squares of a Sorted Array:](https://leetcode.com/problems/squares-of-a-sorted-array/)
         - [LC-844. Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/)
-        - [LC-581. Shortest Unsorted Continuous Subarray]()
+        - [LC-581. Shortest Unsorted Continuous Subarray](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/)
         - [LC-83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
     - Medium:
         - [LC-82. Remove Duplicates from Sorted List II](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/)
         - [LC-11. Container With Most Water](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/234)
-        - [LC-713. Subarray Product Less Than K]()
-        - [Dutch national flag problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/258)
-        - [LC-15. 3Sum]()
-        - [LC-16. 3Sum Closest]()
-        - [LC-259. 3Sum Smaller]()
+        - [LC-713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/)
+        - [ED-001. Dutch national flag problem](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/258)
+        - [LC-15. 3Sum](https://leetcode.com/problems/3sum/)
+        - [LC-16. 3Sum Closest](https://leetcode.com/problems/3sum-closest/)
+        - [LC-259. 3Sum Smaller](https://leetcode.com/problems/3sum-smaller/)
         - [LC-18. 4Sum](https://leetcode.com/problems/4sum/)
+        - [LC-484. Find Permutation](https://leetcode.com/problems/find-permutation/)
     - Hard:
-        - [LC-30. Substring with Concatenation of All Words]()
-        - [LC-76. Minimum Window Substring]()
+        - [LC-30. Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/)
+        - [LC-76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
 
 </details>
 
@@ -4684,7 +4685,15 @@
 <details>
 <summary>Cyclic Sort Pattern</summary>
 
-- Example: You are given an unsorted array containing numbers taken from the range 1 to ‘n’. The array can have duplicates, which means that some numbers will be missing. Find all the missing numbers.
+- Example of a problem: 
+    - You are given an unsorted array containing numbers taken from the range 1 to ‘n’. 
+    - The array can have duplicates: some numbers will be missing. 
+    - Find all the missing numbers.
+- Efficient Solution:
+    - We can use the fact that the input array contains numbers in the range of 1 to ‘n’. 
+    - To efficiently sort the array, we can place each number in its correct place: placing ‘1’ at index ‘0’, placing ‘2’ at index ‘1’, ...
+    - Once we are done with the sorting, we can iterate the array to find all indices that are missing the correct numbers. 
+    - These will be our required numbers.
 - Related problems:
     - Easy:
         - [LC-268. Missing Number](https://leetcode.com/problems/missing-number/)
@@ -4744,6 +4753,7 @@
         - [LC-57. Insert Interval](https://leetcode.com/problems/insert-interval/)
         - [LC-715. Range Module](https://leetcode.com/problems/range-module/)
         - [LC-759. Employee Free Time](https://leetcode.com/problems/employee-free-time/)
+        - [ED-002. Maximum CPU Load](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/270)
 
 </details>
 
@@ -4759,7 +4769,7 @@
         - [LC-61. Rotate List](https://leetcode.com/problems/rotate-list/)
     - Hard:
         - [LC-25. Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/)
-        - [EDU. Reverse alternating k-Group](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/267)
+        - [EDU-003. Reverse alternating k-Group](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/267)
 
 </details>
 
@@ -4769,6 +4779,7 @@
 - Related problems:
     - Easy:
     - Medium:
+        - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
     - Hard:
 
 </details>
@@ -4779,6 +4790,7 @@
 - Related problems:
     - Easy:
     - Medium:
+        - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
     - Hard:
 
 </details>
@@ -4789,6 +4801,8 @@
 - Related problems:
     - Easy:
         - [LC-703. Kth Largest Element in a Stream](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/226)
+    - Medium:
+    - Hard:
 
 </details>
 
@@ -4796,18 +4810,17 @@
 <summary>Subsets Pattern (Backtracking)</summary>
 
 - It's usefull for problems requiring to explore all possible solutions: Subsets, Combinations, Permutations
-- It requires a backtracking solution
-- It's a methodology where we mark the current path of exploration, if the path does not lead to a solution, we then revert the change and try another path
+- This pattern describes an efficient Breadth First Search (BFS) approach to handle all these problems.
+(- It requires a backtracking solution
+- It's a methodology where we mark the current path of exploration, if the path does not lead to a solution, we then revert the change and try another path)
 - Related problems:
     - Easy:
     - Medium:
         - [LC-46. Permutations](https://leetcode.com/problems/permutations/)
         - [LC-79. Word Search](https://leetcode.com/problems/word-search/)
-- Related problems:
-    - Easy:
-    - Medium:
+        - [LC-1286. Iterator for Combination](https://trello.com/c/FKXEjrbW/43-lc-457-circular-array-loop)
     - Hard:
-
+        
 </details>
 
 <details>
