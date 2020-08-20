@@ -116,31 +116,43 @@ class RabinKarpPatternMatching:
         
         p_hash = self.__get_hash(p)
         s_window_hash = self.__get_hash(s, 0, len(p) - 1)
-        #print('->', self.__multiplier, p, s_window_hash)
-        multiplier_powred = int(math.pow(self.__multiplier, len_p - 1)) % self.__prime
+        
+        powered_multiplier = int(math.pow(self.__multiplier, len_p - 1)) % self.__prime
 
         matching_positions = [0] if s_window_hash == p_hash and s[:len_p] == p else []
         for i in range(len_p, len_s):
-            s_window_hash -= (ord(s[i - len(p)]) - ord('a') + 1)
-            s_window_hash //= self.__multiplier
-            s_window_hash += (ord(s[i]) - ord('a') + 1) * multiplier_powred
-            s_window_hash %= self.__prime
             
-            if s_window_hash == p_hash and s[i-len_p+1:i+1] == p:
-                matching_positions.append(i-len_p+1)
-            #print(i, p_hash, s_window_hash, s[i-len_p+1:i+1], p, matching_positions)
-
+            s_window_hash = self.__move_window(s, i, len_p, s_window_hash, powered_multiplier)
+            
+            if s_window_hash == p_hash and s[i - len_p + 1 : i + 1] == p:
+                matching_positions.append(i - len_p + 1)
+            
         return matching_positions
+
+    def __move_window(self, t:str, idx: int, window_size: int, window_hash: int, powered_multiplier: int) -> int:
+        
+        window_hash -= (self.__get_char_code(t[idx - window_size]) * powered_multiplier) % self.__prime
+        window_hash += 0 if window_hash >= 0 else self.__prime
+        window_hash *= self.__multiplier
+        window_hash += self.__get_char_code(t[idx])
+        window_hash %= self.__prime
+
+        return window_hash
 
     def __get_hash(self, t:str, l=0, r=None) -> int:
         if r is None:
             r = len(t) - 1
 
         hash = 0
-        for i in range(r, l-1, -1):
-            hash = (hash * self.__multiplier + ord(t[i]) - ord('a') + 1) % self.__prime
+        for i in range(l, r + 1):
+            hash = (hash * self.__multiplier + self.__get_char_code(t[i])) % self.__prime
         
         return hash
+
+    def __get_char_code(self, c:str) -> int:
+        assert(len(c) == 1)
+
+        return ord(c) - ord('0') + 1
 
 class KnuthMorrisPrattPatternMatching:
     """ 
@@ -210,4 +222,22 @@ if __name__ == '__main__':
     
     solution = Solution(KnuthMorrisPrattPatternMatching())
     print(solution.add_bold_tag('aabcd', ["ab","bc"]))
+
+
+    """
+    ["cddccbbda","aacbcbccd","cccabbc","abdcbba","bbcbccaba","b","bbadbcac","dbbbb","ccabcad","dcadaaab","bbbbcc","dddbadbdaa","bbcbdbd","cc","ab","bbcccddcad","ca","dd","b","cabdbbdba","cdcdd","bdbddabdc","dbaddcdca","aaab","aaa","acddbdbdbd","bacabbdddb","baa","abcdb","cb","bb","dccbb","cdcdaccaa","abbbcbdbdb","abaccdcdc","ccdc","d","dbad","dcccabcad","dcc","cbca","bacdbbcccd","cdca","caab","bddc","adccdabcdb","dbaa","cb","dc","bbca"]
+"bddddbdddbadbdaabbdcbcbbabcacdcdbbbacabbdcdbadaacaaaacccdddabbbadccbbcaacbcbccdcdaacbbaddadaacdcacddccbbdaaabacdbbcccdcdadbcdaccbdcdccbcbbaabbcbccabaadabaccacaabccbcbbacabdccaacbddbcdaabbaddddbddcbaacddbdbdbdacacbbbccabadccbbbbdbbbbcccddcaddbdbcbadbadacdbacccbdbddabdcbbaaaddaaadcbddaddccdcdaccaacbaaabbbcbdbdbcdbcbcdddcbdccadccdabcdbcddadcadadbdcccabcadabcdbddcbddabaabcddaaacabdbbdbaddcdcaacabacabbdddbdaccadcadaaabaccdcdcddccbbcaabaaaabbadbcacccabbccbbcbcabaddbaaaabdaaaccbdddcabbcadbdbcdbbdbbacab"
+
+    "aaabbcc"
+    ["aaa","aab","bc"]
+
+    "aaabbcc"
+    ["aaa","aab","bc","aaabbcc"]
+    
+    "aaabbcc"
+    ["a","b","c"]
+
+    "qrzjsorbkmyzzzvoqxefvxkcwtpkhzbakuufbpgdkykmojwuennrjeciqvvacpzrrczfhxnsmginzwinzihpomxtmweyyzzmgcoiupjnidphvzlnxtcogufozlenjfvokztghwckzyvmktduqkizixzxpanjwrdeudjyftxksjgdklwxrhmudhrtemuvelykqaafzlqmennttkighcdxfozdcoqkyshhajipnsdrljrnlwmyjuwxsebpqm"
+    ["qr","zj","so","rb","km","yz","zz","vo","qx","ef","vx","kc","wt","pk"]
+    """
 
