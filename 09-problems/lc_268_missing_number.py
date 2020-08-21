@@ -5,16 +5,28 @@
         Output([2,0,1]): 3
         
     2. Inuition: 3 different solutions:
-        - Solution 1: Math
-            - missing number = sum of the arithmetic series (0, n) - sum(nums)
-            - Risk: Overflow issue to compute sum of the arithmetic series (0, n)
-            - The question above if relevant for this solution
+        - The naive solution 1:
+            - To sort the array in ascending order and then 
+            - Find the missing number (nums[i] != i) but 
+            - We could do better: O(nlogn)
+        - The other solution 2: 
+            - To add all nums items to a hash set and then 
+            - To find the missing number by checking which number from 0 to n that isn't in the hash set
+            - Although the time complexity is O(n), the space complexity is O(n)
+            - So We could do better
 
-        - Solution 2: Bitwise
+        - Solution 3: Math
+            - missing number = sum of the arithmetic series (0, n) - sum(nums)
+            - Although this solution runs in linear time and O(1) space it has a flaw
+            - The flaw is its risk of Overflow issue to compute sum of the arithmetic series (0, n)
+            - The question above if relevant for this solution
+            - So we could do better
+
+        - Solution 4: Bitwise
             - xor all values from 0 to n
             - xor all values in nums
 
-        - Solution 3: Sorting in linear space
+        - Solution 5: Sorting in linear space
             - if nums[i] != i, swap positions i, nums[i]
 
     3. Implementation:
