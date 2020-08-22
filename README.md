@@ -4531,6 +4531,17 @@
 ## Problem Solving Patterns:
 
 <details>
+<summary>Math Pattern</summary>
+
+- Related problems:
+    - Easy:
+        - [LC-268. Missing Number](https://leetcode.com/problems/missing-number/)
+    - Medium:
+    - Hard:
+
+</details>
+
+<details>
 <summary>Bitwise Pattern</summary>
 
 - Some useful Properties of Binary Numbers:
@@ -4586,7 +4597,8 @@
     - Easy:
         - [Swap 2 numbers without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/147)
         - [Find the inserted char](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/203)
-        - [136. Single Number without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
+        - [LC-136. Single Number without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
+        - [LC-268. Missing Number](https://leetcode.com/problems/missing-number/)
     - Medium:
         - [LC-371. Sum of Two Integers](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/220)
         - [LC-957. Prison Cells After N Days](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/225)
@@ -4622,15 +4634,17 @@
 - Related problems:
     - Easy:
         - [Reverse vowels in an input string](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/202)
-        - [1. Two Sum](https://leetcode.com/problems/two-sum/)
-        - [LC-125. Valid Palindrome:](https://leetcode.com/problems/valid-palindrome/)
+        - [LC-1. Two Sum](https://leetcode.com/problems/two-sum/)
         - [LC-26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
         - [LC-27. Remove Element](https://leetcode.com/problems/remove-element/)
-        - [LC-283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
-        - [LC-977. Squares of a Sorted Array:](https://leetcode.com/problems/squares-of-a-sorted-array/)
-        - [LC-844. Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/)
-        - [LC-581. Shortest Unsorted Continuous Subarray](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/)
         - [LC-83. Remove Duplicates from Sorted List](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)
+        - [LC-125. Valid Palindrome:](https://leetcode.com/problems/valid-palindrome/)
+        - [LC-283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
+        - [LC-581. Shortest Unsorted Continuous Subarray](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/)
+        - [LC-844. Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/)
+        - [LC-905. Sort Array By Parity](https://leetcode.com/problems/sort-array-by-parity/)
+        - [LC-977. Squares of a Sorted Array:](https://leetcode.com/problems/squares-of-a-sorted-array/)
+        
     - Medium:
         - [LC-82. Remove Duplicates from Sorted List II](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/)
         - [LC-11. Container With Most Water](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/234)
@@ -4679,7 +4693,6 @@
     - [LC-287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
     - [LC-457. Circular Array Loop](https://leetcode.com/problems/circular-array-loop/)
     
-
 </details>
 
 <details>
@@ -4696,26 +4709,17 @@
     - These will be our required numbers.
 - Related problems:
     - Easy:
+        - [ED-3. Cyclic Sort]()
         - [LC-268. Missing Number](https://leetcode.com/problems/missing-number/)
         - [LC-448. Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
-
-        ?
-        - [LC-1539. Kth Missing Positive Number](https://leetcode.com/problems/kth-missing-positive-number/)
     - Medium:
         - [LC-287. Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/)
+            - Don't consider the requirements that the array is ready-only
         - [LC-442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/)
-
-        ?
-        - [LC-136. Single Number](https://leetcode.com/problems/single-number/)
-        - [LC-137. Single Number II](https://leetcode.com/problems/single-number-ii/)
-        - [LC-260. Single Number III](https://leetcode.com/problems/single-number-iii/)
-        - [LC-1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/)
     - Hard:
         - [LC-41. First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
+        - [ED-4. Find the First K Missing Positive Numbers](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/276)
 
-
-        ?
-        - [LC-765. Couples Holding Hands](https://leetcode.com/problems/couples-holding-hands/)
 </details>
 
 <details>
@@ -4829,6 +4833,7 @@
 - Related problems:
     - Easy:
     - Medium:
+        - [LC-1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/)
     - Hard:
 
 </details>
