@@ -4709,7 +4709,7 @@
     - These will be our required numbers.
 - Related problems:
     - Easy:
-        - [ED-3. Cyclic Sort]()
+        - [ED-003. Cyclic Sort](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/274)
         - [LC-268. Missing Number](https://leetcode.com/problems/missing-number/)
         - [LC-448. Find All Numbers Disappeared in an Array](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)
     - Medium:
@@ -4718,7 +4718,7 @@
         - [LC-442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/)
     - Hard:
         - [LC-41. First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
-        - [ED-4. Find the First K Missing Positive Numbers](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/276)
+        - [ED-004. Find the First K Missing Positive Numbers](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/276)
 
 </details>
 
@@ -4773,7 +4773,7 @@
         - [LC-61. Rotate List](https://leetcode.com/problems/rotate-list/)
     - Hard:
         - [LC-25. Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/)
-        - [EDU-003. Reverse alternating k-Group](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/267)
+        - [EDU-005. Reverse alternating k-Group](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/267)
 
 </details>
 
@@ -4794,6 +4794,12 @@
         - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
         - [LC-510. Inorder Successor in BST II](https://leetcode.com/problems/inorder-successor-in-bst-ii/)
         - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
+
+        ?
+        - [LC-505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
+    - Hard:
+    ?   
+        - [LC-499. The Maze III](https://leetcode.com/problems/the-maze-iii/)
     - Hard:
 
 </details>
@@ -4806,7 +4812,11 @@
     - Medium:
         - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
         - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
+        ?
+        - [LC-505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
     - Hard:
+    ?   
+        - [LC-499. The Maze III](https://leetcode.com/problems/the-maze-iii/)
 
 </details>
 
