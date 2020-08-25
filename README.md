@@ -4782,7 +4782,17 @@
 
 - Related problems:
     - Easy:
+        - [LC-104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+        - [LC-107. Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
+        - [LC-111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
+        - [LC-637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
     - Medium:
+        - [LC-102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
+        - [LC-103. Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
+        - [LC-199. Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
+        - [LC-285. Inorder Successor in BST](https://leetcode.com/problems/inorder-successor-in-bst/)
+        - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
+        - [LC-510. Inorder Successor in BST II](https://leetcode.com/problems/inorder-successor-in-bst-ii/)
         - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
     - Hard:
 
@@ -4794,6 +4804,7 @@
 - Related problems:
     - Easy:
     - Medium:
+        - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
         - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
     - Hard:
 
