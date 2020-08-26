@@ -4786,11 +4786,11 @@
         - [LC-107. Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
         - [LC-111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
         - [LC-637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
+        - [LC-993. Cousins in Binary Tree](https://leetcode.com/problems/cousins-in-binary-tree/)
     - Medium:
         - [LC-102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
         - [LC-103. Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
         - [LC-199. Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
-        - [LC-285. Inorder Successor in BST](https://leetcode.com/problems/inorder-successor-in-bst/)
         - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
         - [LC-510. Inorder Successor in BST II](https://leetcode.com/problems/inorder-successor-in-bst-ii/)
         - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
@@ -4857,6 +4857,9 @@
         - [LC-1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/)
     - Hard:
 
+
+- [LC-285. Inorder Successor in BST](https://leetcode.com/problems/inorder-successor-in-bst/)
+- [LC-510. Inorder Successor in BST II](https://leetcode.com/problems/inorder-successor-in-bst-ii/)
 </details>
 
 <details>
