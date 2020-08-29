@@ -4793,7 +4793,9 @@
         - [LC-199. Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
         - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
         - [LC-510. Inorder Successor in BST II](https://leetcode.com/problems/inorder-successor-in-bst-ii/)
+        - [LC-515. Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/)
         - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
+        - [LC-1302. Deepest Leaves Sum](https://leetcode.com/problems/deepest-leaves-sum/)
 
         ?
         - [LC-505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
@@ -4809,14 +4811,50 @@
 
 - Related problems:
     - Easy:
+        - [LC-112. Path Sum](https://leetcode.com/problems/path-sum/)
+        - [LC-543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
     - Medium:
+        - [LC-113. Path Sum II](https://leetcode.com/problems/path-sum-ii/)
+        - [LC-114. Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/)
+        - [LC-129. Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/)
+        - [LC-437. Path Sum III](https://leetcode.com/problems/path-sum-iii/)
         - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
         - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
-        ?
-        - [LC-505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
+        - [LC-1367. Linked List in Binary Tree](https://leetcode.com/problems/linked-list-in-binary-tree/)
+        - [LC-1430. Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree](https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/)
+        - [LC-1522. Diameter of N-Ary Tree](https://leetcode.com/problems/diameter-of-n-ary-tree/)
     - Hard:
-    ?   
-        - [LC-499. The Maze III](https://leetcode.com/problems/the-maze-iii/)
+        - [LC-124. Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+
+</details>
+
+<details>
+<summary>Prefix Sum Pattern</summary>
+
+- Related problems:
+    - Easy:
+    - Medium:
+        - [LC-437. Path Sum III](https://leetcode.com/problems/path-sum-iii/)
+        - [LC-560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/)
+    - Hard:
+- [For more details](https://en.wikipedia.org/wiki/Prefix_sum)
+
+</details>
+
+<details>
+<summary>Shortest-Path/Fastest-Route Pattern</summary>
+
+- Shortest path problems:
+    - They're in a weighted graph (directed or undirected) which weights are nul or positive
+    - They could be solved with Dijkstra's algorithm
+- Fastest Route problems:
+    - They're in a weighted graph (directed or undirected) which weights are positive or negative
+    - They could be solved with Bellman-Ford's algorithm
+- Medium:
+    - [LC-505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
+    - [LC-743. Network Delay Time](https://leetcode.com/problems/network-delay-time/)
+- Hard:
+    - [LC-499. The Maze III](https://leetcode.com/problems/the-maze-iii/)
 
 </details>
 
