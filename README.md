@@ -4825,6 +4825,7 @@
         - [LC-1522. Diameter of N-Ary Tree](https://leetcode.com/problems/diameter-of-n-ary-tree/)
     - Hard:
         - [LC-124. Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+        - [LC-489. Robot Room Cleaner](https://leetcode.com/problems/robot-room-cleaner/)
 
 </details>
 
