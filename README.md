@@ -4790,6 +4790,8 @@
     - Medium:
         - [LC-102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
         - [LC-103. Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
+        - [LC-116. Populating Next Right Pointers in Each Node](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/)
+        - [LC-117. Populating Next Right Pointers in Each Node II](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii)
         - [LC-199. Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
         - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
         - [LC-510. Inorder Successor in BST II](https://leetcode.com/problems/inorder-successor-in-bst-ii/)
@@ -4818,6 +4820,8 @@
         - [LC-106. Construct Binary Tree from Inorder and Postorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
         - [LC-113. Path Sum II](https://leetcode.com/problems/path-sum-ii/)
         - [LC-114. Flatten Binary Tree to Linked List](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/)
+        - [LC-116. Populating Next Right Pointers in Each Node](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/)
+        - [LC-117. Populating Next Right Pointers in Each Node II](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii)
         - [LC-129. Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/)
         - [LC-250. Count Univalue Subtrees](https://leetcode.com/problems/count-univalue-subtrees/)
         - [LC-437. Path Sum III](https://leetcode.com/problems/path-sum-iii/)
