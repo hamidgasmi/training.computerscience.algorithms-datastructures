@@ -5,10 +5,80 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+class CodecSolution3:
+    """
+    2. Intuition:
+        - Serialize Recursively with a DFS preorder traversal
+        
+            1
+           / \
+          2   3     --------------> 1,2,$,$,3,4,6,$,$,7,$,$,5,$,$
+             / \     Serialization
+            4   5
+           / \
+          6   7
+
+    3. Complexity Analysis:
+        - Let's n be the number of nodes
+        - Time complexity: O(n + n) = O(n)
+        - Space complexity: O(n + n) = O(n)
+    
+    """
+
+    def __init__(self):
+        self.separator = ','
+        self.serialized_none = '$'
+
+    def serialize(self, root):
+        
+        serialized_tree = []
+        self.serialize_dfs_preorder(root, serialized_tree)
+        
+        return self.separator.join(serialized_tree)
+    
+    def serialize_dfs_preorder(self, root, serialized_tree):
+        if not root:
+            return
+        
+        serialized_tree.append(str(root.val))
+        
+        if root.left:
+            self.serialize_dfs_preorder(root.left, serialized_tree)
+        
+        else:
+            serialized_tree.append(self.serialized_none)
+            
+        if root.right:
+            self.serialize_dfs_preorder(root.right, serialized_tree)
+        
+        else:
+            serialized_tree.append(self.serialized_none)
+    
+    def deserialize(self, data):
+        if not data:
+            return None
+        
+        values = data.split(self.separator)
+        
+        return self.deserialize_dfs_preorder(values, 0)[0]
+    
+    def deserialize_dfs_preorder(self, values:[str], idx: int):
+        if idx >= len(values):
+            return None, idx
+        
+        elif values[idx] == self.serialized_none:
+            return None, idx + 1
+        
+        root = TreeNode(int(values[idx]))
+        root.left, idx = self.deserialize_dfs_preorder(values, idx + 1)
+        root.right, idx = self.deserialize_dfs_preorder(values, idx)
+        
+        return root, idx
+
 class CodecSolution2:
     """
     2. Intuition:
-        - Serialize level by level
+        - Serialize level by level with a BFS traversal
         - Serialize None nodes only when necessary: they're between two not null nodes
         - Compress None nodes serialization: if there're 5 consecutive None node: compress them to: $5
             1
@@ -26,6 +96,8 @@ class CodecSolution2:
     """
 
     def __init__(self):
+        
+        self.separator = ','
         self.serialized_none = '$'
 
     def serialize(self, root):
@@ -64,13 +136,13 @@ class CodecSolution2:
             
             curr_level = next_level
         
-        return ','.join(serialization)
+        return self.separator.join(serialization)
     
     def deserialize(self, data):
         if not data:
             return None
         
-        values = data.split(',')
+        values = data.split(self.separator)
                 
         parent = 0
         child_no = 0
@@ -133,13 +205,14 @@ class CodecSolution1:
     """
     def __init__(self):
         self.serialized_none = '$'
+        self.separator = ','
     
     def serialize(self, root):
         
         serialization = []
         self.serialize_heap(root, serialization, 0)
         
-        return ','.join(serialization)
+        return self.separator.join(serialization)
     
     def serialize_heap(self, root, serialization, node_no):
         if not root:
@@ -160,7 +233,7 @@ class CodecSolution1:
         if not data:
             return None
         
-        values_heap = data.split(',')
+        values_heap = data.split(self.separator)
 
         nodes_heap = [None if val == self.serialized_none else TreeNode(int(val)) for val in values_heap]
         for i in range(1, len(values_heap)):
