@@ -12,7 +12,7 @@
 
     3. Complexity Analaysis:
         - Let n and m be the number of rows and columns respectively and b the number of buildings
-        - Time Complexity: O(max(bnm + mn) # if b = 0, then O(nm)
+        - Time Complexity: O(bnm + mn) # if b = 0, then O(nm)
         - Space Complexity: O(nm)
     
 """
