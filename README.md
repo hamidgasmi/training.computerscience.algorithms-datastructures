@@ -4793,15 +4793,19 @@
         - [LC-116. Populating Next Right Pointers in Each Node](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/)
         - [LC-117. Populating Next Right Pointers in Each Node II](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii)
         - [LC-199. Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
+        - [LC-200. Number of Islands](https://leetcode.com/problems/number-of-islands/)
+        - [LC-286. Walls and Gates](https://leetcode.com/problems/walls-and-gates/)
         - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
         - [LC-510. Inorder Successor in BST II](https://leetcode.com/problems/inorder-successor-in-bst-ii/)
         - [LC-515. Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/)
+        - [LC-752. Open the Lock](https://leetcode.com/problems/open-the-lock/)
         - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
         - [LC-1302. Deepest Leaves Sum](https://leetcode.com/problems/deepest-leaves-sum/)
-
-        ?
-        - [LC-505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
     - Hard:
+        - [LC-297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
+        - [LC-317. Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/)
+        - [LC-428. Serialize and Deserialize N-ary Tree](https://leetcode.com/problems/serialize-and-deserialize-n-ary-tree/)
+
     ?   
         - [LC-499. The Maze III](https://leetcode.com/problems/the-maze-iii/)
     - Hard:
@@ -4823,6 +4827,7 @@
         - [LC-116. Populating Next Right Pointers in Each Node](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/)
         - [LC-117. Populating Next Right Pointers in Each Node II](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii)
         - [LC-129. Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/)
+        - [LC-236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
         - [LC-250. Count Univalue Subtrees](https://leetcode.com/problems/count-univalue-subtrees/)
         - [LC-437. Path Sum III](https://leetcode.com/problems/path-sum-iii/)
         - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
@@ -4840,11 +4845,17 @@
 <details>
 <summary>Prefix Sum Pattern</summary>
 
+- Prefix sum is a sum of the current value with all previous elements starting from the beginning of the structure
+-       nums:       [ n0    n1          n2              n3                      n4 ]
+        Prefix Sum:   n0    n1 + n0     n2 + n1 + n0    n3 + n2 + n1 + n0       n4 + n3 + n2 + n1 + n0 ]
 - Related problems:
     - Easy:
+        - [LC-724. Find Pivot Index](https://leetcode.com/problems/find-pivot-index/)
     - Medium:
         - [LC-437. Path Sum III](https://leetcode.com/problems/path-sum-iii/)
+        - [LC-523. Continuous Subarray Sum](https://leetcode.com/problems/continuous-subarray-sum/)
         - [LC-560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/)
+        - [LC-974. Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/)
     - Hard:
 - [For more details](https://en.wikipedia.org/wiki/Prefix_sum)
 
@@ -4855,16 +4866,19 @@
 
 - Shortest path problems:
     - They're in a weighted graph (directed or undirected) which weights are nul or positive
-    - They could be solved with Dijkstra's algorithm
+    - They could be solved with a BFS traversal if all weights are equal
+    - They could be solved with Dijkstra's algorithm if weights are different
 - Fastest Route problems:
     - They're in a weighted graph (directed or undirected) which weights are positive or negative
     - They could be solved with Bellman-Ford's algorithm
 - Medium:
+    - [LC-286. Walls and Gates](https://leetcode.com/problems/walls-and-gates/)
     - [LC-505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
     - [LC-743. Network Delay Time](https://leetcode.com/problems/network-delay-time/)
 - Hard:
+    - [LC-317. Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/)
     - [LC-499. The Maze III](https://leetcode.com/problems/the-maze-iii/)
-
+    
 </details>
 
 <details>
