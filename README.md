@@ -4794,6 +4794,7 @@
         - [LC-117. Populating Next Right Pointers in Each Node II](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii)
         - [LC-199. Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
         - [LC-200. Number of Islands](https://leetcode.com/problems/number-of-islands/)
+        - [LC-279. Perfect Squares](https://leetcode.com/problems/perfect-squares/)
         - [LC-286. Walls and Gates](https://leetcode.com/problems/walls-and-gates/)
         - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
         - [LC-510. Inorder Successor in BST II](https://leetcode.com/problems/inorder-successor-in-bst-ii/)
@@ -4872,6 +4873,7 @@
     - They're in a weighted graph (directed or undirected) which weights are positive or negative
     - They could be solved with Bellman-Ford's algorithm
 - Medium:
+    - [LC-279. Perfect Squares](https://leetcode.com/problems/perfect-squares/)
     - [LC-286. Walls and Gates](https://leetcode.com/problems/walls-and-gates/)
     - [LC-505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
     - [LC-743. Network Delay Time](https://leetcode.com/problems/network-delay-time/)
@@ -4914,6 +4916,7 @@
 
 - Related problems:
     - Easy:
+        - [LC-69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
     - Medium:
         - [LC-1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/)
     - Hard:
@@ -4952,11 +4955,13 @@
 </details>
 
 <details>
-<summary>DP-Knapsack Pattern</summary>
+<summary>Dynamic Programming Patterns</summary>
 
+- DP-Knapsack Pattern
 - Related problems:
     - Easy:
     - Medium:
+        - [LC-279. Perfect Squares](https://leetcode.com/problems/perfect-squares/)
     - Hard:
 
 </details>
@@ -5024,14 +5029,6 @@
 
 <details>
 <summary>Radix Sort</summary>
-
-</details>
-
-<details>
-<summary>Dynamic Programming Patterns</summary>
-
-- For more details:
-    - Leetcode Post: [Dynamic Programming Patterns](https://en.wikipedia.org/wiki/Counting_sort)
 
 </details>
 
