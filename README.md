@@ -76,8 +76,18 @@
 
 - It's the number of lines of code executed by an algorithm
 
-</details>    
+</details>
 
+<details>
+<summary>Permutation and Combination</summary>
+
+- This is required for time and space analysis for backtracking (recursive) problems
+- Permutation: ***P(n,k)***:
+- Combination: ***C(n,k)***:
+- For more details:
+    - Khan Academy: [Counting, permutations, and combinations](https://www.khanacademy.org/math/statistics-probability/counting-permutations-and-combinations)
+
+</details>
 
 ## Algorithm Design and Techniques
 
@@ -152,7 +162,8 @@
     - A function f is o(g) if f(n)/g(n) → 0 as n → ∞
     - f grows slower than g
     - It's NOT used in the industry
-- [For more details](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation)
+- For more details
+    - Khan Academy: [Asymptotic Notation](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/asymptotic-notation)
 
 </details>
 
@@ -4536,6 +4547,7 @@
 - Related problems:
     - Easy:
         - [LC-268. Missing Number](https://leetcode.com/problems/missing-number/)
+        - [LC-1103. Distribute Candies to People](https://leetcode.com/problems/distribute-candies-to-people/)
     - Medium:
     - Hard:
 
