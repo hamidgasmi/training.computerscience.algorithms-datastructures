@@ -4616,6 +4616,7 @@
         - [LC-957. Prison Cells After N Days](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/225)
         - [LC-137. Single Number II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/246)
         - [LC-260. Single Number III](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/247)
+        - [LC-421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/)
 
 </details>
 
