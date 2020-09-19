@@ -64,6 +64,32 @@
 
 - To [Get Started](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion)
 - Stack optimization and Tail Recursion:
+    - It's is a recursion where the recursive call is the final instruction in the recursion function 
+    - There should be only one recursive call in the function
+    - It's exempted from the system stack overhead
+    - Since the recursive call is the last instruction, we can skip the entire chain of recursive calls returning and return straight to the original caller
+    - This means that we don't need a call stack at all for all of the recursive calls, which saves us space
+    - Example of non tail recursion:
+        `
+        def sum_non_tail_recursion(ls):
+            if len(ls) == 0:
+                return 0
+    
+            //# not a tail recursion because it does some computation after the recursive call returned.
+            return ls[0] + sum_non_tail_recursion(ls[1:])
+        `
+    - Example of a tail recursion:
+        `
+        def sum_tail_recursion(ls):
+            def helper(ls, acc):
+                if len(ls) == 0:
+                    return acc
+                //# this is a tail recursion because the final instruction is a recursive call.
+                return helper(ls[1:], ls[0] + acc)
+    
+            return helper(ls, 0)
+        `
+- For more details:
     - [Tail Recursion](http://wiki.c2.com/?TailRecursion)
     - Geeks of Geeks [Tail Recursion](https://www.geeksforgeeks.org/tail-recursion/)
     - Geeks of Geeks [Tail Recursion Elimination](https://www.geeksforgeeks.org/tail-call-elimination/)
@@ -330,7 +356,7 @@
 - **Divide**: Break into non-overlapping subproblems of the same type
 - **Conquer**:
     - Solve subproblems: each one indepently of the others
-    - Combine results
+- **Combine** results
 - Implementation: it's often implemented with a **recursive** algorithm
 - Calculate its Time Complexity:
     - Define a corresponding **recurrence relation**, **T**
