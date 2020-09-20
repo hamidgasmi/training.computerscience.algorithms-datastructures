@@ -369,7 +369,12 @@
         - Look at the **recursion tree**
         - For Linear Search T(n) = T(n - 1) + c = T(n - 2) + 2 * c = n * c = T(n) = Θ(n)
         - For Binary Search T(n) = T(n/2) + c = T(n/2^2) + 2 * c = T(n/2^3) + 3 * c = Θ(log2 n) = Θ(log n)
-    - We could use the **Master Theorem** for divide-and-conquer recurrences
+    - We could use the **Master Theorem** for divide-and-conquer recurrences:
+        - Express the time complexity as: `T(n) = a T(n/b) + n^d`
+        - If `a > b^d`, `T(n) = O(n^log_b(a))`: Split problem + combine results work is small than subproblems work
+        - If `a = b^d`, `T(n) = O(n^d logn)`
+        - If `a < b^d`, `T(n) = O(n^d)`: Split problem + combine results work is outweights the subproblems work
+        - The conditions for each case correspond to the intuition of whether the work to split problems and combine results outweighs the work of subproblems
     - We could also compute it as below: 
         - Let's take the example of a binary search in an sorted array:
         -        level  |  Recursion Tree     | # Problems    |  Level_Work = #_Problem * Level_T(n)
