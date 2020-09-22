@@ -108,8 +108,18 @@
 <summary>Permutation and Combination</summary>
 
 - This is required for time and space analysis for backtracking (recursive) problems
-- Permutation: ***P(n,k)***:
-- Combination: ***C(n,k)***:
+- Permutation: ***P(n,k)***: 
+    - `P(n,k) = n! / (n - k)!`
+    - We care about the different `k` items that are choosen and the order they're chosen: `123` is different from `321`
+    - E.g. Number of different numbers  of 3 digits without repitited digit (leading 0 are included)
+    - `P(10,3) = 10! / 7! = 10 x 9 x 8 = 720`
+- Combination: ***C(n,k)***: 
+    - `C(n,k) = n! / k! * (n - k)!`
+    - We only care about the `k` items that are choosen out of `n`: `123` is similar than `321` and `231`
+    - In other words, all permutations of a group of `k` items form the same combination
+    - Therefore, combination of `k` items out of `n` is the number of permutations (n, k) divided by all permutations (k, k): `C(n, k) = P(n, k) / P(k, k)`
+    - E.g. Number of different numbers of 3 digits with increasing digits (leading 0 are included): 123, 234
+    - `C(10,3) = 10! / 3 ! 7! = 10 x 3 x 4 = 120`
 - For more details:
     - Khan Academy: [Counting, permutations, and combinations](https://www.khanacademy.org/math/statistics-probability/counting-permutations-and-combinations)
 
