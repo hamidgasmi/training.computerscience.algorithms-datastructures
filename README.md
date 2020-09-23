@@ -89,6 +89,9 @@
     
             return helper(ls, 0)
         `
+- Backtracking:
+    - It's a methodology where we mark the current path of exploration
+    - If the path does not lead to a solution, we then revert the change and try another path
 - For more details:
     - [Tail Recursion](http://wiki.c2.com/?TailRecursion)
     - Geeks of Geeks [Tail Recursion](https://www.geeksforgeeks.org/tail-recursion/)
@@ -4951,15 +4954,16 @@
 <details>
 <summary>Subsets Pattern (Backtracking)</summary>
 
-- It's usefull for problems requiring to explore all possible solutions: Subsets, Combinations, Permutations
-- This pattern describes an efficient Breadth First Search (BFS) approach to handle all these problems.
-(- It requires a backtracking solution
-- It's a methodology where we mark the current path of exploration, if the path does not lead to a solution, we then revert the change and try another path)
+- It's usefull for problems requiring to explore all possible solutions: Combinations (subsets) and Permutations
+- It requires a backtracking solution or a BFS approach
 - Related problems:
     - Easy:
     - Medium:
         - [LC-46. Permutations](https://leetcode.com/problems/permutations/)
+        - [LC-77. Combinations](https://leetcode.com/problems/combinations/)
+        - [LC-78. Subsets](https://leetcode.com/problems/subsets/)
         - [LC-79. Word Search](https://leetcode.com/problems/word-search/)
+        - [LC-90. Subsets II](https://leetcode.com/problems/subsets-ii/)
         - [LC-1286. Iterator for Combination](https://trello.com/c/FKXEjrbW/43-lc-457-circular-array-loop)
     - Hard:
         
