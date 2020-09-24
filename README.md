@@ -4652,9 +4652,9 @@
 - Related problems:
     - Easy:
         - [Swap 2 numbers without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/147)
-        - [Find the inserted char](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/203)
         - [LC-136. Single Number without extra memory](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/64)
         - [LC-268. Missing Number](https://leetcode.com/problems/missing-number/)
+        - [LC-389. Find the Difference](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/203)
     - Medium:
         - [LC-371. Sum of Two Integers](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/220)
         - [LC-957. Prison Cells After N Days](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/225)
@@ -4959,12 +4959,13 @@
 - Related problems:
     - Easy:
     - Medium:
+        - [LC-22. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
         - [LC-46. Permutations](https://leetcode.com/problems/permutations/)
         - [LC-77. Combinations](https://leetcode.com/problems/combinations/)
         - [LC-78. Subsets](https://leetcode.com/problems/subsets/)
         - [LC-79. Word Search](https://leetcode.com/problems/word-search/)
         - [LC-90. Subsets II](https://leetcode.com/problems/subsets-ii/)
-        - [LC-1286. Iterator for Combination](https://trello.com/c/FKXEjrbW/43-lc-457-circular-array-loop)
+        - [LC-1286. Iterator for Combination](https://leetcode.com/problems/iterator-for-combination/)
     - Hard:
         
 </details>
