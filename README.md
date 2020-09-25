@@ -4965,6 +4965,8 @@
         - [LC-78. Subsets](https://leetcode.com/problems/subsets/)
         - [LC-79. Word Search](https://leetcode.com/problems/word-search/)
         - [LC-90. Subsets II](https://leetcode.com/problems/subsets-ii/)
+        - [LC-267. Palindrome Permutation II](https://leetcode.com/problems/palindrome-permutation-ii/)
+        - [LC-320. Generalized Abbreviation](https://leetcode.com/problems/generalized-abbreviation/)
         - [LC-1286. Iterator for Combination](https://leetcode.com/problems/iterator-for-combination/)
     - Hard:
         
