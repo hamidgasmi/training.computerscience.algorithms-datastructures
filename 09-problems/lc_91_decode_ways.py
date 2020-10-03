@@ -62,3 +62,32 @@ class SolutionDP:
             dp[i] += dp[i - 2] if 9 < int(s[s_curr_idx - 1: s_curr_idx + 1]) < 27 else 0              
         
         return dp[len_dp - 1]
+
+class SolutionDPOptimized:
+    """
+    Intuition:
+        - Dynamic Programming
+        - dp[0] = 0
+        - dp[1] = 0 if s[0] = '0' else 1
+        - dp[i] = dp[i - 2] if s[i - 1] = '0' and s[i - 2] in ('1', '2')
+        - dp[i] = dp[i - 1] if s[i - 1] != '0'
+                + dp[i - 2] if <= s[i - 2: i] < 27)
+    
+    Complexity Analysis:
+        Time Complexity: O(N)
+        Space Complexity: O(1)
+
+    """
+    def num_decodings(self, s: str) -> int:
+        
+        prev = 1
+        curr = 0 if s[0] == '0' else 1
+        for i in range(2, len(s) + 1):
+            
+            next_ = 0 if s[i - 1] == '0' else curr
+            next_ += prev if 9 < int(s[i - 2: i]) < 27 else 0
+            
+            prev = curr
+            curr = next_
+        
+        return curr
