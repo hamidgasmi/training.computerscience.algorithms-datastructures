@@ -1,10 +1,23 @@
+"""
+    1. Problem Summary / Clarifications / TDD:
+        num_decodings('0') = 0
+        num_decodings('1') = 1
+        num_decodings('10') = 1
+        num_decodings('20') = 1
+        num_decodings('12') = 2
+        num_decodings('226') = 3
+        num_decodings("2101") = 1
+        num_decodings("111111111111111111111111111111111111111111111") = 1836311903
+
+"""
+
 
 class SolutionRecursive:
     """
-    Intuition:
+    2. Intuition:
         - Backtracking + memoization
     
-    Complexity Analysis:
+    3. Complexity Analysis:
         Time Complexity: O(N)
         Space Complexity: O(N)
 
@@ -36,7 +49,7 @@ class SolutionRecursive:
 
 class SolutionDP:
     """
-    Intuition:
+    2. Intuition:
         - Dynamic Programming
         - dp[0] = 0
         - dp[1] = 0 if s[0] = '0' else 1
@@ -44,7 +57,7 @@ class SolutionDP:
         - dp[i] = dp[i - 1] if s[i - 1] != '0'
                 + dp[i - 2] if <= s[i - 2: i] < 27)
     
-    Complexity Analysis:
+    3. Complexity Analysis:
         Time Complexity: O(N)
         Space Complexity: O(N)
 
@@ -65,7 +78,7 @@ class SolutionDP:
 
 class SolutionDPOptimized:
     """
-    Intuition:
+    2. Intuition:
         - Dynamic Programming
         - dp[0] = 0
         - dp[1] = 0 if s[0] = '0' else 1
@@ -73,7 +86,7 @@ class SolutionDPOptimized:
         - dp[i] = dp[i - 1] if s[i - 1] != '0'
                 + dp[i - 2] if <= s[i - 2: i] < 27)
     
-    Complexity Analysis:
+    3. Complexity Analysis:
         Time Complexity: O(N)
         Space Complexity: O(1)
 
