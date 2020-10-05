@@ -62,7 +62,6 @@
 <details>
 <summary>Recursion</summary>
 
-- To [Get Started](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion)
 - Stack optimization and Tail Recursion:
     - It's is a recursion where the recursive call is the final instruction in the recursion function 
     - There should be only one recursive call in the function
@@ -89,14 +88,24 @@
     
             return helper(ls, 0)
         `
-- Backtracking:
+- **Backtracking**:
     - It's a methodology where we mark the current path of exploration
     - If the path does not lead to a solution, we then revert the change and try another path
+    - ![Backtracking](https://assets.leetcode.com/uploads/2019/04/15/backtracking.png)
+- **Unfold Recursion**:
+    - It's the process of converting a recursion algorithm to non-recursion one
+    - It's usually required because of
+        - **Risk of Stackoverflow**
+        - Efficiency: memory consumption + additional cost of function calls + sometimes duplicate calculations
+        - Complexity: some recursive solution could be difficult to read. For example, **nested recursion**
+    - We usually use a data structure of stack or queue, which replaces the role of the system call stack during the process of recursion
 - For more details:
+    - To [Get Started](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/recursion)
     - [Tail Recursion](http://wiki.c2.com/?TailRecursion)
     - Geeks of Geeks [Tail Recursion](https://www.geeksforgeeks.org/tail-recursion/)
     - Geeks of Geeks [Tail Recursion Elimination](https://www.geeksforgeeks.org/tail-call-elimination/)
     - Python [Tail Recusion](https://chrispenner.ca/posts/python-tail-recursion)
+    - [Unfold Recursion](https://leetcode.com/explore/learn/card/recursion-ii/503/recursion-to-iteration/2693/)
 
 </details>
 
@@ -4593,6 +4602,7 @@
         - [LC-268. Missing Number](https://leetcode.com/problems/missing-number/)
         - [LC-1103. Distribute Candies to People](https://leetcode.com/problems/distribute-candies-to-people/)
     - Medium:
+        - [LC-357. Count Numbers with Unique Digits](https://leetcode.com/problems/count-numbers-with-unique-digits/)
     - Hard:
 
 </details>
@@ -4811,6 +4821,7 @@
         - [LC-616. Add Bold Tag in String](https://leetcode.com/problems/add-bold-tag-in-string/)
         - [LC-763. Partition Labels](https://leetcode.com/problems/partition-labels/)
         - [LC-986. Interval List Intersections](https://leetcode.com/problems/interval-list-intersections/)
+        - [LC-1288. Remove Covered Intervals](https://leetcode.com/problems/remove-covered-intervals/)
     - Hard:
         - [LC-57. Insert Interval](https://leetcode.com/problems/insert-interval/)
         - [LC-715. Range Module](https://leetcode.com/problems/range-module/)
@@ -4864,6 +4875,7 @@
         - [LC-297. Serialize and Deserialize Binary Tree](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
         - [LC-317. Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/)
         - [LC-428. Serialize and Deserialize N-ary Tree](https://leetcode.com/problems/serialize-and-deserialize-n-ary-tree/)
+        - [LC-1036. Escape a Large Maze](https://leetcode.com/problems/escape-a-large-maze/)
 
     ?   
         - [LC-499. The Maze III](https://leetcode.com/problems/the-maze-iii/)
@@ -4942,17 +4954,6 @@
 </details>
 
 <details>
-<summary>Two heaps Pattern</summary>
-
-- Related problems:
-    - Easy:
-        - [LC-703. Kth Largest Element in a Stream](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/226)
-    - Medium:
-    - Hard:
-
-</details>
-
-<details>
 <summary>Subsets Pattern (Backtracking)</summary>
 
 - It's usefull for problems requiring to explore all possible solutions: Combinations (subsets) and Permutations
@@ -4971,7 +4972,37 @@
         - [LC-320. Generalized Abbreviation](https://leetcode.com/problems/generalized-abbreviation/)
         - [LC-1286. Iterator for Combination](https://leetcode.com/problems/iterator-for-combination/)
     - Hard:
+        - [LC-37. Sudoku Solver](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/289)
         
+</details>
+
+<details>
+<summary>Dynamic Programming: Count Distinct Ways Pattern</summary>
+
+- It's similar to the backtracking pattern where it is asked to find all possible permutations/combinations
+- Here however, it's asked to count all possible permutations/combinations
+- It could be solved by a **backtracking** approach (see pattern above):
+    - However, it's not efficient since the time complexity is often exponential
+    - Sometimes **memoization** could help to improve the time complexity
+- It could be solved by a **Dynamic Programming** technique and **buttom-up** approach:
+- Related problems:
+    - Easy:
+    - Medium:
+        - [LC-91. Decode Ways](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/291)
+    - Hard:
+        - [LC-639. Decode Ways II](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/292)
+
+</details>
+
+<details>
+<summary>Two heaps Pattern</summary>
+
+- Related problems:
+    - Easy:
+        - [LC-703. Kth Largest Element in a Stream](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/226)
+    - Medium:
+    - Hard:
+
 </details>
 
 <details>
@@ -4987,6 +5018,7 @@
 
 - [LC-285. Inorder Successor in BST](https://leetcode.com/problems/inorder-successor-in-bst/)
 - [LC-510. Inorder Successor in BST II](https://leetcode.com/problems/inorder-successor-in-bst-ii/)
+
 </details>
 
 <details>
@@ -5018,18 +5050,6 @@
 </details>
 
 <details>
-<summary>Dynamic Programming Patterns</summary>
-
-- DP-Knapsack Pattern
-- Related problems:
-    - Easy:
-    - Medium:
-        - [LC-279. Perfect Squares](https://leetcode.com/problems/perfect-squares/)
-    - Hard:
-
-</details>
-
-<details>
 <summary>Topological-Sort Pattern</summary>
 
 - Related problems:
@@ -5051,6 +5071,20 @@
         - [LC-642. Design Search Autocomplete System](https://leetcode.com/problems/design-search-autocomplete-system/)
 
 </details>
+
+
+<details>
+<summary>Dynamic Programming Patterns</summary>
+
+- DP-Knapsack Pattern
+- Related problems:
+    - Easy:
+    - Medium:
+        - [LC-279. Perfect Squares](https://leetcode.com/problems/perfect-squares/)
+    - Hard:
+
+</details>
+
 
 <details>
 <summary>Counting Sort</summary>
