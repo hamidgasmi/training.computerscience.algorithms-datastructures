@@ -5014,6 +5014,7 @@
     - Medium:
         - [LC-33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
         - [LC-81. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
+        - [LC-540. Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/)
         - [LC-1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/)
     - Hard:
 
