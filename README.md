@@ -5012,6 +5012,8 @@
     - Easy:
         - [LC-69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
     - Medium:
+        - [LC-33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+        - [LC-81. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
         - [LC-1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/)
     - Hard:
 
