@@ -5010,13 +5010,20 @@
 
 - Related problems:
     - Easy:
+        - [LC-35. Search Insert Position](https://leetcode.com/problems/search-insert-position/)
         - [LC-69. Sqrt(x)](https://leetcode.com/problems/sqrtx/)
+        - [LC-278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
+        - [LC-374. Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/)
     - Medium:
         - [LC-33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+        - [LC-34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
         - [LC-81. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
+        - [LC-153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
         - [LC-540. Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/)
+        - [LC-702. Search in a Sorted Array of Unknown Size](https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/)
         - [LC-1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/)
     - Hard:
+        - [LC-154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
 
 
 - [LC-285. Inorder Successor in BST](https://leetcode.com/problems/inorder-successor-in-bst/)
