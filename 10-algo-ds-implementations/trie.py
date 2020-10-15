@@ -9,7 +9,7 @@ class Trie:
         node = self.root
         for c in word:
             if c not in node:
-                node.add(c)
+                node[c] = {}
             node = node[c]
         if '$' not in node:
             node['$'] = None
@@ -25,7 +25,7 @@ class Trie:
 
             node = node[c]
         
-        return True if  '$' in node else False
+        return True if '$' in node else False
 
                 
 
