@@ -4925,6 +4925,7 @@
     - Medium:
         - [LC-437. Path Sum III](https://leetcode.com/problems/path-sum-iii/)
         - [LC-523. Continuous Subarray Sum](https://leetcode.com/problems/continuous-subarray-sum/)
+        - [LC-528. Random Pick with Weight](https://leetcode.com/problems/random-pick-with-weight/)
         - [LC-560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/)
         - [LC-974. Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/)
     - Hard:
@@ -4983,7 +4984,7 @@
 - Here however, it's asked to count all possible permutations/combinations
 - It could be solved by a **backtracking** approach (see pattern above):
     - However, it's not efficient since the time complexity is often exponential
-    - Sometimes **memoization** could help to improve the time complexity
+    - Sometimes **memoization** could help to improve this time complexity
 - It could be solved by a **Dynamic Programming** technique and **buttom-up** approach:
 - Related problems:
     - Easy:
@@ -5002,6 +5003,7 @@
         - [LC-703. Kth Largest Element in a Stream](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/226)
     - Medium:
     - Hard:
+        - [LC-295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
 
 </details>
 
@@ -5019,6 +5021,7 @@
         - [LC-34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
         - [LC-81. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
         - [LC-153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+        - [LC-528. Random Pick with Weight](https://leetcode.com/problems/random-pick-with-weight/)
         - [LC-540. Single Element in a Sorted Array](https://leetcode.com/problems/single-element-in-a-sorted-array/)
         - [LC-702. Search in a Sorted Array of Unknown Size](https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/)
         - [LC-1060. Missing Element in Sorted Array](https://leetcode.com/problems/missing-element-in-sorted-array/)
