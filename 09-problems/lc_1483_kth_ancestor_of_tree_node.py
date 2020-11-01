@@ -110,3 +110,10 @@ class TreeAncestorNaiveOptimized:
             self.ancestors[node].extend(self.ancestors[ancestor])
         
         return self.ancestors[node][k - 1] if k <= len(self.ancestors[node]) else -1
+
+class TreeAncestorBinaryLifting:
+    def __init__(self, n: int, parent: List[int]):
+        pass
+    
+    def getKthAncestor(self, node: int, k: int) -> int:
+        pass
