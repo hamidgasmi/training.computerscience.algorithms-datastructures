@@ -1238,6 +1238,11 @@
     - ![Hash Chaining](https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2015/07/hashChaining1.png)
 - **Open Addressing**:
     - It's an implementation technique used to solve collisions issue
+- **The Principle of Built-in Hash Table**: the typical design of built-in hash table is:
+    - Each hash table slot contains an array to store all the values in the same bucket initially.
+    - If there are too many values in the same slot, these values will be maintained in a **height-balanced binary search tree** instead.
+    - The average time complexity of both insertion and search is still O(1). 
+    - The worst case time complexity is O(logN) for both insertion and search by using height-balanced BST
 - For more details:
     - UC San Diego Course: [Introduction to Hashing](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/4_hashing/04_1_hashing_intro.pdf)
     - UC San Diego Course: [Hash Function](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/blob/master/02-data-sructures-fundamentals/4_hashing/04_2_hashing_hashfunctions.pdf)
