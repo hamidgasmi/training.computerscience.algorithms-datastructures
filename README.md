@@ -182,7 +182,7 @@
         - It's contains duplicates
         - It contains same elements: min value only (0 for integers), max value only (2^32 for integers), any specific value
         - It contains only small numbers or a small range of large numbers
-    - It contains **few** elements: 1, 2
+    - It contains a **few** elements: 1, 2
     - It contains **many** elements: 10^6
     - Sorted/unsorted array
 - When dealing with **Trees**:
