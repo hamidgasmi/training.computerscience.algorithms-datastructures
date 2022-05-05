@@ -160,22 +160,31 @@
     - Check that both programs produce the same result (this is not applicable to problems where the output is not unique) 
     - Generate random test cases as well as biased tests cases
 - When dealing with **numbers**:
-    - Think about number size: Int. Long, ... ?
-    - If there is any division: division by 0; Precision?
-    - Integers Biased cases: a **Prime/Composite** number; an **Even/Odd** number
+    - Scalability: think about number size: Int. Long, ... or should we store them in a string ?
+    - Think about number precision?
+    - If there is any division: division by 0?
+    - Integers Biased cases: **Prime/Composite** numbers; **Even/Odd** numbers; **positive/negative** numbers
 - When dealing with **String**:
+    - Scalability: 
+        - Size of the string? Could the whole string be read to the memory?
+        - Size of each character (related to encoding)? E.g. For ASCII, 1 character = 1B
     - Biased/Degenerate tests: 
         - Empty string
         - A strings that contains a sequence of a single letter (“aaaaaaa”) or 2 letters ("abbaabaa") as opposed to those composed of all possible Latin letters
     - Encoding (ASCII, UTF-8, UTF-16)?
     - Special characters
 - When dealing with **arrays/lists**:
+    - Scalability: 
+        - Size of the array? Could the whole array be read to the memory?
+        - Type of the array items? Range ot the values? small range? large numbers?
     - Biased/Degenerate tests: 
         - It's empty
+        - It's contains duplicates
+        - It contains same elements: min value only (0 for integers), max value only (2^32 for integers), any specific value
         - It contains only small numbers or a small range of large numbers
     - It contains **few** elements: 1, 2
     - It contains **many** elements: 10^6
-    - It contains same elements: min value only (0 for integers), max value only (2^32 for integers), any specific value
+    - Sorted/unsorted array
 - When dealing with **Trees**:
     - Biased/Degenerate tests: a tree which consists of a linked list, binary trees, stars
 - When dealing with **Graphs**:
