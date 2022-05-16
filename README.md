@@ -1891,7 +1891,7 @@
 - **Distance** in **unweighted** graph
     - It's between 2 nodes in a graph
     - It's the length of the shortest possible path between these nodes  
-    - For any any pair of vertices μ, ν: **Distance(μ, ν) in a directed graph is ≥ Distance(μ, ν) in the corresponding undirected graph**
+    - For any pair of vertices μ, ν: **Distance(μ, ν) in a directed graph is ≥ Distance(μ, ν) in the corresponding undirected graph**
 - **Distance Layers**:
     - For a given vertex ν in  a graph, it's a way of representing the graph by repositioning all its nodes from top to bottom with increasing distance from ν
     - Layer 0: contains the vertex v
