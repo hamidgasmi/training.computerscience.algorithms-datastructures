@@ -573,9 +573,9 @@
                             if wi ≤ w:
                                 candidate_max_val = max_value(w − wi) + vi
                                 if candidate_max_val > max_value(w):
-                                    value(w ) = candidate_max_val
+                                    max_value(w ) = candidate_max_val
 
-                    return value(W)
+                    return max_value(W)
 
     - Discrete Knapsack without repititions (one of each item):
         - Input: Weights (W1,..., Wn) and values (V1,..., Vn) of n items; total weight W (Vi’s, Wi’s, and W are non-negative integers)
