@@ -28,3 +28,20 @@ if __name__ == "__main__":
 
     s = Solution()
     print(s.solve())
+
+"""
+Recursive solution time/space complexity analysis template:
+
+depth         Nbr of problem           work at corresponding depth
+  0             1                        O(N) #divide expression
+  1             2                        O(1) + O(N - 2) = O(N) * 2
+  ...
+  i             2^i                      O(N) * 2^i 
+  ...
+  N//2          2^N//2                   O(N) * 2^N//2
+
+Total time complexity: O(N) (2^0 + 2^1 + ... + 2^N//2) = O(N * 2^N//2) = O(N * 2^N)
+Total space complexity: O(N/2 * space allocated in every call)
+
+
+"""
