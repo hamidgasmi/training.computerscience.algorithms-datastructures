@@ -1,5 +1,5 @@
 from typing import List
-from .graph import Weighted_Edge
+from .graph import Positively_Weighted_Edge
 from .union_find_path_compression_heuristic import Union_Find_Path_Compression_Heuristic
 
 '''
@@ -24,7 +24,7 @@ from .union_find_path_compression_heuristic import Union_Find_Path_Compression_H
 
 class Kruskal_MST: 
 
-    def compute_mst_weight(self, vertices_count: int, edges: List[Weighted_Edge]) -> int:
+    def compute_mst_weight(self, vertices_count: int, edges: List[Positively_Weighted_Edge]) -> int:
         if vertices_count <= 1:
             return -1
         
