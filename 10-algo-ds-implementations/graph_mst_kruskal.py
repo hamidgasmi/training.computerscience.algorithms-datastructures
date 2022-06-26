@@ -1,4 +1,5 @@
 from typing import List
+from .graph import Weighted_Edge
 from .union_find_path_compression_heuristic import Union_Find_Path_Compression_Heuristic
 
 '''
@@ -19,15 +20,11 @@ from .union_find_path_compression_heuristic import Union_Find_Path_Compression_H
         - T = O(|E|Log|E|) + O(|E|) + O(|V|) = O(|E|Log|E|)
     Space Complexity: space union-find: O(|V) + space sorting edges: O(|E|) = O(|V) + |E|)
 '''
-class Edge:
-    def __init__(self, source: int, sink: int, weight: int):
-        self.source = source
-        self.sink = sink
-        self.weight = weight
+
 
 class Kruskal_MST: 
 
-    def compute_mst_weight(self, vertices_count: int, edges: List[Edge]) -> int:
+    def compute_mst_weight(self, vertices_count: int, edges: List[Weighted_Edge]) -> int:
         if vertices_count <= 1:
             return -1
         
