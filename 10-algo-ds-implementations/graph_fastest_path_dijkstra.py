@@ -50,9 +50,7 @@ class Dijkstra:
         self.__distances = [ self.__max_distance for _ in range(vertices_count) ]
 
         self.__distances[self.__path_source_node] = 0
-        closest_nodes_queue = [ (edge.weight, edge.sink) for edge in self.__adjacency_list[self.__path_source_node] ]
-        closest_nodes_queue.append((0,  self.__path_source_node))
-        heapq.heapify(closest_nodes_queue)
+        closest_nodes_queue = [ (0,  self.__path_source_node) ]
 
         while closest_nodes_queue:
             (distance, node) = heapq.heappop(closest_nodes_queue)
@@ -60,12 +58,10 @@ class Dijkstra:
             for edge in self.__adjacency_list[node]:
                 adjacent = edge.sink
                 candidate_distance = distance + edge.weight
-                if candidate_distance >= self.__distances[ adjacent ]:
-                    continue
-                
-                self.__distances[ adjacent ] = candidate_distance
-                self.__parents[ adjacent ] = node
-                heapq.heappush(closest_nodes_queue, (candidate_distance, adjacent))
+                if candidate_distance < self.__distances[ adjacent ]:
+                    self.__parents[ adjacent ] = node
+                    self.__distances[ adjacent ] = candidate_distance
+                    heapq.heappush(closest_nodes_queue, (candidate_distance, adjacent))
     
     def __build_adjacency_list(self, vertices_count: int, edges: List[Positively_Weighted_Edge]) -> List[List[Positively_Weighted_Edge]]:
         adjacency_list = [ [] for _ in range(vertices_count) ]
