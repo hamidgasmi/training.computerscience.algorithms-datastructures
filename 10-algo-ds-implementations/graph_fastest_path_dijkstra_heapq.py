@@ -13,8 +13,12 @@ from collections import namedtuple
         - fastest path distances from s to any v in V
     
     Time and Space Complexity:
-        - Time Complexity:
-        - Space Complexity:
+        - Time Complexity: O(|V| + |E|log|E|)
+            - T(Initialization) + T(Compute Min Distance) = O(|V|) + P(|E|*log|E|)
+            - Dense graph (|E| = O(|V|^2)) --> T = O(|V| + |V|^2 * log|V|^2) = O(|V|^2 * log|V|)
+            - Sparce graph (|E| ~ |V|)     --> T = O(|V| + |V|log|V|) = O(|V|log|V|) 
+        - Space Complexity: O(|V| + |E|)
+            - S(Parent list) + S(distance list) + S(Heap queue) = O(|V| + |V| + |E|) = O(|V| + |E|)
     
     Implementation Assumptions:
         - Directed graph
@@ -27,7 +31,7 @@ from collections import namedtuple
 
 Edge = namedtuple('Edge', ['source', 'sink', 'weight'])
 
-class Dijkstra:
+class Dijkstra_Heap_Queue:
     def __init__(self, vertices_count: int, edges: List[Edge], s: int):
         self.__max_distance = 10**7
         
@@ -57,22 +61,24 @@ class Dijkstra:
         return reversed_path[::-1]
     
     def __compute_fastest_path (self) -> List[int]:
+        # Initialization
         self.__parent = [ -1 for _ in range(self.__nodes_count) ]                       # O(|V|)
         self.__distance = [ self.__max_distance for _ in range(self.__nodes_count) ]    # O(|V|)
 
         self.__distance[self.__path_source_node] = 0
         closest_nodes_queue = [ (0,  self.__path_source_node) ]
 
-        while closest_nodes_queue:
-            (distance, node) = heapq.heappop(closest_nodes_queue)
+        # Computing min distance for each v in V
+        while closest_nodes_queue:                                                      # T(Push to hq) + T(Pop from hq) = O(2*|E|*log|E|) = O(|E|*log|E|):
+            (distance, node) = heapq.heappop(closest_nodes_queue)                       # we can pop at most |E| edges from the hq
             
-            for edge in self.__adjacency_list[node]:
+            for edge in self.__adjacency_list[node]:                                    
                 adjacent = edge.sink
-                candidate_distance = distance + edge.weight
+                candidate_distance = distance + edge.weight                             
                 if candidate_distance < self.__distance[ adjacent ]:
                     self.__parent[ adjacent ] = node
                     self.__distance[ adjacent ] = candidate_distance
-                    heapq.heappush(closest_nodes_queue, (candidate_distance, adjacent))
+                    heapq.heappush(closest_nodes_queue, (candidate_distance, adjacent)) # we can push at most |E| edges into the hq
     
     def __build_adjacency_list(self, vertices_count: int, edges: List[Edge]) -> List[List[Edge]]:
         adjacency_list = [ [] for _ in range(vertices_count) ]
