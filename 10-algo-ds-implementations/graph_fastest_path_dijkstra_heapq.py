@@ -57,7 +57,7 @@ class Dijkstra_Heap_Queue:
         
         return reversed_path[::-1]
     
-    def __compute_fastest_path (self) -> List[int]:
+    def __compute_fastest_path (self):
         # Initialization
         self.__parent = [ -1 for _ in range(self.__graph.vertices_count) ]                       # O(|V|)
         self.__distance = [ self.__max_distance for _ in range(self.__graph.vertices_count) ]    # O(|V|)
