@@ -1,6 +1,6 @@
 import heapq
 from typing import List
-from .graph import Positively_Weighted_Edge
+from collections import namedtuple
 
 '''
     Dijkstra's Algorithm
@@ -24,8 +24,11 @@ from .graph import Positively_Weighted_Edge
             - It does not have duplicates
     
 '''
+
+Edge = namedtuple('Edge', ['source', 'sink', 'weight'])
+
 class Dijkstra:
-    def __init__(self, vertices_count: int, edges: List[Positively_Weighted_Edge], s: int):
+    def __init__(self, vertices_count: int, edges: List[Edge], s: int):
         self.__max_distance = 10**7
         
         self.__adjacency_list = self.__build_adjacency_list(vertices_count, edges) # O(|E|)
@@ -71,9 +74,10 @@ class Dijkstra:
                     self.__distance[ adjacent ] = candidate_distance
                     heapq.heappush(closest_nodes_queue, (candidate_distance, adjacent))
     
-    def __build_adjacency_list(self, vertices_count: int, edges: List[Positively_Weighted_Edge]) -> List[List[Positively_Weighted_Edge]]:
+    def __build_adjacency_list(self, vertices_count: int, edges: List[Edge]) -> List[List[Edge]]:
         adjacency_list = [ [] for _ in range(vertices_count) ]
         for edge in edges:
+            assert(edge.weight >= 0)
             adjacency_list[edge.source] = edge
         
         return adjacency_list
