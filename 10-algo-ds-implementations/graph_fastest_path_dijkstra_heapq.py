@@ -78,7 +78,12 @@ class Dijkstra_Heap_Queue:
                 if candidate_distance < self.__distance[ adjacent ]:
                     self.__parent[ adjacent ] = node
                     self.__distance[ adjacent ] = candidate_distance
-                    heapq.heappush(closest_nodes_queue, (candidate_distance, adjacent)) # we can push at most |E| edges into the hq
+                    
+                    # we can push at most |E| edges into the hq
+                    heapq.heappush(closest_nodes_queue, (candidate_distance, adjacent))
+                    # We could build a custom minheap that can return the position of an element in O(1).
+                    # We can then change its priority in O(log|V|): heapq.changepriority(closest_nodes_queue, adjacent, candidate_distance)
+                    # The heap queue will contain then at most: |V| elements (instead of |E| element as it's implemented here) 
     
     def __build_adjacency_list(self, vertices_count: int, edges: List[Edge]) -> List[List[Edge]]:
         adjacency_list = [ [] for _ in range(vertices_count) ]
