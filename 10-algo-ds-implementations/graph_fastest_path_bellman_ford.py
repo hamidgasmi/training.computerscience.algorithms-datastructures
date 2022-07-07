@@ -37,8 +37,24 @@ from graph_fastest_path_base import Fastest_Path_Base
 
 
 class Bellman_Ford(Fastest_Path_Base):
-    
+
     def __compute_fastest_path (self):
-        pass
+        # Initializations
+        self.__parent = [ -1 for _ in range(self.__graph.vertices_count) ]
+        self.__distance = [ self.__max_distance for _ in range(self.__graph.vertices_count) ]
+
+        self.__distance[ self.__path_source_node ] = 0
+
+        for n in range(self.__graph.vertices_count):
+            for v in range(self.__graph.vertices_count):
+                if self.__distance[v] != self.__max_distance:
+                    for edge in self.__graph.adjacency_list[v]:
+                        candidate_distance = self.__distance[v] + edge.weight
+                        if self.__distance[edge.sink] > candidate_distance:
+                            self.__distance[edge.sink] = candidate_distance
+                            parents[edge.sink] = v
+                            reachable[edge.sink] = 1
+                            if n == self.__graph.vertices_count - 1:
+                                q.put(a_tuple.vertex) 
     
 

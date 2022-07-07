@@ -1,6 +1,3 @@
-from typing import List
-from graph import Graph_Adjacency_List
-
 '''
     Dijkstra's Algorithm
     Input: Weighted Graph: G(V, E, W), s ∈ V
@@ -17,11 +14,11 @@ from graph import Graph_Adjacency_List
             - Dense graph (|E| = O(|V|^2)) --> T = O(|V|^2 + |V|^2) = O(|V|^2)
             - Sparce graph (|E| ~ |V|)     --> T = O(|V|^2 + |V|) = O(|V|^2) 
         - Space Complexity: O(|V|)
-            - S(Parent list) + S(distance list) + S(visited nodes set) = O(|V| + |V| + |V|) = O(|V|)
-    
+            - S(Parent list) + S(distance list) + S(visited nodes set) = O(|V| + |V| + |V|) = O(|V|)   
 '''
 
-Candidate = namedtuple('Candidate', ['distance', 'node'])
+from typing import List
+from graph import Graph_Adjacency_List
 
 class Dijkstra_Heap_Queue:
     def __init__(self, graph: Graph_Adjacency_List, s: int):
@@ -61,7 +58,8 @@ class Dijkstra_Heap_Queue:
                 min_distance = self.__distance[candidate]
         
         return closest_node
-
+    
+    # O(|V|^2)
     def __compute_fastest_path (self):
         # Initialization
         self.__parent = [ -1 for _ in range(self.__graph.vertices_count) ]                       # O(|V|)
@@ -84,5 +82,4 @@ class Dijkstra_Heap_Queue:
                     self.__distance[ adjacent ] = candidate_distance
             
             closest_node = self.__get_closest_node(visted_nodes)   # O(|V|)
-
-        
+    
