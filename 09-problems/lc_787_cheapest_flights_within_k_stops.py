@@ -21,11 +21,10 @@
 
     2. Intuition:
         - Naive:
-            - Kind of BFS + Optimizations:
+            - Kind of BFS + Optimizations: O(|V|^2 + |V||E|) ?
                 - to have a variable dst cheapest path price (initialized to Infinity)
                 - To visit cities multiple-times: when curr visit path price < prev visit path price
                 - To stop a path if its price > dst cheapest path price
-                - Each node 
         - We could do better:
 
     3. Implementation
@@ -39,9 +38,9 @@ from typing import List
 
 class Solution_BFS:
     '''
-        Time Complexity:
+        Time Complexity: O(|V|^2 + |V||E|)
             T = T(Build Adjacency List) + T(Kind Of BFS algo)
-              = O(|E|)
+              = O(|E|)                  + |V| * O(|V| + |E|) 
             
         Space Complexity: O(|V| + |E|)
             S = S(Adjacency_list) + S(BFS Curr Level Queue) + S(BFS Next Level Queue) + S(Visited Hash Map)
