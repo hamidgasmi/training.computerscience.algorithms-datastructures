@@ -4883,6 +4883,7 @@
         - [LC-510. Inorder Successor in BST II](https://leetcode.com/problems/inorder-successor-in-bst-ii/)
         - [LC-515. Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/)
         - [LC-752. Open the Lock](https://leetcode.com/problems/open-the-lock/)
+        - [LC-787. Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/)
         - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
         - [LC-1302. Deepest Leaves Sum](https://leetcode.com/problems/deepest-leaves-sum/)
     - Hard:
@@ -4916,6 +4917,7 @@
         - [LC-250. Count Univalue Subtrees](https://leetcode.com/problems/count-univalue-subtrees/)
         - [LC-437. Path Sum III](https://leetcode.com/problems/path-sum-iii/)
         - [LC-490. The Maze](https://leetcode.com/problems/the-maze/)
+        - [LC-787. Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/)
         - [LC-889. Construct Binary Tree from Preorder and Postorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/)
         - [LC-967. Numbers With Same Consecutive Differences](https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures/issues/273)
         - [LC-1367. Linked List in Binary Tree](https://leetcode.com/problems/linked-list-in-binary-tree/)
@@ -4962,10 +4964,11 @@
     - [LC-286. Walls and Gates](https://leetcode.com/problems/walls-and-gates/)
     - [LC-505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
     - [LC-743. Network Delay Time](https://leetcode.com/problems/network-delay-time/)
+    - [LC-787. Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/)
 - Hard:
     - [LC-317. Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/)
     - [LC-499. The Maze III](https://leetcode.com/problems/the-maze-iii/)
-    
+
 </details>
 
 <details>
