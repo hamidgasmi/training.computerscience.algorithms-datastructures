@@ -33,5 +33,20 @@
 
 class Solution:
     
-    def find_cheapest_price(self, cities_count: int, flights: List[List[int]], src: int, dst: int, max_stops_count: int) -> int:
-        pass
+    import heapq
+
+class Solution_Base:
+    def __init__(self):
+        self.__max_pirce = 10**8
+
+    """
+        Time Complexity: O(|E|)
+        Space Complexity: O(|V| + |E|)
+    """
+    def __build_adjacency_list(self, cities_count: int, flights: List[List[int]]) -> List[List[int]]:
+        adjacency_list = [ [] for _ in range(cities_count) ]
+        for [ flight_from, flight_to, flight_pirce ] in flights:
+            adjacency_list[flight_from].append([ flight_to, flight_pirce ])
+
+        return adjacency_list
+    
