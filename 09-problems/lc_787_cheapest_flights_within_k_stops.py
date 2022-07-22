@@ -54,9 +54,9 @@ class Solution_BFS:
         '''
             Each node (city) is potentially visited multiple times.
             Worst case: 
-                - Successive pathes to a city have a decreasing price
-                - Each city will be visited n times
-            This would make the time complexity: T = n * T(Real BFS) = |V| * O(|V| + |E|) = O(|V|^2 + |V||E|) ?
+                - Successive pathes to a city have decreasing prices
+                - Each city will be visited |V| times
+            This would make the time complexity: T = |V| * T(Real BFS) = |V| * O(|V| + |E|) = O(|V|^2 + |V||E|) ?
         '''
         visited_cities = {}
         curr_level = [ (src, 0) ]
