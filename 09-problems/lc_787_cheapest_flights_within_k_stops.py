@@ -131,8 +131,11 @@ class Solution_DFS(Solution_Base):
         if (self.__indegree(dst) == 0):
             return -1
         
-        '''
-            Assumption: K < |V|
+        cheapest_price = self.__dfs(src, dst, adjacency_list, max_stops_count, {})
+        return -1 if cheapest_price == self.__max_pirce else cheapest_price
+    
+    '''
+            Assumption: remaining_stops_count = K < |V|
             Time complexity:
                 depth         Nbr of problems          work at corresponding depth      space at corresponding depth
                 0             1                        1 * O(outdegree(src)) = O(|V|)    O(1)
@@ -144,9 +147,6 @@ class Solution_DFS(Solution_Base):
             Total space complexity: O(K * |V|)
         
         '''
-        cheapest_price = self.__dfs(src, dst, adjacency_list, max_stops_count, {})
-        return -1 if cheapest_price == self.__max_pirce else cheapest_price
-    
     def __dfs(self, src: int, dst: int, adjacency_list: List[List[int]], remaining_stops_count: int, memo: dict) -> int:
         if src == dst:
             return 0 
