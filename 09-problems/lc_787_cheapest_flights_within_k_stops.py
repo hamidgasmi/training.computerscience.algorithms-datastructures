@@ -20,11 +20,12 @@
         Expected result for K = 4: 6 (4 Stops: C0 --> C3 ---> C1 ---> C4 ---> C2)
 
     2. Intuition:
-        - Naive:
-            - Kind of BFS + Optimizations: O(|V|^2 + |V||E|) ?
-                - to have a variable dst cheapest path price (initialized to Infinity)
-                - To visit cities multiple-times: when curr visit path price < prev visit path price
-                - To stop a path if its price > dst cheapest path price
+        - Kind of BFS + Optimizations: O(|V|^2 + |V||E|) ?
+            - to have a variable dst cheapest path price (initialized to Infinity)
+            - To visit cities multiple-times: when curr visit path price < prev visit path price
+            - To stop a path if its price > dst cheapest path price
+        - DFS + memoization:
+            - 
         - We could do better:
 
     3. Implementation
@@ -36,7 +37,31 @@
 """
 from typing import List
 
-class Solution_BFS:
+class Solution_Base:
+    def __init__(self):
+        self.__max_pirce = 10**8
+
+    """
+        Time Complexity: O(|E|)
+        Space Complexity: O(|V| + |E|)
+    """
+    def __build_adjacency_list(self, cities_count: int, edges: List[List[int]]) -> List[List[int]]:
+
+        adjacency_list = [ [] for _ in range(cities_count) ]
+        for [ source, sink, weight ] in edges:
+            adjacency_list[source].append([ sink, weight ])
+
+        return adjacency_list
+
+    def __indegree(self, v: int, edges: List[List[int]]) -> int:
+        indegree = 0
+        for [ source, sink, weight ] in edges:
+            if sink == v:
+                indegree += 1
+        
+        return indegree
+
+class Solution_BFS(Solution_Base):
     '''
         Time Complexity: O(|V|^2 + |V||E|) ?
             T = T(Build Adjacency List) + T(Kind Of BFS algo)
@@ -50,6 +75,9 @@ class Solution_BFS:
     def find_cheapest_price(self, cities_count: int, flights: List[List[int]], src: int, dst: int, max_stops_count: int) -> int:
         
         adjacency_list = self.__build_adjacency_list(cities_count, flights)
+
+        if (self.__indegree(dst) == 0):
+            return -1
 
         '''
             Each node (city) is potentially visited multiple times.
@@ -86,22 +114,55 @@ class Solution_BFS:
         
         return -1 if cheapest_price == self.__max_pirce else cheapest_price
 
-class Solution_Base:
-    def __init__(self):
-        self.__max_pirce = 10**8
+class Solution_DFS(Solution_Base):
+    '''
+        Time Complexity: O(K * |V|^2 + |E|)
+            T = T(Build Adjacency List) + T(DFS algo)
+              = O(|E|)                  + O(K * |V|^2)
+            
+        Space Complexity: O(K * |V| + |E|)
+            S = S(Adjacency_list) + S(DFS)
+              = O(|V| + |E|)      + O(K * |V|)
+    
+    '''
+    def find_cheapest_price(self, cities_count: int, flights: List[List[int]], src: int, dst: int, max_stops_count: int) -> int:
+        adjacency_list = self.__build_adjacency_list(cities_count, flights)
 
-    """
-        Time Complexity: O(|E|)
-        Space Complexity: O(|V| + |E|)
-    """
-    def __build_adjacency_list(self, cities_count: int, flights: List[List[int]]) -> List[List[int]]:
+        if (self.__indegree(dst) == 0):
+            return -1
+        
+        '''
+            Assumption: K < |V|
+            Time complexity:
+                depth         Nbr of problems          work at corresponding depth      space at corresponding depth
+                0             1                        1 * O(outdegree(src)) = O(|V|)    O(1)
+                1             |V|                      |V| * O(|V|) = O(|V|^2)           |V| * O(1)
+                ...
+                K             |V|                      O(|V|^2)                          O(|V|)
 
-        adjacency_list = [ [] for _ in range(cities_count) ]
-        for [ flight_from, flight_to, flight_pirce ] in flights:
-            adjacency_list[flight_from].append([ flight_to, flight_pirce ])
-
-        return adjacency_list
-
+            Total time complexity:  O(K * |V|^2)
+            Total space complexity: O(K * |V|)
+        
+        '''
+        cheapest_price = self.__dfs(src, dst, adjacency_list, max_stops_count, {})
+        return -1 if cheapest_price == self.__max_pirce else cheapest_price
+    
+    def __dfs(self, src: int, dst: int, adjacency_list: List[List[int]], remaining_stops_count: int, memo: dict) -> int:
+        if src == dst:
+            return 0 
+        
+        if remaining_stops_count == -1:
+            return self.__max_pirce
+        
+        elif (src, remaining_stops_count) in memo:
+            return memo[(src, remaining_stops_count)]
+        
+        cheapest_price = self.__max_pirce
+        for [ flight_to, flight_pirce ] in adjacency_list[src]:
+            cheapest_price = min(cheapest_price, self.__dfs(flight_to, dst, adjacency_list, remaining_stops_count - 1, memo) + flight_pirce)
+        
+        memo[(src, remaining_stops_count)] = cheapest_price
+        return cheapest_price
 
 '''
 4
