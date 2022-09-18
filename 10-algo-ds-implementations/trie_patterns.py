@@ -1,85 +1,96 @@
-# Class to store Trie(Patterns)
-# It handles all cases particularly the case where a pattern Pi is a subtext of a pattern Pj for i != j
-class Trie_Patterns:
-    def __init__(self, patterns, start, end):
-        self.build_trie(patterns, start, end)
+'''
+    Multiple Exact Patterns Matching
+    Input: 
+        - A list of strings Patterns = [ P0, P1, ..., Pn ]
+        - A string S
+    
+    Output: 
+        - All positions in S where a string Pi from Patterns appears as a substring in S
+    
+    Time and Space Complexity:
+        - Time Complexity: O(|S| * max(|Pi|) + Sum(|Pi|)) for for 0 <= i <= n
+            - T(build Trie) = O(Sum(|Pi|) for 0 <= i <= n) = O(|Patterns|)
+            - T(Search in Trie) = (|S| * max(|Pi|))
+        - Space Complexity:
+            - S(Trie) + S(Output) = O(Sum(|Pi|) for 0 <= i <= n) + O(|S|) = O(|S| + |Patterns|)
+            - S(Output): in the worst case, output contains all positions in |S|
+    
+    Implementation Assumptions:
+        - Trie is a dictionary of a dictionary
+        - A leaf has '$' as a child
 
-    # The trie will be a dictionary of dictionaries where:
-    # ... The key of the external dictionary is the node ID (integer), 
-    # ... The internal dictionary:
-    # ...... It contains all the trie edges outgoing from the corresponding node
-    # ...... Its keys are the letters on those edges
-    # ...... Its values are the node IDs to which these edges lead
-    # Time Complexity: O(|patterns|)
-    # Space Complexity: O(|patterns|)
-    def build_trie(self, patterns, start, end):
-                
-        self.trie = dict()
-        self.trie[0] = dict()
-        self.node_patterns_mapping = dict()
-        self.max_node_no = 0
-        for i in range(len(patterns)):
-            self.insert(patterns[i], i, start, end)
+        Patterns: aba, aa, baa
+              Trie
+              /  \
+            a     b
+           / \     \
+          b   a     a
+         /    |      \
+        a     $       a
+        |             |
+        $             $
 
-    def insert(self, pattern, pattern_no, start, end):
+'''
 
-        (index, node) = self.search_text(pattern, start, end)
+class Trie:
+    # Time: O(1)
+    # Space: O(1)
+    def __init__(self):
+        self.__root = dict()
+        self.__leaf_character = '$'
+    
+    # Time: O(1) in average
+    # Space: O(1)
+    def is_leaf(self, node: dict) -> bool:
+        return True if node and self.__leaf_character in node else False
 
-        i = index
-        while i <= (end+1):
-            
-            if i == end + 1:
-                c = '$' # to handle the case where Pi is a substring of Pj for i != j
-            else:
-                c = pattern[i]
-
-            self.max_node_no += 1
-            self.trie[node][c] = self.max_node_no
-            self.trie[self.max_node_no] = dict()
-            node = self.max_node_no
-
-            i += 1
+    # Time: O(|pattern|)
+    # Space: O(|pattern|)   
+    def add(self, pattern: str):
+        if not pattern:
+            return
         
-        if not node in self.node_patterns_mapping:
-            self.node_patterns_mapping[node] = []
-        self.node_patterns_mapping[node].append(pattern_no)
+        node = self.__root
+        for c in pattern:
+            if not c in node:
+                node[c] = dict()
+            node = node[c]
+        if not self.is_leaf(node):
+            node[ self.__leaf_character ] = None
+    
+    # Time: P(max(|Pi|))
+    # Space: O(1)
+    def search(self, s: str, start: int) -> bool:
 
-    def search_text(self, pattern, start, end):
-        if len(self.trie) == 0:
-            return (0, -1)
-
-        node = 0
-        i = start
-        while i <= (end+1):
-
-            if i == end + 1:
-                c = '$' # to handle the case where Pi is a substring of Pj for i != j
-            else:
-                c = pattern[i]
-
-            if c in self.trie[node]:
-                node = self.trie[node][c]
-                i += 1
-                continue
-            else:
+        node = self.__root
+        for idx in range(start, len(s)):
+            node = node.get(s[idx], None)
+            if not node:
                 break
         
-        return (i, node)
+        return True if self.is_leaf(node) else False
 
-    # Prints the trie in the form of a dictionary of dictionaries
-    # E.g. For the following patterns: ["AC", "T"] {0:{'A':1,'T':2},1:{'C':3}}
-    def print_tree(self):
-        for node in self.trie:
-            for c in self.trie[node]:
-                print("{}->{}:{}".format(node, self.trie[node][c], c))
-        print(self.node_patterns_mapping)
 
-    # Time Complexity: O(|text| * |longest pattern|)
-    def multi_pattern_matching(self, text, start, end):
+class Exact_Patterns_Matching_Solution:
+    def __init__(self, patterns: list[str]):
+        self.__patterns_trie = self.__build_trie(patterns)
+    
+    # Time Complexity: O(sum(|Pi|))
+    # Space Complexity: O(sum(|Pi|))
+    def __build_trie(self, patterns: list[str]) -> Trie:
+        trie = Trie()
+        for pattern in patterns:
+            trie.add(pattern)
         
-        if len(self.trie) == 0:
-            return []
+        return trie
+    
+    # Time complexity: O(|s| * max(|Pi|))
+    # Space Complexity: O(|s|)
+    def multi_pattern_matching(self, s: str) -> list[int]:
+        matching_positions = []
+        for p in range(len(s)):
+            if self.__patterns_trie.search(s, p):
+                matching_positions.append(p)
         
-        (i, node) = self.search_text(text, start, end)
-        
-        return self.node_patterns_mapping[node] if node in self.node_patterns_mapping else []
+        return matching_positions
+
