@@ -3384,7 +3384,7 @@
                        b/ \a    \a              3: { }
                        2   4     6              4: { }
                      a/                         5: { a:6 }
-                    3                           5: { }
+                    3                           6: { }
                                               }
     - Multiple Pattern Matching:
         - For simplicity, we assume that no pattern is a substring of another pattern
