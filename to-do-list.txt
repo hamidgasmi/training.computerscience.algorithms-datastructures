@@ -1,3 +1,21 @@
+lCurrent:
+https://leetcode.com/problems/design-snake-game/
+https://leetcode.com/problems/partition-labels/
+https://leetcode.com/problems/range-sum-query-2d-immutable/
+https://leetcode.com/problems/course-schedule-ii/
+https://leetcode.com/problems/parallel-courses-iii/
+https://leetcode.com/problems/parallel-courses-ii/
+https://gist.github.com/craigtp/05a82b51557adc278acd71b5a2b88905?utm_source=pocket_mylist
+https://microservices.io/patterns/data/transactional-outbox.html
+https://khalilstemmler.com/articles/typescript-value-object/
+
+
+
+- Refresh:
+    - Ricursion: https://leetcode.com/discuss/study-guide/1733447/become-master-in-recursion
+    - Linked list: https://leetcode.com/discuss/study-guide/1800120/become-master-in-linked-list
+    - Trees: https://leetcode.com/discuss/study-guide/1820334/become-master-in-tree
+
 - Pre-requisites:
     - 
 - Algorithm Techniques and Design:
