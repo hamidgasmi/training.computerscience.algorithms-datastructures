@@ -1,7 +1,11 @@
 Trie:
 https://github.com/hamidgasmi/training.computerscience.algorithms-datastructures#graph-algorithms
+https://leetcode.com/problems/word-search-ii/
 https://leetcode.com/problems/design-file-system/
-
+https://leetcode.com/problems/wildcard-matching/
+https://leetcode.com/problems/regular-expression-matching/
+https://leetcode.com/problems/encrypt-and-decrypt-strings/
+https://leetcode.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/
 
 Arrays:
 https://leetcode.com/problems/search-a-2d-matrix-ii/submissions/
@@ -17,6 +21,7 @@ https://leetcode.com/problems/minimum-cost-to-reach-city-with-discounts/discuss/
 https://leetcode.com/problems/all-paths-from-source-lead-to-destination/
 https://leetcode.com/problems/cheapest-flights-within-k-stops/
 https://leetcode.com/problems/connecting-cities-with-minimum-cost/
+https://leetcode.com/problems/unique-paths-iii/
 
 Others:
 https://leetcode.com/problems/shopping-offers/
@@ -37,7 +42,8 @@ https://gist.github.com/craigtp/05a82b51557adc278acd71b5a2b88905?utm_source=pock
 https://microservices.io/patterns/data/transactional-outbox.html
 https://khalilstemmler.com/articles/typescript-value-object/
 
-
+SortedDict:
+https://leetcode.com/discuss/study-guide/1515408/using-python3-sorteddict-effectively-floor-ceillings-minimum-maximum-etc
 
 - Refresh:
     - Ricursion: https://leetcode.com/discuss/study-guide/1733447/become-master-in-recursion
