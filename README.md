@@ -2064,7 +2064,13 @@
                     prev[v] ← u
                     H.ChangePriority(v, dist[v])
     -           ReconstructPath(A, μ, prev):
-                    Same as BFS ReconstructPath algorithm
+                    // Same as BFS ReconstructPath algorithm (see above)
+                    result ← empty
+                    while μ != A:
+                        result.append(μ)
+                        μ ← prev[μ]
+                    
+                    return Reverse(result)
     - Time Complexity: 
         - T(n) = T(Initializations) + T(H.MakeQueue) + |V|*T(H.ExtractMin) + |E|*T(H.ChangePriority)
         - Priority Queue could be implemented as an **Array**
