@@ -2061,8 +2061,8 @@
     -       Relax(G, H, u, v, dist, prev) # Relax v
                 if dist[v] > dist[u] + w(u, v)
                     dist[v] ← dist[u] + w(u, v)
-                        prev[v] ← u
-                        H.ChangePriority(v, dist[v])
+                    prev[v] ← u
+                    H.ChangePriority(v, dist[v])
     -           ReconstructPath(A, μ, prev):
                     Same as BFS ReconstructPath algorithm
     - Time Complexity: 
