@@ -1,6 +1,6 @@
 # Algorithms and Data Structures with TypeScript
 
-libreoffice --calc ts-data-structure-cheat-sheet.ods &
+libreoffice --calc data-structure-cheat-sheet-typescript.ods &
 libreoffice --calc problem_solving_log_2024.ods &
 
 TO DO:
