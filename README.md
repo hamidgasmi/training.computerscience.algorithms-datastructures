@@ -3431,7 +3431,7 @@
     - It's the trie formed from all suffixes of *Text*
     - We append "$" to *Text* in order to mark the end of *Text*
     - Each leaf is labeled with the starting position of the suffix whose path through the trie ends at this leaf
-    - When we arrive at a leaf, we'll immidiately know where this suffix cam from in *Text*
+    - When we arrive at a leaf, we'll immidiately know where this suffix came from in *Text*
     - E.g. Text: ababaa; Patterns: aba, baa
     -                                 ___Root___
                    suffix: ababaa$   /      \   \
@@ -3831,14 +3831,14 @@
 </details>
 
 <details>
-<summary>Knuth-Morris-Pratt Algorithm</summary>
+<summary>Knuth-Morris-Pratt's Algorithm</summary>
 
 - It's an exact pattern matching algorithm:
     - Input: String *Text* and a pattern *P*
     - Output: All such positions in *Text* where *Pattern* appears as substring
 - It consists of:
     - Sliding *Pattern* down *Text* (naive approach) and
-    - Skipping skipping positions of *Text*
+    - Skipping positions of *Text*
     - E.g. 1. *Pattern*: abra *Text*: abracadabra
     -       abracadabra
             abra        Match
@@ -4068,7 +4068,7 @@
 </details>
 
 <details>
-<summary>Rabin-Karp's Algorithm Algorithm</summary>
+<summary>Rabin-Karp's Algorithm</summary>
 
 - It's an exact a single pattern matching algorithm:
     - Input: String *Text* and a pattern *P*
@@ -5097,7 +5097,7 @@
 </details>
 
 <details>
-<summary>Trie Pattern</summary>
+<summary>String Matching Algorithm: Trie Pattern</summary>
 
 - Related problems:
     - Medium:
@@ -5110,6 +5110,16 @@
 
 </details>
 
+<details>
+<summary>String Matching Algorithms: Rabin-Karp's + Knuth-Morris-Pratt's</summary>
+
+- Easy:
+    - [LC-459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern/description/)
+- Medium:
+    - [LC-1062. Longest Repeating substring](https://leetcode.com/problems/longest-repeating-substring/description/)
+- Hard:
+
+</details>
 
 <details>
 <summary>Dynamic Programming Patterns</summary>
