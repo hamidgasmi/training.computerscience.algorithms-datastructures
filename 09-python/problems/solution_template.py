@@ -13,9 +13,25 @@
     3. Implementation
     4. Tests:
     5. Complexity Analysis:
-       Time Complexity:
-       Space Compexity:
+       - Time Complexity:
+       - Space Compexity:
+    6. Advanced discussion:
+        - Scalability
+"""
 
+"""
+    1. Problem Summary / Clarifications / TDD:
+        - Can we assume that the input can fit in memory
+    2. Intuition:
+        - Naive:
+        - We could do better:
+    3. Implementation
+    4. Tests:
+    5. Complexity Analysis:
+       - Time Complexity:
+       - Space Compexity:
+    6. Advanced discussion:
+        - Scalability (Input Size ? Memory? Disk ? Distributed Machine?)
 """
 class Solution:
     def __init__(self):
