@@ -1,0 +1,4 @@
+# Test Case: text ends with pattern and has multiple occurences of pattern
+2
+str foundornotfound
+str found

@@ -1,0 +1,4 @@
+# Test Case: text bigger than pattern and pattern does not exist in text
+2
+str whereismypattern
+str notfound

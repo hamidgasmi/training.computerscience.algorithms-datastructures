@@ -1,0 +1,4 @@
+# Test Case: text starts with pattern and only 1 occurence
+2
+str foundornotfoundthisisthequestion
+str foundo

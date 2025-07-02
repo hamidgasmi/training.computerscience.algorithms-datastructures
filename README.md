@@ -5114,6 +5114,7 @@
 <summary>String Matching Algorithms: Rabin-Karp's + Knuth-Morris-Pratt's</summary>
 
 - Easy:
+    - [LC-28. Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
     - [LC-459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern/description/)
 - Medium:
     - [LC-1062. Longest Repeating substring](https://leetcode.com/problems/longest-repeating-substring/description/)

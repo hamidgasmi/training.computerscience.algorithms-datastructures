@@ -1,0 +1,4 @@
+# Test Case: text length equal to pattern length and pattern does not exist in text
+2
+str notfount
+str notfound

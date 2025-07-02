@@ -1,0 +1,4 @@
+# Test Case: pattern bigger than text
+2
+str tinytext
+str iambiggerthantext
