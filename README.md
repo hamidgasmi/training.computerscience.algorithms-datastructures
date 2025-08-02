@@ -3879,7 +3879,7 @@
             Text :   ___|_w_|_____u____|_w_|_______________
             Pattern:    |_w_|_____u____|_w_|___
                         ^0
-    - 3rd. Move *Pattern* such that prefix *w* in *Pattern* aligns with suffix *w* of *u* in *Text*
+    - 3rd. Move *Pattern* such that prefix *w* in *Pattern* aligns with suffix *w* in *Text*
     -                   k------------->k'
             Text :   ___|_w_|_____u____|_w_|_______________
             Pattern:    ^------------->|_w_|_____u____|_w_|___
@@ -3908,21 +3908,21 @@
         - Then there is prefix *v* of *Pattern* equal to suffix in *u*, and *v* is longer than *w* (see above)                            
         - This is a contradiction: *v* is a border longer than *w*, but *w* is te longest border of *u*
 - **Prefix Function**:
-    - It's a function *s(i)* that for each *i* returns the length of the longest border of the prefix *Pattern*[0 : *i*]
+    - It's a function *s(i)* that for each *i* returns the length of the **longest** border of the prefix *Pattern*[0 : *i*]
     - It's precalculated in advance and its values *s(i)* are stored in an array *s* of length |*Pattern*|
     - E.g. *Pattern*: abababcaab
     -       Pattern: a b a b a b c a a b
                   s: 0 0 1 2 3 4 0 1 1 2
-    - *Pattern*[0 : *i*] has a border of length **s(i + 1) − 1**
-    -                    ___w__      ___w___
-                        /      \    /       \             
-            Pattern:    |______|____|___|_|_|___
-                                        i^ ^i+1
+    - *Pattern*[0 : *i*] has a longest border of length **s(i + 1) − 1**
+    -                               ___w__      ___w___
+                                   /      \    /       \             
+            Pattern[0 : *i+1*]:    |______|____|___|_|_|___
+                                                   i^ ^i+1
                     If we remove the positions i + 1 and |w| - 1:
-                         _w'_        _w'_
-                        /    \      /    \
-            Pattern:    |____|X|____|___|_|X|___
-                                        i^ ^i+1
+                                    _w'_        _w'_
+                                   /    \      /    \
+            Pattern[0 : *i*]  :    |____|X|____|___|_|X|___
+                                                   i^ ^i+1
                     We get a border w' that is the longest border for the prefix Pattern[0:i]
                     Thus, Pattern[0 : i] has a border of length s(i + 1) − 1
     - ***s*(*i* + 1) <= *s*(*i*) + 1**
@@ -4592,7 +4592,35 @@
 
 </details>
 
----
+<details>
+<summary>Summary</summary>
+
+- Problem:
+    - Input:
+        - A string Text of length T 
+        - A set of strings Patterns:
+            - The patterns' lengths sum: P
+            - The longest pattern length: Lp
+    - Output: All positions in *Text* where a *pattern* from *Patterns* appears as a substring
+
+| Solution                                  | Time Cmplx | Space Cmplx | 
+| :-----------------------------------------|------------|------------:|
+| Naive:                                    |   O(P*T)   |     O(1)    |
+| :-----------------------------------------|------------|------------:|
+| Trie (Patterns):                          | O(P+T*Lp)  | O(P)        |
+|    - Build Trie(patterns)                 | - O(P)     | -O(P) +     |
+|    - Search all suffix of Text in Trie    | - O(T*Lp)  | -O(1)       |
+| :-----------------------------------------|------------|------------:|
+| Suffix Trie:                              | O(T^2+P)   | O(T^2)      |
+|    - Build Suffix Trie (Text)             | - O(T^2) + | - O(T^2) +  |
+|    - Check each Pattern exists in S-Trie  | - O(P)     | - O(1)      |
+| :-----------------------------------------|------------|------------:|
+| Suffix Tree:                              | O(T+P)     | O(T)        |
+|    - Build Suffix Tree (Text): Weiner Algo| - O(T) +   | - O(T) +    |
+|    - Check each Pattern exists in S-Tree  | - O(P)     | - O(1)      |
+| :-----------------------------------------|------------|------------:|
+
+</details>
 
 ## Dynamic Programming: Applications In Machine Learning and Genomics 
 
