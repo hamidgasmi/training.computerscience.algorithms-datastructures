@@ -4595,30 +4595,22 @@
 <details>
 <summary>Summary</summary>
 
-- Problem:
-    - Input:
-        - A string Text of length T 
-        - A set of strings Patterns:
-            - The patterns' lengths sum: P
-            - The longest pattern length: Lp
-    - Output: All positions in *Text* where a *pattern* from *Patterns* appears as a substring
+- Input:
+    - A string Text of length T 
+    - A set of strings Patterns:
+        - The number of patterns: p
+        - The patterns' lengths sum: P
+        - The longest pattern length: Lp
+- Output: All positions in *Text* where a *pattern* from *Patterns* appears as a substring
 
 | Solution                                  | Time Cmplx | Space Cmplx | 
 | :-----------------------------------------|------------|------------:|
-| Naive:                                    |   O(P*T)   |     O(1)    |
-| :-----------------------------------------|------------|------------:|
-| Trie (Patterns):                          | O(P+T*Lp)  | O(P)        |
-|    - Build Trie(patterns)                 | - O(P)     | -O(P) +     |
-|    - Search all suffix of Text in Trie    | - O(T*Lp)  | -O(1)       |
-| :-----------------------------------------|------------|------------:|
+| Naive                                     | O(P*T)     | O(1)        |
+| Trie (Patterns)                           | O(P+T*Lp)  | O(P)        |
 | Suffix Trie:                              | O(T^2+P)   | O(T^2)      |
-|    - Build Suffix Trie (Text)             | - O(T^2) + | - O(T^2) +  |
-|    - Check each Pattern exists in S-Trie  | - O(P)     | - O(1)      |
-| :-----------------------------------------|------------|------------:|
-| Suffix Tree:                              | O(T+P)     | O(T)        |
-|    - Build Suffix Tree (Text): Weiner Algo| - O(T) +   | - O(T) +    |
-|    - Check each Pattern exists in S-Tree  | - O(P)     | - O(1)      |
-| :-----------------------------------------|------------|------------:|
+| Suffix Tree (Weiner Algorithm)            | O(T+P)     | O(T)        |
+| Burrows-Wheeler Transform                 | O(T)       | O(4 * T)    |
+| Knuth-Morris-Pratt's Algorithm            | O(p*T+P)   |             |
 
 </details>
 
