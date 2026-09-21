@@ -1759,16 +1759,21 @@
                 if not visited (ν):
                     Explore(ν)
 
-- Explore 1 path until hitting a dead end:      
-        def Explore (v ):
-            visited (v ) = true
+- Explore 1 path until hitting a dead end:
+    ```
+        def Explore (v):
+            visited (v) = true
             for (v , w) ∈ E:
                 if not visited (w):
                     Explore (w)
+    ```
+
 - Time complexity:
-    -            Implementation:    Explore()        DFS
-                  Adjacency List:    O(degre)       O(|V| + ∑ degre for all ν) = O(|V| + |E|)
-                Adjacency Matrix:    O(|V|)         O(|V|^2)
+    ```
+        Implementation:    Explore()      DFS
+        Adjacency List:    O(degre)       O(|V| + ∑ degre for all ν) = O(|V| + |E|)
+        Adjacency Matrix:    O(|V|)       O(|V|^2)
+    ```
     - Number of calls to explore:
         - Each explored vertex is marked visited
         - No vertex is explored after visited once
@@ -5120,6 +5125,9 @@
 <summary>String Matching Algorithm: Trie Pattern</summary>
 
 - Related problems:
+    - Easy:
+        - [LC-28. Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/)
+        - [LC-459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern/description/)
     - Medium:
         - [LC-208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
         - [LC-421. Maximum XOR of Two Numbers in an Array](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/)
